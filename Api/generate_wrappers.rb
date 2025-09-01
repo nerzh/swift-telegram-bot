@@ -86,7 +86,7 @@ class Api
         vars_block << "#{ONE}/// #{line.strip}\n"
       end
             
-      vars_block << "#{ONE}public var #{var_name_camel}: #{correct_var_type}\n\n"
+      vars_block << "#{ONE}public let #{var_name_camel}: #{correct_var_type}\n\n"
       init_params_block << "#{var_name_camel}: #{correct_var_type_init}, "
       init_block << "#{TWO}self.#{var_name_camel} = #{var_name_camel}\n"
 
@@ -102,7 +102,7 @@ class Api
       init_block = model_blocks[:init_block]
     end
 
-    var_protocol = "Codable"
+    var_protocol = "Codable, Sendable"
     
     if fucking_telegram_any_type?(description)
       return [type_name, vars_block, ''] if skip_fucking_telegram_any_type
@@ -412,7 +412,7 @@ class Api
     protocol << "#{ONE}var botId: String { get }\n"
     protocol << "#{ONE}var tgURI: URL { get }\n"
     protocol << "#{ONE}var tgClient: TGClientPrtcl { get async throws }\n"
-    protocol << "#{ONE}var log: Logger { get }\n\n"
+    # protocol << "#{ONE}var log: Logger { get }\n\n"
     protocol << "#{ONE}@discardableResult\n"
     protocol << "#{ONE}func start() async throws -> Bool\n\n"
     signatures.each { |signature| protocol << "#{signature}\n\n" }
@@ -470,9 +470,9 @@ class Api
           end
           
           if var_name_camel == 'user' || var_name_camel == 'status'
-            vars_block << "#{ONE}public var #{var_name_camel}: #{correct_var_type}\n\n"
+            vars_block << "#{ONE}public let #{var_name_camel}: #{correct_var_type}\n\n"
           else
-            vars_block << "#{ONE}public var #{var_name_camel}: #{correct_var_type[/\?$/] ? correct_var_type : "#{correct_var_type}?"}\n\n"
+            vars_block << "#{ONE}public let #{var_name_camel}: #{correct_var_type[/\?$/] ? correct_var_type : "#{correct_var_type}?"}\n\n"
           end
 
           if var_name_camel == 'user' || var_name_camel == 'status'
@@ -701,7 +701,7 @@ class Api
     var_desc.each_line do |line|
       parameters << "#{ONE}/// #{line.strip}\n"
     end
-    parameters << "#{ONE}public var #{var_name.camel_case_lower}: #{swift_type_name}#{var_optional ? '?' : ''}\n\n"
+    parameters << "#{ONE}public let #{var_name.camel_case_lower}: #{swift_type_name}#{var_optional ? '?' : ''}\n\n"
     return parameters
   end
 
