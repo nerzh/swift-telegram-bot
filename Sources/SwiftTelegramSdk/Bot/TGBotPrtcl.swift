@@ -3,17 +3,17 @@
 import Foundation
 import Logging
 
-public protocol TGBotPrtcl {
+public protocol TGBotPrtcl: Sendable {
 
-    var connectionType: TGConnectionType { get }
+//    var connectionType: TGConnectionType { get }
     var dispatcher: TGDispatcherPrtcl { get }
-    var botId: String { get }
-    var tgURI: URL { get }
-    var tgClient: TGClientPrtcl { get async throws }
-    var log: Logger { get }
-
-    @discardableResult
-    func start() async throws -> Bool
+//    var botId: String { get }
+//    var tgURI: URL { get }
+//    var tgClient: TGClientPrtcl { get async throws }
+//    var log: Logger { get }
+//
+//    @discardableResult
+//    func start() async throws -> Bool
 
 
 

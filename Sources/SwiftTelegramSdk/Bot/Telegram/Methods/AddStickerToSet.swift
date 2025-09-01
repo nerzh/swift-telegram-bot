@@ -52,7 +52,12 @@ public extension TGBot {
         guard let methodURL: URL = .init(string: getMethodURL("addStickerToSet")) else {
             throw BotError("Bad URL: \(getMethodURL("addStickerToSet"))")
         }
-        let result: Bool = try await tgClient.post(methodURL, params: params, as: nil)
+        let safeParams = TGAddStickerToSetParams(
+            userId: params.userId,
+            name: params.name,
+            sticker: params.sticker
+        )
+        let result: Bool = try await tgClient.post(methodURL, params: safeParams, as: nil)
         return result
     }
 }

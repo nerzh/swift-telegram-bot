@@ -8,7 +8,7 @@
 import Foundation
 import Logging
 
-public protocol TGClientPrtcl {
+public protocol TGClientPrtcl: Sendable {
     
     var log: Logger { get set }
     

@@ -13,7 +13,7 @@ public protocol TGConnectionPrtcl {
     func start(bot: TGBot) async throws -> Bool
 }
 
-public enum TGConnectionType {
+public enum TGConnectionType: Sendable {
     case longpolling(limit: Int?,
                      timeout: Int?,
                      allowedUpdates: [TGUpdate.CodingKeys]?)
@@ -21,8 +21,8 @@ public enum TGConnectionType {
 }
 
 public final class TGLongPollingConnection: TGConnectionPrtcl {
-    public var limit: Int?
-    public var timeout: Int? = 10
+    private var limit: Int?
+    private var timeout: Int? = 10
     public var allowedUpdates: [TGUpdate.CodingKeys]?
     
     private var offsetUpdates: Int = 0
@@ -33,7 +33,7 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
                 timeout: Int? = nil,
                 allowedUpdates: [TGUpdate.CodingKeys]? = nil,
                 log: Logger
-    ) async throws {
+    ) {
         self.log = log
         self.limit = limit
         self.timeout = timeout ?? self.timeout
@@ -99,7 +99,7 @@ public final class TGWebHookConnection: TGConnectionPrtcl {
     
     public let webHookURL: URL
     
-    public init(webHookURL: URL) async throws {
+    public init(webHookURL: URL) {
         self.webHookURL = webHookURL
     }
     

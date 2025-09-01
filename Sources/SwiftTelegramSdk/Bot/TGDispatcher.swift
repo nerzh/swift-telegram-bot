@@ -8,7 +8,7 @@
 import Foundation
 import Logging
 
-public protocol TGDispatcherPrtcl {
+public protocol TGDispatcherPrtcl: Sendable {
     var handlersGroup: [[TGHandlerPrtcl]] { get set }
     /// priority - priority of execution by handlers
     func add(_ handler: TGHandlerPrtcl, priority: Int) async
