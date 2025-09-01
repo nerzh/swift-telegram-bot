@@ -1,7 +1,4 @@
 //
-//  File.swift
-//
-//
 //  Created by Oleh Hudeichuk on 21.05.2021.
 //
 
@@ -20,9 +17,9 @@ public actor TGBot: TGBotPrtcl {
     public let tgURI: URL
     public var tgClient: TGClientPrtcl {
         get async {
-//            await limiter.run {
+            await limiter.run {
                 return self.client
-//            }
+            }
         }
     }
     public let log: Logger
