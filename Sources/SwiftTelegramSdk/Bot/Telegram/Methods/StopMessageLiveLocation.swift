@@ -7,22 +7,22 @@ import Foundation
 
 
 /// Parameters container struct for `stopMessageLiveLocation` method
-public struct TGStopMessageLiveLocationParams: Encodable {
+public struct TGStopMessageLiveLocationParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId?
+    public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message with live location to stop
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// A JSON-serialized object for a new inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `StopMessageLiveLocationParams` struct
     public enum CodingKeys: String, CodingKey {

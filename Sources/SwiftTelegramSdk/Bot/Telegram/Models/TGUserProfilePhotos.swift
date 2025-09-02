@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [UserProfilePhotos](https://core.telegram.org/bots/api#userprofilephotos)
  **/
-public final class TGUserProfilePhotos: Codable {
+public final class TGUserProfilePhotos: Codable, Sendable {
 
     /// Custom keys for coding/decoding `UserProfilePhotos` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGUserProfilePhotos: Codable {
     }
 
     /// Total number of profile pictures the target user has
-    public var totalCount: Int
+    public let totalCount: Int
 
     /// Requested profile pictures (in up to 4 sizes each)
-    public var photos: [[TGPhotoSize]]
+    public let photos: [[TGPhotoSize]]
 
     public init (totalCount: Int, photos: [[TGPhotoSize]]) {
         self.totalCount = totalCount

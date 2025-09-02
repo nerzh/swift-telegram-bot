@@ -7,7 +7,7 @@
  [MenuButtonWebApp](https://core.telegram.org/bots/api#menubuttonwebapp)
  */
 
-public enum TGMenuButtonWebAppType: String, Codable {
+public enum TGMenuButtonWebAppType: String, Codable, Sendable {
     case webApp = "web_app"
     case undefined
 

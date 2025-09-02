@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [VideoChatEnded](https://core.telegram.org/bots/api#videochatended)
  **/
-public final class TGVideoChatEnded: Codable {
+public final class TGVideoChatEnded: Codable, Sendable {
 
     /// Custom keys for coding/decoding `VideoChatEnded` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGVideoChatEnded: Codable {
     }
 
     /// Video chat duration in seconds
-    public var duration: Int
+    public let duration: Int
 
     public init (duration: Int) {
         self.duration = duration

@@ -8,13 +8,13 @@
 import Foundation
 
 /// Handler for CallbackQuery updates
-public class TGCallbackQueryHandler: TGHandlerPrtcl {
+actor TGCallbackQueryHandler: TGHandlerPrtcl {
 
-    public var id: Int = 0
-    public var name: String
+    public let id: SendableValue<Int> = .init(0)
+    public let name: String
     
     let pattern: String
-    var callbackAsync: TGHandlerCallbackAsync
+    let callbackAsync: TGHandlerCallbackAsync
     
     public init(
         name: String = String(describing: TGCallbackQueryHandler.self),
@@ -26,7 +26,7 @@ public class TGCallbackQueryHandler: TGHandlerPrtcl {
         self.name = name
     }
 
-    public func check(update: TGUpdate) -> Bool {
+    public func check(update: TGUpdate) async -> Bool {
         guard let callbackQuery = update.callbackQuery else { return false }
         if
             let data = callbackQuery.data,

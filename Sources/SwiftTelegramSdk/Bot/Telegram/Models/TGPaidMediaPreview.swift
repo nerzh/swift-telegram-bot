@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PaidMediaPreview](https://core.telegram.org/bots/api#paidmediapreview)
  **/
-public final class TGPaidMediaPreview: Codable {
+public final class TGPaidMediaPreview: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PaidMediaPreview` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPaidMediaPreview: Codable {
     }
 
     /// Type of the paid media, always “preview”
-    public var type: TGPaidMediaPreviewType
+    public let type: TGPaidMediaPreviewType
 
     /// Optional. Media width as defined by the sender
-    public var width: Int?
+    public let width: Int?
 
     /// Optional. Media height as defined by the sender
-    public var height: Int?
+    public let height: Int?
 
     /// Optional. Duration of the media in seconds as defined by the sender
-    public var duration: Int?
+    public let duration: Int?
 
     public init (type: TGPaidMediaPreviewType, width: Int? = nil, height: Int? = nil, duration: Int? = nil) {
         self.type = type

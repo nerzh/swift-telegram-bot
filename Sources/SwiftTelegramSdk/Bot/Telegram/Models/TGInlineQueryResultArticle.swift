@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultArticle](https://core.telegram.org/bots/api#inlinequeryresultarticle)
  **/
-public final class TGInlineQueryResultArticle: Codable {
+public final class TGInlineQueryResultArticle: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultArticle` struct
     public enum CodingKeys: String, CodingKey {
@@ -23,34 +23,34 @@ public final class TGInlineQueryResultArticle: Codable {
     }
 
     /// Type of the result, must be article
-    public var type: TGInlineQueryResultArticleType
+    public let type: TGInlineQueryResultArticleType
 
     /// Unique identifier for this result, 1-64 Bytes
-    public var id: String
+    public let id: String
 
     /// Title of the result
-    public var title: String
+    public let title: String
 
     /// Content of the message to be sent
-    public var inputMessageContent: TGInputMessageContent
+    public let inputMessageContent: TGInputMessageContent
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. URL of the result
-    public var url: String?
+    public let url: String?
 
     /// Optional. Short description of the result
-    public var description: String?
+    public let description: String?
 
     /// Optional. Url of the thumbnail for the result
-    public var thumbnailUrl: String?
+    public let thumbnailUrl: String?
 
     /// Optional. Thumbnail width
-    public var thumbnailWidth: Int?
+    public let thumbnailWidth: Int?
 
     /// Optional. Thumbnail height
-    public var thumbnailHeight: Int?
+    public let thumbnailHeight: Int?
 
     public init (type: TGInlineQueryResultArticleType, id: String, title: String, inputMessageContent: TGInputMessageContent, replyMarkup: TGInlineKeyboardMarkup? = nil, url: String? = nil, description: String? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
         self.type = type

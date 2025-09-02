@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ReactionCount](https://core.telegram.org/bots/api#reactioncount)
  **/
-public final class TGReactionCount: Codable {
+public final class TGReactionCount: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ReactionCount` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGReactionCount: Codable {
     }
 
     /// Type of the reaction
-    public var type: TGReactionType
+    public let type: TGReactionType
 
     /// Number of times the reaction was added
-    public var totalCount: Int
+    public let totalCount: Int
 
     public init (type: TGReactionType, totalCount: Int) {
         self.type = type

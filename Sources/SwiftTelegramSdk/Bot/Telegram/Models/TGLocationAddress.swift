@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [LocationAddress](https://core.telegram.org/bots/api#locationaddress)
  **/
-public final class TGLocationAddress: Codable {
+public final class TGLocationAddress: Codable, Sendable {
 
     /// Custom keys for coding/decoding `LocationAddress` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGLocationAddress: Codable {
     }
 
     /// The two-letter ISO 3166-1 alpha-2 country code of the country where the location is located
-    public var countryCode: String
+    public let countryCode: String
 
     /// Optional. State of the location
-    public var state: String?
+    public let state: String?
 
     /// Optional. City of the location
-    public var city: String?
+    public let city: String?
 
     /// Optional. Street address of the location
-    public var street: String?
+    public let street: String?
 
     public init (countryCode: String, state: String? = nil, city: String? = nil, street: String? = nil) {
         self.countryCode = countryCode

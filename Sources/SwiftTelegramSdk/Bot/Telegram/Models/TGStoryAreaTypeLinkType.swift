@@ -7,7 +7,7 @@
  [StoryAreaTypeLink](https://core.telegram.org/bots/api#storyareatypelink)
  */
 
-public enum TGStoryAreaTypeLinkType: String, Codable {
+public enum TGStoryAreaTypeLinkType: String, Codable, Sendable {
     case link = "link"
     case undefined
 

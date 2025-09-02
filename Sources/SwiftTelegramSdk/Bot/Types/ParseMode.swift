@@ -12,7 +12,7 @@ import Foundation
  SeeAlso Telegram TGBot API Reference:
  [Formatting Options](https://core.telegram.org/bots/api#formatting-options)
  */
-public enum TGParseMode: String, Codable {
+public enum TGParseMode: String, Codable, Sendable {
     case markdownV2 = "MarkdownV2"
     @available(*, deprecated, message: "This is a legacy mode, retained for backward compatibility.", renamed: "markdownV2")
     case markdown  = "Markdown"

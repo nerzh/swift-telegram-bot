@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotCommandScopeAllPrivateChats](https://core.telegram.org/bots/api#botcommandscopeallprivatechats)
  **/
-public final class TGBotCommandScopeAllPrivateChats: Codable {
+public final class TGBotCommandScopeAllPrivateChats: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BotCommandScopeAllPrivateChats` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGBotCommandScopeAllPrivateChats: Codable {
     }
 
     /// Scope type, must be all_private_chats
-    public var type: TGBotCommandScopeAllPrivateChatsType
+    public let type: TGBotCommandScopeAllPrivateChatsType
 
     public init (type: TGBotCommandScopeAllPrivateChatsType) {
         self.type = type

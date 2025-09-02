@@ -7,7 +7,7 @@
  [PassportElementErrorReverseSide](https://core.telegram.org/bots/api#passportelementerrorreverseside)
  */
 
-public enum TGPassportElementErrorReverseSideType: String, Codable {
+public enum TGPassportElementErrorReverseSideType: String, Codable, Sendable {
     case driverLicense = "driver_license"
     case identityCard = "identity_card"
     case undefined

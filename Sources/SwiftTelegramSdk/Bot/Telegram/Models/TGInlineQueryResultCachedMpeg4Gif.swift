@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultCachedMpeg4Gif](https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif)
  **/
-public final class TGInlineQueryResultCachedMpeg4Gif: Codable {
+public final class TGInlineQueryResultCachedMpeg4Gif: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultCachedMpeg4Gif` struct
     public enum CodingKeys: String, CodingKey {
@@ -23,34 +23,34 @@ public final class TGInlineQueryResultCachedMpeg4Gif: Codable {
     }
 
     /// Type of the result, must be mpeg4_gif
-    public var type: TGInlineQueryResultCachedMpeg4GifType
+    public let type: TGInlineQueryResultCachedMpeg4GifType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid file identifier for the MPEG4 file
-    public var mpeg4FileId: String
+    public let mpeg4FileId: String
 
     /// Optional. Title for the result
-    public var title: String?
+    public let title: String?
 
     /// Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Pass True, if the caption must be shown above the message media
-    public var showCaptionAboveMedia: Bool?
+    public let showCaptionAboveMedia: Bool?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the video animation
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultCachedMpeg4GifType, id: String, mpeg4FileId: String, title: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

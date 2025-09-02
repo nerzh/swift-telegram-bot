@@ -7,7 +7,7 @@
  [Poll](https://core.telegram.org/bots/api#poll)
  */
 
-public enum TGPollType: String, Codable {
+public enum TGPollType: String, Codable, Sendable {
     case regular = "regular"
     case quiz = "quiz"
     case undefined

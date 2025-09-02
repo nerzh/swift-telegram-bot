@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultMpeg4Gif](https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif)
  **/
-public final class TGInlineQueryResultMpeg4Gif: Codable {
+public final class TGInlineQueryResultMpeg4Gif: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultMpeg4Gif` struct
     public enum CodingKeys: String, CodingKey {
@@ -28,49 +28,49 @@ public final class TGInlineQueryResultMpeg4Gif: Codable {
     }
 
     /// Type of the result, must be mpeg4_gif
-    public var type: TGInlineQueryResultMpeg4GifType
+    public let type: TGInlineQueryResultMpeg4GifType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid URL for the MPEG4 file
-    public var mpeg4Url: String
+    public let mpeg4Url: String
 
     /// Optional. Video width
-    public var mpeg4Width: Int?
+    public let mpeg4Width: Int?
 
     /// Optional. Video height
-    public var mpeg4Height: Int?
+    public let mpeg4Height: Int?
 
     /// Optional. Video duration in seconds
-    public var mpeg4Duration: Int?
+    public let mpeg4Duration: Int?
 
     /// URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
-    public var thumbnailUrl: String
+    public let thumbnailUrl: String
 
     /// Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
-    public var thumbnailMimeType: String?
+    public let thumbnailMimeType: String?
 
     /// Optional. Title for the result
-    public var title: String?
+    public let title: String?
 
     /// Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Pass True, if the caption must be shown above the message media
-    public var showCaptionAboveMedia: Bool?
+    public let showCaptionAboveMedia: Bool?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the video animation
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultMpeg4GifType, id: String, mpeg4Url: String, mpeg4Width: Int? = nil, mpeg4Height: Int? = nil, mpeg4Duration: Int? = nil, thumbnailUrl: String, thumbnailMimeType: String? = nil, title: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

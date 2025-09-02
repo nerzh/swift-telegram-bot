@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ShippingAddress](https://core.telegram.org/bots/api#shippingaddress)
  **/
-public final class TGShippingAddress: Codable {
+public final class TGShippingAddress: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ShippingAddress` struct
     public enum CodingKeys: String, CodingKey {
@@ -19,22 +19,22 @@ public final class TGShippingAddress: Codable {
     }
 
     /// Two-letter ISO 3166-1 alpha-2 country code
-    public var countryCode: String
+    public let countryCode: String
 
     /// State, if applicable
-    public var state: String
+    public let state: String
 
     /// City
-    public var city: String
+    public let city: String
 
     /// First line for the address
-    public var streetLine1: String
+    public let streetLine1: String
 
     /// Second line for the address
-    public var streetLine2: String
+    public let streetLine2: String
 
     /// Address post code
-    public var postCode: String
+    public let postCode: String
 
     public init (countryCode: String, state: String, city: String, streetLine1: String, streetLine2: String, postCode: String) {
         self.countryCode = countryCode

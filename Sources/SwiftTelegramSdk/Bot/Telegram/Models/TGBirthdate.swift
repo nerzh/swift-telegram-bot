@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Birthdate](https://core.telegram.org/bots/api#birthdate)
  **/
-public final class TGBirthdate: Codable {
+public final class TGBirthdate: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Birthdate` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGBirthdate: Codable {
     }
 
     /// Day of the user's birth; 1-31
-    public var day: Int
+    public let day: Int
 
     /// Month of the user's birth; 1-12
-    public var month: Int
+    public let month: Int
 
     /// Optional. Year of the user's birth
-    public var year: Int?
+    public let year: Int?
 
     public init (day: Int, month: Int, year: Int? = nil) {
         self.day = day

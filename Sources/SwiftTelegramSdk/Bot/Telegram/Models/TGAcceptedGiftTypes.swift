@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [AcceptedGiftTypes](https://core.telegram.org/bots/api#acceptedgifttypes)
  **/
-public final class TGAcceptedGiftTypes: Codable {
+public final class TGAcceptedGiftTypes: Codable, Sendable {
 
     /// Custom keys for coding/decoding `AcceptedGiftTypes` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGAcceptedGiftTypes: Codable {
     }
 
     /// True, if unlimited regular gifts are accepted
-    public var unlimitedGifts: Bool
+    public let unlimitedGifts: Bool
 
     /// True, if limited regular gifts are accepted
-    public var limitedGifts: Bool
+    public let limitedGifts: Bool
 
     /// True, if unique gifts or gifts that can be upgraded to unique for free are accepted
-    public var uniqueGifts: Bool
+    public let uniqueGifts: Bool
 
     /// True, if a Telegram Premium subscription is accepted
-    public var premiumSubscription: Bool
+    public let premiumSubscription: Bool
 
     public init (unlimitedGifts: Bool, limitedGifts: Bool, uniqueGifts: Bool, premiumSubscription: Bool) {
         self.unlimitedGifts = unlimitedGifts

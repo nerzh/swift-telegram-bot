@@ -9,7 +9,7 @@
  SeeAlso Telegram Bot API Reference:
  [RevenueWithdrawalState](https://core.telegram.org/bots/api#revenuewithdrawalstate)
  **/
-public enum TGRevenueWithdrawalState: Codable {
+public enum TGRevenueWithdrawalState: Codable, Sendable {
     case revenueWithdrawalStatePending(TGRevenueWithdrawalStatePending)
     case revenueWithdrawalStateSucceeded(TGRevenueWithdrawalStateSucceeded)
     case revenueWithdrawalStateFailed(TGRevenueWithdrawalStateFailed)

@@ -27,7 +27,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResult](https://core.telegram.org/bots/api#inlinequeryresult)
  **/
-public enum TGInlineQueryResult: Codable {
+public enum TGInlineQueryResult: Codable, Sendable {
     case inlineQueryResultCachedAudio(TGInlineQueryResultCachedAudio)
     case inlineQueryResultCachedDocument(TGInlineQueryResultCachedDocument)
     case inlineQueryResultCachedGif(TGInlineQueryResultCachedGif)

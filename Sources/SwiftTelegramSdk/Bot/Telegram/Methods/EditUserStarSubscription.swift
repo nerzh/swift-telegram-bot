@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `editUserStarSubscription` method
-public struct TGEditUserStarSubscriptionParams: Encodable {
+public struct TGEditUserStarSubscriptionParams: Encodable, Sendable {
 
     /// Identifier of the user whose subscription will be edited
-    public var userId: Int64
+    public let userId: Int64
 
     /// Telegram payment identifier for the subscription
-    public var telegramPaymentChargeId: String
+    public let telegramPaymentChargeId: String
 
     /// Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
-    public var isCanceled: Bool
+    public let isCanceled: Bool
 
     /// Custom keys for coding/decoding `EditUserStarSubscriptionParams` struct
     public enum CodingKeys: String, CodingKey {

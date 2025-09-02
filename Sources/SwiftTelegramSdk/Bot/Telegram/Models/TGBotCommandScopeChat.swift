@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotCommandScopeChat](https://core.telegram.org/bots/api#botcommandscopechat)
  **/
-public final class TGBotCommandScopeChat: Codable {
+public final class TGBotCommandScopeChat: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BotCommandScopeChat` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGBotCommandScopeChat: Codable {
     }
 
     /// Scope type, must be chat
-    public var type: TGBotCommandScopeChatType
+    public let type: TGBotCommandScopeChatType
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel direct messages chats and channel chats aren't supported.
+    public let chatId: TGChatId
 
     public init (type: TGBotCommandScopeChatType, chatId: TGChatId) {
         self.type = type

@@ -7,7 +7,7 @@
  [ReactionTypeEmoji](https://core.telegram.org/bots/api#reactiontypeemoji)
  */
 
-public enum TGReactionTypeEmojiType: String, Codable {
+public enum TGReactionTypeEmojiType: String, Codable, Sendable {
     case emoji = "emoji"
     case undefined
 

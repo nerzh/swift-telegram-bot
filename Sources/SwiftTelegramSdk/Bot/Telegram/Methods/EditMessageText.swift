@@ -7,34 +7,34 @@ import Foundation
 
 
 /// Parameters container struct for `editMessageText` method
-public struct TGEditMessageTextParams: Encodable {
+public struct TGEditMessageTextParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId?
+    public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message to edit
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// New text of the message, 1-4096 characters after entities parsing
-    public var text: String
+    public let text: String
 
     /// Mode for parsing entities in the message text. See formatting options for more details.
-    public var parseMode: TGParseMode?
+    public let parseMode: TGParseMode?
 
     /// A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
-    public var entities: [TGMessageEntity]?
+    public let entities: [TGMessageEntity]?
 
     /// Link preview generation options for the message
-    public var linkPreviewOptions: TGLinkPreviewOptions?
+    public let linkPreviewOptions: TGLinkPreviewOptions?
 
     /// A JSON-serialized object for an inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageTextParams` struct
     public enum CodingKeys: String, CodingKey {

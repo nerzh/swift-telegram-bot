@@ -7,14 +7,14 @@
 import Foundation
 import SwiftRegularExpression
 
-public class TGRegexpHandler: TGHandlerPrtcl {
+public final class TGRegexpHandler: TGHandlerPrtcl {
     
-    public var id: Int = 0
-    public var name: String
+    public let id: SendableValue<Int> = .init(0)
+    public let name: String
     
     let regexp: NSRegularExpression
-    var callbackAsync: TGHandlerCallbackAsync
-    let filters: TGFilter
+    let callbackAsync: TGHandlerCallbackAsync
+    let filters: SendableValue<TGFilter>
     
     public init(
         name: String = String(describing: TGRegexpHandler.self),
@@ -24,7 +24,7 @@ public class TGRegexpHandler: TGHandlerPrtcl {
     ) {
         self.name = name
         self.regexp = regexp
-        self.filters = filters
+        self.filters = .init(filters)
         self.callbackAsync = callback
     }
     
@@ -44,7 +44,7 @@ public class TGRegexpHandler: TGHandlerPrtcl {
         )
     }
     
-    public func check(update: TGUpdate) -> Bool {
+    public func check(update: TGUpdate) async -> Bool {
         guard let text = update.message?.text else { return false }
         return text.regexp(regexp.pattern, regexp.options).keys.count > 0
     }

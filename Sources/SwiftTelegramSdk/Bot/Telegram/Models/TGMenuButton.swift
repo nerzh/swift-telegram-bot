@@ -10,7 +10,7 @@
  SeeAlso Telegram Bot API Reference:
  [MenuButton](https://core.telegram.org/bots/api#menubutton)
  **/
-public enum TGMenuButton: Codable {
+public enum TGMenuButton: Codable, Sendable {
     case menuButtonCommands(TGMenuButtonCommands)
     case menuButtonWebApp(TGMenuButtonWebApp)
     case menuButtonDefault(TGMenuButtonDefault)

@@ -6,6 +6,6 @@
  SeeAlso Telegram Bot API Reference:
  [GeneralForumTopicUnhidden](https://core.telegram.org/bots/api#generalforumtopicunhidden)
  **/
-public final class TGGeneralForumTopicUnhidden: Codable {
+public final class TGGeneralForumTopicUnhidden: Codable, Sendable {
 
 }

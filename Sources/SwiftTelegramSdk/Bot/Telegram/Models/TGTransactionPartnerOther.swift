@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [TransactionPartnerOther](https://core.telegram.org/bots/api#transactionpartnerother)
  **/
-public final class TGTransactionPartnerOther: Codable {
+public final class TGTransactionPartnerOther: Codable, Sendable {
 
     /// Custom keys for coding/decoding `TransactionPartnerOther` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGTransactionPartnerOther: Codable {
     }
 
     /// Type of the transaction partner, always “other”
-    public var type: TGTransactionPartnerOtherType
+    public let type: TGTransactionPartnerOtherType
 
     public init (type: TGTransactionPartnerOtherType) {
         self.type = type

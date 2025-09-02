@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BusinessOpeningHours](https://core.telegram.org/bots/api#businessopeninghours)
  **/
-public final class TGBusinessOpeningHours: Codable {
+public final class TGBusinessOpeningHours: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BusinessOpeningHours` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGBusinessOpeningHours: Codable {
     }
 
     /// Unique name of the time zone for which the opening hours are defined
-    public var timeZoneName: String
+    public let timeZoneName: String
 
     /// List of time intervals describing business opening hours
-    public var openingHours: [TGBusinessOpeningHoursInterval]
+    public let openingHours: [TGBusinessOpeningHoursInterval]
 
     public init (timeZoneName: String, openingHours: [TGBusinessOpeningHoursInterval]) {
         self.timeZoneName = timeZoneName

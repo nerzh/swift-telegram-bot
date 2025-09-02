@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatPermissions](https://core.telegram.org/bots/api#chatpermissions)
  **/
-public final class TGChatPermissions: Codable {
+public final class TGChatPermissions: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatPermissions` struct
     public enum CodingKeys: String, CodingKey {
@@ -27,46 +27,46 @@ public final class TGChatPermissions: Codable {
     }
 
     /// Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
-    public var canSendMessages: Bool?
+    public let canSendMessages: Bool?
 
     /// Optional. True, if the user is allowed to send audios
-    public var canSendAudios: Bool?
+    public let canSendAudios: Bool?
 
     /// Optional. True, if the user is allowed to send documents
-    public var canSendDocuments: Bool?
+    public let canSendDocuments: Bool?
 
     /// Optional. True, if the user is allowed to send photos
-    public var canSendPhotos: Bool?
+    public let canSendPhotos: Bool?
 
     /// Optional. True, if the user is allowed to send videos
-    public var canSendVideos: Bool?
+    public let canSendVideos: Bool?
 
     /// Optional. True, if the user is allowed to send video notes
-    public var canSendVideoNotes: Bool?
+    public let canSendVideoNotes: Bool?
 
     /// Optional. True, if the user is allowed to send voice notes
-    public var canSendVoiceNotes: Bool?
+    public let canSendVoiceNotes: Bool?
 
     /// Optional. True, if the user is allowed to send polls and checklists
-    public var canSendPolls: Bool?
+    public let canSendPolls: Bool?
 
     /// Optional. True, if the user is allowed to send animations, games, stickers and use inline bots
-    public var canSendOtherMessages: Bool?
+    public let canSendOtherMessages: Bool?
 
     /// Optional. True, if the user is allowed to add web page previews to their messages
-    public var canAddWebPagePreviews: Bool?
+    public let canAddWebPagePreviews: Bool?
 
     /// Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
-    public var canChangeInfo: Bool?
+    public let canChangeInfo: Bool?
 
     /// Optional. True, if the user is allowed to invite new users to the chat
-    public var canInviteUsers: Bool?
+    public let canInviteUsers: Bool?
 
     /// Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
-    public var canPinMessages: Bool?
+    public let canPinMessages: Bool?
 
     /// Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
-    public var canManageTopics: Bool?
+    public let canManageTopics: Bool?
 
     public init (canSendMessages: Bool? = nil, canSendAudios: Bool? = nil, canSendDocuments: Bool? = nil, canSendPhotos: Bool? = nil, canSendVideos: Bool? = nil, canSendVideoNotes: Bool? = nil, canSendVoiceNotes: Bool? = nil, canSendPolls: Bool? = nil, canSendOtherMessages: Bool? = nil, canAddWebPagePreviews: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil) {
         self.canSendMessages = canSendMessages

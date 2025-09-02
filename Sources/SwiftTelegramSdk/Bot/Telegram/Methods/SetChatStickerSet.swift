@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setChatStickerSet` method
-public struct TGSetChatStickerSetParams: Encodable {
+public struct TGSetChatStickerSetParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Name of the sticker set to be set as the group sticker set
-    public var stickerSetName: String
+    public let stickerSetName: String
 
     /// Custom keys for coding/decoding `SetChatStickerSetParams` struct
     public enum CodingKeys: String, CodingKey {

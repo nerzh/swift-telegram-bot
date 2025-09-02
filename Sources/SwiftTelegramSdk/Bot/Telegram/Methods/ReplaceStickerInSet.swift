@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `replaceStickerInSet` method
-public struct TGReplaceStickerInSetParams: Encodable {
+public struct TGReplaceStickerInSetParams: Encodable, Sendable {
 
     /// User identifier of the sticker set owner
-    public var userId: Int64
+    public let userId: Int64
 
     /// Sticker set name
-    public var name: String
+    public let name: String
 
     /// File identifier of the replaced sticker
-    public var oldSticker: String
+    public let oldSticker: String
 
     /// A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
-    public var sticker: TGInputSticker
+    public let sticker: TGInputSticker
 
     /// Custom keys for coding/decoding `ReplaceStickerInSetParams` struct
     public enum CodingKeys: String, CodingKey {

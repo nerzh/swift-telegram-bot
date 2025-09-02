@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBackground](https://core.telegram.org/bots/api#chatbackground)
  **/
-public final class TGChatBackground: Codable {
+public final class TGChatBackground: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatBackground` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGChatBackground: Codable {
     }
 
     /// Type of the background
-    public var type: TGBackgroundType
+    public let type: TGBackgroundType
 
     public init (type: TGBackgroundType) {
         self.type = type

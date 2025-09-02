@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `deleteStickerSet` method
-public struct TGDeleteStickerSetParams: Encodable {
+public struct TGDeleteStickerSetParams: Encodable, Sendable {
 
     /// Sticker set name
-    public var name: String
+    public let name: String
 
     /// Custom keys for coding/decoding `DeleteStickerSetParams` struct
     public enum CodingKeys: String, CodingKey {

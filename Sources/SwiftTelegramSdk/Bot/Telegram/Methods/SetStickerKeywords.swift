@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setStickerKeywords` method
-public struct TGSetStickerKeywordsParams: Encodable {
+public struct TGSetStickerKeywordsParams: Encodable, Sendable {
 
     /// File identifier of the sticker
-    public var sticker: String
+    public let sticker: String
 
     /// A JSON-serialized list of 0-20 search keywords for the sticker with total length of up to 64 characters
-    public var keywords: [String]?
+    public let keywords: [String]?
 
     /// Custom keys for coding/decoding `SetStickerKeywordsParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -7,7 +7,7 @@
  [Chat](https://core.telegram.org/bots/api#chat)
  */
 
-public enum TGChatType: String, Codable {
+public enum TGChatType: String, Codable, Sendable {
     case `private` = "private"
     case group = "group"
     case supergroup = "supergroup"

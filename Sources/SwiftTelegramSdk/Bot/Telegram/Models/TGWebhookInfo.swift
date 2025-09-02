@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [WebhookInfo](https://core.telegram.org/bots/api#webhookinfo)
  **/
-public final class TGWebhookInfo: Codable {
+public final class TGWebhookInfo: Codable, Sendable {
 
     /// Custom keys for coding/decoding `WebhookInfo` struct
     public enum CodingKeys: String, CodingKey {
@@ -22,31 +22,31 @@ public final class TGWebhookInfo: Codable {
     }
 
     /// Webhook URL, may be empty if webhook is not set up
-    public var url: String
+    public let url: String
 
     /// True, if a custom certificate was provided for webhook certificate checks
-    public var hasCustomCertificate: Bool
+    public let hasCustomCertificate: Bool
 
     /// Number of updates awaiting delivery
-    public var pendingUpdateCount: Int
+    public let pendingUpdateCount: Int
 
     /// Optional. Currently used webhook IP address
-    public var ipAddress: String?
+    public let ipAddress: String?
 
     /// Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook
-    public var lastErrorDate: Int?
+    public let lastErrorDate: Int?
 
     /// Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook
-    public var lastErrorMessage: String?
+    public let lastErrorMessage: String?
 
     /// Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters
-    public var lastSynchronizationErrorDate: Int?
+    public let lastSynchronizationErrorDate: Int?
 
     /// Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
-    public var maxConnections: Int?
+    public let maxConnections: Int?
 
     /// Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member
-    public var allowedUpdates: [String]?
+    public let allowedUpdates: [String]?
 
     public init (url: String, hasCustomCertificate: Bool, pendingUpdateCount: Int, ipAddress: String? = nil, lastErrorDate: Int? = nil, lastErrorMessage: String? = nil, lastSynchronizationErrorDate: Int? = nil, maxConnections: Int? = nil, allowedUpdates: [String]? = nil) {
         self.url = url

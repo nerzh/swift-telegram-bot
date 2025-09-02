@@ -7,7 +7,7 @@
  [ChatFullInfo](https://core.telegram.org/bots/api#chatfullinfo)
  */
 
-public enum TGChatFullInfoType: String, Codable {
+public enum TGChatFullInfoType: String, Codable, Sendable {
     case `private` = "private"
     case group = "group"
     case supergroup = "supergroup"

@@ -7,7 +7,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultVideo](https://core.telegram.org/bots/api#inlinequeryresultvideo)
  **/
-public final class TGInlineQueryResultVideo: Codable {
+public final class TGInlineQueryResultVideo: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultVideo` struct
     public enum CodingKeys: String, CodingKey {
@@ -30,52 +30,52 @@ public final class TGInlineQueryResultVideo: Codable {
     }
 
     /// Type of the result, must be video
-    public var type: TGInlineQueryResultVideoType
+    public let type: TGInlineQueryResultVideoType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid URL for the embedded video player or video file
-    public var videoUrl: String
+    public let videoUrl: String
 
     /// MIME type of the content of the video URL, “text/html” or “video/mp4”
-    public var mimeType: String
+    public let mimeType: String
 
     /// URL of the thumbnail (JPEG only) for the video
-    public var thumbnailUrl: String
+    public let thumbnailUrl: String
 
     /// Title for the result
-    public var title: String
+    public let title: String
 
     /// Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Pass True, if the caption must be shown above the message media
-    public var showCaptionAboveMedia: Bool?
+    public let showCaptionAboveMedia: Bool?
 
     /// Optional. Video width
-    public var videoWidth: Int?
+    public let videoWidth: Int?
 
     /// Optional. Video height
-    public var videoHeight: Int?
+    public let videoHeight: Int?
 
     /// Optional. Video duration in seconds
-    public var videoDuration: Int?
+    public let videoDuration: Int?
 
     /// Optional. Short description of the result
-    public var description: String?
+    public let description: String?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultVideoType, id: String, videoUrl: String, mimeType: String, thumbnailUrl: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, videoWidth: Int? = nil, videoHeight: Int? = nil, videoDuration: Int? = nil, description: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

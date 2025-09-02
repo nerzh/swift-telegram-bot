@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundTypeChatTheme](https://core.telegram.org/bots/api#backgroundtypechattheme)
  **/
-public final class TGBackgroundTypeChatTheme: Codable {
+public final class TGBackgroundTypeChatTheme: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BackgroundTypeChatTheme` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGBackgroundTypeChatTheme: Codable {
     }
 
     /// Type of the background, always “chat_theme”
-    public var type: TGBackgroundTypeChatThemeType
+    public let type: TGBackgroundTypeChatThemeType
 
     /// Name of the chat theme, which is usually an emoji
-    public var themeName: String
+    public let themeName: String
 
     public init (type: TGBackgroundTypeChatThemeType, themeName: String) {
         self.type = type

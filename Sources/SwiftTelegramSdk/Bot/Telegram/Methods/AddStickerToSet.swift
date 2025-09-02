@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `addStickerToSet` method
-public struct TGAddStickerToSetParams: Encodable {
+public struct TGAddStickerToSetParams: Encodable, Sendable {
 
     /// User identifier of sticker set owner
-    public var userId: Int64
+    public let userId: Int64
 
     /// Sticker set name
-    public var name: String
+    public let name: String
 
     /// A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.
-    public var sticker: TGInputSticker
+    public let sticker: TGInputSticker
 
     /// Custom keys for coding/decoding `AddStickerToSetParams` struct
     public enum CodingKeys: String, CodingKey {
@@ -52,12 +52,7 @@ public extension TGBot {
         guard let methodURL: URL = .init(string: getMethodURL("addStickerToSet")) else {
             throw BotError("Bad URL: \(getMethodURL("addStickerToSet"))")
         }
-        let safeParams = TGAddStickerToSetParams(
-            userId: params.userId,
-            name: params.name,
-            sticker: params.sticker
-        )
-        let result: Bool = try await tgClient.post(methodURL, params: safeParams, as: nil)
+        let result: Bool = try await tgClient.post(methodURL, params: params, as: nil)
         return result
     }
 }

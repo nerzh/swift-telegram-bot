@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `transferBusinessAccountStars` method
-public struct TGTransferBusinessAccountStarsParams: Encodable {
+public struct TGTransferBusinessAccountStarsParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Number of Telegram Stars to transfer; 1-10000
-    public var starCount: Int
+    public let starCount: Int
 
     /// Custom keys for coding/decoding `TransferBusinessAccountStarsParams` struct
     public enum CodingKeys: String, CodingKey {

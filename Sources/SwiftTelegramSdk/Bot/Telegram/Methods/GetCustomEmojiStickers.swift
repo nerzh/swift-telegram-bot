@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getCustomEmojiStickers` method
-public struct TGGetCustomEmojiStickersParams: Encodable {
+public struct TGGetCustomEmojiStickersParams: Encodable, Sendable {
 
     /// A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
-    public var customEmojiIds: [String]
+    public let customEmojiIds: [String]
 
     /// Custom keys for coding/decoding `GetCustomEmojiStickersParams` struct
     public enum CodingKeys: String, CodingKey {

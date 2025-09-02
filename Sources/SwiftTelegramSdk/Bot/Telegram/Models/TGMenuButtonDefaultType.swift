@@ -7,7 +7,7 @@
  [MenuButtonDefault](https://core.telegram.org/bots/api#menubuttondefault)
  */
 
-public enum TGMenuButtonDefaultType: String, Codable {
+public enum TGMenuButtonDefaultType: String, Codable, Sendable {
     case `default` = "default"
     case undefined
 

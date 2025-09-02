@@ -7,7 +7,7 @@
  [BotCommandScopeChat](https://core.telegram.org/bots/api#botcommandscopechat)
  */
 
-public enum TGBotCommandScopeChatType: String, Codable {
+public enum TGBotCommandScopeChatType: String, Codable, Sendable {
     case chat = "chat"
     case undefined
 

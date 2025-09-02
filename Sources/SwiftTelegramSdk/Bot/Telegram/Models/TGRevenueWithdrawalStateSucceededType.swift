@@ -7,7 +7,7 @@
  [RevenueWithdrawalStateSucceeded](https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded)
  */
 
-public enum TGRevenueWithdrawalStateSucceededType: String, Codable {
+public enum TGRevenueWithdrawalStateSucceededType: String, Codable, Sendable {
     case succeeded = "succeeded"
     case undefined
 

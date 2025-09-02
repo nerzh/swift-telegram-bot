@@ -7,7 +7,7 @@
  [BackgroundTypeFill](https://core.telegram.org/bots/api#backgroundtypefill)
  */
 
-public enum TGBackgroundTypeFillType: String, Codable {
+public enum TGBackgroundTypeFillType: String, Codable, Sendable {
     case fill = "fill"
     case undefined
 

@@ -7,7 +7,7 @@
  [MenuButtonCommands](https://core.telegram.org/bots/api#menubuttoncommands)
  */
 
-public enum TGMenuButtonCommandsType: String, Codable {
+public enum TGMenuButtonCommandsType: String, Codable, Sendable {
     case commands = "commands"
     case undefined
 

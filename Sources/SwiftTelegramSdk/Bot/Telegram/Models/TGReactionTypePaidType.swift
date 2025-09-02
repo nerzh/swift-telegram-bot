@@ -7,7 +7,7 @@
  [ReactionTypePaid](https://core.telegram.org/bots/api#reactiontypepaid)
  */
 
-public enum TGReactionTypePaidType: String, Codable {
+public enum TGReactionTypePaidType: String, Codable, Sendable {
     case paid = "paid"
     case undefined
 

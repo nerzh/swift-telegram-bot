@@ -10,7 +10,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundType](https://core.telegram.org/bots/api#backgroundtype)
  **/
-public enum TGBackgroundType: Codable {
+public enum TGBackgroundType: Codable, Sendable {
     case backgroundTypeFill(TGBackgroundTypeFill)
     case backgroundTypeWallpaper(TGBackgroundTypeWallpaper)
     case backgroundTypePattern(TGBackgroundTypePattern)

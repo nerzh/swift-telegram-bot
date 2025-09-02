@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaTypeLocation](https://core.telegram.org/bots/api#storyareatypelocation)
  **/
-public final class TGStoryAreaTypeLocation: Codable {
+public final class TGStoryAreaTypeLocation: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryAreaTypeLocation` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGStoryAreaTypeLocation: Codable {
     }
 
     /// Type of the area, always “location”
-    public var type: TGStoryAreaTypeLocationType
+    public let type: TGStoryAreaTypeLocationType
 
     /// Location latitude in degrees
-    public var latitude: Float
+    public let latitude: Float
 
     /// Location longitude in degrees
-    public var longitude: Float
+    public let longitude: Float
 
     /// Optional. Address of the location
-    public var address: TGLocationAddress?
+    public let address: TGLocationAddress?
 
     public init (type: TGStoryAreaTypeLocationType, latitude: Float, longitude: Float, address: TGLocationAddress? = nil) {
         self.type = type

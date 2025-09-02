@@ -7,7 +7,7 @@
  [InlineQueryResultContact](https://core.telegram.org/bots/api#inlinequeryresultcontact)
  */
 
-public enum TGInlineQueryResultContactType: String, Codable {
+public enum TGInlineQueryResultContactType: String, Codable, Sendable {
     case contact = "contact"
     case undefined
 

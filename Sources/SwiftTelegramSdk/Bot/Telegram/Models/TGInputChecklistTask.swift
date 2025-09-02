@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputChecklistTask](https://core.telegram.org/bots/api#inputchecklisttask)
  **/
-public final class TGInputChecklistTask: Codable {
+public final class TGInputChecklistTask: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InputChecklistTask` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGInputChecklistTask: Codable {
     }
 
     /// Unique identifier of the task; must be positive and unique among all task identifiers currently present in the checklist
-    public var id: Int
+    public let id: Int
 
     /// Text of the task; 1-100 characters after entities parsing
-    public var text: String
+    public let text: String
 
     /// Optional. Mode for parsing entities in the text. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the text, which can be specified instead of parse_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are allowed.
-    public var textEntities: [TGMessageEntity]?
+    public let textEntities: [TGMessageEntity]?
 
     public init (id: Int, text: String, parseMode: String? = nil, textEntities: [TGMessageEntity]? = nil) {
         self.id = id

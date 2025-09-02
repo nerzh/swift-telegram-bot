@@ -7,7 +7,7 @@
  [BotCommandScopeChatMember](https://core.telegram.org/bots/api#botcommandscopechatmember)
  */
 
-public enum TGBotCommandScopeChatMemberType: String, Codable {
+public enum TGBotCommandScopeChatMemberType: String, Codable, Sendable {
     case chatMember = "chat_member"
     case undefined
 

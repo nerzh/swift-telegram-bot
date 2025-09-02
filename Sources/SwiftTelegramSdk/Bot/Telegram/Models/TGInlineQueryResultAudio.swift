@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultAudio](https://core.telegram.org/bots/api#inlinequeryresultaudio)
  **/
-public final class TGInlineQueryResultAudio: Codable {
+public final class TGInlineQueryResultAudio: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultAudio` struct
     public enum CodingKeys: String, CodingKey {
@@ -24,37 +24,37 @@ public final class TGInlineQueryResultAudio: Codable {
     }
 
     /// Type of the result, must be audio
-    public var type: TGInlineQueryResultAudioType
+    public let type: TGInlineQueryResultAudioType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid URL for the audio file
-    public var audioUrl: String
+    public let audioUrl: String
 
     /// Title
-    public var title: String
+    public let title: String
 
     /// Optional. Caption, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Performer
-    public var performer: String?
+    public let performer: String?
 
     /// Optional. Audio duration in seconds
-    public var audioDuration: Int?
+    public let audioDuration: Int?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the audio
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultAudioType, id: String, audioUrl: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, performer: String? = nil, audioDuration: Int? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

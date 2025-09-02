@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChecklistTasksAdded](https://core.telegram.org/bots/api#checklisttasksadded)
  **/
-public final class TGChecklistTasksAdded: Codable {
+public final class TGChecklistTasksAdded: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChecklistTasksAdded` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGChecklistTasksAdded: Codable {
     }
 
     /// Optional. Message containing the checklist to which the tasks were added. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.
-    public var checklistMessage: TGMessage?
+    public let checklistMessage: TGMessage?
 
     /// List of tasks added to the checklist
-    public var tasks: [TGChecklistTask]
+    public let tasks: [TGChecklistTask]
 
     public init (checklistMessage: TGMessage? = nil, tasks: [TGChecklistTask]) {
         self.checklistMessage = checklistMessage

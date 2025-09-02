@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaPosition](https://core.telegram.org/bots/api#storyareaposition)
  **/
-public final class TGStoryAreaPosition: Codable {
+public final class TGStoryAreaPosition: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryAreaPosition` struct
     public enum CodingKeys: String, CodingKey {
@@ -19,22 +19,22 @@ public final class TGStoryAreaPosition: Codable {
     }
 
     /// The abscissa of the area's center, as a percentage of the media width
-    public var xPercentage: Float
+    public let xPercentage: Float
 
     /// The ordinate of the area's center, as a percentage of the media height
-    public var yPercentage: Float
+    public let yPercentage: Float
 
     /// The width of the area's rectangle, as a percentage of the media width
-    public var widthPercentage: Float
+    public let widthPercentage: Float
 
     /// The height of the area's rectangle, as a percentage of the media height
-    public var heightPercentage: Float
+    public let heightPercentage: Float
 
     /// The clockwise rotation angle of the rectangle, in degrees; 0-360
-    public var rotationAngle: Float
+    public let rotationAngle: Float
 
     /// The radius of the rectangle corner rounding, as a percentage of the media width
-    public var cornerRadiusPercentage: Float
+    public let cornerRadiusPercentage: Float
 
     public init (xPercentage: Float, yPercentage: Float, widthPercentage: Float, heightPercentage: Float, rotationAngle: Float, cornerRadiusPercentage: Float) {
         self.xPercentage = xPercentage

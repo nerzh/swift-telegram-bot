@@ -7,7 +7,7 @@
  [PassportElementErrorTranslationFiles](https://core.telegram.org/bots/api#passportelementerrortranslationfiles)
  */
 
-public enum TGPassportElementErrorTranslationFilesType: String, Codable {
+public enum TGPassportElementErrorTranslationFilesType: String, Codable, Sendable {
     case passport = "passport"
     case driverLicense = "driver_license"
     case identityCard = "identity_card"

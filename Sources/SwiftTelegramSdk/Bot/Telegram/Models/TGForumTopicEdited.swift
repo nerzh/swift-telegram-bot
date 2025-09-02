@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ForumTopicEdited](https://core.telegram.org/bots/api#forumtopicedited)
  **/
-public final class TGForumTopicEdited: Codable {
+public final class TGForumTopicEdited: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ForumTopicEdited` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGForumTopicEdited: Codable {
     }
 
     /// Optional. New name of the topic, if it was edited
-    public var name: String?
+    public let name: String?
 
     /// Optional. New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed
-    public var iconCustomEmojiId: String?
+    public let iconCustomEmojiId: String?
 
     public init (name: String? = nil, iconCustomEmojiId: String? = nil) {
         self.name = name

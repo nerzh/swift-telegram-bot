@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setMyDefaultAdministratorRights` method
-public struct TGSetMyDefaultAdministratorRightsParams: Encodable {
+public struct TGSetMyDefaultAdministratorRightsParams: Encodable, Sendable {
 
     /// A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared.
-    public var rights: TGChatAdministratorRights?
+    public let rights: TGChatAdministratorRights?
 
     /// Pass True to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed.
-    public var forChannels: Bool?
+    public let forChannels: Bool?
 
     /// Custom keys for coding/decoding `SetMyDefaultAdministratorRightsParams` struct
     public enum CodingKeys: String, CodingKey {

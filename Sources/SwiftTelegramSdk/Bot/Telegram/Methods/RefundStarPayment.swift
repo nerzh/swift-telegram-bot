@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `refundStarPayment` method
-public struct TGRefundStarPaymentParams: Encodable {
+public struct TGRefundStarPaymentParams: Encodable, Sendable {
 
     /// Identifier of the user whose payment will be refunded
-    public var userId: Int64
+    public let userId: Int64
 
     /// Telegram payment identifier
-    public var telegramPaymentChargeId: String
+    public let telegramPaymentChargeId: String
 
     /// Custom keys for coding/decoding `RefundStarPaymentParams` struct
     public enum CodingKeys: String, CodingKey {

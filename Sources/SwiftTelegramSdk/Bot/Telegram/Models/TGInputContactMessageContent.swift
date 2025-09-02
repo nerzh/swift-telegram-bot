@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputContactMessageContent](https://core.telegram.org/bots/api#inputcontactmessagecontent)
  **/
-public final class TGInputContactMessageContent: Codable {
+public final class TGInputContactMessageContent: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InputContactMessageContent` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGInputContactMessageContent: Codable {
     }
 
     /// Contact's phone number
-    public var phoneNumber: String
+    public let phoneNumber: String
 
     /// Contact's first name
-    public var firstName: String
+    public let firstName: String
 
     /// Optional. Contact's last name
-    public var lastName: String?
+    public let lastName: String?
 
     /// Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
-    public var vcard: String?
+    public let vcard: String?
 
     public init (phoneNumber: String, firstName: String, lastName: String? = nil, vcard: String? = nil) {
         self.phoneNumber = phoneNumber

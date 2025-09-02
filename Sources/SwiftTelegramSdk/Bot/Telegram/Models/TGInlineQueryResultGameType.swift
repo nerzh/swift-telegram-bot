@@ -7,7 +7,7 @@
  [InlineQueryResultGame](https://core.telegram.org/bots/api#inlinequeryresultgame)
  */
 
-public enum TGInlineQueryResultGameType: String, Codable {
+public enum TGInlineQueryResultGameType: String, Codable, Sendable {
     case game = "game"
     case undefined
 

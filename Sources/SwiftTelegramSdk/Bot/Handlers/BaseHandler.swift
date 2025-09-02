@@ -7,11 +7,11 @@
 
 import Foundation
 
-public class TGBaseHandler: TGHandlerPrtcl {
+public actor TGBaseHandler: TGHandlerPrtcl {
     
-    public var id: Int = 0
-    public var name: String
-    var callbackAsync: TGHandlerCallbackAsync
+    public let id: SendableValue<Int> = .init(0)
+    public let name: String
+    let callbackAsync: TGHandlerCallbackAsync
     
     public init(
         name: String = String(describing: TGBaseHandler.self),
@@ -21,7 +21,7 @@ public class TGBaseHandler: TGHandlerPrtcl {
         self.callbackAsync = callback
     }
     
-    public func check(update: TGUpdate) -> Bool {
+    public func check(update: TGUpdate) async -> Bool {
         true
     }
     

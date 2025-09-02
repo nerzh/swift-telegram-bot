@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [SharedUser](https://core.telegram.org/bots/api#shareduser)
  **/
-public final class TGSharedUser: Codable {
+public final class TGSharedUser: Codable, Sendable {
 
     /// Custom keys for coding/decoding `SharedUser` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGSharedUser: Codable {
     }
 
     /// Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so 64-bit integers or double-precision float types are safe for storing these identifiers. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means.
-    public var userId: Int64
+    public let userId: Int64
 
     /// Optional. First name of the user, if the name was requested by the bot
-    public var firstName: String?
+    public let firstName: String?
 
     /// Optional. Last name of the user, if the name was requested by the bot
-    public var lastName: String?
+    public let lastName: String?
 
     /// Optional. Username of the user, if the username was requested by the bot
-    public var username: String?
+    public let username: String?
 
     /// Optional. Available sizes of the chat photo, if the photo was requested by the bot
-    public var photo: [TGPhotoSize]?
+    public let photo: [TGPhotoSize]?
 
     public init (userId: Int64, firstName: String? = nil, lastName: String? = nil, username: String? = nil, photo: [TGPhotoSize]? = nil) {
         self.userId = userId

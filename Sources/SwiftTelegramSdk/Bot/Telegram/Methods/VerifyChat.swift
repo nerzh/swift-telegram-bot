@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `verifyChat` method
-public struct TGVerifyChatParams: Encodable {
+public struct TGVerifyChatParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername). Channel direct messages chats can't be verified.
+    public let chatId: TGChatId
 
     /// Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
-    public var customDescription: String?
+    public let customDescription: String?
 
     /// Custom keys for coding/decoding `VerifyChatParams` struct
     public enum CodingKeys: String, CodingKey {

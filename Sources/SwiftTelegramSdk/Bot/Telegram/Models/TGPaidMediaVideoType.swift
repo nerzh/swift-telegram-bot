@@ -7,7 +7,7 @@
  [PaidMediaVideo](https://core.telegram.org/bots/api#paidmediavideo)
  */
 
-public enum TGPaidMediaVideoType: String, Codable {
+public enum TGPaidMediaVideoType: String, Codable, Sendable {
     case video = "video"
     case undefined
 

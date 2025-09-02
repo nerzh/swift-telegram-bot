@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBoostUpdated](https://core.telegram.org/bots/api#chatboostupdated)
  **/
-public final class TGChatBoostUpdated: Codable {
+public final class TGChatBoostUpdated: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatBoostUpdated` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGChatBoostUpdated: Codable {
     }
 
     /// Chat which was boosted
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Information about the chat boost
-    public var boost: TGChatBoost
+    public let boost: TGChatBoost
 
     public init (chat: TGChat, boost: TGChatBoost) {
         self.chat = chat

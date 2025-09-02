@@ -7,7 +7,7 @@
  [PassportElementErrorDataField](https://core.telegram.org/bots/api#passportelementerrordatafield)
  */
 
-public enum TGPassportElementErrorDataFieldType: String, Codable {
+public enum TGPassportElementErrorDataFieldType: String, Codable, Sendable {
     case personalDetails = "personal_details"
     case passport = "passport"
     case driverLicense = "driver_license"

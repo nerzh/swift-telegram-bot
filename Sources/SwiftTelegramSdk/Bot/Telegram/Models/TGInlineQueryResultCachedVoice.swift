@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultCachedVoice](https://core.telegram.org/bots/api#inlinequeryresultcachedvoice)
  **/
-public final class TGInlineQueryResultCachedVoice: Codable {
+public final class TGInlineQueryResultCachedVoice: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultCachedVoice` struct
     public enum CodingKeys: String, CodingKey {
@@ -22,31 +22,31 @@ public final class TGInlineQueryResultCachedVoice: Codable {
     }
 
     /// Type of the result, must be voice
-    public var type: TGInlineQueryResultCachedVoiceType
+    public let type: TGInlineQueryResultCachedVoiceType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid file identifier for the voice message
-    public var voiceFileId: String
+    public let voiceFileId: String
 
     /// Voice message title
-    public var title: String
+    public let title: String
 
     /// Optional. Caption, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the voice message caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the voice message
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultCachedVoiceType, id: String, voiceFileId: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

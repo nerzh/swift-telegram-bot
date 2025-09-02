@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StarTransaction](https://core.telegram.org/bots/api#startransaction)
  **/
-public final class TGStarTransaction: Codable {
+public final class TGStarTransaction: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StarTransaction` struct
     public enum CodingKeys: String, CodingKey {
@@ -19,22 +19,22 @@ public final class TGStarTransaction: Codable {
     }
 
     /// Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.
-    public var id: String
+    public let id: String
 
     /// Integer amount of Telegram Stars transferred by the transaction
-    public var amount: Int
+    public let amount: Int
 
     /// Optional. The number of 1/1000000000 shares of Telegram Stars transferred by the transaction; from 0 to 999999999
-    public var nanostarAmount: Int?
+    public let nanostarAmount: Int?
 
     /// Date the transaction was created in Unix time
-    public var date: Int
+    public let date: Int
 
     /// Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
-    public var source: TGTransactionPartner?
+    public let source: TGTransactionPartner?
 
     /// Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
-    public var receiver: TGTransactionPartner?
+    public let receiver: TGTransactionPartner?
 
     public init (id: String, amount: Int, nanostarAmount: Int? = nil, date: Int, source: TGTransactionPartner? = nil, receiver: TGTransactionPartner? = nil) {
         self.id = id

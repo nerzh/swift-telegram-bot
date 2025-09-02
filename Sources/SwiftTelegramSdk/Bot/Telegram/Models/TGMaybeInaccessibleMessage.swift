@@ -8,7 +8,7 @@
  SeeAlso Telegram Bot API Reference:
  [MaybeInaccessibleMessage](https://core.telegram.org/bots/api#maybeinaccessiblemessage)
  **/
-public enum TGMaybeInaccessibleMessage: Codable {
+public enum TGMaybeInaccessibleMessage: Codable, Sendable {
     case message(TGMessage)
     case inaccessibleMessage(TGInaccessibleMessage)
 

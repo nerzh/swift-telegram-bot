@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BusinessOpeningHoursInterval](https://core.telegram.org/bots/api#businessopeninghoursinterval)
  **/
-public final class TGBusinessOpeningHoursInterval: Codable {
+public final class TGBusinessOpeningHoursInterval: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BusinessOpeningHoursInterval` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGBusinessOpeningHoursInterval: Codable {
     }
 
     /// The minute's sequence number in a week, starting on Monday, marking the start of the time interval during which the business is open; 0 - 7 * 24 * 60
-    public var openingMinute: Int
+    public let openingMinute: Int
 
     /// The minute's sequence number in a week, starting on Monday, marking the end of the time interval during which the business is open; 0 - 8 * 24 * 60
-    public var closingMinute: Int
+    public let closingMinute: Int
 
     public init (openingMinute: Int, closingMinute: Int) {
         self.openingMinute = openingMinute

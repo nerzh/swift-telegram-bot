@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBoost](https://core.telegram.org/bots/api#chatboost)
  **/
-public final class TGChatBoost: Codable {
+public final class TGChatBoost: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatBoost` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGChatBoost: Codable {
     }
 
     /// Unique identifier of the boost
-    public var boostId: String
+    public let boostId: String
 
     /// Point in time (Unix timestamp) when the chat was boosted
-    public var addDate: Int
+    public let addDate: Int
 
     /// Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
-    public var expirationDate: Int
+    public let expirationDate: Int
 
     /// Source of the added boost
-    public var source: TGChatBoostSource
+    public let source: TGChatBoostSource
 
     public init (boostId: String, addDate: Int, expirationDate: Int, source: TGChatBoostSource) {
         self.boostId = boostId

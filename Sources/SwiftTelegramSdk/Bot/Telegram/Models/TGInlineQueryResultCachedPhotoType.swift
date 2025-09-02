@@ -7,7 +7,7 @@
  [InlineQueryResultCachedPhoto](https://core.telegram.org/bots/api#inlinequeryresultcachedphoto)
  */
 
-public enum TGInlineQueryResultCachedPhotoType: String, Codable {
+public enum TGInlineQueryResultCachedPhotoType: String, Codable, Sendable {
     case photo = "photo"
     case undefined
 

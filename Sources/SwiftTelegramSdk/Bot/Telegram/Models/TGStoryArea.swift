@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryArea](https://core.telegram.org/bots/api#storyarea)
  **/
-public final class TGStoryArea: Codable {
+public final class TGStoryArea: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryArea` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGStoryArea: Codable {
     }
 
     /// Position of the area
-    public var position: TGStoryAreaPosition
+    public let position: TGStoryAreaPosition
 
     /// Type of the area
-    public var type: TGStoryAreaType
+    public let type: TGStoryAreaType
 
     public init (position: TGStoryAreaPosition, type: TGStoryAreaType) {
         self.position = position

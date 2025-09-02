@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatMemberMember](https://core.telegram.org/bots/api#chatmembermember)
  **/
-public final class TGChatMemberMember: Codable {
+public final class TGChatMemberMember: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatMemberMember` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGChatMemberMember: Codable {
     }
 
     /// The member's status in the chat, always “member”
-    public var status: String
+    public let status: String
 
     /// Information about the user
-    public var user: TGUser
+    public let user: TGUser
 
     /// Optional. Date when the user's subscription will expire; Unix time
-    public var untilDate: Int?
+    public let untilDate: Int?
 
     public init (status: String, user: TGUser, untilDate: Int? = nil) {
         self.status = status

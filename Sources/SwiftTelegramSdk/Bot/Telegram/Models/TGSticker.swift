@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Sticker](https://core.telegram.org/bots/api#sticker)
  **/
-public final class TGSticker: Codable {
+public final class TGSticker: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Sticker` struct
     public enum CodingKeys: String, CodingKey {
@@ -28,49 +28,49 @@ public final class TGSticker: Codable {
     }
 
     /// Identifier for this file, which can be used to download or reuse the file
-    public var fileId: String
+    public let fileId: String
 
     /// Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    public var fileUniqueId: String
+    public let fileUniqueId: String
 
     /// Type of the sticker, currently one of “regular”, “mask”, “custom_emoji”. The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video.
-    public var type: TGStickerType
+    public let type: TGStickerType
 
     /// Sticker width
-    public var width: Int
+    public let width: Int
 
     /// Sticker height
-    public var height: Int
+    public let height: Int
 
     /// True, if the sticker is animated
-    public var isAnimated: Bool
+    public let isAnimated: Bool
 
     /// True, if the sticker is a video sticker
-    public var isVideo: Bool
+    public let isVideo: Bool
 
     /// Optional. Sticker thumbnail in the .WEBP or .JPG format
-    public var thumbnail: TGPhotoSize?
+    public let thumbnail: TGPhotoSize?
 
     /// Optional. Emoji associated with the sticker
-    public var emoji: String?
+    public let emoji: String?
 
     /// Optional. Name of the sticker set to which the sticker belongs
-    public var setName: String?
+    public let setName: String?
 
     /// Optional. For premium regular stickers, premium animation for the sticker
-    public var premiumAnimation: TGFile?
+    public let premiumAnimation: TGFile?
 
     /// Optional. For mask stickers, the position where the mask should be placed
-    public var maskPosition: TGMaskPosition?
+    public let maskPosition: TGMaskPosition?
 
     /// Optional. For custom emoji stickers, unique identifier of the custom emoji
-    public var customEmojiId: String?
+    public let customEmojiId: String?
 
     /// Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places
-    public var needsRepainting: Bool?
+    public let needsRepainting: Bool?
 
     /// Optional. File size in bytes
-    public var fileSize: Int?
+    public let fileSize: Int?
 
     public init (fileId: String, fileUniqueId: String, type: TGStickerType, width: Int, height: Int, isAnimated: Bool, isVideo: Bool, thumbnail: TGPhotoSize? = nil, emoji: String? = nil, setName: String? = nil, premiumAnimation: TGFile? = nil, maskPosition: TGMaskPosition? = nil, customEmojiId: String? = nil, needsRepainting: Bool? = nil, fileSize: Int? = nil) {
         self.fileId = fileId

@@ -7,34 +7,34 @@ import Foundation
 
 
 /// Parameters container struct for `editMessageCaption` method
-public struct TGEditMessageCaptionParams: Encodable {
+public struct TGEditMessageCaptionParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId?
+    public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message to edit
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// New caption of the message, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Mode for parsing entities in the message caption. See formatting options for more details.
-    public var parseMode: TGParseMode?
+    public let parseMode: TGParseMode?
 
     /// A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
-    public var showCaptionAboveMedia: Bool?
+    public let showCaptionAboveMedia: Bool?
 
     /// A JSON-serialized object for an inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageCaptionParams` struct
     public enum CodingKeys: String, CodingKey {

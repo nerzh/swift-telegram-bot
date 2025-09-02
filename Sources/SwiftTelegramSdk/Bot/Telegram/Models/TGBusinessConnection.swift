@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BusinessConnection](https://core.telegram.org/bots/api#businessconnection)
  **/
-public final class TGBusinessConnection: Codable {
+public final class TGBusinessConnection: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BusinessConnection` struct
     public enum CodingKeys: String, CodingKey {
@@ -19,22 +19,22 @@ public final class TGBusinessConnection: Codable {
     }
 
     /// Unique identifier of the business connection
-    public var id: String
+    public let id: String
 
     /// Business account user that created the business connection
-    public var user: TGUser
+    public let user: TGUser
 
     /// Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
-    public var userChatId: Int64
+    public let userChatId: Int64
 
     /// Date the connection was established in Unix time
-    public var date: Int
+    public let date: Int
 
     /// Optional. Rights of the business bot
-    public var rights: TGBusinessBotRights?
+    public let rights: TGBusinessBotRights?
 
     /// True, if the connection is active
-    public var isEnabled: Bool
+    public let isEnabled: Bool
 
     public init (id: String, user: TGUser, userChatId: Int64, date: Int, rights: TGBusinessBotRights? = nil, isEnabled: Bool) {
         self.id = id

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [TransactionPartnerChat](https://core.telegram.org/bots/api#transactionpartnerchat)
  **/
-public final class TGTransactionPartnerChat: Codable {
+public final class TGTransactionPartnerChat: Codable, Sendable {
 
     /// Custom keys for coding/decoding `TransactionPartnerChat` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGTransactionPartnerChat: Codable {
     }
 
     /// Type of the transaction partner, always “chat”
-    public var type: TGTransactionPartnerChatType
+    public let type: TGTransactionPartnerChatType
 
     /// Information about the chat
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Optional. The gift sent to the chat by the bot
-    public var gift: TGGift?
+    public let gift: TGGift?
 
     public init (type: TGTransactionPartnerChatType, chat: TGChat, gift: TGGift? = nil) {
         self.type = type

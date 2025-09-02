@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Audio](https://core.telegram.org/bots/api#audio)
  **/
-public final class TGAudio: Codable {
+public final class TGAudio: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Audio` struct
     public enum CodingKeys: String, CodingKey {
@@ -22,31 +22,31 @@ public final class TGAudio: Codable {
     }
 
     /// Identifier for this file, which can be used to download or reuse the file
-    public var fileId: String
+    public let fileId: String
 
     /// Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    public var fileUniqueId: String
+    public let fileUniqueId: String
 
     /// Duration of the audio in seconds as defined by the sender
-    public var duration: Int
+    public let duration: Int
 
     /// Optional. Performer of the audio as defined by the sender or by audio tags
-    public var performer: String?
+    public let performer: String?
 
     /// Optional. Title of the audio as defined by the sender or by audio tags
-    public var title: String?
+    public let title: String?
 
     /// Optional. Original filename as defined by the sender
-    public var fileName: String?
+    public let fileName: String?
 
     /// Optional. MIME type of the file as defined by the sender
-    public var mimeType: String?
+    public let mimeType: String?
 
     /// Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
-    public var fileSize: Int?
+    public let fileSize: Int?
 
     /// Optional. Thumbnail of the album cover to which the music file belongs
-    public var thumbnail: TGPhotoSize?
+    public let thumbnail: TGPhotoSize?
 
     public init (fileId: String, fileUniqueId: String, duration: Int, performer: String? = nil, title: String? = nil, fileName: String? = nil, mimeType: String? = nil, fileSize: Int? = nil, thumbnail: TGPhotoSize? = nil) {
         self.fileId = fileId

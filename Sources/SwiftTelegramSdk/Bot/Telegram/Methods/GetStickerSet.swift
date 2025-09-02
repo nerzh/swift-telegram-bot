@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getStickerSet` method
-public struct TGGetStickerSetParams: Encodable {
+public struct TGGetStickerSetParams: Encodable, Sendable {
 
     /// Name of the sticker set
-    public var name: String
+    public let name: String
 
     /// Custom keys for coding/decoding `GetStickerSetParams` struct
     public enum CodingKeys: String, CodingKey {

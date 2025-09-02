@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [RevenueWithdrawalStatePending](https://core.telegram.org/bots/api#revenuewithdrawalstatepending)
  **/
-public final class TGRevenueWithdrawalStatePending: Codable {
+public final class TGRevenueWithdrawalStatePending: Codable, Sendable {
 
     /// Custom keys for coding/decoding `RevenueWithdrawalStatePending` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGRevenueWithdrawalStatePending: Codable {
     }
 
     /// Type of the state, always “pending”
-    public var type: TGRevenueWithdrawalStatePendingType
+    public let type: TGRevenueWithdrawalStatePendingType
 
     public init (type: TGRevenueWithdrawalStatePendingType) {
         self.type = type

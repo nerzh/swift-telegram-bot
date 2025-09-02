@@ -7,7 +7,7 @@
  [StoryAreaTypeWeather](https://core.telegram.org/bots/api#storyareatypeweather)
  */
 
-public enum TGStoryAreaTypeWeatherType: String, Codable {
+public enum TGStoryAreaTypeWeatherType: String, Codable, Sendable {
     case weather = "weather"
     case undefined
 

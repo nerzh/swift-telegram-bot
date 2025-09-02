@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultCachedSticker](https://core.telegram.org/bots/api#inlinequeryresultcachedsticker)
  **/
-public final class TGInlineQueryResultCachedSticker: Codable {
+public final class TGInlineQueryResultCachedSticker: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultCachedSticker` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGInlineQueryResultCachedSticker: Codable {
     }
 
     /// Type of the result, must be sticker
-    public var type: TGInlineQueryResultCachedStickerType
+    public let type: TGInlineQueryResultCachedStickerType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid file identifier of the sticker
-    public var stickerFileId: String
+    public let stickerFileId: String
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the sticker
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultCachedStickerType, id: String, stickerFileId: String, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

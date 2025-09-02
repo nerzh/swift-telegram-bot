@@ -7,7 +7,7 @@
  [InlineQueryResultVoice](https://core.telegram.org/bots/api#inlinequeryresultvoice)
  */
 
-public enum TGInlineQueryResultVoiceType: String, Codable {
+public enum TGInlineQueryResultVoiceType: String, Codable, Sendable {
     case voice = "voice"
     case undefined
 

@@ -7,7 +7,7 @@
  [StoryAreaTypeUniqueGift](https://core.telegram.org/bots/api#storyareatypeuniquegift)
  */
 
-public enum TGStoryAreaTypeUniqueGiftType: String, Codable {
+public enum TGStoryAreaTypeUniqueGiftType: String, Codable, Sendable {
     case uniqueGift = "unique_gift"
     case undefined
 

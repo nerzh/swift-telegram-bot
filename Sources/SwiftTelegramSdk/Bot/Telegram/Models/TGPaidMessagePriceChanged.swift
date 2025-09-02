@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PaidMessagePriceChanged](https://core.telegram.org/bots/api#paidmessagepricechanged)
  **/
-public final class TGPaidMessagePriceChanged: Codable {
+public final class TGPaidMessagePriceChanged: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PaidMessagePriceChanged` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGPaidMessagePriceChanged: Codable {
     }
 
     /// The new number of Telegram Stars that must be paid by non-administrator users of the supergroup chat for each sent message
-    public var paidMessageStarCount: Int
+    public let paidMessageStarCount: Int
 
     public init (paidMessageStarCount: Int) {
         self.paidMessageStarCount = paidMessageStarCount

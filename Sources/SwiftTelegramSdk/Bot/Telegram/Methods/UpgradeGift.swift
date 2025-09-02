@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `upgradeGift` method
-public struct TGUpgradeGiftParams: Encodable {
+public struct TGUpgradeGiftParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier of the regular gift that should be upgraded to a unique one
-    public var ownedGiftId: String
+    public let ownedGiftId: String
 
     /// Pass True to keep the original gift text, sender and receiver in the upgraded gift
-    public var keepOriginalDetails: Bool?
+    public let keepOriginalDetails: Bool?
 
     /// The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If gift.prepaid_upgrade_star_count > 0, then pass 0, otherwise, the can_transfer_stars business bot right is required and gift.upgrade_star_count must be passed.
-    public var starCount: Int?
+    public let starCount: Int?
 
     /// Custom keys for coding/decoding `UpgradeGiftParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `unbanChatSenderChat` method
-public struct TGUnbanChatSenderChatParams: Encodable {
+public struct TGUnbanChatSenderChatParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier of the target sender chat
-    public var senderChatId: Int64
+    public let senderChatId: Int64
 
     /// Custom keys for coding/decoding `UnbanChatSenderChatParams` struct
     public enum CodingKeys: String, CodingKey {

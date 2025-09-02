@@ -6,6 +6,6 @@
  SeeAlso Telegram Bot API Reference:
  [ForumTopicClosed](https://core.telegram.org/bots/api#forumtopicclosed)
  **/
-public final class TGForumTopicClosed: Codable {
+public final class TGForumTopicClosed: Codable, Sendable {
 
 }

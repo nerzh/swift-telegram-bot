@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [UniqueGiftBackdropColors](https://core.telegram.org/bots/api#uniquegiftbackdropcolors)
  **/
-public final class TGUniqueGiftBackdropColors: Codable {
+public final class TGUniqueGiftBackdropColors: Codable, Sendable {
 
     /// Custom keys for coding/decoding `UniqueGiftBackdropColors` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGUniqueGiftBackdropColors: Codable {
     }
 
     /// The color in the center of the backdrop in RGB format
-    public var centerColor: Int
+    public let centerColor: Int
 
     /// The color on the edges of the backdrop in RGB format
-    public var edgeColor: Int
+    public let edgeColor: Int
 
     /// The color to be applied to the symbol in RGB format
-    public var symbolColor: Int
+    public let symbolColor: Int
 
     /// The color for the text on the backdrop in RGB format
-    public var textColor: Int
+    public let textColor: Int
 
     public init (centerColor: Int, edgeColor: Int, symbolColor: Int, textColor: Int) {
         self.centerColor = centerColor

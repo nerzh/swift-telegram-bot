@@ -7,22 +7,22 @@ import Foundation
 
 
 /// Parameters container struct for `editMessageReplyMarkup` method
-public struct TGEditMessageReplyMarkupParams: Encodable {
+public struct TGEditMessageReplyMarkupParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId?
+    public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message to edit
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// A JSON-serialized object for an inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageReplyMarkupParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChosenInlineResult](https://core.telegram.org/bots/api#choseninlineresult)
  **/
-public final class TGChosenInlineResult: Codable {
+public final class TGChosenInlineResult: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChosenInlineResult` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGChosenInlineResult: Codable {
     }
 
     /// The unique identifier for the result that was chosen
-    public var resultId: String
+    public let resultId: String
 
     /// The user that chose the result
-    public var from: TGUser
+    public let from: TGUser
 
     /// Optional. Sender location, only for bots that require user location
-    public var location: TGLocation?
+    public let location: TGLocation?
 
     /// Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message.
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// The query that was used to obtain the result
-    public var query: String
+    public let query: String
 
     public init (resultId: String, from: TGUser, location: TGLocation? = nil, inlineMessageId: String? = nil, query: String) {
         self.resultId = resultId

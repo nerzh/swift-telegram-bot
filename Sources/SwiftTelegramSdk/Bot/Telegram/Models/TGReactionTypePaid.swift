@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ReactionTypePaid](https://core.telegram.org/bots/api#reactiontypepaid)
  **/
-public final class TGReactionTypePaid: Codable {
+public final class TGReactionTypePaid: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ReactionTypePaid` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGReactionTypePaid: Codable {
     }
 
     /// Type of the reaction, always “paid”
-    public var type: TGReactionTypePaidType
+    public let type: TGReactionTypePaidType
 
     public init (type: TGReactionTypePaidType) {
         self.type = type

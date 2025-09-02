@@ -6,6 +6,6 @@
  SeeAlso Telegram Bot API Reference:
  [VideoChatStarted](https://core.telegram.org/bots/api#videochatstarted)
  **/
-public final class TGVideoChatStarted: Codable {
+public final class TGVideoChatStarted: Codable, Sendable {
 
 }

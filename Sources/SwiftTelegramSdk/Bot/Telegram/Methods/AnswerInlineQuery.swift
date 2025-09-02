@@ -8,25 +8,25 @@ import Foundation
 
 
 /// Parameters container struct for `answerInlineQuery` method
-public struct TGAnswerInlineQueryParams: Encodable {
+public struct TGAnswerInlineQueryParams: Encodable, Sendable {
 
     /// Unique identifier for the answered query
-    public var inlineQueryId: String
+    public let inlineQueryId: String
 
     /// A JSON-serialized array of results for the inline query
-    public var results: [TGInlineQueryResult]
+    public let results: [TGInlineQueryResult]
 
     /// The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to 300.
-    public var cacheTime: Int?
+    public let cacheTime: Int?
 
     /// Pass True if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
-    public var isPersonal: Bool?
+    public let isPersonal: Bool?
 
     /// Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
-    public var nextOffset: String?
+    public let nextOffset: String?
 
     /// A JSON-serialized object describing a button to be shown above inline query results
-    public var button: TGInlineQueryResultsButton?
+    public let button: TGInlineQueryResultsButton?
 
     /// Custom keys for coding/decoding `AnswerInlineQueryParams` struct
     public enum CodingKeys: String, CodingKey {

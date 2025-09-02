@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `getUserChatBoosts` method
-public struct TGGetUserChatBoostsParams: Encodable {
+public struct TGGetUserChatBoostsParams: Encodable, Sendable {
 
     /// Unique identifier for the chat or username of the channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Custom keys for coding/decoding `GetUserChatBoostsParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -7,7 +7,7 @@
  [InlineQueryResultDocument](https://core.telegram.org/bots/api#inlinequeryresultdocument)
  */
 
-public enum TGInlineQueryResultDocumentType: String, Codable {
+public enum TGInlineQueryResultDocumentType: String, Codable, Sendable {
     case document = "document"
     case undefined
 

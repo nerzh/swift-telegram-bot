@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputLocationMessageContent](https://core.telegram.org/bots/api#inputlocationmessagecontent)
  **/
-public final class TGInputLocationMessageContent: Codable {
+public final class TGInputLocationMessageContent: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InputLocationMessageContent` struct
     public enum CodingKeys: String, CodingKey {
@@ -19,22 +19,22 @@ public final class TGInputLocationMessageContent: Codable {
     }
 
     /// Latitude of the location in degrees
-    public var latitude: Float
+    public let latitude: Float
 
     /// Longitude of the location in degrees
-    public var longitude: Float
+    public let longitude: Float
 
     /// Optional. The radius of uncertainty for the location, measured in meters; 0-1500
-    public var horizontalAccuracy: Float?
+    public let horizontalAccuracy: Float?
 
     /// Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
-    public var livePeriod: Int?
+    public let livePeriod: Int?
 
     /// Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
-    public var heading: Int?
+    public let heading: Int?
 
     /// Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
-    public var proximityAlertRadius: Int?
+    public let proximityAlertRadius: Int?
 
     public init (latitude: Float, longitude: Float, horizontalAccuracy: Float? = nil, livePeriod: Int? = nil, heading: Int? = nil, proximityAlertRadius: Int? = nil) {
         self.latitude = latitude

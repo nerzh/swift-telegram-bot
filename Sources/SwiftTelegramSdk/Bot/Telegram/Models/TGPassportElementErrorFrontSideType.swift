@@ -7,7 +7,7 @@
  [PassportElementErrorFrontSide](https://core.telegram.org/bots/api#passportelementerrorfrontside)
  */
 
-public enum TGPassportElementErrorFrontSideType: String, Codable {
+public enum TGPassportElementErrorFrontSideType: String, Codable, Sendable {
     case passport = "passport"
     case driverLicense = "driver_license"
     case identityCard = "identity_card"

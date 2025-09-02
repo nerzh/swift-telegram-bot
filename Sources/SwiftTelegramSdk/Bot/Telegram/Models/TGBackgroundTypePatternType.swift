@@ -7,7 +7,7 @@
  [BackgroundTypePattern](https://core.telegram.org/bots/api#backgroundtypepattern)
  */
 
-public enum TGBackgroundTypePatternType: String, Codable {
+public enum TGBackgroundTypePatternType: String, Codable, Sendable {
     case pattern = "pattern"
     case undefined
 

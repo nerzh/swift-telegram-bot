@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [SuccessfulPayment](https://core.telegram.org/bots/api#successfulpayment)
  **/
-public final class TGSuccessfulPayment: Codable {
+public final class TGSuccessfulPayment: Codable, Sendable {
 
     /// Custom keys for coding/decoding `SuccessfulPayment` struct
     public enum CodingKeys: String, CodingKey {
@@ -23,34 +23,34 @@ public final class TGSuccessfulPayment: Codable {
     }
 
     /// Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
-    public var currency: String
+    public let currency: String
 
     /// Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-    public var totalAmount: Int
+    public let totalAmount: Int
 
     /// Bot-specified invoice payload
-    public var invoicePayload: String
+    public let invoicePayload: String
 
     /// Optional. Expiration date of the subscription, in Unix time; for recurring payments only
-    public var subscriptionExpirationDate: Int?
+    public let subscriptionExpirationDate: Int?
 
     /// Optional. True, if the payment is a recurring payment for a subscription
-    public var isRecurring: Bool?
+    public let isRecurring: Bool?
 
     /// Optional. True, if the payment is the first payment for a subscription
-    public var isFirstRecurring: Bool?
+    public let isFirstRecurring: Bool?
 
     /// Optional. Identifier of the shipping option chosen by the user
-    public var shippingOptionId: String?
+    public let shippingOptionId: String?
 
     /// Optional. Order information provided by the user
-    public var orderInfo: TGOrderInfo?
+    public let orderInfo: TGOrderInfo?
 
     /// Telegram payment identifier
-    public var telegramPaymentChargeId: String
+    public let telegramPaymentChargeId: String
 
     /// Provider payment identifier
-    public var providerPaymentChargeId: String
+    public let providerPaymentChargeId: String
 
     public init (currency: String, totalAmount: Int, invoicePayload: String, subscriptionExpirationDate: Int? = nil, isRecurring: Bool? = nil, isFirstRecurring: Bool? = nil, shippingOptionId: String? = nil, orderInfo: TGOrderInfo? = nil, telegramPaymentChargeId: String, providerPaymentChargeId: String) {
         self.currency = currency

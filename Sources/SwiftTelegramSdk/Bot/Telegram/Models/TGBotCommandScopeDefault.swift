@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotCommandScopeDefault](https://core.telegram.org/bots/api#botcommandscopedefault)
  **/
-public final class TGBotCommandScopeDefault: Codable {
+public final class TGBotCommandScopeDefault: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BotCommandScopeDefault` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGBotCommandScopeDefault: Codable {
     }
 
     /// Scope type, must be default
-    public var type: TGBotCommandScopeDefaultType
+    public let type: TGBotCommandScopeDefaultType
 
     public init (type: TGBotCommandScopeDefaultType) {
         self.type = type

@@ -8,19 +8,19 @@ import Foundation
 
 
 /// Parameters container struct for `getGameHighScores` method
-public struct TGGetGameHighScoresParams: Encodable {
+public struct TGGetGameHighScoresParams: Encodable, Sendable {
 
     /// Target user id
-    public var userId: Int64
+    public let userId: Int64
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat
-    public var chatId: Int64?
+    public let chatId: Int64?
 
     /// Required if inline_message_id is not specified. Identifier of the sent message
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// Custom keys for coding/decoding `GetGameHighScoresParams` struct
     public enum CodingKeys: String, CodingKey {

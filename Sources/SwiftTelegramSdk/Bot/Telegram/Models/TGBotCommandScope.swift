@@ -13,7 +13,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotCommandScope](https://core.telegram.org/bots/api#botcommandscope)
  **/
-public enum TGBotCommandScope: Codable {
+public enum TGBotCommandScope: Codable, Sendable {
     case botCommandScopeDefault(TGBotCommandScopeDefault)
     case botCommandScopeAllPrivateChats(TGBotCommandScopeAllPrivateChats)
     case botCommandScopeAllGroupChats(TGBotCommandScopeAllGroupChats)

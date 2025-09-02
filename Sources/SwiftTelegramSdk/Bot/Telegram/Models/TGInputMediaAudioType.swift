@@ -7,7 +7,7 @@
  [InputMediaAudio](https://core.telegram.org/bots/api#inputmediaaudio)
  */
 
-public enum TGInputMediaAudioType: String, Codable {
+public enum TGInputMediaAudioType: String, Codable, Sendable {
     case audio = "audio"
     case undefined
 

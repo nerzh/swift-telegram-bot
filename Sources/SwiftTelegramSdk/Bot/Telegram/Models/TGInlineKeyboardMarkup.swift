@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineKeyboardMarkup](https://core.telegram.org/bots/api#inlinekeyboardmarkup)
  **/
-public final class TGInlineKeyboardMarkup: Codable {
+public final class TGInlineKeyboardMarkup: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineKeyboardMarkup` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGInlineKeyboardMarkup: Codable {
     }
 
     /// Array of button rows, each represented by an Array of InlineKeyboardButton objects
-    public var inlineKeyboard: [[TGInlineKeyboardButton]]
+    public let inlineKeyboard: [[TGInlineKeyboardButton]]
 
     public init (inlineKeyboard: [[TGInlineKeyboardButton]]) {
         self.inlineKeyboard = inlineKeyboard

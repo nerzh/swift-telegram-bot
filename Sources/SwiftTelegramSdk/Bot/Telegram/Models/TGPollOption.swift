@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PollOption](https://core.telegram.org/bots/api#polloption)
  **/
-public final class TGPollOption: Codable {
+public final class TGPollOption: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PollOption` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGPollOption: Codable {
     }
 
     /// Option text, 1-100 characters
-    public var text: String
+    public let text: String
 
     /// Optional. Special entities that appear in the option text. Currently, only custom emoji entities are allowed in poll option texts
-    public var textEntities: [TGMessageEntity]?
+    public let textEntities: [TGMessageEntity]?
 
     /// Number of users that voted for this option
-    public var voterCount: Int
+    public let voterCount: Int
 
     public init (text: String, textEntities: [TGMessageEntity]? = nil, voterCount: Int) {
         self.text = text

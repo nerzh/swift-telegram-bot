@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [WebAppData](https://core.telegram.org/bots/api#webappdata)
  **/
-public final class TGWebAppData: Codable {
+public final class TGWebAppData: Codable, Sendable {
 
     /// Custom keys for coding/decoding `WebAppData` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGWebAppData: Codable {
     }
 
     /// The data. Be aware that a bad client can send arbitrary data in this field.
-    public var data: String
+    public let data: String
 
     /// Text of the web_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field.
-    public var buttonText: String
+    public let buttonText: String
 
     public init (data: String, buttonText: String) {
         self.data = data

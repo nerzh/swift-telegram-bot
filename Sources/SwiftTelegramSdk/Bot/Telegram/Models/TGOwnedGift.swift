@@ -8,7 +8,7 @@
  SeeAlso Telegram Bot API Reference:
  [OwnedGift](https://core.telegram.org/bots/api#ownedgift)
  **/
-public enum TGOwnedGift: Codable {
+public enum TGOwnedGift: Codable, Sendable {
     case ownedGiftRegular(TGOwnedGiftRegular)
     case ownedGiftUnique(TGOwnedGiftUnique)
 

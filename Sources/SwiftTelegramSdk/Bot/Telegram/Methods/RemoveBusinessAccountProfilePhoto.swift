@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `removeBusinessAccountProfilePhoto` method
-public struct TGRemoveBusinessAccountProfilePhotoParams: Encodable {
+public struct TGRemoveBusinessAccountProfilePhotoParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.
-    public var isPublic: Bool?
+    public let isPublic: Bool?
 
     /// Custom keys for coding/decoding `RemoveBusinessAccountProfilePhotoParams` struct
     public enum CodingKeys: String, CodingKey {

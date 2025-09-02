@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `deleteWebhook` method
-public struct TGDeleteWebhookParams: Encodable {
+public struct TGDeleteWebhookParams: Encodable, Sendable {
 
     /// Pass True to drop all pending updates
-    public var dropPendingUpdates: Bool?
+    public let dropPendingUpdates: Bool?
 
     /// Custom keys for coding/decoding `DeleteWebhookParams` struct
     public enum CodingKeys: String, CodingKey {

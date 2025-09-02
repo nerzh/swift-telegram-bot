@@ -8,13 +8,13 @@ import Foundation
 
 
 /// Parameters container struct for `setPassportDataErrors` method
-public struct TGSetPassportDataErrorsParams: Encodable {
+public struct TGSetPassportDataErrorsParams: Encodable, Sendable {
 
     /// User identifier
-    public var userId: Int64
+    public let userId: Int64
 
     /// A JSON-serialized array describing the errors
-    public var errors: [TGPassportElementError]
+    public let errors: [TGPassportElementError]
 
     /// Custom keys for coding/decoding `SetPassportDataErrorsParams` struct
     public enum CodingKeys: String, CodingKey {

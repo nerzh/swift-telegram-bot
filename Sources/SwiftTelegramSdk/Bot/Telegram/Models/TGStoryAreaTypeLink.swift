@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaTypeLink](https://core.telegram.org/bots/api#storyareatypelink)
  **/
-public final class TGStoryAreaTypeLink: Codable {
+public final class TGStoryAreaTypeLink: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryAreaTypeLink` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGStoryAreaTypeLink: Codable {
     }
 
     /// Type of the area, always “link”
-    public var type: TGStoryAreaTypeLinkType
+    public let type: TGStoryAreaTypeLinkType
 
     /// HTTP or tg:// URL to be opened when the area is clicked
-    public var url: String
+    public let url: String
 
     public init (type: TGStoryAreaTypeLinkType, url: String) {
         self.type = type

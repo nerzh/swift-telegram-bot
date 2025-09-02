@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultCachedDocument](https://core.telegram.org/bots/api#inlinequeryresultcacheddocument)
  **/
-public final class TGInlineQueryResultCachedDocument: Codable {
+public final class TGInlineQueryResultCachedDocument: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultCachedDocument` struct
     public enum CodingKeys: String, CodingKey {
@@ -23,34 +23,34 @@ public final class TGInlineQueryResultCachedDocument: Codable {
     }
 
     /// Type of the result, must be document
-    public var type: TGInlineQueryResultCachedDocumentType
+    public let type: TGInlineQueryResultCachedDocumentType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// Title for the result
-    public var title: String
+    public let title: String
 
     /// A valid file identifier for the file
-    public var documentFileId: String
+    public let documentFileId: String
 
     /// Optional. Short description of the result
-    public var description: String?
+    public let description: String?
 
     /// Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the document caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the file
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultCachedDocumentType, id: String, title: String, documentFileId: String, description: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

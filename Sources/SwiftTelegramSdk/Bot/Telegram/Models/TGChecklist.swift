@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Checklist](https://core.telegram.org/bots/api#checklist)
  **/
-public final class TGChecklist: Codable {
+public final class TGChecklist: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Checklist` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGChecklist: Codable {
     }
 
     /// Title of the checklist
-    public var title: String
+    public let title: String
 
     /// Optional. Special entities that appear in the checklist title
-    public var titleEntities: [TGMessageEntity]?
+    public let titleEntities: [TGMessageEntity]?
 
     /// List of tasks in the checklist
-    public var tasks: [TGChecklistTask]
+    public let tasks: [TGChecklistTask]
 
     /// Optional. True, if users other than the creator of the list can add tasks to the list
-    public var othersCanAddTasks: Bool?
+    public let othersCanAddTasks: Bool?
 
     /// Optional. True, if users other than the creator of the list can mark tasks as done or not done
-    public var othersCanMarkTasksAsDone: Bool?
+    public let othersCanMarkTasksAsDone: Bool?
 
     public init (title: String, titleEntities: [TGMessageEntity]? = nil, tasks: [TGChecklistTask], othersCanAddTasks: Bool? = nil, othersCanMarkTasksAsDone: Bool? = nil) {
         self.title = title

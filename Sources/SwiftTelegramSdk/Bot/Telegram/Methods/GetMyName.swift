@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getMyName` method
-public struct TGGetMyNameParams: Encodable {
+public struct TGGetMyNameParams: Encodable, Sendable {
 
     /// A two-letter ISO 639-1 language code or an empty string
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `GetMyNameParams` struct
     public enum CodingKeys: String, CodingKey {

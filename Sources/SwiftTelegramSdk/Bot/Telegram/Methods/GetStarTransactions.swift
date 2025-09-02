@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `getStarTransactions` method
-public struct TGGetStarTransactionsParams: Encodable {
+public struct TGGetStarTransactionsParams: Encodable, Sendable {
 
     /// Number of transactions to skip in the response
-    public var offset: Int?
+    public let offset: Int?
 
     /// The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
-    public var limit: Int?
+    public let limit: Int?
 
     /// Custom keys for coding/decoding `GetStarTransactionsParams` struct
     public enum CodingKeys: String, CodingKey {

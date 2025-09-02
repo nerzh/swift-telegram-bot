@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `removeUserVerification` method
-public struct TGRemoveUserVerificationParams: Encodable {
+public struct TGRemoveUserVerificationParams: Encodable, Sendable {
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Custom keys for coding/decoding `RemoveUserVerificationParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -11,7 +11,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaType](https://core.telegram.org/bots/api#storyareatype)
  **/
-public enum TGStoryAreaType: Codable {
+public enum TGStoryAreaType: Codable, Sendable {
     case storyAreaTypeLocation(TGStoryAreaTypeLocation)
     case storyAreaTypeSuggestedReaction(TGStoryAreaTypeSuggestedReaction)
     case storyAreaTypeLink(TGStoryAreaTypeLink)

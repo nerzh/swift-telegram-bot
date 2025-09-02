@@ -7,7 +7,7 @@
  [BotCommandScopeDefault](https://core.telegram.org/bots/api#botcommandscopedefault)
  */
 
-public enum TGBotCommandScopeDefaultType: String, Codable {
+public enum TGBotCommandScopeDefaultType: String, Codable, Sendable {
     case `default` = "default"
     case undefined
 

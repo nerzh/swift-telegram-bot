@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultDocument](https://core.telegram.org/bots/api#inlinequeryresultdocument)
  **/
-public final class TGInlineQueryResultDocument: Codable {
+public final class TGInlineQueryResultDocument: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultDocument` struct
     public enum CodingKeys: String, CodingKey {
@@ -27,46 +27,46 @@ public final class TGInlineQueryResultDocument: Codable {
     }
 
     /// Type of the result, must be document
-    public var type: TGInlineQueryResultDocumentType
+    public let type: TGInlineQueryResultDocumentType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// Title for the result
-    public var title: String
+    public let title: String
 
     /// Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the document caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// A valid URL for the file
-    public var documentUrl: String
+    public let documentUrl: String
 
     /// MIME type of the content of the file, either “application/pdf” or “application/zip”
-    public var mimeType: String
+    public let mimeType: String
 
     /// Optional. Short description of the result
-    public var description: String?
+    public let description: String?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the file
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     /// Optional. URL of the thumbnail (JPEG only) for the file
-    public var thumbnailUrl: String?
+    public let thumbnailUrl: String?
 
     /// Optional. Thumbnail width
-    public var thumbnailWidth: Int?
+    public let thumbnailWidth: Int?
 
     /// Optional. Thumbnail height
-    public var thumbnailHeight: Int?
+    public let thumbnailHeight: Int?
 
     public init (type: TGInlineQueryResultDocumentType, id: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, documentUrl: String, mimeType: String, description: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
         self.type = type

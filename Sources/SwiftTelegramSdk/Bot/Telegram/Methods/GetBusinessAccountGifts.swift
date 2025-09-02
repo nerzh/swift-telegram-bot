@@ -7,34 +7,34 @@ import Foundation
 
 
 /// Parameters container struct for `getBusinessAccountGifts` method
-public struct TGGetBusinessAccountGiftsParams: Encodable {
+public struct TGGetBusinessAccountGiftsParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Pass True to exclude gifts that aren't saved to the account's profile page
-    public var excludeUnsaved: Bool?
+    public let excludeUnsaved: Bool?
 
     /// Pass True to exclude gifts that are saved to the account's profile page
-    public var excludeSaved: Bool?
+    public let excludeSaved: Bool?
 
     /// Pass True to exclude gifts that can be purchased an unlimited number of times
-    public var excludeUnlimited: Bool?
+    public let excludeUnlimited: Bool?
 
     /// Pass True to exclude gifts that can be purchased a limited number of times
-    public var excludeLimited: Bool?
+    public let excludeLimited: Bool?
 
     /// Pass True to exclude unique gifts
-    public var excludeUnique: Bool?
+    public let excludeUnique: Bool?
 
     /// Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.
-    public var sortByPrice: Bool?
+    public let sortByPrice: Bool?
 
     /// Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
-    public var offset: String?
+    public let offset: String?
 
     /// The maximum number of gifts to be returned; 1-100. Defaults to 100
-    public var limit: Int?
+    public let limit: Int?
 
     /// Custom keys for coding/decoding `GetBusinessAccountGiftsParams` struct
     public enum CodingKeys: String, CodingKey {

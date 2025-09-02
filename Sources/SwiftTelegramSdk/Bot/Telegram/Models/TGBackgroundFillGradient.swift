@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundFillGradient](https://core.telegram.org/bots/api#backgroundfillgradient)
  **/
-public final class TGBackgroundFillGradient: Codable {
+public final class TGBackgroundFillGradient: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BackgroundFillGradient` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGBackgroundFillGradient: Codable {
     }
 
     /// Type of the background fill, always “gradient”
-    public var type: TGBackgroundFillGradientType
+    public let type: TGBackgroundFillGradientType
 
     /// Top color of the gradient in the RGB24 format
-    public var topColor: Int
+    public let topColor: Int
 
     /// Bottom color of the gradient in the RGB24 format
-    public var bottomColor: Int
+    public let bottomColor: Int
 
     /// Clockwise rotation angle of the background fill in degrees; 0-359
-    public var rotationAngle: Int
+    public let rotationAngle: Int
 
     public init (type: TGBackgroundFillGradientType, topColor: Int, bottomColor: Int, rotationAngle: Int) {
         self.type = type

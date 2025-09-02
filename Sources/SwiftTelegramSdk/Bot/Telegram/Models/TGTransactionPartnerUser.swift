@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [TransactionPartnerUser](https://core.telegram.org/bots/api#transactionpartneruser)
  **/
-public final class TGTransactionPartnerUser: Codable {
+public final class TGTransactionPartnerUser: Codable, Sendable {
 
     /// Custom keys for coding/decoding `TransactionPartnerUser` struct
     public enum CodingKeys: String, CodingKey {
@@ -23,34 +23,34 @@ public final class TGTransactionPartnerUser: Codable {
     }
 
     /// Type of the transaction partner, always “user”
-    public var type: TGTransactionPartnerUserType
+    public let type: TGTransactionPartnerUserType
 
     /// Type of the transaction, currently one of “invoice_payment” for payments via invoices, “paid_media_payment” for payments for paid media, “gift_purchase” for gifts sent by the bot, “premium_purchase” for Telegram Premium subscriptions gifted by the bot, “business_account_transfer” for direct transfers from managed business accounts
-    public var transactionType: String
+    public let transactionType: String
 
     /// Information about the user
-    public var user: TGUser
+    public let user: TGUser
 
     /// Optional. Information about the affiliate that received a commission via this transaction. Can be available only for “invoice_payment” and “paid_media_payment” transactions.
-    public var affiliate: TGAffiliateInfo?
+    public let affiliate: TGAffiliateInfo?
 
     /// Optional. Bot-specified invoice payload. Can be available only for “invoice_payment” transactions.
-    public var invoicePayload: String?
+    public let invoicePayload: String?
 
     /// Optional. The duration of the paid subscription. Can be available only for “invoice_payment” transactions.
-    public var subscriptionPeriod: Int?
+    public let subscriptionPeriod: Int?
 
     /// Optional. Information about the paid media bought by the user; for “paid_media_payment” transactions only
-    public var paidMedia: [TGPaidMedia]?
+    public let paidMedia: [TGPaidMedia]?
 
     /// Optional. Bot-specified paid media payload. Can be available only for “paid_media_payment” transactions.
-    public var paidMediaPayload: String?
+    public let paidMediaPayload: String?
 
     /// Optional. The gift sent to the user by the bot; for “gift_purchase” transactions only
-    public var gift: TGGift?
+    public let gift: TGGift?
 
     /// Optional. Number of months the gifted Telegram Premium subscription will be active for; for “premium_purchase” transactions only
-    public var premiumSubscriptionDuration: Int?
+    public let premiumSubscriptionDuration: Int?
 
     public init (type: TGTransactionPartnerUserType, transactionType: String, user: TGUser, affiliate: TGAffiliateInfo? = nil, invoicePayload: String? = nil, subscriptionPeriod: Int? = nil, paidMedia: [TGPaidMedia]? = nil, paidMediaPayload: String? = nil, gift: TGGift? = nil, premiumSubscriptionDuration: Int? = nil) {
         self.type = type

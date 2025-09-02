@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [WriteAccessAllowed](https://core.telegram.org/bots/api#writeaccessallowed)
  **/
-public final class TGWriteAccessAllowed: Codable {
+public final class TGWriteAccessAllowed: Codable, Sendable {
 
     /// Custom keys for coding/decoding `WriteAccessAllowed` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGWriteAccessAllowed: Codable {
     }
 
     /// Optional. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method requestWriteAccess
-    public var fromRequest: Bool?
+    public let fromRequest: Bool?
 
     /// Optional. Name of the Web App, if the access was granted when the Web App was launched from a link
-    public var webAppName: String?
+    public let webAppName: String?
 
     /// Optional. True, if the access was granted when the bot was added to the attachment or side menu
-    public var fromAttachmentMenu: Bool?
+    public let fromAttachmentMenu: Bool?
 
     public init (fromRequest: Bool? = nil, webAppName: String? = nil, fromAttachmentMenu: Bool? = nil) {
         self.fromRequest = fromRequest

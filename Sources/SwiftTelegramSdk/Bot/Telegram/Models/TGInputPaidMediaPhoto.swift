@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputPaidMediaPhoto](https://core.telegram.org/bots/api#inputpaidmediaphoto)
  **/
-public final class TGInputPaidMediaPhoto: Codable {
+public final class TGInputPaidMediaPhoto: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InputPaidMediaPhoto` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGInputPaidMediaPhoto: Codable {
     }
 
     /// Type of the media, must be photo
-    public var type: TGInputPaidMediaPhotoType
+    public let type: TGInputPaidMediaPhotoType
 
     /// File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    public var media: String
+    public let media: String
 
     public init (type: TGInputPaidMediaPhotoType, media: String) {
         self.type = type

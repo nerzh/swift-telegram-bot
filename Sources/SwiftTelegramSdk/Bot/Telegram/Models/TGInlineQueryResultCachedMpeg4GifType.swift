@@ -7,7 +7,7 @@
  [InlineQueryResultCachedMpeg4Gif](https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif)
  */
 
-public enum TGInlineQueryResultCachedMpeg4GifType: String, Codable {
+public enum TGInlineQueryResultCachedMpeg4GifType: String, Codable, Sendable {
     case mpeg4Gif = "mpeg4_gif"
     case undefined
 

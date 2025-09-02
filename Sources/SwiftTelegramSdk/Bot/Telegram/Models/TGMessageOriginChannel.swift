@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageOriginChannel](https://core.telegram.org/bots/api#messageoriginchannel)
  **/
-public final class TGMessageOriginChannel: Codable {
+public final class TGMessageOriginChannel: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MessageOriginChannel` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGMessageOriginChannel: Codable {
     }
 
     /// Type of the message origin, always “channel”
-    public var type: TGMessageOriginChannelType
+    public let type: TGMessageOriginChannelType
 
     /// Date the message was sent originally in Unix time
-    public var date: Int
+    public let date: Int
 
     /// Channel chat to which the message was originally sent
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Unique message identifier inside the chat
-    public var messageId: Int
+    public let messageId: Int
 
     /// Optional. Signature of the original post author
-    public var authorSignature: String?
+    public let authorSignature: String?
 
     public init (type: TGMessageOriginChannelType, date: Int, chat: TGChat, messageId: Int, authorSignature: String? = nil) {
         self.type = type

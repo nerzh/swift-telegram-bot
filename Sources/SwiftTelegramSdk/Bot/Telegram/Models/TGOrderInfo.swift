@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [OrderInfo](https://core.telegram.org/bots/api#orderinfo)
  **/
-public final class TGOrderInfo: Codable {
+public final class TGOrderInfo: Codable, Sendable {
 
     /// Custom keys for coding/decoding `OrderInfo` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGOrderInfo: Codable {
     }
 
     /// Optional. User name
-    public var name: String?
+    public let name: String?
 
     /// Optional. User's phone number
-    public var phoneNumber: String?
+    public let phoneNumber: String?
 
     /// Optional. User email
-    public var email: String?
+    public let email: String?
 
     /// Optional. User shipping address
-    public var shippingAddress: TGShippingAddress?
+    public let shippingAddress: TGShippingAddress?
 
     public init (name: String? = nil, phoneNumber: String? = nil, email: String? = nil, shippingAddress: TGShippingAddress? = nil) {
         self.name = name

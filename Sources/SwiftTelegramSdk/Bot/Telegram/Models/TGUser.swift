@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [User](https://core.telegram.org/bots/api#user)
  **/
-public final class TGUser: Codable {
+public final class TGUser: Codable, Sendable {
 
     /// Custom keys for coding/decoding `User` struct
     public enum CodingKeys: String, CodingKey {
@@ -26,43 +26,43 @@ public final class TGUser: Codable {
     }
 
     /// Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
-    public var id: Int64
+    public let id: Int64
 
     /// True, if this user is a bot
-    public var isBot: Bool
+    public let isBot: Bool
 
     /// User's or bot's first name
-    public var firstName: String
+    public let firstName: String
 
     /// Optional. User's or bot's last name
-    public var lastName: String?
+    public let lastName: String?
 
     /// Optional. User's or bot's username
-    public var username: String?
+    public let username: String?
 
     /// Optional. IETF language tag of the user's language
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Optional. True, if this user is a Telegram Premium user
-    public var isPremium: Bool?
+    public let isPremium: Bool?
 
     /// Optional. True, if this user added the bot to the attachment menu
-    public var addedToAttachmentMenu: Bool?
+    public let addedToAttachmentMenu: Bool?
 
     /// Optional. True, if the bot can be invited to groups. Returned only in getMe.
-    public var canJoinGroups: Bool?
+    public let canJoinGroups: Bool?
 
     /// Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
-    public var canReadAllGroupMessages: Bool?
+    public let canReadAllGroupMessages: Bool?
 
     /// Optional. True, if the bot supports inline queries. Returned only in getMe.
-    public var supportsInlineQueries: Bool?
+    public let supportsInlineQueries: Bool?
 
     /// Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
-    public var canConnectToBusiness: Bool?
+    public let canConnectToBusiness: Bool?
 
     /// Optional. True, if the bot has a main Web App. Returned only in getMe.
-    public var hasMainWebApp: Bool?
+    public let hasMainWebApp: Bool?
 
     public init (id: Int64, isBot: Bool, firstName: String, lastName: String? = nil, username: String? = nil, languageCode: String? = nil, isPremium: Bool? = nil, addedToAttachmentMenu: Bool? = nil, canJoinGroups: Bool? = nil, canReadAllGroupMessages: Bool? = nil, supportsInlineQueries: Bool? = nil, canConnectToBusiness: Bool? = nil, hasMainWebApp: Bool? = nil) {
         self.id = id

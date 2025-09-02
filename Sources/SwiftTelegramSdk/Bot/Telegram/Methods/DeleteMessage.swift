@@ -11,18 +11,19 @@ import Foundation
 /// - Bots can delete incoming messages in private chats.
 /// - Bots granted can_post_messages permissions can delete outgoing messages in channels.
 /// - If the bot is an administrator of a group, it can delete any message there.
-/// - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
+/// - If the bot has can_delete_messages administrator right in a supergroup or a channel, it can delete any message there.
+/// - If the bot has can_manage_direct_messages administrator right in a channel, it can delete any message in the corresponding direct messages chat.
 /// Returns True on success.
 
 
 /// Parameters container struct for `deleteMessage` method
-public struct TGDeleteMessageParams: Encodable {
+public struct TGDeleteMessageParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Identifier of the message to delete
-    public var messageId: Int
+    public let messageId: Int
 
     /// Custom keys for coding/decoding `DeleteMessageParams` struct
     public enum CodingKeys: String, CodingKey {
@@ -48,7 +49,8 @@ public extension TGBot {
  - Bots can delete incoming messages in private chats.
  - Bots granted can_post_messages permissions can delete outgoing messages in channels.
  - If the bot is an administrator of a group, it can delete any message there.
- - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
+ - If the bot has can_delete_messages administrator right in a supergroup or a channel, it can delete any message there.
+ - If the bot has can_manage_direct_messages administrator right in a channel, it can delete any message in the corresponding direct messages chat.
  Returns True on success.
 
  SeeAlso Telegram Bot API Reference:

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [KeyboardButtonRequestUsers](https://core.telegram.org/bots/api#keyboardbuttonrequestusers)
  **/
-public final class TGKeyboardButtonRequestUsers: Codable {
+public final class TGKeyboardButtonRequestUsers: Codable, Sendable {
 
     /// Custom keys for coding/decoding `KeyboardButtonRequestUsers` struct
     public enum CodingKeys: String, CodingKey {
@@ -20,25 +20,25 @@ public final class TGKeyboardButtonRequestUsers: Codable {
     }
 
     /// Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message
-    public var requestId: Int
+    public let requestId: Int
 
     /// Optional. Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied.
-    public var userIsBot: Bool?
+    public let userIsBot: Bool?
 
     /// Optional. Pass True to request premium users, pass False to request non-premium users. If not specified, no additional restrictions are applied.
-    public var userIsPremium: Bool?
+    public let userIsPremium: Bool?
 
     /// Optional. The maximum number of users to be selected; 1-10. Defaults to 1.
-    public var maxQuantity: Int?
+    public let maxQuantity: Int?
 
     /// Optional. Pass True to request the users' first and last names
-    public var requestName: Bool?
+    public let requestName: Bool?
 
     /// Optional. Pass True to request the users' usernames
-    public var requestUsername: Bool?
+    public let requestUsername: Bool?
 
     /// Optional. Pass True to request the users' photos
-    public var requestPhoto: Bool?
+    public let requestPhoto: Bool?
 
     public init (requestId: Int, userIsBot: Bool? = nil, userIsPremium: Bool? = nil, maxQuantity: Int? = nil, requestName: Bool? = nil, requestUsername: Bool? = nil, requestPhoto: Bool? = nil) {
         self.requestId = requestId

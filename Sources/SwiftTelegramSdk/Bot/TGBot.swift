@@ -5,7 +5,7 @@
 import Foundation
 import Logging
 
-public actor TGBot: TGBotPrtcl {
+public actor TGBot {
 
     public static let standardTGURL: URL = .init(
         string: "https://api.telegram.org"
@@ -17,33 +17,41 @@ public actor TGBot: TGBotPrtcl {
     public let tgURI: URL
     public var tgClient: TGClientPrtcl {
         get async {
-            await limiter.run {
-                return self.client
+            if let limiter {
+                await limiter.run {
+                    return await client
+                }
             }
+            return client
         }
     }
     public let log: Logger
-    private let limiter: LimiterAsync
+    private let limiter: LimiterAsync?
     private let connection: TGConnectionPrtcl
-    private let client: TGClientPrtcl
-
+    private var client: TGClientPrtcl
+    public var dispatchGroups: [TGDispatcherPrtcl] = []
+    
     public init(
         connectionType: TGConnectionType,
         dispatcher: TGDispatcherPrtcl? = nil,
         tgClient: TGClientPrtcl,
         tgURI: URL = TGBot.standardTGURL,
         botId: String,
-        apiRequestLimitWebHook: UInt = 30,
-        apiRequestLimitLongPolling: UInt = 2,
+        apiRequestLimitWebHook: UInt? = 30,
+        apiRequestLimitLongPolling: UInt? = 2,
         log: Logger = .init(label: "com.tgbot")
     ) async throws {
         self.connectionType = connectionType
-        limiter = LimiterAsync(
-            maxRequests: Int(apiRequestLimitLongPolling),
-            per: 1
-        )
         switch connectionType {
         case let .longpolling(limit, timeout, allowedUpdates):
+            if let apiRequestLimitLongPolling {
+                limiter = LimiterAsync(
+                    maxRequests: Int(apiRequestLimitLongPolling),
+                    per: 1
+                )
+            } else {
+                limiter = nil
+            }
             self.connection = TGLongPollingConnection(
                 limit: limit,
                 timeout: timeout,
@@ -51,10 +59,14 @@ public actor TGBot: TGBotPrtcl {
                 log: log
             )
         case let .webhook(webHookURL):
-            limiter = LimiterAsync(
-                maxRequests: Int(apiRequestLimitLongPolling),
-                per: 1
-            )
+            if let apiRequestLimitWebHook {
+                limiter = LimiterAsync(
+                    maxRequests: Int(apiRequestLimitWebHook),
+                    per: 1
+                )
+            } else {
+                limiter = nil
+            }
             self.connection = TGWebHookConnection(webHookURL: webHookURL)
         }
         client = tgClient

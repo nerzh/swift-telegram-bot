@@ -7,40 +7,40 @@ import Foundation
 
 
 /// Parameters container struct for `editMessageLiveLocation` method
-public struct TGEditMessageLiveLocationParams: Encodable {
+public struct TGEditMessageLiveLocationParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId?
+    public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message to edit
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// Latitude of new location
-    public var latitude: Float
+    public let latitude: Float
 
     /// Longitude of new location
-    public var longitude: Float
+    public let longitude: Float
 
     /// New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live_period remains unchanged
-    public var livePeriod: Int?
+    public let livePeriod: Int?
 
     /// The radius of uncertainty for the location, measured in meters; 0-1500
-    public var horizontalAccuracy: Float?
+    public let horizontalAccuracy: Float?
 
     /// Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
-    public var heading: Int?
+    public let heading: Int?
 
     /// The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
-    public var proximityAlertRadius: Int?
+    public let proximityAlertRadius: Int?
 
     /// A JSON-serialized object for a new inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageLiveLocationParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PollAnswer](https://core.telegram.org/bots/api#pollanswer)
  **/
-public final class TGPollAnswer: Codable {
+public final class TGPollAnswer: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PollAnswer` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPollAnswer: Codable {
     }
 
     /// Unique poll identifier
-    public var pollId: String
+    public let pollId: String
 
     /// Optional. The chat that changed the answer to the poll, if the voter is anonymous
-    public var voterChat: TGChat?
+    public let voterChat: TGChat?
 
     /// Optional. The user that changed the answer to the poll, if the voter isn't anonymous
-    public var user: TGUser?
+    public let user: TGUser?
 
     /// 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
-    public var optionIds: [Int]
+    public let optionIds: [Int]
 
     public init (pollId: String, voterChat: TGChat? = nil, user: TGUser? = nil, optionIds: [Int]) {
         self.pollId = pollId

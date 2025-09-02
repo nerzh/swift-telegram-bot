@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ProximityAlertTriggered](https://core.telegram.org/bots/api#proximityalerttriggered)
  **/
-public final class TGProximityAlertTriggered: Codable {
+public final class TGProximityAlertTriggered: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ProximityAlertTriggered` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGProximityAlertTriggered: Codable {
     }
 
     /// User that triggered the alert
-    public var traveler: TGUser
+    public let traveler: TGUser
 
     /// User that set the alert
-    public var watcher: TGUser
+    public let watcher: TGUser
 
     /// The distance between the users
-    public var distance: Int
+    public let distance: Int
 
     public init (traveler: TGUser, watcher: TGUser, distance: Int) {
         self.traveler = traveler

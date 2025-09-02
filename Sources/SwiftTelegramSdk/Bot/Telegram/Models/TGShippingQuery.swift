@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ShippingQuery](https://core.telegram.org/bots/api#shippingquery)
  **/
-public final class TGShippingQuery: Codable {
+public final class TGShippingQuery: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ShippingQuery` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGShippingQuery: Codable {
     }
 
     /// Unique query identifier
-    public var id: String
+    public let id: String
 
     /// User who sent the query
-    public var from: TGUser
+    public let from: TGUser
 
     /// Bot-specified invoice payload
-    public var invoicePayload: String
+    public let invoicePayload: String
 
     /// User specified shipping address
-    public var shippingAddress: TGShippingAddress
+    public let shippingAddress: TGShippingAddress
 
     public init (id: String, from: TGUser, invoicePayload: String, shippingAddress: TGShippingAddress) {
         self.id = id

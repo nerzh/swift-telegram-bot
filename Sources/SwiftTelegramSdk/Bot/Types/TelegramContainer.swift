@@ -4,9 +4,9 @@
 //
 //  Created by Givi Pataridze on 25.02.2018.
 //
-
+import Foundation
 /// This object represents a Telegram server response container.
-public struct TGTelegramContainer<T: Decodable>: Decodable {
+public struct TGTelegramContainer<T: Decodable & Sendable>: Decodable & Sendable {
 
     enum CodingKeys: String, CodingKey {
         case ok = "ok"
@@ -16,11 +16,11 @@ public struct TGTelegramContainer<T: Decodable>: Decodable {
         case parameters = "parameters"
     }
 
-    public var ok: Bool
-    public var result: T?
-    public var description: String?
-    public var errorCode: Int?
-    public var parameters: TGResponseParameters?
+    public let ok: Bool
+    public let result: T?
+    public let description: String?
+    public let errorCode: Int?
+    public let parameters: TGResponseParameters?
 
     public init (ok: Bool, result: T?, description: String?, errorCode: Int?, parameters: TGResponseParameters?) {
         self.ok = ok

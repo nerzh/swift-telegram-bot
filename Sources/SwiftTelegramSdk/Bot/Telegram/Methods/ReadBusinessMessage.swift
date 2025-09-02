@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `readBusinessMessage` method
-public struct TGReadBusinessMessageParams: Encodable {
+public struct TGReadBusinessMessageParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which to read the message
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.
-    public var chatId: Int64
+    public let chatId: Int64
 
     /// Unique identifier of the message to mark as read
-    public var messageId: Int
+    public let messageId: Int
 
     /// Custom keys for coding/decoding `ReadBusinessMessageParams` struct
     public enum CodingKeys: String, CodingKey {

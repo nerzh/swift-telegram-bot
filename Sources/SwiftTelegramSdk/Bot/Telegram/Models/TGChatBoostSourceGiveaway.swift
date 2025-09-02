@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBoostSourceGiveaway](https://core.telegram.org/bots/api#chatboostsourcegiveaway)
  **/
-public final class TGChatBoostSourceGiveaway: Codable {
+public final class TGChatBoostSourceGiveaway: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatBoostSourceGiveaway` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGChatBoostSourceGiveaway: Codable {
     }
 
     /// Source of the boost, always “giveaway”
-    public var source: String
+    public let source: String
 
     /// Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet.
-    public var giveawayMessageId: Int
+    public let giveawayMessageId: Int
 
     /// Optional. User that won the prize in the giveaway if any; for Telegram Premium giveaways only
-    public var user: TGUser?
+    public let user: TGUser?
 
     /// Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
-    public var prizeStarCount: Int?
+    public let prizeStarCount: Int?
 
     /// Optional. True, if the giveaway was completed, but there was no user to win the prize
-    public var isUnclaimed: Bool?
+    public let isUnclaimed: Bool?
 
     public init (source: String, giveawayMessageId: Int, user: TGUser? = nil, prizeStarCount: Int? = nil, isUnclaimed: Bool? = nil) {
         self.source = source

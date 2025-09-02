@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PaidMediaPhoto](https://core.telegram.org/bots/api#paidmediaphoto)
  **/
-public final class TGPaidMediaPhoto: Codable {
+public final class TGPaidMediaPhoto: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PaidMediaPhoto` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGPaidMediaPhoto: Codable {
     }
 
     /// Type of the paid media, always “photo”
-    public var type: TGPaidMediaPhotoType
+    public let type: TGPaidMediaPhotoType
 
     /// The photo
-    public var photo: [TGPhotoSize]
+    public let photo: [TGPhotoSize]
 
     public init (type: TGPaidMediaPhotoType, photo: [TGPhotoSize]) {
         self.type = type

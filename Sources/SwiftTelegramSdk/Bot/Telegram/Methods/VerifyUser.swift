@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `verifyUser` method
-public struct TGVerifyUserParams: Encodable {
+public struct TGVerifyUserParams: Encodable, Sendable {
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
-    public var customDescription: String?
+    public let customDescription: String?
 
     /// Custom keys for coding/decoding `VerifyUserParams` struct
     public enum CodingKeys: String, CodingKey {

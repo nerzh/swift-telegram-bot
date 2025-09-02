@@ -7,7 +7,7 @@
  [BotCommandScopeAllGroupChats](https://core.telegram.org/bots/api#botcommandscopeallgroupchats)
  */
 
-public enum TGBotCommandScopeAllGroupChatsType: String, Codable {
+public enum TGBotCommandScopeAllGroupChatsType: String, Codable, Sendable {
     case allGroupChats = "all_group_chats"
     case undefined
 

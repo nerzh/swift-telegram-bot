@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Gifts](https://core.telegram.org/bots/api#gifts)
  **/
-public final class TGGifts: Codable {
+public final class TGGifts: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Gifts` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGGifts: Codable {
     }
 
     /// The list of gifts
-    public var gifts: [TGGift]
+    public let gifts: [TGGift]
 
     public init (gifts: [TGGift]) {
         self.gifts = gifts

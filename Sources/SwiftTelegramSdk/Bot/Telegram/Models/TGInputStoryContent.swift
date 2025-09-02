@@ -8,7 +8,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputStoryContent](https://core.telegram.org/bots/api#inputstorycontent)
  **/
-public enum TGInputStoryContent: Codable {
+public enum TGInputStoryContent: Codable, Sendable {
     case inputStoryContentPhoto(TGInputStoryContentPhoto)
     case inputStoryContentVideo(TGInputStoryContentVideo)
 

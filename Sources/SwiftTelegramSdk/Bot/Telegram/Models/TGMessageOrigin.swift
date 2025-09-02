@@ -10,7 +10,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageOrigin](https://core.telegram.org/bots/api#messageorigin)
  **/
-public enum TGMessageOrigin: Codable {
+public enum TGMessageOrigin: Codable, Sendable {
     case messageOriginUser(TGMessageOriginUser)
     case messageOriginHiddenUser(TGMessageOriginHiddenUser)
     case messageOriginChat(TGMessageOriginChat)

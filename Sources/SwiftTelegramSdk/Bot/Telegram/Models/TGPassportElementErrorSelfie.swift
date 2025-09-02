@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportElementErrorSelfie](https://core.telegram.org/bots/api#passportelementerrorselfie)
  **/
-public final class TGPassportElementErrorSelfie: Codable {
+public final class TGPassportElementErrorSelfie: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PassportElementErrorSelfie` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPassportElementErrorSelfie: Codable {
     }
 
     /// Error source, must be selfie
-    public var source: String
+    public let source: String
 
     /// The section of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport”
-    public var type: TGPassportElementErrorSelfieType
+    public let type: TGPassportElementErrorSelfieType
 
     /// Base64-encoded hash of the file with the selfie
-    public var fileHash: String
+    public let fileHash: String
 
     /// Error message
-    public var message: String
+    public let message: String
 
     public init (source: String, type: TGPassportElementErrorSelfieType, fileHash: String, message: String) {
         self.source = source

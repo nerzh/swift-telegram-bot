@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [KeyboardButtonPollType](https://core.telegram.org/bots/api#keyboardbuttonpolltype)
  **/
-public final class TGKeyboardButtonPollType: Codable {
+public final class TGKeyboardButtonPollType: Codable, Sendable {
 
     /// Custom keys for coding/decoding `KeyboardButtonPollType` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGKeyboardButtonPollType: Codable {
     }
 
     /// Optional. If quiz is passed, the user will be allowed to create only polls in the quiz mode. If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type.
-    public var type: String?
+    public let type: String?
 
     public init (type: String? = nil) {
         self.type = type

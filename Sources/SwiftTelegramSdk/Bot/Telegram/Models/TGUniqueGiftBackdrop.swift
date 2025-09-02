@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [UniqueGiftBackdrop](https://core.telegram.org/bots/api#uniquegiftbackdrop)
  **/
-public final class TGUniqueGiftBackdrop: Codable {
+public final class TGUniqueGiftBackdrop: Codable, Sendable {
 
     /// Custom keys for coding/decoding `UniqueGiftBackdrop` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGUniqueGiftBackdrop: Codable {
     }
 
     /// Name of the backdrop
-    public var name: String
+    public let name: String
 
     /// Colors of the backdrop
-    public var colors: TGUniqueGiftBackdropColors
+    public let colors: TGUniqueGiftBackdropColors
 
     /// The number of unique gifts that receive this backdrop for every 1000 gifts upgraded
-    public var rarityPerMille: Int
+    public let rarityPerMille: Int
 
     public init (name: String, colors: TGUniqueGiftBackdropColors, rarityPerMille: Int) {
         self.name = name

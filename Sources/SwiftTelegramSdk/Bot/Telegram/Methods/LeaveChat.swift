@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `leaveChat` method
-public struct TGLeaveChatParams: Encodable {
+public struct TGLeaveChatParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
-    public var chatId: TGChatId
+    /// Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername). Channel direct messages chats aren't supported; leave the corresponding channel instead.
+    public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `LeaveChatParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundFillFreeformGradient](https://core.telegram.org/bots/api#backgroundfillfreeformgradient)
  **/
-public final class TGBackgroundFillFreeformGradient: Codable {
+public final class TGBackgroundFillFreeformGradient: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BackgroundFillFreeformGradient` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGBackgroundFillFreeformGradient: Codable {
     }
 
     /// Type of the background fill, always “freeform_gradient”
-    public var type: TGBackgroundFillFreeformGradientType
+    public let type: TGBackgroundFillFreeformGradientType
 
     /// A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format
-    public var colors: [Int]
+    public let colors: [Int]
 
     public init (type: TGBackgroundFillFreeformGradientType, colors: [Int]) {
         self.type = type

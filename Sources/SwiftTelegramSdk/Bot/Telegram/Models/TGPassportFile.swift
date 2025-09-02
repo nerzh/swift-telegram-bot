@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportFile](https://core.telegram.org/bots/api#passportfile)
  **/
-public final class TGPassportFile: Codable {
+public final class TGPassportFile: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PassportFile` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPassportFile: Codable {
     }
 
     /// Identifier for this file, which can be used to download or reuse the file
-    public var fileId: String
+    public let fileId: String
 
     /// Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    public var fileUniqueId: String
+    public let fileUniqueId: String
 
     /// File size in bytes
-    public var fileSize: Int
+    public let fileSize: Int
 
     /// Unix time when the file was uploaded
-    public var fileDate: Int
+    public let fileDate: Int
 
     public init (fileId: String, fileUniqueId: String, fileSize: Int, fileDate: Int) {
         self.fileId = fileId

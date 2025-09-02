@@ -11,7 +11,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputMedia](https://core.telegram.org/bots/api#inputmedia)
  **/
-public enum TGInputMedia: Codable {
+public enum TGInputMedia: Codable, Sendable {
     case inputMediaAnimation(TGInputMediaAnimation)
     case inputMediaDocument(TGInputMediaDocument)
     case inputMediaAudio(TGInputMediaAudio)

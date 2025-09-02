@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaTypeWeather](https://core.telegram.org/bots/api#storyareatypeweather)
  **/
-public final class TGStoryAreaTypeWeather: Codable {
+public final class TGStoryAreaTypeWeather: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryAreaTypeWeather` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGStoryAreaTypeWeather: Codable {
     }
 
     /// Type of the area, always “weather”
-    public var type: TGStoryAreaTypeWeatherType
+    public let type: TGStoryAreaTypeWeatherType
 
     /// Temperature, in degree Celsius
-    public var temperature: Float
+    public let temperature: Float
 
     /// Emoji representing the weather
-    public var emoji: String
+    public let emoji: String
 
     /// A color of the area background in the ARGB format
-    public var backgroundColor: Int
+    public let backgroundColor: Int
 
     public init (type: TGStoryAreaTypeWeatherType, temperature: Float, emoji: String, backgroundColor: Int) {
         self.type = type

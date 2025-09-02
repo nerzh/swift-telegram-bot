@@ -7,37 +7,37 @@ import Foundation
 
 
 /// Parameters container struct for `sendGame` method
-public struct TGSendGameParams: Encodable {
+public struct TGSendGameParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message will be sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat
-    public var chatId: Int64
+    /// Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.
+    public let chatId: Int64
 
     /// Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    public var messageThreadId: Int?
+    public let messageThreadId: Int?
 
     /// Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
-    public var gameShortName: String
+    public let gameShortName: String
 
     /// Sends the message silently. Users will receive a notification with no sound.
-    public var disableNotification: Bool?
+    public let disableNotification: Bool?
 
     /// Protects the contents of the sent message from forwarding and saving
-    public var protectContent: Bool?
+    public let protectContent: Bool?
 
     /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
-    public var allowPaidBroadcast: Bool?
+    public let allowPaidBroadcast: Bool?
 
     /// Unique identifier of the message effect to be added to the message; for private chats only
-    public var messageEffectId: String?
+    public let messageEffectId: String?
 
     /// Description of the message to reply to
-    public var replyParameters: TGReplyParameters?
+    public let replyParameters: TGReplyParameters?
 
     /// A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `SendGameParams` struct
     public enum CodingKeys: String, CodingKey {

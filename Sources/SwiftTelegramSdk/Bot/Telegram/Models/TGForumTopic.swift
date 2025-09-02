@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ForumTopic](https://core.telegram.org/bots/api#forumtopic)
  **/
-public final class TGForumTopic: Codable {
+public final class TGForumTopic: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ForumTopic` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGForumTopic: Codable {
     }
 
     /// Unique identifier of the forum topic
-    public var messageThreadId: Int
+    public let messageThreadId: Int
 
     /// Name of the topic
-    public var name: String
+    public let name: String
 
     /// Color of the topic icon in RGB format
-    public var iconColor: Int
+    public let iconColor: Int
 
     /// Optional. Unique identifier of the custom emoji shown as the topic icon
-    public var iconCustomEmojiId: String?
+    public let iconCustomEmojiId: String?
 
     public init (messageThreadId: Int, name: String, iconColor: Int, iconCustomEmojiId: String? = nil) {
         self.messageThreadId = messageThreadId

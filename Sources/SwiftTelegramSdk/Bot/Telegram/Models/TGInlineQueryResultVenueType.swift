@@ -7,7 +7,7 @@
  [InlineQueryResultVenue](https://core.telegram.org/bots/api#inlinequeryresultvenue)
  */
 
-public enum TGInlineQueryResultVenueType: String, Codable {
+public enum TGInlineQueryResultVenueType: String, Codable, Sendable {
     case venue = "venue"
     case undefined
 

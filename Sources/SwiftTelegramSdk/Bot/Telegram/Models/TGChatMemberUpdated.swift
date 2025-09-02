@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatMemberUpdated](https://core.telegram.org/bots/api#chatmemberupdated)
  **/
-public final class TGChatMemberUpdated: Codable {
+public final class TGChatMemberUpdated: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatMemberUpdated` struct
     public enum CodingKeys: String, CodingKey {
@@ -21,28 +21,28 @@ public final class TGChatMemberUpdated: Codable {
     }
 
     /// Chat the user belongs to
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Performer of the action, which resulted in the change
-    public var from: TGUser
+    public let from: TGUser
 
     /// Date the change was done in Unix time
-    public var date: Int
+    public let date: Int
 
     /// Previous information about the chat member
-    public var oldChatMember: TGChatMember
+    public let oldChatMember: TGChatMember
 
     /// New information about the chat member
-    public var newChatMember: TGChatMember
+    public let newChatMember: TGChatMember
 
     /// Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
-    public var inviteLink: TGChatInviteLink?
+    public let inviteLink: TGChatInviteLink?
 
     /// Optional. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
-    public var viaJoinRequest: Bool?
+    public let viaJoinRequest: Bool?
 
     /// Optional. True, if the user joined the chat via a chat folder invite link
-    public var viaChatFolderInviteLink: Bool?
+    public let viaChatFolderInviteLink: Bool?
 
     public init (chat: TGChat, from: TGUser, date: Int, oldChatMember: TGChatMember, newChatMember: TGChatMember, inviteLink: TGChatInviteLink? = nil, viaJoinRequest: Bool? = nil, viaChatFolderInviteLink: Bool? = nil) {
         self.chat = chat

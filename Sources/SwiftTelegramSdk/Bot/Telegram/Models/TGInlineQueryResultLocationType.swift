@@ -7,7 +7,7 @@
  [InlineQueryResultLocation](https://core.telegram.org/bots/api#inlinequeryresultlocation)
  */
 
-public enum TGInlineQueryResultLocationType: String, Codable {
+public enum TGInlineQueryResultLocationType: String, Codable, Sendable {
     case location = "location"
     case undefined
 

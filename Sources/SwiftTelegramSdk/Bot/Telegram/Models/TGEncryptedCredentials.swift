@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [EncryptedCredentials](https://core.telegram.org/bots/api#encryptedcredentials)
  **/
-public final class TGEncryptedCredentials: Codable {
+public final class TGEncryptedCredentials: Codable, Sendable {
 
     /// Custom keys for coding/decoding `EncryptedCredentials` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGEncryptedCredentials: Codable {
     }
 
     /// Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for EncryptedPassportElement decryption and authentication
-    public var data: String
+    public let data: String
 
     /// Base64-encoded data hash for data authentication
-    public var hash: String
+    public let hash: String
 
     /// Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption
-    public var secret: String
+    public let secret: String
 
     public init (data: String, hash: String, secret: String) {
         self.data = data

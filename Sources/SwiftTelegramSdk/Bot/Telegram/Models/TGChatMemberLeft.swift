@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatMemberLeft](https://core.telegram.org/bots/api#chatmemberleft)
  **/
-public final class TGChatMemberLeft: Codable {
+public final class TGChatMemberLeft: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatMemberLeft` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGChatMemberLeft: Codable {
     }
 
     /// The member's status in the chat, always “left”
-    public var status: String
+    public let status: String
 
     /// Information about the user
-    public var user: TGUser
+    public let user: TGUser
 
     public init (status: String, user: TGUser) {
         self.status = status

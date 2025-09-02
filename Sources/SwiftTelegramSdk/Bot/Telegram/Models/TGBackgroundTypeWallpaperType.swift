@@ -7,7 +7,7 @@
  [BackgroundTypeWallpaper](https://core.telegram.org/bots/api#backgroundtypewallpaper)
  */
 
-public enum TGBackgroundTypeWallpaperType: String, Codable {
+public enum TGBackgroundTypeWallpaperType: String, Codable, Sendable {
     case wallpaper = "wallpaper"
     case undefined
 

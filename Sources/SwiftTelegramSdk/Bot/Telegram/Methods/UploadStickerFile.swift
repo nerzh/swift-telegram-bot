@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `uploadStickerFile` method
-public struct TGUploadStickerFileParams: Encodable {
+public struct TGUploadStickerFileParams: Encodable, Sendable {
 
     /// User identifier of sticker file owner
-    public var userId: Int64
+    public let userId: Int64
 
     /// A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. More information on Sending Files »
-    public var sticker: TGInputFile
+    public let sticker: TGInputFile
 
     /// Format of the sticker, must be one of “static”, “animated”, “video”
-    public var stickerFormat: String
+    public let stickerFormat: String
 
     /// Custom keys for coding/decoding `UploadStickerFileParams` struct
     public enum CodingKeys: String, CodingKey {

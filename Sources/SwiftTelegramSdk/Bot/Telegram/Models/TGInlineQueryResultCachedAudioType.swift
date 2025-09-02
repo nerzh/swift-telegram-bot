@@ -7,7 +7,7 @@
  [InlineQueryResultCachedAudio](https://core.telegram.org/bots/api#inlinequeryresultcachedaudio)
  */
 
-public enum TGInlineQueryResultCachedAudioType: String, Codable {
+public enum TGInlineQueryResultCachedAudioType: String, Codable, Sendable {
     case audio = "audio"
     case undefined
 

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PaidMediaVideo](https://core.telegram.org/bots/api#paidmediavideo)
  **/
-public final class TGPaidMediaVideo: Codable {
+public final class TGPaidMediaVideo: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PaidMediaVideo` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGPaidMediaVideo: Codable {
     }
 
     /// Type of the paid media, always “video”
-    public var type: TGPaidMediaVideoType
+    public let type: TGPaidMediaVideoType
 
     /// The video
-    public var video: TGVideo
+    public let video: TGVideo
 
     public init (type: TGPaidMediaVideoType, video: TGVideo) {
         self.type = type

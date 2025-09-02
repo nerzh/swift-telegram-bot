@@ -7,7 +7,7 @@
  [InlineQueryResultCachedSticker](https://core.telegram.org/bots/api#inlinequeryresultcachedsticker)
  */
 
-public enum TGInlineQueryResultCachedStickerType: String, Codable {
+public enum TGInlineQueryResultCachedStickerType: String, Codable, Sendable {
     case sticker = "sticker"
     case undefined
 

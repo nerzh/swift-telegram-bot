@@ -7,34 +7,34 @@ import Foundation
 
 
 /// Parameters container struct for `postStory` method
-public struct TGPostStoryParams: Encodable {
+public struct TGPostStoryParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Content of the story
-    public var content: TGInputStoryContent
+    public let content: TGInputStoryContent
 
     /// Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400
-    public var activePeriod: Int
+    public let activePeriod: Int
 
     /// Caption of the story, 0-2048 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Mode for parsing entities in the story caption. See formatting options for more details.
-    public var parseMode: TGParseMode?
+    public let parseMode: TGParseMode?
 
     /// A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// A JSON-serialized list of clickable areas to be shown on the story
-    public var areas: [TGStoryArea]?
+    public let areas: [TGStoryArea]?
 
     /// Pass True to keep the story accessible after it expires
-    public var postToChatPage: Bool?
+    public let postToChatPage: Bool?
 
     /// Pass True if the content of the story must be protected from forwarding and screenshotting
-    public var protectContent: Bool?
+    public let protectContent: Bool?
 
     /// Custom keys for coding/decoding `PostStoryParams` struct
     public enum CodingKeys: String, CodingKey {

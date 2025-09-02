@@ -7,7 +7,7 @@
  [MessageOriginHiddenUser](https://core.telegram.org/bots/api#messageoriginhiddenuser)
  */
 
-public enum TGMessageOriginHiddenUserType: String, Codable {
+public enum TGMessageOriginHiddenUserType: String, Codable, Sendable {
     case hiddenUser = "hidden_user"
     case undefined
 

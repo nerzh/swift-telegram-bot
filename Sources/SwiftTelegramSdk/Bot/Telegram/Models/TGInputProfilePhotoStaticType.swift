@@ -7,7 +7,7 @@
  [InputProfilePhotoStatic](https://core.telegram.org/bots/api#inputprofilephotostatic)
  */
 
-public enum TGInputProfilePhotoStaticType: String, Codable {
+public enum TGInputProfilePhotoStaticType: String, Codable, Sendable {
     case `static` = "static"
     case undefined
 

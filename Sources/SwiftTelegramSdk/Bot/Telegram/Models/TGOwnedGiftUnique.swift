@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [OwnedGiftUnique](https://core.telegram.org/bots/api#ownedgiftunique)
  **/
-public final class TGOwnedGiftUnique: Codable {
+public final class TGOwnedGiftUnique: Codable, Sendable {
 
     /// Custom keys for coding/decoding `OwnedGiftUnique` struct
     public enum CodingKeys: String, CodingKey {
@@ -22,31 +22,31 @@ public final class TGOwnedGiftUnique: Codable {
     }
 
     /// Type of the gift, always “unique”
-    public var type: TGOwnedGiftUniqueType
+    public let type: TGOwnedGiftUniqueType
 
     /// Information about the unique gift
-    public var gift: TGUniqueGift
+    public let gift: TGUniqueGift
 
     /// Optional. Unique identifier of the received gift for the bot; for gifts received on behalf of business accounts only
-    public var ownedGiftId: String?
+    public let ownedGiftId: String?
 
     /// Optional. Sender of the gift if it is a known user
-    public var senderUser: TGUser?
+    public let senderUser: TGUser?
 
     /// Date the gift was sent in Unix time
-    public var sendDate: Int
+    public let sendDate: Int
 
     /// Optional. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
-    public var isSaved: Bool?
+    public let isSaved: Bool?
 
     /// Optional. True, if the gift can be transferred to another owner; for gifts received on behalf of business accounts only
-    public var canBeTransferred: Bool?
+    public let canBeTransferred: Bool?
 
     /// Optional. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
-    public var transferStarCount: Int?
+    public let transferStarCount: Int?
 
     /// Optional. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
-    public var nextTransferDate: Int?
+    public let nextTransferDate: Int?
 
     public init (type: TGOwnedGiftUniqueType, gift: TGUniqueGift, ownedGiftId: String? = nil, senderUser: TGUser? = nil, sendDate: Int, isSaved: Bool? = nil, canBeTransferred: Bool? = nil, transferStarCount: Int? = nil, nextTransferDate: Int? = nil) {
         self.type = type

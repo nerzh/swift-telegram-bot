@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PreparedInlineMessage](https://core.telegram.org/bots/api#preparedinlinemessage)
  **/
-public final class TGPreparedInlineMessage: Codable {
+public final class TGPreparedInlineMessage: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PreparedInlineMessage` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGPreparedInlineMessage: Codable {
     }
 
     /// Unique identifier of the prepared message
-    public var id: String
+    public let id: String
 
     /// Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used
-    public var expirationDate: Int
+    public let expirationDate: Int
 
     public init (id: String, expirationDate: Int) {
         self.id = id

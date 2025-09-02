@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [RevenueWithdrawalStateFailed](https://core.telegram.org/bots/api#revenuewithdrawalstatefailed)
  **/
-public final class TGRevenueWithdrawalStateFailed: Codable {
+public final class TGRevenueWithdrawalStateFailed: Codable, Sendable {
 
     /// Custom keys for coding/decoding `RevenueWithdrawalStateFailed` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGRevenueWithdrawalStateFailed: Codable {
     }
 
     /// Type of the state, always “failed”
-    public var type: TGRevenueWithdrawalStateFailedType
+    public let type: TGRevenueWithdrawalStateFailedType
 
     public init (type: TGRevenueWithdrawalStateFailedType) {
         self.type = type

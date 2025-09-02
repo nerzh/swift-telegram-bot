@@ -7,7 +7,7 @@
  [BackgroundTypeChatTheme](https://core.telegram.org/bots/api#backgroundtypechattheme)
  */
 
-public enum TGBackgroundTypeChatThemeType: String, Codable {
+public enum TGBackgroundTypeChatThemeType: String, Codable, Sendable {
     case chatTheme = "chat_theme"
     case undefined
 

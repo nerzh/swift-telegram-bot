@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportElementErrorDataField](https://core.telegram.org/bots/api#passportelementerrordatafield)
  **/
-public final class TGPassportElementErrorDataField: Codable {
+public final class TGPassportElementErrorDataField: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PassportElementErrorDataField` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGPassportElementErrorDataField: Codable {
     }
 
     /// Error source, must be data
-    public var source: String
+    public let source: String
 
     /// The section of the user's Telegram Passport which has the error, one of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”
-    public var type: TGPassportElementErrorDataFieldType
+    public let type: TGPassportElementErrorDataFieldType
 
     /// Name of the data field which has the error
-    public var fieldName: String
+    public let fieldName: String
 
     /// Base64-encoded data hash
-    public var dataHash: String
+    public let dataHash: String
 
     /// Error message
-    public var message: String
+    public let message: String
 
     public init (source: String, type: TGPassportElementErrorDataFieldType, fieldName: String, dataHash: String, message: String) {
         self.source = source

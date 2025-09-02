@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TGInputFile: Codable {
+public struct TGInputFile: Codable, Sendable {
     var fileName: String
     var data: Data
     var mimeType: String?

@@ -7,7 +7,7 @@
  [PassportElementErrorFile](https://core.telegram.org/bots/api#passportelementerrorfile)
  */
 
-public enum TGPassportElementErrorFileType: String, Codable {
+public enum TGPassportElementErrorFileType: String, Codable, Sendable {
     case utilityBill = "utility_bill"
     case bankStatement = "bank_statement"
     case rentalAgreement = "rental_agreement"

@@ -9,7 +9,7 @@
  SeeAlso Telegram Bot API Reference:
  [ReactionType](https://core.telegram.org/bots/api#reactiontype)
  **/
-public enum TGReactionType: Codable {
+public enum TGReactionType: Codable, Sendable {
     case reactionTypeEmoji(TGReactionTypeEmoji)
     case reactionTypeCustomEmoji(TGReactionTypeCustomEmoji)
     case reactionTypePaid(TGReactionTypePaid)

@@ -7,28 +7,28 @@ import Foundation
 
 
 /// Parameters container struct for `setGameScore` method
-public struct TGSetGameScoreParams: Encodable {
+public struct TGSetGameScoreParams: Encodable, Sendable {
 
     /// User identifier
-    public var userId: Int64
+    public let userId: Int64
 
     /// New score, must be non-negative
-    public var score: Int
+    public let score: Int
 
     /// Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
-    public var force: Bool?
+    public let force: Bool?
 
     /// Pass True if the game message should not be automatically edited to include the current scoreboard
-    public var disableEditMessage: Bool?
+    public let disableEditMessage: Bool?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat
-    public var chatId: Int64?
+    public let chatId: Int64?
 
     /// Required if inline_message_id is not specified. Identifier of the sent message
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// Custom keys for coding/decoding `SetGameScoreParams` struct
     public enum CodingKeys: String, CodingKey {

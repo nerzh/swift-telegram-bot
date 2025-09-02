@@ -7,7 +7,7 @@
  [MessageOriginUser](https://core.telegram.org/bots/api#messageoriginuser)
  */
 
-public enum TGMessageOriginUserType: String, Codable {
+public enum TGMessageOriginUserType: String, Codable, Sendable {
     case user = "user"
     case undefined
 

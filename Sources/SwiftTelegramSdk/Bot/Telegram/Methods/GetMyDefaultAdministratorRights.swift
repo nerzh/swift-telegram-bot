@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getMyDefaultAdministratorRights` method
-public struct TGGetMyDefaultAdministratorRightsParams: Encodable {
+public struct TGGetMyDefaultAdministratorRightsParams: Encodable, Sendable {
 
     /// Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.
-    public var forChannels: Bool?
+    public let forChannels: Bool?
 
     /// Custom keys for coding/decoding `GetMyDefaultAdministratorRightsParams` struct
     public enum CodingKeys: String, CodingKey {

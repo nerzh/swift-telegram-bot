@@ -7,7 +7,7 @@
  [StoryAreaTypeLocation](https://core.telegram.org/bots/api#storyareatypelocation)
  */
 
-public enum TGStoryAreaTypeLocationType: String, Codable {
+public enum TGStoryAreaTypeLocationType: String, Codable, Sendable {
     case location = "location"
     case undefined
 

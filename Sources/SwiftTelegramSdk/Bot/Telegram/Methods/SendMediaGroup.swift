@@ -3,44 +3,48 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.
+/// Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
 
 
 /// Parameters container struct for `sendMediaGroup` method
-public struct TGSendMediaGroupParams: Encodable {
+public struct TGSendMediaGroupParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message will be sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    public var messageThreadId: Int?
+    public let messageThreadId: Int?
+
+    /// Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
+    public let directMessagesTopicId: Int?
 
     /// A JSON-serialized array describing messages to be sent, must include 2-10 items
-    public var media: [TGInputMedia]
+    public let media: [TGInputMedia]
 
     /// Sends messages silently. Users will receive a notification with no sound.
-    public var disableNotification: Bool?
+    public let disableNotification: Bool?
 
     /// Protects the contents of the sent messages from forwarding and saving
-    public var protectContent: Bool?
+    public let protectContent: Bool?
 
     /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
-    public var allowPaidBroadcast: Bool?
+    public let allowPaidBroadcast: Bool?
 
     /// Unique identifier of the message effect to be added to the message; for private chats only
-    public var messageEffectId: String?
+    public let messageEffectId: String?
 
     /// Description of the message to reply to
-    public var replyParameters: TGReplyParameters?
+    public let replyParameters: TGReplyParameters?
 
     /// Custom keys for coding/decoding `SendMediaGroupParams` struct
     public enum CodingKeys: String, CodingKey {
             case businessConnectionId = "business_connection_id"
             case chatId = "chat_id"
             case messageThreadId = "message_thread_id"
+            case directMessagesTopicId = "direct_messages_topic_id"
             case media = "media"
             case disableNotification = "disable_notification"
             case protectContent = "protect_content"
@@ -49,10 +53,11 @@ public struct TGSendMediaGroupParams: Encodable {
             case replyParameters = "reply_parameters"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, media: [TGInputMedia], disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, media: [TGInputMedia], disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId
+            self.directMessagesTopicId = directMessagesTopicId
             self.media = media
             self.disableNotification = disableNotification
             self.protectContent = protectContent
@@ -66,7 +71,7 @@ public struct TGSendMediaGroupParams: Encodable {
 public extension TGBot {
 
 /**
- Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.
+ Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
 
  SeeAlso Telegram Bot API Reference:
  [SendMediaGroupParams](https://core.telegram.org/bots/api#sendmediagroup)

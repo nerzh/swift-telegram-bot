@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [UniqueGiftModel](https://core.telegram.org/bots/api#uniquegiftmodel)
  **/
-public final class TGUniqueGiftModel: Codable {
+public final class TGUniqueGiftModel: Codable, Sendable {
 
     /// Custom keys for coding/decoding `UniqueGiftModel` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGUniqueGiftModel: Codable {
     }
 
     /// Name of the model
-    public var name: String
+    public let name: String
 
     /// The sticker that represents the unique gift
-    public var sticker: TGSticker
+    public let sticker: TGSticker
 
     /// The number of unique gifts that receive this model for every 1000 gifts upgraded
-    public var rarityPerMille: Int
+    public let rarityPerMille: Int
 
     public init (name: String, sticker: TGSticker, rarityPerMille: Int) {
         self.name = name

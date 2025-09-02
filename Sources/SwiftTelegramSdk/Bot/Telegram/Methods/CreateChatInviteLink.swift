@@ -7,22 +7,22 @@ import Foundation
 
 
 /// Parameters container struct for `createChatInviteLink` method
-public struct TGCreateChatInviteLinkParams: Encodable {
+public struct TGCreateChatInviteLinkParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Invite link name; 0-32 characters
-    public var name: String?
+    public let name: String?
 
     /// Point in time (Unix timestamp) when the link will expire
-    public var expireDate: Int?
+    public let expireDate: Int?
 
     /// The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
-    public var memberLimit: Int?
+    public let memberLimit: Int?
 
     /// True, if users joining the chat via the link need to be approved by chat administrators. If True, member_limit can't be specified
-    public var createsJoinRequest: Bool?
+    public let createsJoinRequest: Bool?
 
     /// Custom keys for coding/decoding `CreateChatInviteLinkParams` struct
     public enum CodingKeys: String, CodingKey {

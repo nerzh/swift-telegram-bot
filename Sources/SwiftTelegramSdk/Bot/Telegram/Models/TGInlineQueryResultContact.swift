@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultContact](https://core.telegram.org/bots/api#inlinequeryresultcontact)
  **/
-public final class TGInlineQueryResultContact: Codable {
+public final class TGInlineQueryResultContact: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultContact` struct
     public enum CodingKeys: String, CodingKey {
@@ -24,37 +24,37 @@ public final class TGInlineQueryResultContact: Codable {
     }
 
     /// Type of the result, must be contact
-    public var type: TGInlineQueryResultContactType
+    public let type: TGInlineQueryResultContactType
 
     /// Unique identifier for this result, 1-64 Bytes
-    public var id: String
+    public let id: String
 
     /// Contact's phone number
-    public var phoneNumber: String
+    public let phoneNumber: String
 
     /// Contact's first name
-    public var firstName: String
+    public let firstName: String
 
     /// Optional. Contact's last name
-    public var lastName: String?
+    public let lastName: String?
 
     /// Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
-    public var vcard: String?
+    public let vcard: String?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the contact
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     /// Optional. Url of the thumbnail for the result
-    public var thumbnailUrl: String?
+    public let thumbnailUrl: String?
 
     /// Optional. Thumbnail width
-    public var thumbnailWidth: Int?
+    public let thumbnailWidth: Int?
 
     /// Optional. Thumbnail height
-    public var thumbnailHeight: Int?
+    public let thumbnailHeight: Int?
 
     public init (type: TGInlineQueryResultContactType, id: String, phoneNumber: String, firstName: String, lastName: String? = nil, vcard: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
         self.type = type

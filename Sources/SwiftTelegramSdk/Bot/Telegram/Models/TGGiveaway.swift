@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Giveaway](https://core.telegram.org/bots/api#giveaway)
  **/
-public final class TGGiveaway: Codable {
+public final class TGGiveaway: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Giveaway` struct
     public enum CodingKeys: String, CodingKey {
@@ -22,31 +22,31 @@ public final class TGGiveaway: Codable {
     }
 
     /// The list of chats which the user must join to participate in the giveaway
-    public var chats: [TGChat]
+    public let chats: [TGChat]
 
     /// Point in time (Unix timestamp) when winners of the giveaway will be selected
-    public var winnersSelectionDate: Int
+    public let winnersSelectionDate: Int
 
     /// The number of users which are supposed to be selected as winners of the giveaway
-    public var winnerCount: Int
+    public let winnerCount: Int
 
     /// Optional. True, if only users who join the chats after the giveaway started should be eligible to win
-    public var onlyNewMembers: Bool?
+    public let onlyNewMembers: Bool?
 
     /// Optional. True, if the list of giveaway winners will be visible to everyone
-    public var hasPublicWinners: Bool?
+    public let hasPublicWinners: Bool?
 
     /// Optional. Description of additional giveaway prize
-    public var prizeDescription: String?
+    public let prizeDescription: String?
 
     /// Optional. A list of two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which eligible users for the giveaway must come. If empty, then all users can participate in the giveaway. Users with a phone number that was bought on Fragment can always participate in giveaways.
-    public var countryCodes: [String]?
+    public let countryCodes: [String]?
 
     /// Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
-    public var prizeStarCount: Int?
+    public let prizeStarCount: Int?
 
     /// Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
-    public var premiumSubscriptionMonthCount: Int?
+    public let premiumSubscriptionMonthCount: Int?
 
     public init (chats: [TGChat], winnersSelectionDate: Int, winnerCount: Int, onlyNewMembers: Bool? = nil, hasPublicWinners: Bool? = nil, prizeDescription: String? = nil, countryCodes: [String]? = nil, prizeStarCount: Int? = nil, premiumSubscriptionMonthCount: Int? = nil) {
         self.chats = chats

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [DirectMessagePriceChanged](https://core.telegram.org/bots/api#directmessagepricechanged)
  **/
-public final class TGDirectMessagePriceChanged: Codable {
+public final class TGDirectMessagePriceChanged: Codable, Sendable {
 
     /// Custom keys for coding/decoding `DirectMessagePriceChanged` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGDirectMessagePriceChanged: Codable {
     }
 
     /// True, if direct messages are enabled for the channel chat; false otherwise
-    public var areDirectMessagesEnabled: Bool
+    public let areDirectMessagesEnabled: Bool
 
     /// Optional. The new number of Telegram Stars that must be paid by users for each direct message sent to the channel. Does not apply to users who have been exempted by administrators. Defaults to 0.
-    public var directMessageStarCount: Int?
+    public let directMessageStarCount: Int?
 
     public init (areDirectMessagesEnabled: Bool, directMessageStarCount: Int? = nil) {
         self.areDirectMessagesEnabled = areDirectMessagesEnabled

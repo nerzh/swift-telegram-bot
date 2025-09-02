@@ -7,7 +7,7 @@
  [OwnedGiftRegular](https://core.telegram.org/bots/api#ownedgiftregular)
  */
 
-public enum TGOwnedGiftRegularType: String, Codable {
+public enum TGOwnedGiftRegularType: String, Codable, Sendable {
     case regular = "regular"
     case undefined
 

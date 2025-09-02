@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatMemberRestricted](https://core.telegram.org/bots/api#chatmemberrestricted)
  **/
-public final class TGChatMemberRestricted: Codable {
+public final class TGChatMemberRestricted: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatMemberRestricted` struct
     public enum CodingKeys: String, CodingKey {
@@ -31,58 +31,58 @@ public final class TGChatMemberRestricted: Codable {
     }
 
     /// The member's status in the chat, always “restricted”
-    public var status: String
+    public let status: String
 
     /// Information about the user
-    public var user: TGUser
+    public let user: TGUser
 
     /// True, if the user is a member of the chat at the moment of the request
-    public var isMember: Bool
+    public let isMember: Bool
 
     /// True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
-    public var canSendMessages: Bool
+    public let canSendMessages: Bool
 
     /// True, if the user is allowed to send audios
-    public var canSendAudios: Bool
+    public let canSendAudios: Bool
 
     /// True, if the user is allowed to send documents
-    public var canSendDocuments: Bool
+    public let canSendDocuments: Bool
 
     /// True, if the user is allowed to send photos
-    public var canSendPhotos: Bool
+    public let canSendPhotos: Bool
 
     /// True, if the user is allowed to send videos
-    public var canSendVideos: Bool
+    public let canSendVideos: Bool
 
     /// True, if the user is allowed to send video notes
-    public var canSendVideoNotes: Bool
+    public let canSendVideoNotes: Bool
 
     /// True, if the user is allowed to send voice notes
-    public var canSendVoiceNotes: Bool
+    public let canSendVoiceNotes: Bool
 
     /// True, if the user is allowed to send polls and checklists
-    public var canSendPolls: Bool
+    public let canSendPolls: Bool
 
     /// True, if the user is allowed to send animations, games, stickers and use inline bots
-    public var canSendOtherMessages: Bool
+    public let canSendOtherMessages: Bool
 
     /// True, if the user is allowed to add web page previews to their messages
-    public var canAddWebPagePreviews: Bool
+    public let canAddWebPagePreviews: Bool
 
     /// True, if the user is allowed to change the chat title, photo and other settings
-    public var canChangeInfo: Bool
+    public let canChangeInfo: Bool
 
     /// True, if the user is allowed to invite new users to the chat
-    public var canInviteUsers: Bool
+    public let canInviteUsers: Bool
 
     /// True, if the user is allowed to pin messages
-    public var canPinMessages: Bool
+    public let canPinMessages: Bool
 
     /// True, if the user is allowed to create forum topics
-    public var canManageTopics: Bool
+    public let canManageTopics: Bool
 
     /// Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever
-    public var untilDate: Int
+    public let untilDate: Int
 
     public init (status: String, user: TGUser, isMember: Bool, canSendMessages: Bool, canSendAudios: Bool, canSendDocuments: Bool, canSendPhotos: Bool, canSendVideos: Bool, canSendVideoNotes: Bool, canSendVoiceNotes: Bool, canSendPolls: Bool, canSendOtherMessages: Bool, canAddWebPagePreviews: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPinMessages: Bool, canManageTopics: Bool, untilDate: Int) {
         self.status = status

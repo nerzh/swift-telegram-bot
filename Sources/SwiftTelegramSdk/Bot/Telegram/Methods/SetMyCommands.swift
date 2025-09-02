@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `setMyCommands` method
-public struct TGSetMyCommandsParams: Encodable {
+public struct TGSetMyCommandsParams: Encodable, Sendable {
 
     /// A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
-    public var commands: [TGBotCommand]
+    public let commands: [TGBotCommand]
 
     /// A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
-    public var scope: TGBotCommandScope?
+    public let scope: TGBotCommandScope?
 
     /// A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `SetMyCommandsParams` struct
     public enum CodingKeys: String, CodingKey {

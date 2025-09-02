@@ -7,7 +7,7 @@
  [TransactionPartnerTelegramApi](https://core.telegram.org/bots/api#transactionpartnertelegramapi)
  */
 
-public enum TGTransactionPartnerTelegramApiType: String, Codable {
+public enum TGTransactionPartnerTelegramApiType: String, Codable, Sendable {
     case telegramApi = "telegram_api"
     case undefined
 

@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setStickerSetTitle` method
-public struct TGSetStickerSetTitleParams: Encodable {
+public struct TGSetStickerSetTitleParams: Encodable, Sendable {
 
     /// Sticker set name
-    public var name: String
+    public let name: String
 
     /// Sticker set title, 1-64 characters
-    public var title: String
+    public let title: String
 
     /// Custom keys for coding/decoding `SetStickerSetTitleParams` struct
     public enum CodingKeys: String, CodingKey {

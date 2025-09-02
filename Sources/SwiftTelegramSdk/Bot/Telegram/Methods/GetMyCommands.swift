@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `getMyCommands` method
-public struct TGGetMyCommandsParams: Encodable {
+public struct TGGetMyCommandsParams: Encodable, Sendable {
 
     /// A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
-    public var scope: TGBotCommandScope?
+    public let scope: TGBotCommandScope?
 
     /// A two-letter ISO 639-1 language code or an empty string
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `GetMyCommandsParams` struct
     public enum CodingKeys: String, CodingKey {

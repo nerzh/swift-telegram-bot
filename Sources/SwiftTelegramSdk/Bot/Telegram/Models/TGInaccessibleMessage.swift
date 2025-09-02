@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InaccessibleMessage](https://core.telegram.org/bots/api#inaccessiblemessage)
  **/
-public final class TGInaccessibleMessage: Codable {
+public final class TGInaccessibleMessage: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InaccessibleMessage` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGInaccessibleMessage: Codable {
     }
 
     /// Chat the message belonged to
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Unique message identifier inside the chat
-    public var messageId: Int
+    public let messageId: Int
 
     /// Always 0. The field can be used to differentiate regular and inaccessible messages.
-    public var date: Int
+    public let date: Int
 
     public init (chat: TGChat, messageId: Int, date: Int) {
         self.chat = chat

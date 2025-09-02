@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultCachedVideo](https://core.telegram.org/bots/api#inlinequeryresultcachedvideo)
  **/
-public final class TGInlineQueryResultCachedVideo: Codable {
+public final class TGInlineQueryResultCachedVideo: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultCachedVideo` struct
     public enum CodingKeys: String, CodingKey {
@@ -24,37 +24,37 @@ public final class TGInlineQueryResultCachedVideo: Codable {
     }
 
     /// Type of the result, must be video
-    public var type: TGInlineQueryResultCachedVideoType
+    public let type: TGInlineQueryResultCachedVideoType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid file identifier for the video file
-    public var videoFileId: String
+    public let videoFileId: String
 
     /// Title for the result
-    public var title: String
+    public let title: String
 
     /// Optional. Short description of the result
-    public var description: String?
+    public let description: String?
 
     /// Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Pass True, if the caption must be shown above the message media
-    public var showCaptionAboveMedia: Bool?
+    public let showCaptionAboveMedia: Bool?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the video
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultCachedVideoType, id: String, videoFileId: String, title: String, description: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

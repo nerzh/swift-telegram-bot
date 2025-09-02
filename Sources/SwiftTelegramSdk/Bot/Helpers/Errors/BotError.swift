@@ -7,11 +7,11 @@
 
 import Foundation
 
-public class BotError: TGErrorCommon {
+public struct BotError: ErrorCommon {
     
     public var title: String = ""
     
-    public enum `Type`: String, Decodable {
+    public enum `Type`: String, Decodable, Sendable {
         case `internal`
         case network
         case server
@@ -21,25 +21,25 @@ public class BotError: TGErrorCommon {
     public let description: String
     public var reason: String
     
-    public required init() {
+    public init() {
         self.type = .internal
         self.description = "\(Self.self)"
         self.reason = "\(Self.self)"
     }
     
-    public required init(reason: String) {
+    public init(reason: String) {
         self.reason = reason
         self.type = .internal
         self.description = "\(Self.self)"
     }
     
-    public required init(_ reason: String) {
+    public init(_ reason: String) {
         self.reason = reason
         self.type = .internal
         self.description = "\(Self.self)"
     }
     
-    public required init(_ error: Error) {
+    public init(_ error: Error) {
         self.reason = error.localizedDescription
         self.type = .internal
         self.description = "\(Self.self)"

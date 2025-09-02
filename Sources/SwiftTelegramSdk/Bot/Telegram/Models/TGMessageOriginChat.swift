@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageOriginChat](https://core.telegram.org/bots/api#messageoriginchat)
  **/
-public final class TGMessageOriginChat: Codable {
+public final class TGMessageOriginChat: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MessageOriginChat` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGMessageOriginChat: Codable {
     }
 
     /// Type of the message origin, always “chat”
-    public var type: TGMessageOriginChatType
+    public let type: TGMessageOriginChatType
 
     /// Date the message was sent originally in Unix time
-    public var date: Int
+    public let date: Int
 
     /// Chat that sent the message originally
-    public var senderChat: TGChat
+    public let senderChat: TGChat
 
     /// Optional. For messages originally sent by an anonymous chat administrator, original message author signature
-    public var authorSignature: String?
+    public let authorSignature: String?
 
     public init (type: TGMessageOriginChatType, date: Int, senderChat: TGChat, authorSignature: String? = nil) {
         self.type = type

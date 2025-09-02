@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `editChatSubscriptionInviteLink` method
-public struct TGEditChatSubscriptionInviteLinkParams: Encodable {
+public struct TGEditChatSubscriptionInviteLinkParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// The invite link to edit
-    public var inviteLink: String
+    public let inviteLink: String
 
     /// Invite link name; 0-32 characters
-    public var name: String?
+    public let name: String?
 
     /// Custom keys for coding/decoding `EditChatSubscriptionInviteLinkParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundTypeWallpaper](https://core.telegram.org/bots/api#backgroundtypewallpaper)
  **/
-public final class TGBackgroundTypeWallpaper: Codable {
+public final class TGBackgroundTypeWallpaper: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BackgroundTypeWallpaper` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGBackgroundTypeWallpaper: Codable {
     }
 
     /// Type of the background, always “wallpaper”
-    public var type: TGBackgroundTypeWallpaperType
+    public let type: TGBackgroundTypeWallpaperType
 
     /// Document with the wallpaper
-    public var document: TGDocument
+    public let document: TGDocument
 
     /// Dimming of the background in dark themes, as a percentage; 0-100
-    public var darkThemeDimming: Int
+    public let darkThemeDimming: Int
 
     /// Optional. True, if the wallpaper is downscaled to fit in a 450x450 square and then box-blurred with radius 12
-    public var isBlurred: Bool?
+    public let isBlurred: Bool?
 
     /// Optional. True, if the background moves slightly when the device is tilted
-    public var isMoving: Bool?
+    public let isMoving: Bool?
 
     public init (type: TGBackgroundTypeWallpaperType, document: TGDocument, darkThemeDimming: Int, isBlurred: Bool? = nil, isMoving: Bool? = nil) {
         self.type = type

@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `transferGift` method
-public struct TGTransferGiftParams: Encodable {
+public struct TGTransferGiftParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier of the regular gift that should be transferred
-    public var ownedGiftId: String
+    public let ownedGiftId: String
 
     /// Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.
-    public var newOwnerChatId: Int64
+    public let newOwnerChatId: Int64
 
     /// The amount of Telegram Stars that will be paid for the transfer from the business account balance. If positive, then the can_transfer_stars business bot right is required.
-    public var starCount: Int?
+    public let starCount: Int?
 
     /// Custom keys for coding/decoding `TransferGiftParams` struct
     public enum CodingKeys: String, CodingKey {

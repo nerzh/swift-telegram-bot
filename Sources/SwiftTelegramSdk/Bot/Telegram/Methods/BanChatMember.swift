@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `banChatMember` method
-public struct TGBanChatMemberParams: Encodable {
+public struct TGBanChatMemberParams: Encodable, Sendable {
 
     /// Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
-    public var untilDate: Int?
+    public let untilDate: Int?
 
     /// Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels.
-    public var revokeMessages: Bool?
+    public let revokeMessages: Bool?
 
     /// Custom keys for coding/decoding `BanChatMemberParams` struct
     public enum CodingKeys: String, CodingKey {

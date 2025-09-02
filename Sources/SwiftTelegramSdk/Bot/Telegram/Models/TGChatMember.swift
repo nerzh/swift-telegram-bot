@@ -12,7 +12,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatMember](https://core.telegram.org/bots/api#chatmember)
  **/
-public enum TGChatMember: Codable {
+public enum TGChatMember: Codable, Sendable {
     case chatMemberOwner(TGChatMemberOwner)
     case chatMemberAdministrator(TGChatMemberAdministrator)
     case chatMemberMember(TGChatMemberMember)

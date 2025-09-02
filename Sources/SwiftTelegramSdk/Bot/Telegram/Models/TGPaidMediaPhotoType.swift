@@ -7,7 +7,7 @@
  [PaidMediaPhoto](https://core.telegram.org/bots/api#paidmediaphoto)
  */
 
-public enum TGPaidMediaPhotoType: String, Codable {
+public enum TGPaidMediaPhotoType: String, Codable, Sendable {
     case photo = "photo"
     case undefined
 

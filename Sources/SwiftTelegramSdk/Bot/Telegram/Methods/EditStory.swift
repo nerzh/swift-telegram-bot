@@ -7,28 +7,28 @@ import Foundation
 
 
 /// Parameters container struct for `editStory` method
-public struct TGEditStoryParams: Encodable {
+public struct TGEditStoryParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier of the story to edit
-    public var storyId: Int
+    public let storyId: Int
 
     /// Content of the story
-    public var content: TGInputStoryContent
+    public let content: TGInputStoryContent
 
     /// Caption of the story, 0-2048 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Mode for parsing entities in the story caption. See formatting options for more details.
-    public var parseMode: TGParseMode?
+    public let parseMode: TGParseMode?
 
     /// A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// A JSON-serialized list of clickable areas to be shown on the story
-    public var areas: [TGStoryArea]?
+    public let areas: [TGStoryArea]?
 
     /// Custom keys for coding/decoding `EditStoryParams` struct
     public enum CodingKeys: String, CodingKey {

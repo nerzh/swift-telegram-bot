@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageOriginUser](https://core.telegram.org/bots/api#messageoriginuser)
  **/
-public final class TGMessageOriginUser: Codable {
+public final class TGMessageOriginUser: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MessageOriginUser` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGMessageOriginUser: Codable {
     }
 
     /// Type of the message origin, always “user”
-    public var type: TGMessageOriginUserType
+    public let type: TGMessageOriginUserType
 
     /// Date the message was sent originally in Unix time
-    public var date: Int
+    public let date: Int
 
     /// User that sent the message originally
-    public var senderUser: TGUser
+    public let senderUser: TGUser
 
     public init (type: TGMessageOriginUserType, date: Int, senderUser: TGUser) {
         self.type = type

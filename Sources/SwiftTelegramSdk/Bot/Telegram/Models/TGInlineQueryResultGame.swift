@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultGame](https://core.telegram.org/bots/api#inlinequeryresultgame)
  **/
-public final class TGInlineQueryResultGame: Codable {
+public final class TGInlineQueryResultGame: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultGame` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGInlineQueryResultGame: Codable {
     }
 
     /// Type of the result, must be game
-    public var type: TGInlineQueryResultGameType
+    public let type: TGInlineQueryResultGameType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// Short name of the game
-    public var gameShortName: String
+    public let gameShortName: String
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     public init (type: TGInlineQueryResultGameType, id: String, gameShortName: String, replyMarkup: TGInlineKeyboardMarkup? = nil) {
         self.type = type

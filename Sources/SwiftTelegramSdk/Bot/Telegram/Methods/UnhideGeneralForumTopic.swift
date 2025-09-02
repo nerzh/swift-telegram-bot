@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `unhideGeneralForumTopic` method
-public struct TGUnhideGeneralForumTopicParams: Encodable {
+public struct TGUnhideGeneralForumTopicParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `UnhideGeneralForumTopicParams` struct
     public enum CodingKeys: String, CodingKey {

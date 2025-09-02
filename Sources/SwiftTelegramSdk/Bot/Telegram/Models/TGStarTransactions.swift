@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StarTransactions](https://core.telegram.org/bots/api#startransactions)
  **/
-public final class TGStarTransactions: Codable {
+public final class TGStarTransactions: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StarTransactions` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGStarTransactions: Codable {
     }
 
     /// The list of transactions
-    public var transactions: [TGStarTransaction]
+    public let transactions: [TGStarTransaction]
 
     public init (transactions: [TGStarTransaction]) {
         self.transactions = transactions

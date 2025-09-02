@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `deleteStory` method
-public struct TGDeleteStoryParams: Encodable {
+public struct TGDeleteStoryParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier of the story to delete
-    public var storyId: Int
+    public let storyId: Int
 
     /// Custom keys for coding/decoding `DeleteStoryParams` struct
     public enum CodingKeys: String, CodingKey {

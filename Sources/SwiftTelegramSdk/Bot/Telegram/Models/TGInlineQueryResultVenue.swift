@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultVenue](https://core.telegram.org/bots/api#inlinequeryresultvenue)
  **/
-public final class TGInlineQueryResultVenue: Codable {
+public final class TGInlineQueryResultVenue: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultVenue` struct
     public enum CodingKeys: String, CodingKey {
@@ -28,49 +28,49 @@ public final class TGInlineQueryResultVenue: Codable {
     }
 
     /// Type of the result, must be venue
-    public var type: TGInlineQueryResultVenueType
+    public let type: TGInlineQueryResultVenueType
 
     /// Unique identifier for this result, 1-64 Bytes
-    public var id: String
+    public let id: String
 
     /// Latitude of the venue location in degrees
-    public var latitude: Float
+    public let latitude: Float
 
     /// Longitude of the venue location in degrees
-    public var longitude: Float
+    public let longitude: Float
 
     /// Title of the venue
-    public var title: String
+    public let title: String
 
     /// Address of the venue
-    public var address: String
+    public let address: String
 
     /// Optional. Foursquare identifier of the venue if known
-    public var foursquareId: String?
+    public let foursquareId: String?
 
     /// Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
-    public var foursquareType: String?
+    public let foursquareType: String?
 
     /// Optional. Google Places identifier of the venue
-    public var googlePlaceId: String?
+    public let googlePlaceId: String?
 
     /// Optional. Google Places type of the venue. (See supported types.)
-    public var googlePlaceType: String?
+    public let googlePlaceType: String?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the venue
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     /// Optional. Url of the thumbnail for the result
-    public var thumbnailUrl: String?
+    public let thumbnailUrl: String?
 
     /// Optional. Thumbnail width
-    public var thumbnailWidth: Int?
+    public let thumbnailWidth: Int?
 
     /// Optional. Thumbnail height
-    public var thumbnailHeight: Int?
+    public let thumbnailHeight: Int?
 
     public init (type: TGInlineQueryResultVenueType, id: String, latitude: Float, longitude: Float, title: String, address: String, foursquareId: String? = nil, foursquareType: String? = nil, googlePlaceId: String? = nil, googlePlaceType: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
         self.type = type

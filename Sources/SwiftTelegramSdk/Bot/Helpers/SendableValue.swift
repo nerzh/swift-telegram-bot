@@ -18,10 +18,12 @@ final public class SendableValue<Value>: @unchecked Sendable {
         self.data = val
     }
 
-    public func read() async -> Value {
-        await withCheckedContinuation { continuation in
-            queue.async {
-                continuation.resume(returning: self.data)
+    public var value: Value {
+        get async {
+            await withCheckedContinuation { continuation in
+                queue.async {
+                    continuation.resume(returning: self.data)
+                }
             }
         }
     }

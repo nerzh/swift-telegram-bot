@@ -9,7 +9,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundFill](https://core.telegram.org/bots/api#backgroundfill)
  **/
-public enum TGBackgroundFill: Codable {
+public enum TGBackgroundFill: Codable, Sendable {
     case backgroundFillSolid(TGBackgroundFillSolid)
     case backgroundFillGradient(TGBackgroundFillGradient)
     case backgroundFillFreeformGradient(TGBackgroundFillFreeformGradient)

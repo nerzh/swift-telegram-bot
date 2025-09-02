@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatMemberBanned](https://core.telegram.org/bots/api#chatmemberbanned)
  **/
-public final class TGChatMemberBanned: Codable {
+public final class TGChatMemberBanned: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatMemberBanned` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGChatMemberBanned: Codable {
     }
 
     /// The member's status in the chat, always “kicked”
-    public var status: String
+    public let status: String
 
     /// Information about the user
-    public var user: TGUser
+    public let user: TGUser
 
     /// Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever
-    public var untilDate: Int
+    public let untilDate: Int
 
     public init (status: String, user: TGUser, untilDate: Int) {
         self.status = status

@@ -19,7 +19,7 @@ import Foundation
  SeeAlso Telegram TGBot API Reference:
  [Sending Files](https://core.telegram.org/bots/api#sending-files)
  */
-public enum TGFileInfo: Codable {
+public enum TGFileInfo: Codable, Sendable {
 
     case fileId(String)
     case url(String)

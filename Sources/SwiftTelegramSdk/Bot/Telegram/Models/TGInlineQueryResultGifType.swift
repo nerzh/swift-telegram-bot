@@ -7,7 +7,7 @@
  [InlineQueryResultGif](https://core.telegram.org/bots/api#inlinequeryresultgif)
  */
 
-public enum TGInlineQueryResultGifType: String, Codable {
+public enum TGInlineQueryResultGifType: String, Codable, Sendable {
     case gif = "gif"
     case undefined
 

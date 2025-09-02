@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `reopenGeneralForumTopic` method
-public struct TGReopenGeneralForumTopicParams: Encodable {
+public struct TGReopenGeneralForumTopicParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `ReopenGeneralForumTopicParams` struct
     public enum CodingKeys: String, CodingKey {

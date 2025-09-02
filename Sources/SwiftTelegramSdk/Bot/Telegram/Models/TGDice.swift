@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Dice](https://core.telegram.org/bots/api#dice)
  **/
-public final class TGDice: Codable {
+public final class TGDice: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Dice` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGDice: Codable {
     }
 
     /// Emoji on which the dice throw animation is based
-    public var emoji: String
+    public let emoji: String
 
     /// Value of the dice, 1-6 for “”, “” and “” base emoji, 1-5 for “” and “” base emoji, 1-64 for “” base emoji
-    public var value: Int
+    public let value: Int
 
     public init (emoji: String, value: Int) {
         self.emoji = emoji

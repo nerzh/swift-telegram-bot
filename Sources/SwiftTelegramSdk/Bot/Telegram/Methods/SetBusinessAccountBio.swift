@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setBusinessAccountBio` method
-public struct TGSetBusinessAccountBioParams: Encodable {
+public struct TGSetBusinessAccountBioParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// The new value of the bio for the business account; 0-140 characters
-    public var bio: String?
+    public let bio: String?
 
     /// Custom keys for coding/decoding `SetBusinessAccountBioParams` struct
     public enum CodingKeys: String, CodingKey {

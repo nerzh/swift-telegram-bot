@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setChatDescription` method
-public struct TGSetChatDescriptionParams: Encodable {
+public struct TGSetChatDescriptionParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// New chat description, 0-255 characters
-    public var description: String?
+    public let description: String?
 
     /// Custom keys for coding/decoding `SetChatDescriptionParams` struct
     public enum CodingKeys: String, CodingKey {

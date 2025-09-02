@@ -7,7 +7,7 @@
  [PassportElementErrorSelfie](https://core.telegram.org/bots/api#passportelementerrorselfie)
  */
 
-public enum TGPassportElementErrorSelfieType: String, Codable {
+public enum TGPassportElementErrorSelfieType: String, Codable, Sendable {
     case passport = "passport"
     case driverLicense = "driver_license"
     case identityCard = "identity_card"

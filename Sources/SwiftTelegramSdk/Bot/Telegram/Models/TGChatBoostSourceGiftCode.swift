@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBoostSourceGiftCode](https://core.telegram.org/bots/api#chatboostsourcegiftcode)
  **/
-public final class TGChatBoostSourceGiftCode: Codable {
+public final class TGChatBoostSourceGiftCode: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatBoostSourceGiftCode` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGChatBoostSourceGiftCode: Codable {
     }
 
     /// Source of the boost, always “gift_code”
-    public var source: String
+    public let source: String
 
     /// User for which the gift code was created
-    public var user: TGUser
+    public let user: TGUser
 
     public init (source: String, user: TGUser) {
         self.source = source

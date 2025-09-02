@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [SwitchInlineQueryChosenChat](https://core.telegram.org/bots/api#switchinlinequerychosenchat)
  **/
-public final class TGSwitchInlineQueryChosenChat: Codable {
+public final class TGSwitchInlineQueryChosenChat: Codable, Sendable {
 
     /// Custom keys for coding/decoding `SwitchInlineQueryChosenChat` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGSwitchInlineQueryChosenChat: Codable {
     }
 
     /// Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
-    public var query: String?
+    public let query: String?
 
     /// Optional. True, if private chats with users can be chosen
-    public var allowUserChats: Bool?
+    public let allowUserChats: Bool?
 
     /// Optional. True, if private chats with bots can be chosen
-    public var allowBotChats: Bool?
+    public let allowBotChats: Bool?
 
     /// Optional. True, if group and supergroup chats can be chosen
-    public var allowGroupChats: Bool?
+    public let allowGroupChats: Bool?
 
     /// Optional. True, if channel chats can be chosen
-    public var allowChannelChats: Bool?
+    public let allowChannelChats: Bool?
 
     public init (query: String? = nil, allowUserChats: Bool? = nil, allowBotChats: Bool? = nil, allowGroupChats: Bool? = nil, allowChannelChats: Bool? = nil) {
         self.query = query

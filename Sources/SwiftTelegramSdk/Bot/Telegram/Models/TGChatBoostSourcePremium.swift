@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBoostSourcePremium](https://core.telegram.org/bots/api#chatboostsourcepremium)
  **/
-public final class TGChatBoostSourcePremium: Codable {
+public final class TGChatBoostSourcePremium: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatBoostSourcePremium` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGChatBoostSourcePremium: Codable {
     }
 
     /// Source of the boost, always “premium”
-    public var source: String
+    public let source: String
 
     /// User that boosted the chat
-    public var user: TGUser
+    public let user: TGUser
 
     public init (source: String, user: TGUser) {
         self.source = source

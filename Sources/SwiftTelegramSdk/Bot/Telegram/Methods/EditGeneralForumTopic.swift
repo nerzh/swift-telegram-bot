@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `editGeneralForumTopic` method
-public struct TGEditGeneralForumTopicParams: Encodable {
+public struct TGEditGeneralForumTopicParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// New topic name, 1-128 characters
-    public var name: String
+    public let name: String
 
     /// Custom keys for coding/decoding `EditGeneralForumTopicParams` struct
     public enum CodingKeys: String, CodingKey {

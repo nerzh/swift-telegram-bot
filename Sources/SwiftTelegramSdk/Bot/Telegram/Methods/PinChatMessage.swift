@@ -3,23 +3,23 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+/// Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to pin messages in groups and channels respectively. Returns True on success.
 
 
 /// Parameters container struct for `pinChatMessage` method
-public struct TGPinChatMessageParams: Encodable {
+public struct TGPinChatMessageParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message will be pinned
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Identifier of a message to pin
-    public var messageId: Int
+    public let messageId: Int
 
     /// Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
-    public var disableNotification: Bool?
+    public let disableNotification: Bool?
 
     /// Custom keys for coding/decoding `PinChatMessageParams` struct
     public enum CodingKeys: String, CodingKey {
@@ -41,7 +41,7 @@ public struct TGPinChatMessageParams: Encodable {
 public extension TGBot {
 
 /**
- Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+ Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to pin messages in groups and channels respectively. Returns True on success.
 
  SeeAlso Telegram Bot API Reference:
  [PinChatMessageParams](https://core.telegram.org/bots/api#pinchatmessage)

@@ -13,7 +13,7 @@
  SeeAlso Telegram Bot API Reference:
  [TransactionPartner](https://core.telegram.org/bots/api#transactionpartner)
  **/
-public enum TGTransactionPartner: Codable {
+public enum TGTransactionPartner: Codable, Sendable {
     case transactionPartnerUser(TGTransactionPartnerUser)
     case transactionPartnerChat(TGTransactionPartnerChat)
     case transactionPartnerAffiliateProgram(TGTransactionPartnerAffiliateProgram)

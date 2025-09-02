@@ -7,7 +7,7 @@
  [BackgroundFillGradient](https://core.telegram.org/bots/api#backgroundfillgradient)
  */
 
-public enum TGBackgroundFillGradientType: String, Codable {
+public enum TGBackgroundFillGradientType: String, Codable, Sendable {
     case gradient = "gradient"
     case undefined
 

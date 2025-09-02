@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getMyDescription` method
-public struct TGGetMyDescriptionParams: Encodable {
+public struct TGGetMyDescriptionParams: Encodable, Sendable {
 
     /// A two-letter ISO 639-1 language code or an empty string
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `GetMyDescriptionParams` struct
     public enum CodingKeys: String, CodingKey {

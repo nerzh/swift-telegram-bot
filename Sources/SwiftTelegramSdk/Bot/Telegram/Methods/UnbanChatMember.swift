@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `unbanChatMember` method
-public struct TGUnbanChatMemberParams: Encodable {
+public struct TGUnbanChatMemberParams: Encodable, Sendable {
 
     /// Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Do nothing if the user is not banned
-    public var onlyIfBanned: Bool?
+    public let onlyIfBanned: Bool?
 
     /// Custom keys for coding/decoding `UnbanChatMemberParams` struct
     public enum CodingKeys: String, CodingKey {

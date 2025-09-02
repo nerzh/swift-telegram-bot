@@ -7,7 +7,7 @@
  [InputMediaDocument](https://core.telegram.org/bots/api#inputmediadocument)
  */
 
-public enum TGInputMediaDocumentType: String, Codable {
+public enum TGInputMediaDocumentType: String, Codable, Sendable {
     case document = "document"
     case undefined
 

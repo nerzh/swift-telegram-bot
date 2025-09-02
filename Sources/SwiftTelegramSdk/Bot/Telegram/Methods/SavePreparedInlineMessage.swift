@@ -7,25 +7,25 @@ import Foundation
 
 
 /// Parameters container struct for `savePreparedInlineMessage` method
-public struct TGSavePreparedInlineMessageParams: Encodable {
+public struct TGSavePreparedInlineMessageParams: Encodable, Sendable {
 
     /// Unique identifier of the target user that can use the prepared message
-    public var userId: Int64
+    public let userId: Int64
 
     /// A JSON-serialized object describing the message to be sent
-    public var result: TGInlineQueryResult
+    public let result: TGInlineQueryResult
 
     /// Pass True if the message can be sent to private chats with users
-    public var allowUserChats: Bool?
+    public let allowUserChats: Bool?
 
     /// Pass True if the message can be sent to private chats with bots
-    public var allowBotChats: Bool?
+    public let allowBotChats: Bool?
 
     /// Pass True if the message can be sent to group and supergroup chats
-    public var allowGroupChats: Bool?
+    public let allowGroupChats: Bool?
 
     /// Pass True if the message can be sent to channel chats
-    public var allowChannelChats: Bool?
+    public let allowChannelChats: Bool?
 
     /// Custom keys for coding/decoding `SavePreparedInlineMessageParams` struct
     public enum CodingKeys: String, CodingKey {

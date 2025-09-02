@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportElementErrorFiles](https://core.telegram.org/bots/api#passportelementerrorfiles)
  **/
-public final class TGPassportElementErrorFiles: Codable {
+public final class TGPassportElementErrorFiles: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PassportElementErrorFiles` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPassportElementErrorFiles: Codable {
     }
 
     /// Error source, must be files
-    public var source: String
+    public let source: String
 
     /// The section of the user's Telegram Passport which has the issue, one of “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”
-    public var type: TGPassportElementErrorFilesType
+    public let type: TGPassportElementErrorFilesType
 
     /// List of base64-encoded file hashes
-    public var fileHashes: [String]
+    public let fileHashes: [String]
 
     /// Error message
-    public var message: String
+    public let message: String
 
     public init (source: String, type: TGPassportElementErrorFilesType, fileHashes: [String], message: String) {
         self.source = source

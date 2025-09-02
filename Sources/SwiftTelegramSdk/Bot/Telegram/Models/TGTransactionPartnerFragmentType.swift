@@ -7,7 +7,7 @@
  [TransactionPartnerFragment](https://core.telegram.org/bots/api#transactionpartnerfragment)
  */
 
-public enum TGTransactionPartnerFragmentType: String, Codable {
+public enum TGTransactionPartnerFragmentType: String, Codable, Sendable {
     case fragment = "fragment"
     case undefined
 

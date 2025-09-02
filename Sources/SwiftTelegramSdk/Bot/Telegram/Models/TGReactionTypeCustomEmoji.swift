@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ReactionTypeCustomEmoji](https://core.telegram.org/bots/api#reactiontypecustomemoji)
  **/
-public final class TGReactionTypeCustomEmoji: Codable {
+public final class TGReactionTypeCustomEmoji: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ReactionTypeCustomEmoji` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGReactionTypeCustomEmoji: Codable {
     }
 
     /// Type of the reaction, always “custom_emoji”
-    public var type: TGReactionTypeCustomEmojiType
+    public let type: TGReactionTypeCustomEmojiType
 
     /// Custom emoji identifier
-    public var customEmojiId: String
+    public let customEmojiId: String
 
     public init (type: TGReactionTypeCustomEmojiType, customEmojiId: String) {
         self.type = type

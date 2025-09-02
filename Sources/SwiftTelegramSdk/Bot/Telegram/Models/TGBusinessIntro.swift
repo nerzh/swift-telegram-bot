@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BusinessIntro](https://core.telegram.org/bots/api#businessintro)
  **/
-public final class TGBusinessIntro: Codable {
+public final class TGBusinessIntro: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BusinessIntro` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGBusinessIntro: Codable {
     }
 
     /// Optional. Title text of the business intro
-    public var title: String?
+    public let title: String?
 
     /// Optional. Message text of the business intro
-    public var message: String?
+    public let message: String?
 
     /// Optional. Sticker of the business intro
-    public var sticker: TGSticker?
+    public let sticker: TGSticker?
 
     public init (title: String? = nil, message: String? = nil, sticker: TGSticker? = nil) {
         self.title = title

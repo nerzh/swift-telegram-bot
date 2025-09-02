@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [WebAppInfo](https://core.telegram.org/bots/api#webappinfo)
  **/
-public final class TGWebAppInfo: Codable {
+public final class TGWebAppInfo: Codable, Sendable {
 
     /// Custom keys for coding/decoding `WebAppInfo` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGWebAppInfo: Codable {
     }
 
     /// An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps
-    public var url: String
+    public let url: String
 
     public init (url: String) {
         self.url = url

@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `createChatSubscriptionInviteLink` method
-public struct TGCreateChatSubscriptionInviteLinkParams: Encodable {
+public struct TGCreateChatSubscriptionInviteLinkParams: Encodable, Sendable {
 
     /// Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Invite link name; 0-32 characters
-    public var name: String?
+    public let name: String?
 
     /// The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
-    public var subscriptionPeriod: Int
+    public let subscriptionPeriod: Int
 
     /// The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
-    public var subscriptionPrice: Int
+    public let subscriptionPrice: Int
 
     /// Custom keys for coding/decoding `CreateChatSubscriptionInviteLinkParams` struct
     public enum CodingKeys: String, CodingKey {

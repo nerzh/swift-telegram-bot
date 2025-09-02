@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotCommandScopeAllChatAdministrators](https://core.telegram.org/bots/api#botcommandscopeallchatadministrators)
  **/
-public final class TGBotCommandScopeAllChatAdministrators: Codable {
+public final class TGBotCommandScopeAllChatAdministrators: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BotCommandScopeAllChatAdministrators` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGBotCommandScopeAllChatAdministrators: Codable {
     }
 
     /// Scope type, must be all_chat_administrators
-    public var type: TGBotCommandScopeAllChatAdministratorsType
+    public let type: TGBotCommandScopeAllChatAdministratorsType
 
     public init (type: TGBotCommandScopeAllChatAdministratorsType) {
         self.type = type

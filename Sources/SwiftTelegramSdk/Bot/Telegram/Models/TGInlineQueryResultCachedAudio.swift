@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultCachedAudio](https://core.telegram.org/bots/api#inlinequeryresultcachedaudio)
  **/
-public final class TGInlineQueryResultCachedAudio: Codable {
+public final class TGInlineQueryResultCachedAudio: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultCachedAudio` struct
     public enum CodingKeys: String, CodingKey {
@@ -21,28 +21,28 @@ public final class TGInlineQueryResultCachedAudio: Codable {
     }
 
     /// Type of the result, must be audio
-    public var type: TGInlineQueryResultCachedAudioType
+    public let type: TGInlineQueryResultCachedAudioType
 
     /// Unique identifier for this result, 1-64 bytes
-    public var id: String
+    public let id: String
 
     /// A valid file identifier for the audio file
-    public var audioFileId: String
+    public let audioFileId: String
 
     /// Optional. Caption, 0-1024 characters after entities parsing
-    public var caption: String?
+    public let caption: String?
 
     /// Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
-    public var parseMode: String?
+    public let parseMode: String?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    public var captionEntities: [TGMessageEntity]?
+    public let captionEntities: [TGMessageEntity]?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the audio
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     public init (type: TGInlineQueryResultCachedAudioType, id: String, audioFileId: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type

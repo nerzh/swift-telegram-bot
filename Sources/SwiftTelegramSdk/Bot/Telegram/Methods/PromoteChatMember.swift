@@ -7,58 +7,61 @@ import Foundation
 
 
 /// Parameters container struct for `promoteChatMember` method
-public struct TGPromoteChatMemberParams: Encodable {
+public struct TGPromoteChatMemberParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Pass True if the administrator's presence in the chat is hidden
-    public var isAnonymous: Bool?
+    public let isAnonymous: Bool?
 
     /// Pass True if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
-    public var canManageChat: Bool?
+    public let canManageChat: Bool?
 
     /// Pass True if the administrator can delete messages of other users
-    public var canDeleteMessages: Bool?
+    public let canDeleteMessages: Bool?
 
     /// Pass True if the administrator can manage video chats
-    public var canManageVideoChats: Bool?
+    public let canManageVideoChats: Bool?
 
     /// Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics
-    public var canRestrictMembers: Bool?
+    public let canRestrictMembers: Bool?
 
     /// Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by him)
-    public var canPromoteMembers: Bool?
+    public let canPromoteMembers: Bool?
 
     /// Pass True if the administrator can change chat title, photo and other settings
-    public var canChangeInfo: Bool?
+    public let canChangeInfo: Bool?
 
     /// Pass True if the administrator can invite new users to the chat
-    public var canInviteUsers: Bool?
+    public let canInviteUsers: Bool?
 
     /// Pass True if the administrator can post stories to the chat
-    public var canPostStories: Bool?
+    public let canPostStories: Bool?
 
     /// Pass True if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
-    public var canEditStories: Bool?
+    public let canEditStories: Bool?
 
     /// Pass True if the administrator can delete stories posted by other users
-    public var canDeleteStories: Bool?
+    public let canDeleteStories: Bool?
 
     /// Pass True if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
-    public var canPostMessages: Bool?
+    public let canPostMessages: Bool?
 
     /// Pass True if the administrator can edit messages of other users and can pin messages; for channels only
-    public var canEditMessages: Bool?
+    public let canEditMessages: Bool?
 
     /// Pass True if the administrator can pin messages; for supergroups only
-    public var canPinMessages: Bool?
+    public let canPinMessages: Bool?
 
     /// Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
-    public var canManageTopics: Bool?
+    public let canManageTopics: Bool?
+
+    /// Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only
+    public let canManageDirectMessages: Bool?
 
     /// Custom keys for coding/decoding `PromoteChatMemberParams` struct
     public enum CodingKeys: String, CodingKey {
@@ -79,9 +82,10 @@ public struct TGPromoteChatMemberParams: Encodable {
             case canEditMessages = "can_edit_messages"
             case canPinMessages = "can_pin_messages"
             case canManageTopics = "can_manage_topics"
+            case canManageDirectMessages = "can_manage_direct_messages"
     }
 
-    public init(chatId: TGChatId, userId: Int64, isAnonymous: Bool? = nil, canManageChat: Bool? = nil, canDeleteMessages: Bool? = nil, canManageVideoChats: Bool? = nil, canRestrictMembers: Bool? = nil, canPromoteMembers: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPostStories: Bool? = nil, canEditStories: Bool? = nil, canDeleteStories: Bool? = nil, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil) {
+    public init(chatId: TGChatId, userId: Int64, isAnonymous: Bool? = nil, canManageChat: Bool? = nil, canDeleteMessages: Bool? = nil, canManageVideoChats: Bool? = nil, canRestrictMembers: Bool? = nil, canPromoteMembers: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPostStories: Bool? = nil, canEditStories: Bool? = nil, canDeleteStories: Bool? = nil, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil) {
             self.chatId = chatId
             self.userId = userId
             self.isAnonymous = isAnonymous
@@ -99,6 +103,7 @@ public struct TGPromoteChatMemberParams: Encodable {
             self.canEditMessages = canEditMessages
             self.canPinMessages = canPinMessages
             self.canManageTopics = canManageTopics
+            self.canManageDirectMessages = canManageDirectMessages
     }
 }
 

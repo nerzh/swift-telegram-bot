@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [OwnedGifts](https://core.telegram.org/bots/api#ownedgifts)
  **/
-public final class TGOwnedGifts: Codable {
+public final class TGOwnedGifts: Codable, Sendable {
 
     /// Custom keys for coding/decoding `OwnedGifts` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGOwnedGifts: Codable {
     }
 
     /// The total number of gifts owned by the user or the chat
-    public var totalCount: Int
+    public let totalCount: Int
 
     /// The list of gifts
-    public var gifts: [TGOwnedGift]
+    public let gifts: [TGOwnedGift]
 
     /// Optional. Offset for the next request. If empty, then there are no more results
-    public var nextOffset: String?
+    public let nextOffset: String?
 
     public init (totalCount: Int, gifts: [TGOwnedGift], nextOffset: String? = nil) {
         self.totalCount = totalCount

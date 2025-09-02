@@ -5,14 +5,14 @@
 //
 
 /// Handler for bot messages, can handle normal messages, channel posts, edited messages
-public class TGMessageHandler: TGHandlerPrtcl {
+public final class TGMessageHandler: TGHandlerPrtcl {
     
-    public var id: Int = 0
+    public let id: SendableValue<Int> = .init(0)
     /// Name of particular MessageHandler, needed for determine handlers instances of one class in groups
-    public var name: String
+    public let name: String
     
     /// Option Set for `MessageHandler`
-    public struct Options: OptionSet, Hashable {
+    public struct Options: OptionSet, Hashable, Sendable {
         public let rawValue: Int
         
         public init(rawValue: Int) {
@@ -27,8 +27,8 @@ public class TGMessageHandler: TGHandlerPrtcl {
         public static let editedUpdates = Options(rawValue: 4)
     }
     
-    let filters: TGFilter
-    var callbackAsync: TGHandlerCallbackAsync
+    let filters: SendableValue<TGFilter>
+    let callbackAsync: TGHandlerCallbackAsync
     let options: Set<Options>
     
     public init(
@@ -37,13 +37,13 @@ public class TGMessageHandler: TGHandlerPrtcl {
         options: Set<Options> = Set([.messageUpdates, .channelPostUpdates]),
         _ callback: @escaping TGHandlerCallbackAsync
     ) {
-        self.filters = filters
+        self.filters = .init(filters)
         self.callbackAsync = callback
         self.options = options
         self.name = name
     }
     
-    public func check(update: TGUpdate) -> Bool {
+    public func check(update: TGUpdate) async -> Bool {
         if options.contains(.channelPostUpdates) {
             if update.channelPost != nil {
                 return true
@@ -55,9 +55,11 @@ public class TGMessageHandler: TGHandlerPrtcl {
             }
         }
         
-        if options.contains(.messageUpdates),
-           let message = update.message,
-           filters.check(message) {
+        if
+            options.contains(.messageUpdates),
+            let message = update.message,
+            await filters.value.check(message)
+        {
             return true
         }
         

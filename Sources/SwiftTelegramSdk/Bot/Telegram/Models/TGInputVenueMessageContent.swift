@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputVenueMessageContent](https://core.telegram.org/bots/api#inputvenuemessagecontent)
  **/
-public final class TGInputVenueMessageContent: Codable {
+public final class TGInputVenueMessageContent: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InputVenueMessageContent` struct
     public enum CodingKeys: String, CodingKey {
@@ -21,28 +21,28 @@ public final class TGInputVenueMessageContent: Codable {
     }
 
     /// Latitude of the venue in degrees
-    public var latitude: Float
+    public let latitude: Float
 
     /// Longitude of the venue in degrees
-    public var longitude: Float
+    public let longitude: Float
 
     /// Name of the venue
-    public var title: String
+    public let title: String
 
     /// Address of the venue
-    public var address: String
+    public let address: String
 
     /// Optional. Foursquare identifier of the venue, if known
-    public var foursquareId: String?
+    public let foursquareId: String?
 
     /// Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
-    public var foursquareType: String?
+    public let foursquareType: String?
 
     /// Optional. Google Places identifier of the venue
-    public var googlePlaceId: String?
+    public let googlePlaceId: String?
 
     /// Optional. Google Places type of the venue. (See supported types.)
-    public var googlePlaceType: String?
+    public let googlePlaceType: String?
 
     public init (latitude: Float, longitude: Float, title: String, address: String, foursquareId: String? = nil, foursquareType: String? = nil, googlePlaceId: String? = nil, googlePlaceType: String? = nil) {
         self.latitude = latitude

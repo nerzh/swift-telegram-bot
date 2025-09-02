@@ -8,7 +8,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputPaidMedia](https://core.telegram.org/bots/api#inputpaidmedia)
  **/
-public enum TGInputPaidMedia: Codable {
+public enum TGInputPaidMedia: Codable, Sendable {
     case inputPaidMediaPhoto(TGInputPaidMediaPhoto)
     case inputPaidMediaVideo(TGInputPaidMediaVideo)
 

@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setMyDescription` method
-public struct TGSetMyDescriptionParams: Encodable {
+public struct TGSetMyDescriptionParams: Encodable, Sendable {
 
     /// New bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
-    public var description: String?
+    public let description: String?
 
     /// A two-letter ISO 639-1 language code. If empty, the description will be applied to all users for whose language there is no dedicated description.
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `SetMyDescriptionParams` struct
     public enum CodingKeys: String, CodingKey {

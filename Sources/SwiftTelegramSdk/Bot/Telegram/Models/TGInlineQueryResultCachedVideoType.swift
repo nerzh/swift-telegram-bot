@@ -7,7 +7,7 @@
  [InlineQueryResultCachedVideo](https://core.telegram.org/bots/api#inlinequeryresultcachedvideo)
  */
 
-public enum TGInlineQueryResultCachedVideoType: String, Codable {
+public enum TGInlineQueryResultCachedVideoType: String, Codable, Sendable {
     case video = "video"
     case undefined
 

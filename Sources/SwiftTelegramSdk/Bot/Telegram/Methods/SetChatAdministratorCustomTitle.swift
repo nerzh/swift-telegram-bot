@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `setChatAdministratorCustomTitle` method
-public struct TGSetChatAdministratorCustomTitleParams: Encodable {
+public struct TGSetChatAdministratorCustomTitleParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// New custom title for the administrator; 0-16 characters, emoji are not allowed
-    public var customTitle: String
+    public let customTitle: String
 
     /// Custom keys for coding/decoding `SetChatAdministratorCustomTitleParams` struct
     public enum CodingKeys: String, CodingKey {

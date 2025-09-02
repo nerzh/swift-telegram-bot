@@ -7,7 +7,7 @@
  [BotCommandScopeChatAdministrators](https://core.telegram.org/bots/api#botcommandscopechatadministrators)
  */
 
-public enum TGBotCommandScopeChatAdministratorsType: String, Codable {
+public enum TGBotCommandScopeChatAdministratorsType: String, Codable, Sendable {
     case chatAdministrators = "chat_administrators"
     case undefined
 

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [OwnedGiftRegular](https://core.telegram.org/bots/api#ownedgiftregular)
  **/
-public final class TGOwnedGiftRegular: Codable {
+public final class TGOwnedGiftRegular: Codable, Sendable {
 
     /// Custom keys for coding/decoding `OwnedGiftRegular` struct
     public enum CodingKeys: String, CodingKey {
@@ -26,43 +26,43 @@ public final class TGOwnedGiftRegular: Codable {
     }
 
     /// Type of the gift, always “regular”
-    public var type: TGOwnedGiftRegularType
+    public let type: TGOwnedGiftRegularType
 
     /// Information about the regular gift
-    public var gift: TGGift
+    public let gift: TGGift
 
     /// Optional. Unique identifier of the gift for the bot; for gifts received on behalf of business accounts only
-    public var ownedGiftId: String?
+    public let ownedGiftId: String?
 
     /// Optional. Sender of the gift if it is a known user
-    public var senderUser: TGUser?
+    public let senderUser: TGUser?
 
     /// Date the gift was sent in Unix time
-    public var sendDate: Int
+    public let sendDate: Int
 
     /// Optional. Text of the message that was added to the gift
-    public var text: String?
+    public let text: String?
 
     /// Optional. Special entities that appear in the text
-    public var entities: [TGMessageEntity]?
+    public let entities: [TGMessageEntity]?
 
     /// Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
-    public var isPrivate: Bool?
+    public let isPrivate: Bool?
 
     /// Optional. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
-    public var isSaved: Bool?
+    public let isSaved: Bool?
 
     /// Optional. True, if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only
-    public var canBeUpgraded: Bool?
+    public let canBeUpgraded: Bool?
 
     /// Optional. True, if the gift was refunded and isn't available anymore
-    public var wasRefunded: Bool?
+    public let wasRefunded: Bool?
 
     /// Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars
-    public var convertStarCount: Int?
+    public let convertStarCount: Int?
 
     /// Optional. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift
-    public var prepaidUpgradeStarCount: Int?
+    public let prepaidUpgradeStarCount: Int?
 
     public init (type: TGOwnedGiftRegularType, gift: TGGift, ownedGiftId: String? = nil, senderUser: TGUser? = nil, sendDate: Int, text: String? = nil, entities: [TGMessageEntity]? = nil, isPrivate: Bool? = nil, isSaved: Bool? = nil, canBeUpgraded: Bool? = nil, wasRefunded: Bool? = nil, convertStarCount: Int? = nil, prepaidUpgradeStarCount: Int? = nil) {
         self.type = type

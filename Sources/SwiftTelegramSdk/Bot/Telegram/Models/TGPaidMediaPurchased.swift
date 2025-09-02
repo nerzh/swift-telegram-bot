@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PaidMediaPurchased](https://core.telegram.org/bots/api#paidmediapurchased)
  **/
-public final class TGPaidMediaPurchased: Codable {
+public final class TGPaidMediaPurchased: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PaidMediaPurchased` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGPaidMediaPurchased: Codable {
     }
 
     /// User who purchased the media
-    public var from: TGUser
+    public let from: TGUser
 
     /// Bot-specified paid media payload
-    public var paidMediaPayload: String
+    public let paidMediaPayload: String
 
     public init (from: TGUser, paidMediaPayload: String) {
         self.from = from

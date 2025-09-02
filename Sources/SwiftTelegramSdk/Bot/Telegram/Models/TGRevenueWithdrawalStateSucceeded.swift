@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [RevenueWithdrawalStateSucceeded](https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded)
  **/
-public final class TGRevenueWithdrawalStateSucceeded: Codable {
+public final class TGRevenueWithdrawalStateSucceeded: Codable, Sendable {
 
     /// Custom keys for coding/decoding `RevenueWithdrawalStateSucceeded` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGRevenueWithdrawalStateSucceeded: Codable {
     }
 
     /// Type of the state, always “succeeded”
-    public var type: TGRevenueWithdrawalStateSucceededType
+    public let type: TGRevenueWithdrawalStateSucceededType
 
     /// Date the withdrawal was completed in Unix time
-    public var date: Int
+    public let date: Int
 
     /// An HTTPS URL that can be used to see transaction details
-    public var url: String
+    public let url: String
 
     public init (type: TGRevenueWithdrawalStateSucceededType, date: Int, url: String) {
         self.type = type

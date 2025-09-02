@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BusinessMessagesDeleted](https://core.telegram.org/bots/api#businessmessagesdeleted)
  **/
-public final class TGBusinessMessagesDeleted: Codable {
+public final class TGBusinessMessagesDeleted: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BusinessMessagesDeleted` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGBusinessMessagesDeleted: Codable {
     }
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Information about a chat in the business account. The bot may not have access to the chat or the corresponding user.
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// The list of identifiers of deleted messages in the chat of the business account
-    public var messageIds: [Int]
+    public let messageIds: [Int]
 
     public init (businessConnectionId: String, chat: TGChat, messageIds: [Int]) {
         self.businessConnectionId = businessConnectionId

@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setStickerPositionInSet` method
-public struct TGSetStickerPositionInSetParams: Encodable {
+public struct TGSetStickerPositionInSetParams: Encodable, Sendable {
 
     /// File identifier of the sticker
-    public var sticker: String
+    public let sticker: String
 
     /// New sticker position in the set, zero-based
-    public var position: Int
+    public let position: Int
 
     /// Custom keys for coding/decoding `SetStickerPositionInSetParams` struct
     public enum CodingKeys: String, CodingKey {

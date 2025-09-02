@@ -7,7 +7,7 @@
  [OwnedGiftUnique](https://core.telegram.org/bots/api#ownedgiftunique)
  */
 
-public enum TGOwnedGiftUniqueType: String, Codable {
+public enum TGOwnedGiftUniqueType: String, Codable, Sendable {
     case unique = "unique"
     case undefined
 

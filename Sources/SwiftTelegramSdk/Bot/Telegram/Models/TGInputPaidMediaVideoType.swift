@@ -7,7 +7,7 @@
  [InputPaidMediaVideo](https://core.telegram.org/bots/api#inputpaidmediavideo)
  */
 
-public enum TGInputPaidMediaVideoType: String, Codable {
+public enum TGInputPaidMediaVideoType: String, Codable, Sendable {
     case video = "video"
     case undefined
 

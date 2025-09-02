@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setStickerMaskPosition` method
-public struct TGSetStickerMaskPositionParams: Encodable {
+public struct TGSetStickerMaskPositionParams: Encodable, Sendable {
 
     /// File identifier of the sticker
-    public var sticker: String
+    public let sticker: String
 
     /// A JSON-serialized object with the position where the mask should be placed on faces. Omit the parameter to remove the mask position.
-    public var maskPosition: TGMaskPosition?
+    public let maskPosition: TGMaskPosition?
 
     /// Custom keys for coding/decoding `SetStickerMaskPositionParams` struct
     public enum CodingKeys: String, CodingKey {

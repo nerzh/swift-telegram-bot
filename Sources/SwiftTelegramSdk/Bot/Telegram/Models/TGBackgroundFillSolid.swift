@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundFillSolid](https://core.telegram.org/bots/api#backgroundfillsolid)
  **/
-public final class TGBackgroundFillSolid: Codable {
+public final class TGBackgroundFillSolid: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BackgroundFillSolid` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGBackgroundFillSolid: Codable {
     }
 
     /// Type of the background fill, always “solid”
-    public var type: TGBackgroundFillSolidType
+    public let type: TGBackgroundFillSolidType
 
     /// The color of the background fill in the RGB24 format
-    public var color: Int
+    public let color: Int
 
     public init (type: TGBackgroundFillSolidType, color: Int) {
         self.type = type

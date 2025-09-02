@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `setUserEmojiStatus` method
-public struct TGSetUserEmojiStatusParams: Encodable {
+public struct TGSetUserEmojiStatusParams: Encodable, Sendable {
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
-    public var emojiStatusCustomEmojiId: String?
+    public let emojiStatusCustomEmojiId: String?
 
     /// Expiration date of the emoji status, if any
-    public var emojiStatusExpirationDate: Int?
+    public let emojiStatusExpirationDate: Int?
 
     /// Custom keys for coding/decoding `SetUserEmojiStatusParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaTypeUniqueGift](https://core.telegram.org/bots/api#storyareatypeuniquegift)
  **/
-public final class TGStoryAreaTypeUniqueGift: Codable {
+public final class TGStoryAreaTypeUniqueGift: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryAreaTypeUniqueGift` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGStoryAreaTypeUniqueGift: Codable {
     }
 
     /// Type of the area, always “unique_gift”
-    public var type: TGStoryAreaTypeUniqueGiftType
+    public let type: TGStoryAreaTypeUniqueGiftType
 
     /// Unique name of the gift
-    public var name: String
+    public let name: String
 
     public init (type: TGStoryAreaTypeUniqueGiftType, name: String) {
         self.type = type

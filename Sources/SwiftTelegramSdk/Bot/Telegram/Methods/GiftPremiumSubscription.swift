@@ -7,25 +7,25 @@ import Foundation
 
 
 /// Parameters container struct for `giftPremiumSubscription` method
-public struct TGGiftPremiumSubscriptionParams: Encodable {
+public struct TGGiftPremiumSubscriptionParams: Encodable, Sendable {
 
     /// Unique identifier of the target user who will receive a Telegram Premium subscription
-    public var userId: Int64
+    public let userId: Int64
 
     /// Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
-    public var monthCount: Int
+    public let monthCount: Int
 
     /// Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months
-    public var starCount: Int
+    public let starCount: Int
 
     /// Text that will be shown along with the service message about the subscription; 0-128 characters
-    public var text: String?
+    public let text: String?
 
     /// Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
-    public var textParseMode: TGParseMode?
+    public let textParseMode: TGParseMode?
 
     /// A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
-    public var textEntities: [TGMessageEntity]?
+    public let textEntities: [TGMessageEntity]?
 
     /// Custom keys for coding/decoding `GiftPremiumSubscriptionParams` struct
     public enum CodingKeys: String, CodingKey {

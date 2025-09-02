@@ -8,16 +8,21 @@
 import Foundation
 import Logging
 
-public class TGLoggerHandler: TGHandlerPrtcl {
+public final class TGLoggerHandler: TGHandlerPrtcl {
     
-    public var id: Int = 0
+    public let id: SendableValue<Int> = .init(0)
+    public let name: String
     let log: Logger
     
-    public init(log: Logger) {
+    public init(
+        log: Logger,
+        name: String
+    ) {
+        self.name = name
         self.log = log
     }
     
-    public func check(update: TGUpdate) -> Bool {
+    public func check(update: TGUpdate) async -> Bool {
         return true
     }
     

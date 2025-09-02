@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [GiveawayCreated](https://core.telegram.org/bots/api#giveawaycreated)
  **/
-public final class TGGiveawayCreated: Codable {
+public final class TGGiveawayCreated: Codable, Sendable {
 
     /// Custom keys for coding/decoding `GiveawayCreated` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGGiveawayCreated: Codable {
     }
 
     /// Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
-    public var prizeStarCount: Int?
+    public let prizeStarCount: Int?
 
     public init (prizeStarCount: Int? = nil) {
         self.prizeStarCount = prizeStarCount

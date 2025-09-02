@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StickerSet](https://core.telegram.org/bots/api#stickerset)
  **/
-public final class TGStickerSet: Codable {
+public final class TGStickerSet: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StickerSet` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGStickerSet: Codable {
     }
 
     /// Sticker set name
-    public var name: String
+    public let name: String
 
     /// Sticker set title
-    public var title: String
+    public let title: String
 
     /// Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”
-    public var stickerType: String
+    public let stickerType: String
 
     /// List of all set stickers
-    public var stickers: [TGSticker]
+    public let stickers: [TGSticker]
 
     /// Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
-    public var thumbnail: TGPhotoSize?
+    public let thumbnail: TGPhotoSize?
 
     public init (name: String, title: String, stickerType: String, stickers: [TGSticker], thumbnail: TGPhotoSize? = nil) {
         self.name = name

@@ -15,7 +15,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportElementError](https://core.telegram.org/bots/api#passportelementerror)
  **/
-public enum TGPassportElementError: Codable {
+public enum TGPassportElementError: Codable, Sendable {
     case passportElementErrorDataField(TGPassportElementErrorDataField)
     case passportElementErrorFrontSide(TGPassportElementErrorFrontSide)
     case passportElementErrorReverseSide(TGPassportElementErrorReverseSide)

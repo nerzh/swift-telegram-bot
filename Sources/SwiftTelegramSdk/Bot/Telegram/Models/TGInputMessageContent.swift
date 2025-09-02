@@ -11,7 +11,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputMessageContent](https://core.telegram.org/bots/api#inputmessagecontent)
  **/
-public enum TGInputMessageContent: Codable {
+public enum TGInputMessageContent: Codable, Sendable {
     case inputTextMessageContent(TGInputTextMessageContent)
     case inputLocationMessageContent(TGInputLocationMessageContent)
     case inputVenueMessageContent(TGInputVenueMessageContent)

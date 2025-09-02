@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotName](https://core.telegram.org/bots/api#botname)
  **/
-public final class TGBotName: Codable {
+public final class TGBotName: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BotName` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGBotName: Codable {
     }
 
     /// The bot's name
-    public var name: String
+    public let name: String
 
     public init (name: String) {
         self.name = name

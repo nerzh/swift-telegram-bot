@@ -7,7 +7,7 @@
  [MessageOriginChat](https://core.telegram.org/bots/api#messageoriginchat)
  */
 
-public enum TGMessageOriginChatType: String, Codable {
+public enum TGMessageOriginChatType: String, Codable, Sendable {
     case chat = "chat"
     case undefined
 

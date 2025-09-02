@@ -7,7 +7,7 @@
  [InputStoryContentPhoto](https://core.telegram.org/bots/api#inputstorycontentphoto)
  */
 
-public enum TGInputStoryContentPhotoType: String, Codable {
+public enum TGInputStoryContentPhotoType: String, Codable, Sendable {
     case photo = "photo"
     case undefined
 

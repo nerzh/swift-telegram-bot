@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `answerWebAppQuery` method
-public struct TGAnswerWebAppQueryParams: Encodable {
+public struct TGAnswerWebAppQueryParams: Encodable, Sendable {
 
     /// Unique identifier for the query to be answered
-    public var webAppQueryId: String
+    public let webAppQueryId: String
 
     /// A JSON-serialized object describing the message to be sent
-    public var result: TGInlineQueryResult
+    public let result: TGInlineQueryResult
 
     /// Custom keys for coding/decoding `AnswerWebAppQueryParams` struct
     public enum CodingKeys: String, CodingKey {

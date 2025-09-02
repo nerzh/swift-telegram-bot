@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [GameHighScore](https://core.telegram.org/bots/api#gamehighscore)
  **/
-public final class TGGameHighScore: Codable {
+public final class TGGameHighScore: Codable, Sendable {
 
     /// Custom keys for coding/decoding `GameHighScore` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGGameHighScore: Codable {
     }
 
     /// Position in high score table for the game
-    public var position: Int
+    public let position: Int
 
     /// User
-    public var user: TGUser
+    public let user: TGUser
 
     /// Score
-    public var score: Int
+    public let score: Int
 
     public init (position: Int, user: TGUser, score: Int) {
         self.position = position

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InlineQueryResultLocation](https://core.telegram.org/bots/api#inlinequeryresultlocation)
  **/
-public final class TGInlineQueryResultLocation: Codable {
+public final class TGInlineQueryResultLocation: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InlineQueryResultLocation` struct
     public enum CodingKeys: String, CodingKey {
@@ -27,46 +27,46 @@ public final class TGInlineQueryResultLocation: Codable {
     }
 
     /// Type of the result, must be location
-    public var type: TGInlineQueryResultLocationType
+    public let type: TGInlineQueryResultLocationType
 
     /// Unique identifier for this result, 1-64 Bytes
-    public var id: String
+    public let id: String
 
     /// Location latitude in degrees
-    public var latitude: Float
+    public let latitude: Float
 
     /// Location longitude in degrees
-    public var longitude: Float
+    public let longitude: Float
 
     /// Location title
-    public var title: String
+    public let title: String
 
     /// Optional. The radius of uncertainty for the location, measured in meters; 0-1500
-    public var horizontalAccuracy: Float?
+    public let horizontalAccuracy: Float?
 
     /// Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
-    public var livePeriod: Int?
+    public let livePeriod: Int?
 
     /// Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
-    public var heading: Int?
+    public let heading: Int?
 
     /// Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
-    public var proximityAlertRadius: Int?
+    public let proximityAlertRadius: Int?
 
     /// Optional. Inline keyboard attached to the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Optional. Content of the message to be sent instead of the location
-    public var inputMessageContent: TGInputMessageContent?
+    public let inputMessageContent: TGInputMessageContent?
 
     /// Optional. Url of the thumbnail for the result
-    public var thumbnailUrl: String?
+    public let thumbnailUrl: String?
 
     /// Optional. Thumbnail width
-    public var thumbnailWidth: Int?
+    public let thumbnailWidth: Int?
 
     /// Optional. Thumbnail height
-    public var thumbnailHeight: Int?
+    public let thumbnailHeight: Int?
 
     public init (type: TGInlineQueryResultLocationType, id: String, latitude: Float, longitude: Float, title: String, horizontalAccuracy: Float? = nil, livePeriod: Int? = nil, heading: Int? = nil, proximityAlertRadius: Int? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
         self.type = type

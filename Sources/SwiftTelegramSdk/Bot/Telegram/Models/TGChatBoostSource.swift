@@ -9,7 +9,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatBoostSource](https://core.telegram.org/bots/api#chatboostsource)
  **/
-public enum TGChatBoostSource: Codable {
+public enum TGChatBoostSource: Codable, Sendable {
     case chatBoostSourcePremium(TGChatBoostSourcePremium)
     case chatBoostSourceGiftCode(TGChatBoostSourceGiftCode)
     case chatBoostSourceGiveaway(TGChatBoostSourceGiveaway)

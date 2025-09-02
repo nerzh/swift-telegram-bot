@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setBusinessAccountUsername` method
-public struct TGSetBusinessAccountUsernameParams: Encodable {
+public struct TGSetBusinessAccountUsernameParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// The new value of the username for the business account; 0-32 characters
-    public var username: String?
+    public let username: String?
 
     /// Custom keys for coding/decoding `SetBusinessAccountUsernameParams` struct
     public enum CodingKeys: String, CodingKey {

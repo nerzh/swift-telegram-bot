@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MenuButtonDefault](https://core.telegram.org/bots/api#menubuttondefault)
  **/
-public final class TGMenuButtonDefault: Codable {
+public final class TGMenuButtonDefault: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MenuButtonDefault` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGMenuButtonDefault: Codable {
     }
 
     /// Type of the button, must be default
-    public var type: TGMenuButtonDefaultType
+    public let type: TGMenuButtonDefaultType
 
     public init (type: TGMenuButtonDefaultType) {
         self.type = type

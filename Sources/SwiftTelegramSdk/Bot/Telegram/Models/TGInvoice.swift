@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Invoice](https://core.telegram.org/bots/api#invoice)
  **/
-public final class TGInvoice: Codable {
+public final class TGInvoice: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Invoice` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGInvoice: Codable {
     }
 
     /// Product name
-    public var title: String
+    public let title: String
 
     /// Product description
-    public var description: String
+    public let description: String
 
     /// Unique bot deep-linking parameter that can be used to generate this invoice
-    public var startParameter: String
+    public let startParameter: String
 
     /// Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
-    public var currency: String
+    public let currency: String
 
     /// Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-    public var totalAmount: Int
+    public let totalAmount: Int
 
     public init (title: String, description: String, startParameter: String, currency: String, totalAmount: Int) {
         self.title = title

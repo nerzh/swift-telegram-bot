@@ -7,7 +7,7 @@
  [TransactionPartnerChat](https://core.telegram.org/bots/api#transactionpartnerchat)
  */
 
-public enum TGTransactionPartnerChatType: String, Codable {
+public enum TGTransactionPartnerChatType: String, Codable, Sendable {
     case chat = "chat"
     case undefined
 

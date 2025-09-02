@@ -7,7 +7,7 @@
  [TransactionPartnerUser](https://core.telegram.org/bots/api#transactionpartneruser)
  */
 
-public enum TGTransactionPartnerUserType: String, Codable {
+public enum TGTransactionPartnerUserType: String, Codable, Sendable {
     case user = "user"
     case undefined
 

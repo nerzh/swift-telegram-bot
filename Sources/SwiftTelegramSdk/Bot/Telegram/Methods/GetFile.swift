@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getFile` method
-public struct TGGetFileParams: Encodable {
+public struct TGGetFileParams: Encodable, Sendable {
 
     /// File identifier to get information about
-    public var fileId: String
+    public let fileId: String
 
     /// Custom keys for coding/decoding `GetFileParams` struct
     public enum CodingKeys: String, CodingKey {

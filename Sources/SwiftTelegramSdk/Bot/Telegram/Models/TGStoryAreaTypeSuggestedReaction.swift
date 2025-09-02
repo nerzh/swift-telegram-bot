@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [StoryAreaTypeSuggestedReaction](https://core.telegram.org/bots/api#storyareatypesuggestedreaction)
  **/
-public final class TGStoryAreaTypeSuggestedReaction: Codable {
+public final class TGStoryAreaTypeSuggestedReaction: Codable, Sendable {
 
     /// Custom keys for coding/decoding `StoryAreaTypeSuggestedReaction` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGStoryAreaTypeSuggestedReaction: Codable {
     }
 
     /// Type of the area, always “suggested_reaction”
-    public var type: TGStoryAreaTypeSuggestedReactionType
+    public let type: TGStoryAreaTypeSuggestedReactionType
 
     /// Type of the reaction
-    public var reactionType: TGReactionType
+    public let reactionType: TGReactionType
 
     /// Optional. Pass True if the reaction area has a dark background
-    public var isDark: Bool?
+    public let isDark: Bool?
 
     /// Optional. Pass True if reaction area corner is flipped
-    public var isFlipped: Bool?
+    public let isFlipped: Bool?
 
     public init (type: TGStoryAreaTypeSuggestedReactionType, reactionType: TGReactionType, isDark: Bool? = nil, isFlipped: Bool? = nil) {
         self.type = type

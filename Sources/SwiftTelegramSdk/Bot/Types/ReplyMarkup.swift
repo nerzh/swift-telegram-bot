@@ -12,7 +12,7 @@
  SeeAlso Telegram TGBot API Reference:
  [Reply Markups](https://core.telegram.org/bots/2-0-intro#new-inline-keyboards)
  */
-public enum TGReplyMarkup: Codable {
+public enum TGReplyMarkup: Codable, Sendable {
     case inlineKeyboardMarkup(TGInlineKeyboardMarkup)
     case replyKeyboardMarkup(TGReplyKeyboardMarkup)
     case replyKeyboardRemove(TGReplyKeyboardRemove)

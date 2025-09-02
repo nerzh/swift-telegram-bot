@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `setBusinessAccountGiftSettings` method
-public struct TGSetBusinessAccountGiftSettingsParams: Encodable {
+public struct TGSetBusinessAccountGiftSettingsParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
-    public var showGiftButton: Bool
+    public let showGiftButton: Bool
 
     /// Types of gifts accepted by the business account
-    public var acceptedGiftTypes: TGAcceptedGiftTypes
+    public let acceptedGiftTypes: TGAcceptedGiftTypes
 
     /// Custom keys for coding/decoding `SetBusinessAccountGiftSettingsParams` struct
     public enum CodingKeys: String, CodingKey {

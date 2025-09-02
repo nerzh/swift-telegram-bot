@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [RefundedPayment](https://core.telegram.org/bots/api#refundedpayment)
  **/
-public final class TGRefundedPayment: Codable {
+public final class TGRefundedPayment: Codable, Sendable {
 
     /// Custom keys for coding/decoding `RefundedPayment` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGRefundedPayment: Codable {
     }
 
     /// Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”
-    public var currency: String
+    public let currency: String
 
     /// Total refunded price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45, total_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-    public var totalAmount: Int
+    public let totalAmount: Int
 
     /// Bot-specified invoice payload
-    public var invoicePayload: String
+    public let invoicePayload: String
 
     /// Telegram payment identifier
-    public var telegramPaymentChargeId: String
+    public let telegramPaymentChargeId: String
 
     /// Optional. Provider payment identifier
-    public var providerPaymentChargeId: String?
+    public let providerPaymentChargeId: String?
 
     public init (currency: String, totalAmount: Int, invoicePayload: String, telegramPaymentChargeId: String, providerPaymentChargeId: String? = nil) {
         self.currency = currency

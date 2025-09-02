@@ -7,22 +7,22 @@ import Foundation
 
 
 /// Parameters container struct for `editMessageChecklist` method
-public struct TGEditMessageChecklistParams: Encodable {
+public struct TGEditMessageChecklistParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message will be sent
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier for the target chat
-    public var chatId: Int64
+    public let chatId: Int64
 
     /// Unique identifier for the target message
-    public var messageId: Int
+    public let messageId: Int
 
     /// A JSON-serialized object for the new checklist
-    public var checklist: TGInputChecklist
+    public let checklist: TGInputChecklist
 
     /// A JSON-serialized object for the new inline keyboard for the message
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageChecklistParams` struct
     public enum CodingKeys: String, CodingKey {

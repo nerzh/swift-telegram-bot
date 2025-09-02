@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ReactionTypeEmoji](https://core.telegram.org/bots/api#reactiontypeemoji)
  **/
-public final class TGReactionTypeEmoji: Codable {
+public final class TGReactionTypeEmoji: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ReactionTypeEmoji` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGReactionTypeEmoji: Codable {
     }
 
     /// Type of the reaction, always “emoji”
-    public var type: TGReactionTypeEmojiType
+    public let type: TGReactionTypeEmojiType
 
     /// Reaction emoji. Currently, it can be one of "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
-    public var emoji: String
+    public let emoji: String
 
     public init (type: TGReactionTypeEmojiType, emoji: String) {
         self.type = type

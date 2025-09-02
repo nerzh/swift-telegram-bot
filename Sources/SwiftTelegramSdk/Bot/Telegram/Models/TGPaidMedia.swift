@@ -9,7 +9,7 @@
  SeeAlso Telegram Bot API Reference:
  [PaidMedia](https://core.telegram.org/bots/api#paidmedia)
  **/
-public enum TGPaidMedia: Codable {
+public enum TGPaidMedia: Codable, Sendable {
     case paidMediaPreview(TGPaidMediaPreview)
     case paidMediaPhoto(TGPaidMediaPhoto)
     case paidMediaVideo(TGPaidMediaVideo)

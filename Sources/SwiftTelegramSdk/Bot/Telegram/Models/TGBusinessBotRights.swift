@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BusinessBotRights](https://core.telegram.org/bots/api#businessbotrights)
  **/
-public final class TGBusinessBotRights: Codable {
+public final class TGBusinessBotRights: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BusinessBotRights` struct
     public enum CodingKeys: String, CodingKey {
@@ -27,46 +27,46 @@ public final class TGBusinessBotRights: Codable {
     }
 
     /// Optional. True, if the bot can send and edit messages in the private chats that had incoming messages in the last 24 hours
-    public var canReply: Bool?
+    public let canReply: Bool?
 
     /// Optional. True, if the bot can mark incoming private messages as read
-    public var canReadMessages: Bool?
+    public let canReadMessages: Bool?
 
     /// Optional. True, if the bot can delete messages sent by the bot
-    public var canDeleteSentMessages: Bool?
+    public let canDeleteSentMessages: Bool?
 
     /// Optional. True, if the bot can delete all private messages in managed chats
-    public var canDeleteAllMessages: Bool?
+    public let canDeleteAllMessages: Bool?
 
     /// Optional. True, if the bot can edit the first and last name of the business account
-    public var canEditName: Bool?
+    public let canEditName: Bool?
 
     /// Optional. True, if the bot can edit the bio of the business account
-    public var canEditBio: Bool?
+    public let canEditBio: Bool?
 
     /// Optional. True, if the bot can edit the profile photo of the business account
-    public var canEditProfilePhoto: Bool?
+    public let canEditProfilePhoto: Bool?
 
     /// Optional. True, if the bot can edit the username of the business account
-    public var canEditUsername: Bool?
+    public let canEditUsername: Bool?
 
     /// Optional. True, if the bot can change the privacy settings pertaining to gifts for the business account
-    public var canChangeGiftSettings: Bool?
+    public let canChangeGiftSettings: Bool?
 
     /// Optional. True, if the bot can view gifts and the amount of Telegram Stars owned by the business account
-    public var canViewGiftsAndStars: Bool?
+    public let canViewGiftsAndStars: Bool?
 
     /// Optional. True, if the bot can convert regular gifts owned by the business account to Telegram Stars
-    public var canConvertGiftsToStars: Bool?
+    public let canConvertGiftsToStars: Bool?
 
     /// Optional. True, if the bot can transfer and upgrade gifts owned by the business account
-    public var canTransferAndUpgradeGifts: Bool?
+    public let canTransferAndUpgradeGifts: Bool?
 
     /// Optional. True, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
-    public var canTransferStars: Bool?
+    public let canTransferStars: Bool?
 
     /// Optional. True, if the bot can post, edit and delete stories on behalf of the business account
-    public var canManageStories: Bool?
+    public let canManageStories: Bool?
 
     public init (canReply: Bool? = nil, canReadMessages: Bool? = nil, canDeleteSentMessages: Bool? = nil, canDeleteAllMessages: Bool? = nil, canEditName: Bool? = nil, canEditBio: Bool? = nil, canEditProfilePhoto: Bool? = nil, canEditUsername: Bool? = nil, canChangeGiftSettings: Bool? = nil, canViewGiftsAndStars: Bool? = nil, canConvertGiftsToStars: Bool? = nil, canTransferAndUpgradeGifts: Bool? = nil, canTransferStars: Bool? = nil, canManageStories: Bool? = nil) {
         self.canReply = canReply

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Venue](https://core.telegram.org/bots/api#venue)
  **/
-public final class TGVenue: Codable {
+public final class TGVenue: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Venue` struct
     public enum CodingKeys: String, CodingKey {
@@ -20,25 +20,25 @@ public final class TGVenue: Codable {
     }
 
     /// Venue location. Can't be a live location
-    public var location: TGLocation
+    public let location: TGLocation
 
     /// Name of the venue
-    public var title: String
+    public let title: String
 
     /// Address of the venue
-    public var address: String
+    public let address: String
 
     /// Optional. Foursquare identifier of the venue
-    public var foursquareId: String?
+    public let foursquareId: String?
 
     /// Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
-    public var foursquareType: String?
+    public let foursquareType: String?
 
     /// Optional. Google Places identifier of the venue
-    public var googlePlaceId: String?
+    public let googlePlaceId: String?
 
     /// Optional. Google Places type of the venue. (See supported types.)
-    public var googlePlaceType: String?
+    public let googlePlaceType: String?
 
     public init (location: TGLocation, title: String, address: String, foursquareId: String? = nil, foursquareType: String? = nil, googlePlaceId: String? = nil, googlePlaceType: String? = nil) {
         self.location = location

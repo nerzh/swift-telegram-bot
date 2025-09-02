@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `setBusinessAccountProfilePhoto` method
-public struct TGSetBusinessAccountProfilePhotoParams: Encodable {
+public struct TGSetBusinessAccountProfilePhotoParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// The new profile photo to set
-    public var photo: TGInputProfilePhoto
+    public let photo: TGInputProfilePhoto
 
     /// Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.
-    public var isPublic: Bool?
+    public let isPublic: Bool?
 
     /// Custom keys for coding/decoding `SetBusinessAccountProfilePhotoParams` struct
     public enum CodingKeys: String, CodingKey {

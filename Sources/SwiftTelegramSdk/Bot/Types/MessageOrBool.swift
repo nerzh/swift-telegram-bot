@@ -6,7 +6,7 @@
 //
 
 /// Sometimes bot methods returns objects On success, otherwise returns False
-public enum TGMessageOrBool: Codable {
+public enum TGMessageOrBool: Codable, Sendable {
     case message(TGMessage)
     case bool(Bool)
 

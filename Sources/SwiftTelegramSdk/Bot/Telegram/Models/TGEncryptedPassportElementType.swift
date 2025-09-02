@@ -7,7 +7,7 @@
  [EncryptedPassportElement](https://core.telegram.org/bots/api#encryptedpassportelement)
  */
 
-public enum TGEncryptedPassportElementType: String, Codable {
+public enum TGEncryptedPassportElementType: String, Codable, Sendable {
     case personalDetails = "personal_details"
     case passport = "passport"
     case driverLicense = "driver_license"

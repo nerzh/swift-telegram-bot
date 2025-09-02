@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChecklistTasksDone](https://core.telegram.org/bots/api#checklisttasksdone)
  **/
-public final class TGChecklistTasksDone: Codable {
+public final class TGChecklistTasksDone: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChecklistTasksDone` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGChecklistTasksDone: Codable {
     }
 
     /// Optional. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.
-    public var checklistMessage: TGMessage?
+    public let checklistMessage: TGMessage?
 
     /// Optional. Identifiers of the tasks that were marked as done
-    public var markedAsDoneTaskIds: [Int]?
+    public let markedAsDoneTaskIds: [Int]?
 
     /// Optional. Identifiers of the tasks that were marked as not done
-    public var markedAsNotDoneTaskIds: [Int]?
+    public let markedAsNotDoneTaskIds: [Int]?
 
     public init (checklistMessage: TGMessage? = nil, markedAsDoneTaskIds: [Int]? = nil, markedAsNotDoneTaskIds: [Int]? = nil) {
         self.checklistMessage = checklistMessage

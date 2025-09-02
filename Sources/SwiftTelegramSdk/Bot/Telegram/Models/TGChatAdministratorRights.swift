@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatAdministratorRights](https://core.telegram.org/bots/api#chatadministratorrights)
  **/
-public final class TGChatAdministratorRights: Codable {
+public final class TGChatAdministratorRights: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatAdministratorRights` struct
     public enum CodingKeys: String, CodingKey {
@@ -25,54 +25,58 @@ public final class TGChatAdministratorRights: Codable {
         case canEditMessages = "can_edit_messages"
         case canPinMessages = "can_pin_messages"
         case canManageTopics = "can_manage_topics"
+        case canManageDirectMessages = "can_manage_direct_messages"
     }
 
     /// True, if the user's presence in the chat is hidden
-    public var isAnonymous: Bool
+    public let isAnonymous: Bool
 
     /// True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
-    public var canManageChat: Bool
+    public let canManageChat: Bool
 
     /// True, if the administrator can delete messages of other users
-    public var canDeleteMessages: Bool
+    public let canDeleteMessages: Bool
 
     /// True, if the administrator can manage video chats
-    public var canManageVideoChats: Bool
+    public let canManageVideoChats: Bool
 
     /// True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics
-    public var canRestrictMembers: Bool
+    public let canRestrictMembers: Bool
 
     /// True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user)
-    public var canPromoteMembers: Bool
+    public let canPromoteMembers: Bool
 
     /// True, if the user is allowed to change the chat title, photo and other settings
-    public var canChangeInfo: Bool
+    public let canChangeInfo: Bool
 
     /// True, if the user is allowed to invite new users to the chat
-    public var canInviteUsers: Bool
+    public let canInviteUsers: Bool
 
     /// True, if the administrator can post stories to the chat
-    public var canPostStories: Bool
+    public let canPostStories: Bool
 
     /// True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
-    public var canEditStories: Bool
+    public let canEditStories: Bool
 
     /// True, if the administrator can delete stories posted by other users
-    public var canDeleteStories: Bool
+    public let canDeleteStories: Bool
 
     /// Optional. True, if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
-    public var canPostMessages: Bool?
+    public let canPostMessages: Bool?
 
     /// Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only
-    public var canEditMessages: Bool?
+    public let canEditMessages: Bool?
 
     /// Optional. True, if the user is allowed to pin messages; for groups and supergroups only
-    public var canPinMessages: Bool?
+    public let canPinMessages: Bool?
 
     /// Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
-    public var canManageTopics: Bool?
+    public let canManageTopics: Bool?
 
-    public init (isAnonymous: Bool, canManageChat: Bool, canDeleteMessages: Bool, canManageVideoChats: Bool, canRestrictMembers: Bool, canPromoteMembers: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPostStories: Bool, canEditStories: Bool, canDeleteStories: Bool, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil) {
+    /// Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
+    public let canManageDirectMessages: Bool?
+
+    public init (isAnonymous: Bool, canManageChat: Bool, canDeleteMessages: Bool, canManageVideoChats: Bool, canRestrictMembers: Bool, canPromoteMembers: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPostStories: Bool, canEditStories: Bool, canDeleteStories: Bool, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil) {
         self.isAnonymous = isAnonymous
         self.canManageChat = canManageChat
         self.canDeleteMessages = canDeleteMessages
@@ -88,5 +92,6 @@ public final class TGChatAdministratorRights: Codable {
         self.canEditMessages = canEditMessages
         self.canPinMessages = canPinMessages
         self.canManageTopics = canManageTopics
+        self.canManageDirectMessages = canManageDirectMessages
     }
 }

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [LinkPreviewOptions](https://core.telegram.org/bots/api#linkpreviewoptions)
  **/
-public final class TGLinkPreviewOptions: Codable {
+public final class TGLinkPreviewOptions: Codable, Sendable {
 
     /// Custom keys for coding/decoding `LinkPreviewOptions` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,19 +18,19 @@ public final class TGLinkPreviewOptions: Codable {
     }
 
     /// Optional. True, if the link preview is disabled
-    public var isDisabled: Bool?
+    public let isDisabled: Bool?
 
     /// Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
-    public var url: String?
+    public let url: String?
 
     /// Optional. True, if the media in the link preview is supposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
-    public var preferSmallMedia: Bool?
+    public let preferSmallMedia: Bool?
 
     /// Optional. True, if the media in the link preview is supposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
-    public var preferLargeMedia: Bool?
+    public let preferLargeMedia: Bool?
 
     /// Optional. True, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text
-    public var showAboveText: Bool?
+    public let showAboveText: Bool?
 
     public init (isDisabled: Bool? = nil, url: String? = nil, preferSmallMedia: Bool? = nil, preferLargeMedia: Bool? = nil, showAboveText: Bool? = nil) {
         self.isDisabled = isDisabled

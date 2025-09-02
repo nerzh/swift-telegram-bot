@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageAutoDeleteTimerChanged](https://core.telegram.org/bots/api#messageautodeletetimerchanged)
  **/
-public final class TGMessageAutoDeleteTimerChanged: Codable {
+public final class TGMessageAutoDeleteTimerChanged: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MessageAutoDeleteTimerChanged` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGMessageAutoDeleteTimerChanged: Codable {
     }
 
     /// New auto-delete time for messages in the chat; in seconds
-    public var messageAutoDeleteTime: Int
+    public let messageAutoDeleteTime: Int
 
     public init (messageAutoDeleteTime: Int) {
         self.messageAutoDeleteTime = messageAutoDeleteTime

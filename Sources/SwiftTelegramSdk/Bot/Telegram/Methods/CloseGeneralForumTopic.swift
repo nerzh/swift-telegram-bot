@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `closeGeneralForumTopic` method
-public struct TGCloseGeneralForumTopicParams: Encodable {
+public struct TGCloseGeneralForumTopicParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `CloseGeneralForumTopicParams` struct
     public enum CodingKeys: String, CodingKey {

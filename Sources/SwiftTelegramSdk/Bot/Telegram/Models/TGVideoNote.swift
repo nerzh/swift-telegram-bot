@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [VideoNote](https://core.telegram.org/bots/api#videonote)
  **/
-public final class TGVideoNote: Codable {
+public final class TGVideoNote: Codable, Sendable {
 
     /// Custom keys for coding/decoding `VideoNote` struct
     public enum CodingKeys: String, CodingKey {
@@ -19,22 +19,22 @@ public final class TGVideoNote: Codable {
     }
 
     /// Identifier for this file, which can be used to download or reuse the file
-    public var fileId: String
+    public let fileId: String
 
     /// Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    public var fileUniqueId: String
+    public let fileUniqueId: String
 
     /// Video width and height (diameter of the video message) as defined by the sender
-    public var length: Int
+    public let length: Int
 
     /// Duration of the video in seconds as defined by the sender
-    public var duration: Int
+    public let duration: Int
 
     /// Optional. Video thumbnail
-    public var thumbnail: TGPhotoSize?
+    public let thumbnail: TGPhotoSize?
 
     /// Optional. File size in bytes
-    public var fileSize: Int?
+    public let fileSize: Int?
 
     public init (fileId: String, fileUniqueId: String, length: Int, duration: Int, thumbnail: TGPhotoSize? = nil, fileSize: Int? = nil) {
         self.fileId = fileId

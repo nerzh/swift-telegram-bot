@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportElementErrorFrontSide](https://core.telegram.org/bots/api#passportelementerrorfrontside)
  **/
-public final class TGPassportElementErrorFrontSide: Codable {
+public final class TGPassportElementErrorFrontSide: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PassportElementErrorFrontSide` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPassportElementErrorFrontSide: Codable {
     }
 
     /// Error source, must be front_side
-    public var source: String
+    public let source: String
 
     /// The section of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport”
-    public var type: TGPassportElementErrorFrontSideType
+    public let type: TGPassportElementErrorFrontSideType
 
     /// Base64-encoded hash of the file with the front side of the document
-    public var fileHash: String
+    public let fileHash: String
 
     /// Error message
-    public var message: String
+    public let message: String
 
     public init (source: String, type: TGPassportElementErrorFrontSideType, fileHash: String, message: String) {
         self.source = source

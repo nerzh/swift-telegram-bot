@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BotDescription](https://core.telegram.org/bots/api#botdescription)
  **/
-public final class TGBotDescription: Codable {
+public final class TGBotDescription: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BotDescription` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGBotDescription: Codable {
     }
 
     /// The bot's description
-    public var description: String
+    public let description: String
 
     public init (description: String) {
         self.description = description

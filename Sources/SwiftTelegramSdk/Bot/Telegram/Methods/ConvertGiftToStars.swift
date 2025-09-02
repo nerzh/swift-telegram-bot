@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `convertGiftToStars` method
-public struct TGConvertGiftToStarsParams: Encodable {
+public struct TGConvertGiftToStarsParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier of the regular gift that should be converted to Telegram Stars
-    public var ownedGiftId: String
+    public let ownedGiftId: String
 
     /// Custom keys for coding/decoding `ConvertGiftToStarsParams` struct
     public enum CodingKeys: String, CodingKey {

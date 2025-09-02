@@ -8,7 +8,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputProfilePhoto](https://core.telegram.org/bots/api#inputprofilephoto)
  **/
-public enum TGInputProfilePhoto: Codable {
+public enum TGInputProfilePhoto: Codable, Sendable {
     case inputProfilePhotoStatic(TGInputProfilePhotoStatic)
     case inputProfilePhotoAnimated(TGInputProfilePhotoAnimated)
 

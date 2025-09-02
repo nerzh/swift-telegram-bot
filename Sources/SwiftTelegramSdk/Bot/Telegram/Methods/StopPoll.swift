@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `stopPoll` method
-public struct TGStopPollParams: Encodable {
+public struct TGStopPollParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Identifier of the original message with the poll
-    public var messageId: Int
+    public let messageId: Int
 
     /// A JSON-serialized object for a new message inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `StopPollParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [TransactionPartnerFragment](https://core.telegram.org/bots/api#transactionpartnerfragment)
  **/
-public final class TGTransactionPartnerFragment: Codable {
+public final class TGTransactionPartnerFragment: Codable, Sendable {
 
     /// Custom keys for coding/decoding `TransactionPartnerFragment` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGTransactionPartnerFragment: Codable {
     }
 
     /// Type of the transaction partner, always “fragment”
-    public var type: TGTransactionPartnerFragmentType
+    public let type: TGTransactionPartnerFragmentType
 
     /// Optional. State of the transaction if the transaction is outgoing
-    public var withdrawalState: TGRevenueWithdrawalState?
+    public let withdrawalState: TGRevenueWithdrawalState?
 
     public init (type: TGTransactionPartnerFragmentType, withdrawalState: TGRevenueWithdrawalState? = nil) {
         self.type = type

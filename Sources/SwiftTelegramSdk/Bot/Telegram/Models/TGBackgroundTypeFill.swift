@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [BackgroundTypeFill](https://core.telegram.org/bots/api#backgroundtypefill)
  **/
-public final class TGBackgroundTypeFill: Codable {
+public final class TGBackgroundTypeFill: Codable, Sendable {
 
     /// Custom keys for coding/decoding `BackgroundTypeFill` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGBackgroundTypeFill: Codable {
     }
 
     /// Type of the background, always “fill”
-    public var type: TGBackgroundTypeFillType
+    public let type: TGBackgroundTypeFillType
 
     /// The background fill
-    public var fill: TGBackgroundFill
+    public let fill: TGBackgroundFill
 
     /// Dimming of the background in dark themes, as a percentage; 0-100
-    public var darkThemeDimming: Int
+    public let darkThemeDimming: Int
 
     public init (type: TGBackgroundTypeFillType, fill: TGBackgroundFill, darkThemeDimming: Int) {
         self.type = type

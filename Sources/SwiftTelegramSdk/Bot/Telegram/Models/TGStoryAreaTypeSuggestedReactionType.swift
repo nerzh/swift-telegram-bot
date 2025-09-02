@@ -7,7 +7,7 @@
  [StoryAreaTypeSuggestedReaction](https://core.telegram.org/bots/api#storyareatypesuggestedreaction)
  */
 
-public enum TGStoryAreaTypeSuggestedReactionType: String, Codable {
+public enum TGStoryAreaTypeSuggestedReactionType: String, Codable, Sendable {
     case suggestedReaction = "suggested_reaction"
     case undefined
 

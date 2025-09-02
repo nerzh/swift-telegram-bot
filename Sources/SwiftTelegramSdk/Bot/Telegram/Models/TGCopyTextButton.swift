@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [CopyTextButton](https://core.telegram.org/bots/api#copytextbutton)
  **/
-public final class TGCopyTextButton: Codable {
+public final class TGCopyTextButton: Codable, Sendable {
 
     /// Custom keys for coding/decoding `CopyTextButton` struct
     public enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public final class TGCopyTextButton: Codable {
     }
 
     /// The text to be copied to the clipboard; 1-256 characters
-    public var text: String
+    public let text: String
 
     public init (text: String) {
         self.text = text

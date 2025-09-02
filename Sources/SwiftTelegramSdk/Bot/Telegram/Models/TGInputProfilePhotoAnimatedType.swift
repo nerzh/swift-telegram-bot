@@ -7,7 +7,7 @@
  [InputProfilePhotoAnimated](https://core.telegram.org/bots/api#inputprofilephotoanimated)
  */
 
-public enum TGInputProfilePhotoAnimatedType: String, Codable {
+public enum TGInputProfilePhotoAnimatedType: String, Codable, Sendable {
     case animated = "animated"
     case undefined
 

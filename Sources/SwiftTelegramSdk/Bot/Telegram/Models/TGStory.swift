@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [Story](https://core.telegram.org/bots/api#story)
  **/
-public final class TGStory: Codable {
+public final class TGStory: Codable, Sendable {
 
     /// Custom keys for coding/decoding `Story` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGStory: Codable {
     }
 
     /// Chat that posted the story
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Unique identifier for the story in the chat
-    public var id: Int
+    public let id: Int
 
     public init (chat: TGChat, id: Int) {
         self.chat = chat

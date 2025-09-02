@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [PassportElementErrorUnspecified](https://core.telegram.org/bots/api#passportelementerrorunspecified)
  **/
-public final class TGPassportElementErrorUnspecified: Codable {
+public final class TGPassportElementErrorUnspecified: Codable, Sendable {
 
     /// Custom keys for coding/decoding `PassportElementErrorUnspecified` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGPassportElementErrorUnspecified: Codable {
     }
 
     /// Error source, must be unspecified
-    public var source: String
+    public let source: String
 
     /// Type of element of the user's Telegram Passport which has the issue
-    public var type: String
+    public let type: String
 
     /// Base64-encoded element hash
-    public var elementHash: String
+    public let elementHash: String
 
     /// Error message
-    public var message: String
+    public let message: String
 
     public init (source: String, type: String, elementHash: String, message: String) {
         self.source = source

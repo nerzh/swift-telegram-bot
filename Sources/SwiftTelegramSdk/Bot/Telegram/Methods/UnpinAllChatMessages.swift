@@ -3,14 +3,14 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+/// Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to unpin all pinned messages in groups and channels respectively. Returns True on success.
 
 
 /// Parameters container struct for `unpinAllChatMessages` method
-public struct TGUnpinAllChatMessagesParams: Encodable {
+public struct TGUnpinAllChatMessagesParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `UnpinAllChatMessagesParams` struct
     public enum CodingKeys: String, CodingKey {
@@ -26,7 +26,7 @@ public struct TGUnpinAllChatMessagesParams: Encodable {
 public extension TGBot {
 
 /**
- Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+ Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to unpin all pinned messages in groups and channels respectively. Returns True on success.
 
  SeeAlso Telegram Bot API Reference:
  [UnpinAllChatMessagesParams](https://core.telegram.org/bots/api#unpinallchatmessages)

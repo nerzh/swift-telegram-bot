@@ -7,7 +7,7 @@
  [TransactionPartnerAffiliateProgram](https://core.telegram.org/bots/api#transactionpartneraffiliateprogram)
  */
 
-public enum TGTransactionPartnerAffiliateProgramType: String, Codable {
+public enum TGTransactionPartnerAffiliateProgramType: String, Codable, Sendable {
     case affiliateProgram = "affiliate_program"
     case undefined
 

@@ -7,7 +7,7 @@
  [InputMediaAnimation](https://core.telegram.org/bots/api#inputmediaanimation)
  */
 
-public enum TGInputMediaAnimationType: String, Codable {
+public enum TGInputMediaAnimationType: String, Codable, Sendable {
     case animation = "animation"
     case undefined
 

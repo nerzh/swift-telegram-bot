@@ -7,7 +7,7 @@
  [BotCommandScopeAllPrivateChats](https://core.telegram.org/bots/api#botcommandscopeallprivatechats)
  */
 
-public enum TGBotCommandScopeAllPrivateChatsType: String, Codable {
+public enum TGBotCommandScopeAllPrivateChatsType: String, Codable, Sendable {
     case allPrivateChats = "all_private_chats"
     case undefined
 

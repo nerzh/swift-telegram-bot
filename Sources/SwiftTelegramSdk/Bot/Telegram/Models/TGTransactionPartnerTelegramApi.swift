@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [TransactionPartnerTelegramApi](https://core.telegram.org/bots/api#transactionpartnertelegramapi)
  **/
-public final class TGTransactionPartnerTelegramApi: Codable {
+public final class TGTransactionPartnerTelegramApi: Codable, Sendable {
 
     /// Custom keys for coding/decoding `TransactionPartnerTelegramApi` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGTransactionPartnerTelegramApi: Codable {
     }
 
     /// Type of the transaction partner, always “telegram_api”
-    public var type: TGTransactionPartnerTelegramApiType
+    public let type: TGTransactionPartnerTelegramApiType
 
     /// The number of successful requests that exceeded regular limits and were therefore billed
-    public var requestCount: Int
+    public let requestCount: Int
 
     public init (type: TGTransactionPartnerTelegramApiType, requestCount: Int) {
         self.type = type

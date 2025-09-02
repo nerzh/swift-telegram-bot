@@ -7,25 +7,25 @@ import Foundation
 
 
 /// Parameters container struct for `editMessageMedia` method
-public struct TGEditMessageMediaParams: Encodable {
+public struct TGEditMessageMediaParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
-    public var businessConnectionId: String?
+    public let businessConnectionId: String?
 
     /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId?
+    public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message to edit
-    public var messageId: Int?
+    public let messageId: Int?
 
     /// Required if chat_id and message_id are not specified. Identifier of the inline message
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// A JSON-serialized object for a new media content of the message
-    public var media: TGInputMedia
+    public let media: TGInputMedia
 
     /// A JSON-serialized object for a new inline keyboard.
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageMediaParams` struct
     public enum CodingKeys: String, CodingKey {

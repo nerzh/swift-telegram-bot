@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [InputStoryContentPhoto](https://core.telegram.org/bots/api#inputstorycontentphoto)
  **/
-public final class TGInputStoryContentPhoto: Codable {
+public final class TGInputStoryContentPhoto: Codable, Sendable {
 
     /// Custom keys for coding/decoding `InputStoryContentPhoto` struct
     public enum CodingKeys: String, CodingKey {
@@ -15,10 +15,10 @@ public final class TGInputStoryContentPhoto: Codable {
     }
 
     /// Type of the content, must be photo
-    public var type: TGInputStoryContentPhotoType
+    public let type: TGInputStoryContentPhotoType
 
     /// The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass “attach://<file_attach_name>” if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    public var photo: String
+    public let photo: String
 
     public init (type: TGInputStoryContentPhotoType, photo: String) {
         self.type = type

@@ -7,7 +7,7 @@
  [PaidMediaPreview](https://core.telegram.org/bots/api#paidmediapreview)
  */
 
-public enum TGPaidMediaPreviewType: String, Codable {
+public enum TGPaidMediaPreviewType: String, Codable, Sendable {
     case preview = "preview"
     case undefined
 

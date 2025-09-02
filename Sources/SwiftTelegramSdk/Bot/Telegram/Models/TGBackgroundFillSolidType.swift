@@ -7,7 +7,7 @@
  [BackgroundFillSolid](https://core.telegram.org/bots/api#backgroundfillsolid)
  */
 
-public enum TGBackgroundFillSolidType: String, Codable {
+public enum TGBackgroundFillSolidType: String, Codable, Sendable {
     case solid = "solid"
     case undefined
 

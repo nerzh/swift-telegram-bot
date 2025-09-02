@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setStickerEmojiList` method
-public struct TGSetStickerEmojiListParams: Encodable {
+public struct TGSetStickerEmojiListParams: Encodable, Sendable {
 
     /// File identifier of the sticker
-    public var sticker: String
+    public let sticker: String
 
     /// A JSON-serialized list of 1-20 emoji associated with the sticker
-    public var emojiList: [String]
+    public let emojiList: [String]
 
     /// Custom keys for coding/decoding `SetStickerEmojiListParams` struct
     public enum CodingKeys: String, CodingKey {

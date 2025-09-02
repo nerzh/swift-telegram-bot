@@ -7,19 +7,19 @@ import Foundation
 
 
 /// Parameters container struct for `setMessageReaction` method
-public struct TGSetMessageReactionParams: Encodable {
+public struct TGSetMessageReactionParams: Encodable, Sendable {
 
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    public var chatId: TGChatId
+    public let chatId: TGChatId
 
     /// Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
-    public var messageId: Int
+    public let messageId: Int
 
     /// A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
-    public var reaction: [TGReactionType]?
+    public let reaction: [TGReactionType]?
 
     /// Pass True to set the reaction with a big animation
-    public var isBig: Bool?
+    public let isBig: Bool?
 
     /// Custom keys for coding/decoding `SetMessageReactionParams` struct
     public enum CodingKeys: String, CodingKey {

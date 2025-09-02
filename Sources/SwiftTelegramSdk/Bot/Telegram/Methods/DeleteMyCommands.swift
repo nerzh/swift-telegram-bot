@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `deleteMyCommands` method
-public struct TGDeleteMyCommandsParams: Encodable {
+public struct TGDeleteMyCommandsParams: Encodable, Sendable {
 
     /// A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
-    public var scope: TGBotCommandScope?
+    public let scope: TGBotCommandScope?
 
     /// A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `DeleteMyCommandsParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [CallbackQuery](https://core.telegram.org/bots/api#callbackquery)
  **/
-public final class TGCallbackQuery: Codable {
+public final class TGCallbackQuery: Codable, Sendable {
 
     /// Custom keys for coding/decoding `CallbackQuery` struct
     public enum CodingKeys: String, CodingKey {
@@ -20,25 +20,25 @@ public final class TGCallbackQuery: Codable {
     }
 
     /// Unique identifier for this query
-    public var id: String
+    public let id: String
 
     /// Sender
-    public var from: TGUser
+    public let from: TGUser
 
     /// Optional. Message sent by the bot with the callback button that originated the query
-    public var message: TGMaybeInaccessibleMessage?
+    public let message: TGMaybeInaccessibleMessage?
 
     /// Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
-    public var inlineMessageId: String?
+    public let inlineMessageId: String?
 
     /// Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.
-    public var chatInstance: String
+    public let chatInstance: String
 
     /// Optional. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.
-    public var data: String?
+    public let data: String?
 
     /// Optional. Short name of a Game to be returned, serves as the unique identifier for the game
-    public var gameShortName: String?
+    public let gameShortName: String?
 
     public init (id: String, from: TGUser, message: TGMaybeInaccessibleMessage? = nil, inlineMessageId: String? = nil, chatInstance: String, data: String? = nil, gameShortName: String? = nil) {
         self.id = id

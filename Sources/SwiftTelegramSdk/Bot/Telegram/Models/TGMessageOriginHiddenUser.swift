@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageOriginHiddenUser](https://core.telegram.org/bots/api#messageoriginhiddenuser)
  **/
-public final class TGMessageOriginHiddenUser: Codable {
+public final class TGMessageOriginHiddenUser: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MessageOriginHiddenUser` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGMessageOriginHiddenUser: Codable {
     }
 
     /// Type of the message origin, always “hidden_user”
-    public var type: TGMessageOriginHiddenUserType
+    public let type: TGMessageOriginHiddenUserType
 
     /// Date the message was sent originally in Unix time
-    public var date: Int
+    public let date: Int
 
     /// Name of the user that sent the message originally
-    public var senderUserName: String
+    public let senderUserName: String
 
     public init (type: TGMessageOriginHiddenUserType, date: Int, senderUserName: String) {
         self.type = type

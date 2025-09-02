@@ -7,7 +7,7 @@
  SeeAlso Telegram Bot API Reference:
  [File](https://core.telegram.org/bots/api#file)
  **/
-public final class TGFile: Codable {
+public final class TGFile: Codable, Sendable {
 
     /// Custom keys for coding/decoding `File` struct
     public enum CodingKeys: String, CodingKey {
@@ -18,16 +18,16 @@ public final class TGFile: Codable {
     }
 
     /// Identifier for this file, which can be used to download or reuse the file
-    public var fileId: String
+    public let fileId: String
 
     /// Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    public var fileUniqueId: String
+    public let fileUniqueId: String
 
     /// Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
-    public var fileSize: Int?
+    public let fileSize: Int?
 
     /// Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
-    public var filePath: String?
+    public let filePath: String?
 
     public init (fileId: String, fileUniqueId: String, fileSize: Int? = nil, filePath: String? = nil) {
         self.fileId = fileId

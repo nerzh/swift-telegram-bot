@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ShippingOption](https://core.telegram.org/bots/api#shippingoption)
  **/
-public final class TGShippingOption: Codable {
+public final class TGShippingOption: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ShippingOption` struct
     public enum CodingKeys: String, CodingKey {
@@ -16,13 +16,13 @@ public final class TGShippingOption: Codable {
     }
 
     /// Shipping option identifier
-    public var id: String
+    public let id: String
 
     /// Option title
-    public var title: String
+    public let title: String
 
     /// List of price portions
-    public var prices: [TGLabeledPrice]
+    public let prices: [TGLabeledPrice]
 
     public init (id: String, title: String, prices: [TGLabeledPrice]) {
         self.id = id

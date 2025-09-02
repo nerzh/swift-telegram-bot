@@ -7,7 +7,7 @@
  [MessageOriginChannel](https://core.telegram.org/bots/api#messageoriginchannel)
  */
 
-public enum TGMessageOriginChannelType: String, Codable {
+public enum TGMessageOriginChannelType: String, Codable, Sendable {
     case channel = "channel"
     case undefined
 

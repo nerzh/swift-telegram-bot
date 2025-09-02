@@ -7,10 +7,10 @@ import Foundation
 
 
 /// Parameters container struct for `getBusinessConnection` method
-public struct TGGetBusinessConnectionParams: Encodable {
+public struct TGGetBusinessConnectionParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Custom keys for coding/decoding `GetBusinessConnectionParams` struct
     public enum CodingKeys: String, CodingKey {

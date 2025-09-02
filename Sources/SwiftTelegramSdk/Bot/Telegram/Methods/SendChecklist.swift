@@ -7,31 +7,31 @@ import Foundation
 
 
 /// Parameters container struct for `sendChecklist` method
-public struct TGSendChecklistParams: Encodable {
+public struct TGSendChecklistParams: Encodable, Sendable {
 
     /// Unique identifier of the business connection on behalf of which the message will be sent
-    public var businessConnectionId: String
+    public let businessConnectionId: String
 
     /// Unique identifier for the target chat
-    public var chatId: Int64
+    public let chatId: Int64
 
     /// A JSON-serialized object for the checklist to send
-    public var checklist: TGInputChecklist
+    public let checklist: TGInputChecklist
 
     /// Sends the message silently. Users will receive a notification with no sound.
-    public var disableNotification: Bool?
+    public let disableNotification: Bool?
 
     /// Protects the contents of the sent message from forwarding and saving
-    public var protectContent: Bool?
+    public let protectContent: Bool?
 
     /// Unique identifier of the message effect to be added to the message
-    public var messageEffectId: String?
+    public let messageEffectId: String?
 
     /// A JSON-serialized object for description of the message to reply to
-    public var replyParameters: TGReplyParameters?
+    public let replyParameters: TGReplyParameters?
 
     /// A JSON-serialized object for an inline keyboard
-    public var replyMarkup: TGInlineKeyboardMarkup?
+    public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `SendChecklistParams` struct
     public enum CodingKeys: String, CodingKey {

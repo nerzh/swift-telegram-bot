@@ -7,7 +7,7 @@
  [MessageEntity](https://core.telegram.org/bots/api#messageentity)
  */
 
-public enum TGMessageEntityType: String, Codable {
+public enum TGMessageEntityType: String, Codable, Sendable {
     case mention = "mention"
     case hashtag = "hashtag"
     case cashtag = "cashtag"

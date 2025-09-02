@@ -7,13 +7,13 @@ import Foundation
 
 
 /// Parameters container struct for `setMyName` method
-public struct TGSetMyNameParams: Encodable {
+public struct TGSetMyNameParams: Encodable, Sendable {
 
     /// New bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
-    public var name: String?
+    public let name: String?
 
     /// A two-letter ISO 639-1 language code. If empty, the name will be shown to all users for whose language there is no dedicated name.
-    public var languageCode: String?
+    public let languageCode: String?
 
     /// Custom keys for coding/decoding `SetMyNameParams` struct
     public enum CodingKeys: String, CodingKey {

@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink)
  **/
-public final class TGChatInviteLink: Codable {
+public final class TGChatInviteLink: Codable, Sendable {
 
     /// Custom keys for coding/decoding `ChatInviteLink` struct
     public enum CodingKeys: String, CodingKey {
@@ -24,37 +24,37 @@ public final class TGChatInviteLink: Codable {
     }
 
     /// The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with “…”.
-    public var inviteLink: String
+    public let inviteLink: String
 
     /// Creator of the link
-    public var creator: TGUser
+    public let creator: TGUser
 
     /// True, if users joining the chat via the link need to be approved by chat administrators
-    public var createsJoinRequest: Bool
+    public let createsJoinRequest: Bool
 
     /// True, if the link is primary
-    public var isPrimary: Bool
+    public let isPrimary: Bool
 
     /// True, if the link is revoked
-    public var isRevoked: Bool
+    public let isRevoked: Bool
 
     /// Optional. Invite link name
-    public var name: String?
+    public let name: String?
 
     /// Optional. Point in time (Unix timestamp) when the link will expire or has been expired
-    public var expireDate: Int?
+    public let expireDate: Int?
 
     /// Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
-    public var memberLimit: Int?
+    public let memberLimit: Int?
 
     /// Optional. Number of pending join requests created using this link
-    public var pendingJoinRequestCount: Int?
+    public let pendingJoinRequestCount: Int?
 
     /// Optional. The number of seconds the subscription will be active for before the next payment
-    public var subscriptionPeriod: Int?
+    public let subscriptionPeriod: Int?
 
     /// Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link
-    public var subscriptionPrice: Int?
+    public let subscriptionPrice: Int?
 
     public init (inviteLink: String, creator: TGUser, createsJoinRequest: Bool, isPrimary: Bool, isRevoked: Bool, name: String? = nil, expireDate: Int? = nil, memberLimit: Int? = nil, pendingJoinRequestCount: Int? = nil, subscriptionPeriod: Int? = nil, subscriptionPrice: Int? = nil) {
         self.inviteLink = inviteLink

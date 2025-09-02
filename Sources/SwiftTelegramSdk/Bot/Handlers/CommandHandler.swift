@@ -16,13 +16,12 @@ import SwiftRegularExpression
  - `editedUpdates` Determines whether the handler should also accept edited messages.
  
  */
-public class TGCommandHandler: TGHandlerPrtcl {
+public final class TGCommandHandler: TGHandlerPrtcl {
     
-    public var id: Int = 0
+    public let id: SendableValue<Int> = .init(0)
+    public let name: String
     
-    public var name: String
-    
-    public struct Options: OptionSet {
+    public struct Options: OptionSet, Sendable {
         public let rawValue: Int
         
         public init(rawValue: Int) {
@@ -34,8 +33,8 @@ public class TGCommandHandler: TGHandlerPrtcl {
     }
     
     let commands: Set<String>
-    var callbackAsync: TGHandlerCallbackAsync
-    let filters: TGFilter
+    let callbackAsync: TGHandlerCallbackAsync
+    let filters: SendableValue<TGFilter>
     let options: Options
     let botUsername: String?
     
@@ -49,21 +48,22 @@ public class TGCommandHandler: TGHandlerPrtcl {
     ) {
         self.name = name
         self.commands = Set(commands.map { "/\($0)".replace(#"\/\/"#, "/") })
-        self.filters = filters
+        self.filters = .init(filters)
         self.options = options
         self.botUsername = botUsername
         self.callbackAsync = callback
     }
     
-    public func check(update: TGUpdate) -> Bool {
+    public func check(update: TGUpdate) async -> Bool {
         if options.contains(.editedUpdates),
            update.editedMessage != nil ||
-            update.editedChannelPost != nil {
+            update.editedChannelPost != nil
+        {
             return true
         }
         
         guard let message = update.message,
-              filters.check(message),
+              await filters.value.check(message),
               let text = message.text?.utf16,
               let entities = message.entities else { return false }
         

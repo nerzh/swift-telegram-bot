@@ -6,7 +6,7 @@
  SeeAlso Telegram Bot API Reference:
  [MessageReactionCountUpdated](https://core.telegram.org/bots/api#messagereactioncountupdated)
  **/
-public final class TGMessageReactionCountUpdated: Codable {
+public final class TGMessageReactionCountUpdated: Codable, Sendable {
 
     /// Custom keys for coding/decoding `MessageReactionCountUpdated` struct
     public enum CodingKeys: String, CodingKey {
@@ -17,16 +17,16 @@ public final class TGMessageReactionCountUpdated: Codable {
     }
 
     /// The chat containing the message
-    public var chat: TGChat
+    public let chat: TGChat
 
     /// Unique message identifier inside the chat
-    public var messageId: Int
+    public let messageId: Int
 
     /// Date of the change in Unix time
-    public var date: Int
+    public let date: Int
 
     /// List of reactions that are present on the message
-    public var reactions: [TGReactionCount]
+    public let reactions: [TGReactionCount]
 
     public init (chat: TGChat, messageId: Int, date: Int, reactions: [TGReactionCount]) {
         self.chat = chat

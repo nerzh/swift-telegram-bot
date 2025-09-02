@@ -7,16 +7,16 @@ import Foundation
 
 
 /// Parameters container struct for `getUserProfilePhotos` method
-public struct TGGetUserProfilePhotosParams: Encodable {
+public struct TGGetUserProfilePhotosParams: Encodable, Sendable {
 
     /// Unique identifier of the target user
-    public var userId: Int64
+    public let userId: Int64
 
     /// Sequential number of the first photo to be returned. By default, all photos are returned.
-    public var offset: Int?
+    public let offset: Int?
 
     /// Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100.
-    public var limit: Int?
+    public let limit: Int?
 
     /// Custom keys for coding/decoding `GetUserProfilePhotosParams` struct
     public enum CodingKeys: String, CodingKey {
