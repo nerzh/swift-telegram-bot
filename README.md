@@ -9,11 +9,7 @@
 
 # ⚠️ SWIFT 6
 
-Now for use in Swift 6, to avoid many compiler errors, please use the import as indicated below. In the future I plan to release a version with support for the new parallelism paradigm from Swift 6
-
-```swift
-@preconcurrency import SwiftTelegramSdk
-```
+For now with swift 6 please use 4.0.0 and above
 
 # Usage
 - Clone one of [examples](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples)
@@ -25,7 +21,7 @@ Now for use in Swift 6, to avoid many compiler errors, please use the import as 
   ```
 - Add your telegram bot id to [configure.swift](https://github.com/nerzh/swift-telegram-sdk/blob/master/Examples/Vapor-Telegram-Bot/Sources/Vapor-Telegram-Bot/configure.swift)
   ```swift
-  let tgApi: String = "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+  let botId: String = "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   ```
 - Run in Xcode or build and run binary file
 - check commands in your telegram bots
@@ -38,40 +34,24 @@ Now for use in Swift 6, to avoid many compiler errors, please use the import as 
 - [Smoke Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/Smoke-AsyncHttpClient-Telegram-Bot)
 - [FlyingFox Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/FlyingFox-AsyncHttpClient-Telegram-Bot)
 
-# Advanced Example Usage
-## You should to implement TGClientPrtcl protocol
-To configure and run a bot with or without any framework, you need to implement a simple TGClient protocol to send requests to the network with Content-Type: multipart/form-data.
-You can see an example here: [VaporTGClient](https://github.com/nerzh/swift-telegram-sdk/blob/master/Examples/Vapor-Telegram-Bot/Sources/Vapor-Telegram-Bot/TGBot/VaporTGClient.swift)
-
-```swift
-import Logging
-
-public protocol TGClientPrtcl {
-    
-    var log: Logger { get set }
-    
-    @discardableResult
-    func post<Params: Encodable, Response: Decodable>(_ url: URL, params: Params?, as mediaType: HTTPMediaType?) async throws -> Response
-    
-    @discardableResult
-    func post<Response: Decodable>(_ url: URL) async throws -> Response
-}
-```
 ## Bot configuration.
 ### Define bot ID
 ```swift
+import SwiftTelegramBot
+import Logging
+
 let tgApi: String = "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+var logger: Logger = .init(label: "swift_telegram_bot")
+logger.logLevel = .error
 ```
 ### Define connection type
 ##### LongPolling
 ```swift
-var connectionType: TGConnectionType = .longpolling(limit: nil,
-                                                    timeout: nil,
-                                                    allowedUpdates: nil)
+let connectionType: TGConnectionType = .longpolling()
 ```
 ##### WebHook
 ```swift
-var connectionType: TGConnectionType = .webhook(webHookURL: URL(string: "\(TG_WEBHOOK_DOMAIN!)/\(TGWebHookRouteName)")!)
+let connectionType: TGConnectionType = .webhook(webHookURL: URL(string: "\(TG_WEBHOOK_DOMAIN!)/\(TGWebHookRouteName)")!)
 ```
 ```swift
 /// Add route for webhook. For example Vapor:
@@ -90,7 +70,7 @@ final class TelegramController: RouteCollection {
 
     func telegramWebHook(_ req: Request) async throws -> Bool {
         let update: TGUpdate = try req.content.decode(TGUpdate.self)
-        Task { await botActor.bot.dispatcher.process([update]) }
+        Task { try await bot.processing(updates: [updates]) }
         return true
     }
 }
@@ -98,52 +78,38 @@ final class TelegramController: RouteCollection {
 ### Start bot with added handlers
 ```swift
 let bot: TGBot = try await .init(connectionType: connectionType,
-                                 dispatcher: nil,
-                                 tgClient: VaporTGClient(client: app.client),
+                                 tgClient: TGClientDefault(),
                                  tgURI: TGBot.standardTGURL,
                                  botId: botId,
-                                 log: app.logger)
-try await DefaultBotHandlers.addHandlers(bot: bot)
-try await botActor.bot.start()
+                                 log: logger)
+
+/// add dispatcher with some bot logic
+try await bot.add(dispatcher: TestDispatcher.self)
+/// try await bot.add(dispatcher: SecondDispatcher.self)
+/// etc
+
+try await bot.start()
 ```
 
-### DefaultBotHandlers code example
+### TestDispatcher code example
 ```swift
 import SwiftTelegramSdk
 
-final class DefaultBotHandlers {
-
-    static func addHandlers(bot: TGBot) async {
-        await defaultBaseHandler(bot: bot)
-        await messageHandler(bot: bot)
-        await commandPingHandler(bot: bot)
-        await commandShowButtonsHandler(bot: bot)
-        await buttonsActionHandler(bot: bot)
-    }
-    
-    private static func defaultBaseHandler(bot: TGBot) async {
-        await bot.dispatcher.add(TGBaseHandler({ update in
+class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
+        
+    override
+    func handle() async {
+        await add(TGBaseHandler({ update in
             guard let message = update.message else { return }
             let params: TGSendMessageParams = .init(chatId: .chat(message.chat.id), text: "TGBaseHandler")
-            try await bot.sendMessage(params: params)
+            try await self.bot.sendMessage(params: params)
         }))
-    }
-
-    private static func messageHandler(bot: TGBot) async {
-        await bot.dispatcher.add(TGMessageHandler(filters: (.all && !.command.names(["/ping", "/show_buttons"]))) { update in
-            let params: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: "Success")
-            try await bot.sendMessage(params: params)
+        
+        await add(TGCommandHandler(commands: ["/ping"]) { update in
+            try await update.message?.reply(text: "pong", bot: self.bot)
         })
-    }
-
-    private static func commandPingHandler(bot: TGBot) async {
-        await bot.dispatcher.add(TGCommandHandler(commands: ["/ping"]) { update in
-            try await update.message?.reply(text: "pong", bot: bot)
-        })
-    }
-
-    private static func commandShowButtonsHandler(bot: TGBot) async {
-        await bot.dispatcher.add(TGCommandHandler(commands: ["/show_buttons"]) { update in
+        
+        await add(TGCommandHandler(commands: ["/show_buttons"]) { update in
             guard let userId = update.message?.from?.id else { fatalError("user id not found") }
             let buttons: [[TGInlineKeyboardButton]] = [
                 [.init(text: "Button 1", callbackData: "press 1"), .init(text: "Button 2", callbackData: "press 2")]
@@ -152,44 +118,57 @@ final class DefaultBotHandlers {
             let params: TGSendMessageParams = .init(chatId: .chat(userId),
                                                     text: "Keyboard active",
                                                     replyMarkup: .inlineKeyboardMarkup(keyboard))
-            try await bot.sendMessage(params: params)
-        })
-    }
-
-    private static func buttonsActionHandler(bot: TGBot) async {
-        await bot.dispatcher.add(TGCallbackQueryHandler(pattern: "press 1") { update in
-            TGBot.log.info("press 1")
-            guard let userId = update.callbackQuery?.from.id else { fatalError("user id not found") }
-            let params: TGAnswerCallbackQueryParams = .init(callbackQueryId: update.callbackQuery?.id ?? "0",
-                                                            text: update.callbackQuery?.data  ?? "data not exist",
-                                                            showAlert: nil,
-                                                            url: nil,
-                                                            cacheTime: nil)
-            try await bot.answerCallbackQuery(params: params)
-            try await bot.sendMessage(params: .init(chatId: .chat(userId), text: "press 1"))
+            try await self.bot.sendMessage(params: params)
         })
         
-        await bot.dispatcher.add(TGCallbackQueryHandler(pattern: "press 2") { update in
-            TGBot.log.info("press 2")
+        await add(TGCallbackQueryHandler(pattern: "press 1") { update in
+            await self.bot.log.info("press 1")
             guard let userId = update.callbackQuery?.from.id else { fatalError("user id not found") }
             let params: TGAnswerCallbackQueryParams = .init(callbackQueryId: update.callbackQuery?.id ?? "0",
                                                             text: update.callbackQuery?.data  ?? "data not exist",
                                                             showAlert: nil,
                                                             url: nil,
                                                             cacheTime: nil)
-            try await bot.answerCallbackQuery(params: params)
-            try await bot.sendMessage(params: .init(chatId: .chat(userId), text: "press 2"))
+            try await self.bot.answerCallbackQuery(params: params)
+            try await self.bot.sendMessage(params: .init(chatId: .chat(userId), text: "press 1"))
+        })
+        
+        await add(TGCallbackQueryHandler(pattern: "press 2") { update in
+            await self.bot.log.info("press 2")
+            guard let userId = update.callbackQuery?.from.id else { fatalError("user id not found") }
+            let params: TGAnswerCallbackQueryParams = .init(callbackQueryId: update.callbackQuery?.id ?? "0",
+                                                            text: update.callbackQuery?.data  ?? "data not exist",
+                                                            showAlert: nil,
+                                                            url: nil,
+                                                            cacheTime: nil)
+            try await self.bot.answerCallbackQuery(params: params)
+            try await self.bot.sendMessage(params: .init(chatId: .chat(userId), text: "press 2"))
         })
     }
 }
 ```
 
+# Advanced Example Usage
+## You should to implement TGClientPrtcl protocol
+To configure and run a bot with or without any framework, you need to implement a simple TGClient protocol to send requests to the network with Content-Type: multipart/form-data.
+You can see an example here: [VaporTGClient](https://github.com/nerzh/swift-telegram-sdk/blob/master/Examples/Vapor-Telegram-Bot/Sources/Vapor-Telegram-Bot/TGBot/VaporTGClient.swift)
+
+```swift
+public protocol TGClientPrtcl {
+    
+    @discardableResult
+    func post<Params: Encodable, Response: Decodable>(_ url: URL, params: Params?, as mediaType: HTTPMediaType?) async throws -> Response
+    
+    @discardableResult
+    func post<Response: Decodable>(_ url: URL) async throws -> Response
+}
+```
 
 ### Add to your Vapor project with Swift Package Manager
 add to yor Package.json
 
 ```swift
-// swift-tools-version:5.8
+// swift-tools-version:6.0
 
 import PackageDescription
 
@@ -197,7 +176,7 @@ var packageDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "4.57.0")),
 ]
 
-packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-sdk", .upToNextMajor(from: "3.0.0")))
+packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.0.0")))
 
 
 let package = Package(
@@ -211,7 +190,7 @@ let package = Package(
             name: "Telegram-bot-example",
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
-                .product(name: "SwiftTelegramSdk", package: "swift-telegram-sdk"),
+                .product(name: "SwiftTelegramBot", package: "swift-telegram-bot"),
             ]
         )
     ]
