@@ -17,7 +17,7 @@ For now with swift 6 please use 4.0.0 and above
   git clone https://github.com/nerzh/swift-telegram-bot
   ```
   ```
-  cd swift-telegram-sdk/Examples/Vapor-Telegram-Bot
+  cd swift-telegram-bot/Examples/Vapor-Telegram-Bot
   ```
 - Add your telegram bot id to [configure.swift](https://github.com/nerzh/swift-telegram-bot/blob/master/Examples/Vapor-Telegram-Bot/Sources/Vapor-Telegram-Bot/configure.swift)
   ```swift
