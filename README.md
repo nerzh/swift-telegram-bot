@@ -99,16 +99,19 @@ class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
         
     override
     func handle() async {
+        /// defaultBaseHandler example
         await add(TGBaseHandler({ update in
             guard let message = update.message else { return }
             let params: TGSendMessageParams = .init(chatId: .chat(message.chat.id), text: "TGBaseHandler")
             try await self.bot.sendMessage(params: params)
         }))
-        
+
+        /// commandPingHandler example
         await add(TGCommandHandler(commands: ["/ping"]) { update in
             try await update.message?.reply(text: "pong", bot: self.bot)
         })
-        
+
+        /// commandShowButtonsHandler example
         await add(TGCommandHandler(commands: ["/show_buttons"]) { update in
             guard let userId = update.message?.from?.id else { fatalError("user id not found") }
             let buttons: [[TGInlineKeyboardButton]] = [
@@ -120,7 +123,8 @@ class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
                                                     replyMarkup: .inlineKeyboardMarkup(keyboard))
             try await self.bot.sendMessage(params: params)
         })
-        
+
+        /// buttonsActionHandler 1 example
         await add(TGCallbackQueryHandler(pattern: "press 1") { update in
             await self.bot.log.info("press 1")
             guard let userId = update.callbackQuery?.from.id else { fatalError("user id not found") }
@@ -132,7 +136,8 @@ class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
             try await self.bot.answerCallbackQuery(params: params)
             try await self.bot.sendMessage(params: .init(chatId: .chat(userId), text: "press 1"))
         })
-        
+
+        /// buttonsActionHandler 2 example
         await add(TGCallbackQueryHandler(pattern: "press 2") { update in
             await self.bot.log.info("press 2")
             guard let userId = update.callbackQuery?.from.id else { fatalError("user id not found") }
