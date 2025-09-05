@@ -1,8 +1,8 @@
-// swift-tools-version:5.8
+// swift-tools-version:6.1
 
 import PackageDescription
 
-let name: String = "SwiftTelegramSdk"
+let name: String = "SwiftTelegramBot"
 
 let package = Package(
     name: name,
@@ -25,6 +25,9 @@ let package = Package(
                 .product(name: "SwiftRegularExpression", package: "swift-regular-expression"),
                 .product(name: "SwiftCustomLogger", package: "swift-custom-logger"),
             ]
-        )
+        ),
+        .testTarget(
+            name: "\(name)Tests", dependencies: [.init(stringLiteral: name), "SwiftCustomLogger"]
+        ),
     ]
 )
