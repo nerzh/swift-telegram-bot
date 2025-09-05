@@ -1,7 +1,4 @@
 //
-//  File.swift
-//  
-//
 //  Created by Oleh Hudeichuk on 21.05.2021.
 //
 
@@ -9,8 +6,6 @@ import Foundation
 import Logging
 
 public protocol TGClientPrtcl: Sendable {
-    
-    var log: Logger { get set }
     
     @discardableResult
     func post<Params: Encodable, Response: Decodable>(_ url: URL, params: Params?, as mediaType: HTTPMediaType?) async throws -> Response

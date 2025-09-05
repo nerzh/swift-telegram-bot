@@ -6,7 +6,7 @@
 //
 import Foundation
 /// This object represents a Telegram server response container.
-public struct TGTelegramContainer<T: Decodable & Sendable>: Decodable & Sendable {
+public struct TGTelegramContainer<T: Decodable>: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case ok = "ok"

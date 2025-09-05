@@ -1,43 +1,38 @@
 //
-//  File.swift
-//  
-//
 //  Created by Oleh Hudeichuk on 29.05.2021.
 //
 
 import Foundation
 import Logging
 
-public protocol TGDispatcherPrtcl: Sendable {
-    var name: String { get }
-    var handlersGroup: SendableValue<[[TGHandlerPrtcl]]> { get }
-    /// priority - priority of execution by handlers
-    func add(_ handler: TGHandlerPrtcl, priority: Int) async
-    func add(_ handler: TGHandlerPrtcl) async
-    func remove(_ handler: TGHandlerPrtcl, from priority: Int?) async
-    func process(_ updates: [TGUpdate]) async
-}
-
-public final class TGDefaultDispatcher: TGDispatcherPrtcl {
+open class TGDefaultDispatcher: Equatable, @unchecked Sendable {
     public var name: String { String(describing: Self.self) }
+    public unowned let bot: TGBot
+    public let log: Logger
     public let handlersGroup: SendableValue<[[TGHandlerPrtcl]]> = .init([])
-    private let log: Logger
     private let handlersId: SendableValue<Int> = .init(0)
     private var nextHandlerId: Int {
         get async {
             await handlersId.change { $0 += 1 }
         }
     }
-//    private var index: Int = 0
-
+    
     private typealias Level = Int
     private typealias IndexId = Int
     private typealias Position = Int
     private let handlersIndex: SendableValue<[Level: [IndexId: Position]]> = .init([:])
-
-    required public init(log: Logger) async throws {
-        self.log = log
+    private let tasks: SendableValue<[UUID: Task<Void, Never>]> = .init([:])
+    
+    public static func == (lhs: TGDefaultDispatcher, rhs: TGDefaultDispatcher) -> Bool {
+        lhs.name == rhs.name
     }
+
+    public required init(bot: TGBot, logger: Logger) {
+        self.bot = bot
+        self.log = logger
+    }
+    
+    public func handle() async {}
 
     public func add(_ handler: TGHandlerPrtcl, priority: Int) async {
         /// add uniq index id
@@ -87,26 +82,53 @@ public final class TGDefaultDispatcher: TGDispatcherPrtcl {
     }
     
     public func process(_ updates: [TGUpdate]) async {
+        log.trace("dispatcher send to processing: \(updates.count) updates")
         for update in updates {
             await self.processByHandler(update)
         }
+        log.trace("dispatcher finish send processing: \(updates.count) updates")
     }
     
     private func processByHandler(_ update: TGUpdate) async {
+        log.trace("processByHandler start")
         log.trace("\(dump(update))")
         if await handlersGroup.value.isEmpty { return }
         for i in await 1...handlersGroup.value.count {
             for handler in await handlersGroup.value[handlersGroup.value.count - i] {
                 if await handler.check(update: update) {
-                    Task.detached(priority: .high) { [log] in
-                        do {
-                            try await handler.handle(update: update)
-                        } catch {
-                            log.error("\(BotError(error).localizedDescription)")
+                    await tasks.change {
+                        let uuid: UUID = UUID()
+                        $0[uuid] = Task.detached(priority: .high) { [weak self, uuid] in
+                            if Task.isCancelled { return }
+                            guard let self = self else { return }
+                            log.trace("processByHandler Task start \(uuid)")
+                            do {
+                                try await handler.handle(update: update)
+                            } catch {
+                                self.log.error("\(BotError(error).localizedDescription)")
+                            }
+                            await self.tasks.change {
+                                $0.removeValue(forKey: uuid)
+                            }
+                            log.trace("processByHandler Task finish \(uuid)")
                         }
                     }
                 }
             }
         }
     }
+    
+    deinit {
+        let group: DispatchGroup = .init()
+        group.enter()
+        Task { [weak self] in
+            for task in (await self?.tasks.value ?? [:]).values {
+                task.cancel()
+            }
+            group.leave()
+        }
+        group.wait()
+    }
 }
+
+

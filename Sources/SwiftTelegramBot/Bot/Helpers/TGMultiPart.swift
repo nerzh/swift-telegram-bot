@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Oleh Hudeichuk on 02.06.2021.
 //
@@ -12,7 +12,12 @@ import Logging
 extension NSMutableData {
 
     func appendString(_ string: String) throws {
-        guard let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false) else {
+        guard
+            let data = string.data(
+                using: String.Encoding.utf8,
+                allowLossyConversion: false
+            )
+        else {
             throw BotError(reason: "Can Not Convert String: \(string) to Data")
         }
         append(data)
@@ -32,26 +37,26 @@ public protocol NetSessionFilePrtcl {
 ///
 /// по-сути обертка над словарем, чтобы в checkValue этим не заниматься
 private struct FileContainer {
-    
+
     let fileName: String
     let data: Data
     let mimeType: String?
-    
+
     init?(dictionary: [String: Any]) {
         guard let fileName = dictionary["fileName"] as? String else {
             return nil
         }
-        
+
         guard let data = dictionary["data"] as? String else {
             return nil
         }
-        
+
         guard let rawData = Data(base64Encoded: data) else {
             return nil
         }
-        
+
         let mimeType = dictionary["dictionary"] as? String
-        
+
         self.fileName = fileName
         self.data = rawData
         self.mimeType = mimeType
@@ -61,14 +66,14 @@ private struct FileContainer {
 // MARK: - Multipart
 
 public class NetMultipartData {
-    public var body            : NSMutableData = NSMutableData()
-    private var _boundary      : String        = ""
-    private var boundaryPrefix : String        = ""
-    private var finishBoundary : String        = ""
+    public var body: NSMutableData = NSMutableData()
+    private var _boundary: String = ""
+    private var boundaryPrefix: String = ""
+    private var finishBoundary: String = ""
     private var log: Logger
-    public var boundary : String {
+    public var boundary: String {
         set {
-            _boundary      = newValue
+            _boundary = newValue
             boundaryPrefix = "--\(newValue)\r\n"
             finishBoundary = "--\(self.boundary)--"
         }
@@ -87,13 +92,22 @@ public class NetMultipartData {
 
     public func append(_ name: String, _ value: Any) throws {
         try body.appendString(boundaryPrefix)
-        try body.appendString("Content-Disposition: form-data; name=\"\(name)\"\r\n\r\n")
+        try body.appendString(
+            "Content-Disposition: form-data; name=\"\(name)\"\r\n\r\n"
+        )
         try body.appendString("\(value)\r\n")
     }
 
-    public func appendFile(_ name: String, _ data: Data, _ fileName: String, mimeType: String) throws {
+    public func appendFile(
+        _ name: String,
+        _ data: Data,
+        _ fileName: String,
+        mimeType: String
+    ) throws {
         try body.appendString(boundaryPrefix)
-        try body.appendString("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n")
+        try body.appendString(
+            "Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n"
+        )
         try body.appendString("Content-Type: \(mimeType)\r\n\r\n")
         body.append(data)
         try body.appendString("\r\n")
@@ -110,22 +124,29 @@ public class NetMultipartData {
         }
     }
 
-    public func toTelegramMultipartData(_ anyObject: Dictionary<String, Any>) throws -> NSMutableData {
+    public func toTelegramMultipartData(_ anyObject: [String: Any]) throws
+        -> NSMutableData
+    {
         func checkValue(_ parentName: String, _ anyObject: Any) throws {
-            if let array = anyObject as? Array<Any> {
+            if let array = anyObject as? [Any] {
                 do {
-                    let data = try JSONSerialization.data(withJSONObject: array, options: [])
+                    let data = try JSONSerialization.data(
+                        withJSONObject: array,
+                        options: []
+                    )
                     let json = String(decoding: data, as: UTF8.self)
                     try append(parentName, json)
                 } catch {
                     log.critical("\(error.logMessage)")
                 }
-            } else if let dictionary = anyObject as? Dictionary<String, Any> {
+            } else if let dictionary = anyObject as? [String: Any] {
                 if let file = FileContainer(dictionary: dictionary) {
-                    try appendFile(parentName,
-                               file.data,
-                               file.fileName,
-                               mimeType: file.mimeType ?? "")
+                    try appendFile(
+                        parentName,
+                        file.data,
+                        file.fileName,
+                        mimeType: file.mimeType ?? ""
+                    )
                 } else if parentName.isEmpty {
                     for key in dictionary.keys {
                         let newNodeName = "\(key)"
@@ -133,7 +154,10 @@ public class NetMultipartData {
                     }
                 } else {
                     do {
-                        let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                        let data = try JSONSerialization.data(
+                            withJSONObject: dictionary,
+                            options: []
+                        )
                         let json = String(decoding: data, as: UTF8.self)
                         try append(parentName, json)
                     } catch {
@@ -150,15 +174,25 @@ public class NetMultipartData {
     }
 }
 
-public extension Encodable {
+extension Encodable {
 
-    func toMultiPartFormData(log: Logger) throws -> (body: NSMutableData, boundary: String) {
+    public func toMultiPartFormData(log: Logger) throws -> (
+        body: NSMutableData, boundary: String
+    ) {
         let encodedData = try JSONEncoder().encode(self)
-        guard let dictironary: [String : Any] = try JSONSerialization.jsonObject(with: encodedData, options: []) as? [String : Any] else {
+        guard
+            let dictironary: [String: Any] = try JSONSerialization.jsonObject(
+                with: encodedData,
+                options: []
+            ) as? [String: Any]
+        else {
             throw BotError(reason: "Not encode to dictionary \(Self.self)")
         }
         let multipart: NetMultipartData = .init(log: log)
 
-        return (body: try multipart.toTelegramMultipartData(dictironary), boundary: multipart.boundary)
+        return (
+            body: try multipart.toTelegramMultipartData(dictironary),
+            boundary: multipart.boundary
+        )
     }
 }

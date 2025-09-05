@@ -1,7 +1,4 @@
 //
-//  File.swift
-//  
-//
 //  Created by Oleh Hudeichuk on 29.05.2021.
 //
 
@@ -11,12 +8,15 @@ import Logging
 public protocol TGConnectionPrtcl: Sendable {
     @discardableResult
     func start(bot: TGBot) async throws -> Bool
+    
+    @discardableResult
+    func stop(bot: TGBot) async throws -> Bool
 }
 
 public enum TGConnectionType: Sendable {
-    case longpolling(limit: Int?,
-                     timeout: Int?,
-                     allowedUpdates: [TGUpdate.CodingKeys]?)
+    case longpolling(limit: Int? = nil,
+                     timeout: Int? = nil,
+                     allowedUpdates: [TGUpdate.CodingKeys]? = nil)
     case webhook(webHookURL: URL)
 }
 
@@ -26,12 +26,8 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
     public let allowedUpdates: [TGUpdate.CodingKeys]?
     
     private let offsetUpdates: SendableValue<Int> = .init(0)
-    private var newOffsetUpdates: Int {
-        get async {
-            await offsetUpdates.change { $0 += 1 }
-        }
-    }
     private let log: Logger
+    private let task: SendableValue<Task<Void, Never>> = .init(.init {})
     
     public init(limit: Int? = nil,
                 timeout: Int? = 10,
@@ -49,15 +45,17 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
         /// delete webhook because: You will not be able to receive updates using getUpdates for as long as an outgoing webhook is set up.
         let deleteWebHookParams: TGDeleteWebhookParams = .init(dropPendingUpdates: false)
         try await bot.deleteWebhook(params: deleteWebHookParams)
-        Task.detached { [weak self] in
-            while !Task.isCancelled {
-                guard let self = self else { break }
-                do {
-                    try await Task.sleep(nanoseconds: 1_000_000_000)
-                    let updates: [TGUpdate] = try await self.getUpdates(bot: bot)
-                    await bot.dispatcher.process(updates)
-                } catch {
-                    self.log.error("\(BotError(error).localizedDescription)")
+        await task.change { 
+            $0 = Task.detached { [weak self] in
+                while !Task.isCancelled {
+                    guard let self = self else { break }
+                    do {
+                        log.trace("next try get updates \(UUID())")
+                        let updates: [TGUpdate] = try await self.getUpdates(bot: bot)
+                        try await bot.processing(updates: updates)
+                    } catch {
+                        self.log.error("\(BotError(error).localizedDescription)")
+                    }
                 }
             }
         }
@@ -65,15 +63,22 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
         return true
     }
     
+    @discardableResult
+    public func stop(bot: TGBot) async throws -> Bool {
+        await task.value.cancel()
+        return true
+    }
+    
     private func getUpdates(bot: TGBot) async throws -> [TGUpdate] {
         let allowedUpdates: [String] = (allowedUpdates ?? []).map { $0.rawValue }
-        let params: TGGetUpdatesParams = .init(offset: await newOffsetUpdates,
+        let newOffset: Int? = await offsetUpdates.value == 0 ? nil : await offsetUpdates.value
+        let params: TGGetUpdatesParams = .init(offset: newOffset,
                                                limit: limit,
                                                timeout: timeout,
                                                allowedUpdates: allowedUpdates)
         let response = try await bot.getUpdates(params: params)
         if let lastUpdate: TGUpdate = response.last {
-            await offsetUpdates.change { $0 = lastUpdate.updateId }
+            await offsetUpdates.change { $0 = lastUpdate.updateId + 1 }
         }
         return response
     }
@@ -92,5 +97,11 @@ public final class TGWebHookConnection: TGConnectionPrtcl {
     public func start(bot: TGBot) async throws -> Bool {
         let webHookParams: TGSetWebhookParams = .init(url: webHookURL.description)
         return try await bot.setWebhook(params: webHookParams)
+    }
+    
+    @discardableResult
+    public func stop(bot: TGBot) async throws -> Bool {
+        let deleteWebHookParams: TGDeleteWebhookParams = .init(dropPendingUpdates: false)
+        return try await bot.deleteWebhook(params: deleteWebHookParams)
     }
 }

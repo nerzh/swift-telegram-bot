@@ -113,15 +113,15 @@ class Api
       out <<  "public final class #{PREFIX_LIB}#{type_name}: #{var_protocol} {\n\n"
     
       if keys_block != ""
-        out << "#{ONE}/// Custom keys for coding/decoding `#{type_name}` struct\n"\
-        "#{ONE}public enum CodingKeys: String, CodingKey {\n"\
-        "#{keys_block}"\
-        "#{ONE}}\n"\
-        "\n"\
-        "#{vars_block}"\
-        "#{ONE}public init (#{init_params_block.chomp(', ')}) {\n"\
-        "#{init_block}"\
-        "#{ONE}}\n"
+        out << "#{ONE}/// Custom keys for coding/decoding `#{type_name}` struct\n"
+        out << "#{ONE}public enum CodingKeys: String, CodingKey {\n"
+        out << "#{keys_block}"
+        out << "#{ONE}}\n"
+        out << "\n"
+        out << "#{vars_block}"
+        out << "#{ONE}public init (#{init_params_block.chomp(', ')}) {\n"
+        out << "#{init_block}"
+        out << "#{ONE}}\n"
       end
       out << "}\n"
     end

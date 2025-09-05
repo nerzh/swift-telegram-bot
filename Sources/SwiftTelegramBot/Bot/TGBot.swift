@@ -12,7 +12,6 @@ public actor TGBot {
     )!
 
     public let connectionType: TGConnectionType
-    public let dispatcher: TGDispatcherPrtcl
     public let botId: String
     public let tgURI: URL
     public var tgClient: TGClientPrtcl {
@@ -29,16 +28,19 @@ public actor TGBot {
     private let limiter: LimiterAsync?
     private let connection: TGConnectionPrtcl
     private var client: TGClientPrtcl
-    public var dispatchGroups: [TGDispatcherPrtcl] = []
+    private var _dispatchGroups: [TGDefaultDispatcher] = []
+    public var dispatchers: [TGDefaultDispatcher] {
+        get { _dispatchGroups }
+    }
+    private var started: Bool = false
     
     public init(
         connectionType: TGConnectionType,
-        dispatcher: TGDispatcherPrtcl? = nil,
         tgClient: TGClientPrtcl,
         tgURI: URL = TGBot.standardTGURL,
         botId: String,
         apiRequestLimitWebHook: UInt? = 30,
-        apiRequestLimitLongPolling: UInt? = 2,
+        apiRequestLimitLongPolling: UInt? = 5,
         log: Logger = .init(label: "com.tgbot")
     ) async throws {
         self.connectionType = connectionType
@@ -70,23 +72,52 @@ public actor TGBot {
             self.connection = TGWebHookConnection(webHookURL: webHookURL)
         }
         client = tgClient
-        client.log = log
         self.botId = botId
         self.tgURI = tgURI
-        if let dispatcher {
-            self.dispatcher = dispatcher
-        } else {
-            self.dispatcher = try await TGDefaultDispatcher(log: log)
-        }
         self.log = log
     }
-
-    public func getMethodURL(_ methodName: String) -> String {
+    
+    func getMethodURL(_ methodName: String) -> String {
         "\(tgURI)/bot\(botId)/\(methodName)"
     }
-
+    
+    public func add(dispatcher: TGDefaultDispatcher.Type...) throws {
+        if started {
+            throw BotError("Bot already started. Please add dispatchers before start")
+        }
+        for dispatcherType in dispatcher {
+            _dispatchGroups.append(dispatcherType.init(bot: self, logger: log))
+        }
+    }
+    
+    public func remove<T: TGDefaultDispatcher>(dispatcher: T) {
+        _dispatchGroups.removeAll(where: { $0 == dispatcher })
+    }
+    
+    public func processing(updates: [TGUpdate]) async throws {
+        log.trace("processing: Get new updates: \(updates.count)")
+        for dispatch in dispatchers {
+            await dispatch.process(updates)
+        }
+        log.trace("processing: send all updates to dispatchers")
+    }
+    
     @discardableResult
     public func start() async throws -> Bool {
-        try await connection.start(bot: self)
+        if started {
+            throw BotError("Bot already started")
+        }
+        started = true
+        for dispatch in dispatchers {
+            await dispatch.handle()
+        }
+        return try await connection.start(bot: self)
+    }
+    
+    @discardableResult
+    public func stop() async throws -> Bool {
+        try await connection.stop(bot: self)
     }
 }
+
+
