@@ -8,7 +8,7 @@
 import Foundation
 
 /// Handler for CallbackQuery updates
-actor TGCallbackQueryHandler: TGHandlerPrtcl {
+public final class TGCallbackQueryHandler: TGHandlerPrtcl {
 
     public let id: SendableValue<Int> = .init(0)
     public let name: String

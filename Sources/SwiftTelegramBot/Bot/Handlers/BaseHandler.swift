@@ -4,7 +4,7 @@
 
 import Foundation
 
-public actor TGBaseHandler: TGHandlerPrtcl {
+public final class TGBaseHandler: TGHandlerPrtcl {
     
     public let id: SendableValue<Int> = .init(0)
     public let name: String
