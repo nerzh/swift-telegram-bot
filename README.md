@@ -28,11 +28,11 @@ For now with swift 6 please use 4.0.0 and above
   - /ping
   - /show_buttons
 # Examples
-- [Vapor Telegram Bot](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/Vapor-Telegram-Bot)
-- [Hummingbird Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/Hummingbird-AsyncHttpClient-Telegram-Bot)
-- [Hummingbird Telegram Bot (URLSession)](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/Hummingbird-URLSession-Telegram-Bot)
-- [Smoke Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/Smoke-AsyncHttpClient-Telegram-Bot)
-- [FlyingFox Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples/FlyingFox-AsyncHttpClient-Telegram-Bot)
+- [Vapor Telegram Bot](https://github.com/nerzh/swift-telegram-bot/tree/master/Examples/Vapor-Telegram-Bot)
+- [Hummingbird Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-bot/tree/master/Examples/Hummingbird-AsyncHttpClient-Telegram-Bot)
+- [Hummingbird Telegram Bot (URLSession)](https://github.com/nerzh/swift-telegram-bot/tree/master/Examples/Hummingbird-URLSession-Telegram-Bot)
+- [Smoke Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-bot/tree/master/Examples/Smoke-AsyncHttpClient-Telegram-Bot)
+- [FlyingFox Telegram Bot (AsyncHttpClient)](https://github.com/nerzh/swift-telegram-bot/tree/master/Examples/FlyingFox-AsyncHttpClient-Telegram-Bot)
 
 ## Bot configuration.
 ### Define bot ID
