@@ -32,9 +32,9 @@ open class TGDefaultDispatcher: Equatable, @unchecked Sendable {
         self.log = logger
     }
     
-    public func handle() async {}
+    open func handle() async {}
 
-    public func add(_ handler: TGHandlerPrtcl, priority: Int) async {
+    open func add(_ handler: TGHandlerPrtcl, priority: Int) async {
         /// add uniq index id
         let handler: TGHandlerPrtcl = handler
         let nextHandlerId = await nextHandlerId
@@ -58,11 +58,11 @@ open class TGDefaultDispatcher: Equatable, @unchecked Sendable {
         await handlersIndex.change { $0[priority]?[handleId] = handlerPositionSendable }
     }
 
-    public func add(_ handler: TGHandlerPrtcl) async {
+    open func add(_ handler: TGHandlerPrtcl) async {
         await add(handler, priority: 0)
     }
 
-    public func remove(_ handler: TGHandlerPrtcl, from priority: Int?) async {
+    open func remove(_ handler: TGHandlerPrtcl, from priority: Int?) async {
         let priority: Level = priority ?? 0
         let indexId: IndexId = await handler.id.value
         guard
@@ -81,7 +81,7 @@ open class TGDefaultDispatcher: Equatable, @unchecked Sendable {
         }
     }
     
-    public func process(_ updates: [TGUpdate]) async {
+    open func process(_ updates: [TGUpdate]) async {
         log.trace("dispatcher send to processing: \(updates.count) updates")
         for update in updates {
             await self.processByHandler(update)
