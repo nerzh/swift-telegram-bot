@@ -7,7 +7,6 @@
 
 import FlyingFox
 import Logging
-import SwiftTelegramSdk
 import Foundation
 
 struct TelegramApplicationContext {

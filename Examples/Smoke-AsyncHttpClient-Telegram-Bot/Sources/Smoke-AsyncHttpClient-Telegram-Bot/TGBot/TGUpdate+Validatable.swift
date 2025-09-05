@@ -7,7 +7,7 @@
 
 import SmokeOperationsHTTP1
 import SmokeOperations
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 public struct EmptyQuery: Decodable {}
 public struct EmptyPath: Decodable {}

@@ -1,4 +1,4 @@
-// swift-tools-version:5.8
+// swift-tools-version:6.0
 
 import PackageDescription
 
@@ -10,8 +10,8 @@ var targetDependencies: [PackageDescription.Target.Dependency] = [
     .product(name: "Vapor", package: "vapor"),
 ]
 
-packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-sdk", .upToNextMajor(from: "3.0.3")))
-targetDependencies.append(.product(name: "SwiftTelegramSdk", package: "swift-telegram-sdk"))
+packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.0.3")))
+targetDependencies.append(.product(name: "SwiftTelegramBot", package: "swift-telegram-bot"))
 
 //packageDependencies.append(.package(path: "/Users/nerzh/mydata/swift_projects/SwiftTelegramSdk"))
 //targetDependencies.append(.product(name: "SwiftTelegramSdk", package: "SwiftTelegramSdk"))

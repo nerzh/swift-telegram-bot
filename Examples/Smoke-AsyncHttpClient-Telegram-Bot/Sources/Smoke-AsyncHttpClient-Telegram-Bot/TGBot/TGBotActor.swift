@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 actor TGBotActor {
     private var _bot: TGBot!

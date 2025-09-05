@@ -7,7 +7,7 @@
 
 import Foundation
 import Hummingbird
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 public func configure(_ app: some ApplicationProtocol) async throws {
     let tgApi: String = "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
@@ -21,14 +21,15 @@ public func configure(_ app: some ApplicationProtocol) async throws {
     //                                  log: app.logger)
     
     /// SET LONGPOLLING CONNECTION
-    let bot: TGBot = try await .init(connectionType: .longpolling(limit: nil,
-                                     timeout: nil, allowedUpdates: nil),
-                                     dispatcher: nil, tgClient: AsyncHttpTGClient(),
-                                     tgURI: TGBot.standardTGURL, botId: tgApi, log: app.logger)
+    let bot: TGBot = try await .init(connectionType: .longpolling(),
+                                     tgClient: AsyncHttpTGClient(),
+                                     tgURI: TGBot.standardTGURL,
+                                     botId: tgApi,
+                                     log: app.logger)
     
     // set level of debug if you needed
     // bot.log.logLevel = .error
     await botActor.setBot(bot)
-    await DefaultBotHandlers.addHandlers(bot: botActor.bot)
+    try await botActor.bot.add(dispatcher: DefaultBotHandlers.self)
     try await botActor.bot.start()
 }

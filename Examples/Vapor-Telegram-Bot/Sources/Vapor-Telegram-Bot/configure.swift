@@ -7,30 +7,26 @@
 
 import Foundation
 import Vapor
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 public func configure(_ app: Application) async throws {
         let tgApi: String = "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
     
     /// SET WEBHOOK CONNECTION
     // let bot: TGBot = try await .init(connectionType: .webhook(webHookURL: URL(string: "https://your_domain/telegramWebHook")!),
-    //                            dispatcher: nil, tgClient: VaporTGClient(client: app.client),
+    //                            tgClient: VaporTGClient(client: app.client),
     //                            tgURI: TGBot.standardTGURL, botId: tgApi, log: app.logger)
     
     /// SET LONGPOLLING CONNECTION
     // set level of debug if you needed
     app.logger.logLevel = .info
-    let bot: TGBot = try await .init(connectionType: .longpolling(limit: nil,
-                                                                  timeout: nil,
-                                                                  allowedUpdates: nil),
-                                     dispatcher: nil,
-                                     tgClient: VaporTGClient(client: app.client),
+    app.bot = try await .init(connectionType: .longpolling(),
+                                     tgClient: TGClientDefault(),
                                      tgURI: TGBot.standardTGURL,
                                      botId: tgApi,
                                      log: app.logger)
-    await botActor.setBot(bot)
-    await DefaultBotHandlers.addHandlers(bot: botActor.bot)
-    try await botActor.bot.start()
+    try await app.bot.add(dispatcher: DefaultBotHandlers.self)
+    try await app.bot.start()
     
     try routes(app)
 }

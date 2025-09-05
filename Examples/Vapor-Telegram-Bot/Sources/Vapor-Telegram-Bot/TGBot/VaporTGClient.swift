@@ -7,7 +7,7 @@
 
 import Foundation
 import Vapor
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 public enum TGHTTPMediaType: String, Equatable {
     case formData
@@ -18,8 +18,8 @@ private struct TGEmptyParams: Encodable {}
 
 public final class VaporTGClient: TGClientPrtcl {
     
-    public typealias HTTPMediaType = SwiftTelegramSdk.HTTPMediaType
-    public var log: Logging.Logger = .init(label: "VaporTGClient")
+    public typealias HTTPMediaType = SwiftTelegramBot.HTTPMediaType
+    private let log: Logging.Logger = .init(label: "VaporTGClient")
     private let client: Vapor.Client
     
     public init(client: Vapor.Client) {
@@ -53,7 +53,7 @@ public final class VaporTGClient: TGClientPrtcl {
                 let buffer = ByteBuffer.init(data: rawMultipart.body as Data)
                 clientRequest.body = buffer
                 /// Debug
-                // TGBot.log.critical("url: \(url)\n\(String(decoding: rawMultipart.body, as: UTF8.self))")
+                // log.critical("url: \(url)\n\(String(decoding: rawMultipart.body, as: UTF8.self))")
             } else {
                 let mediaType: Vapor.HTTPMediaType = if let mediaType {
                     .init(type: mediaType.type, subType: mediaType.subType, parameters: mediaType.parameters)

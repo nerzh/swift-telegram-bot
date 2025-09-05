@@ -8,12 +8,12 @@
 import Foundation
 import SmokeOperations
 import SmokeOperationsHTTP1
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 struct TelegramController {
     static func telegramWebHookHandler(input: TGUpdate, context: TelegramApplicationContext) throws -> Void {
         Task {
-            await context.botActor.bot.dispatcher.process([input])
+            await context.botActor.bot.processing(updates: [input])
         }
     }
 }

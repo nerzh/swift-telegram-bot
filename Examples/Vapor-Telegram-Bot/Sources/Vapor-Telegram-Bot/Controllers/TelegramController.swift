@@ -7,7 +7,7 @@
 
 import Foundation
 import Vapor
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 final class TelegramController: RouteCollection {
     
@@ -20,7 +20,7 @@ extension TelegramController {
     
     func telegramWebHook(_ req: Request) async throws -> Bool {
         let update: TGUpdate = try req.content.decode(TGUpdate.self)
-        Task { await botActor.bot.dispatcher.process([update]) }
+        await app.bot.processing(updates: [update])
         return true
     }
 }

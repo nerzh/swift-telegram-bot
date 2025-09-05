@@ -5,7 +5,7 @@
 //  Created by Oleh Hudeichuk on 21.05.2021.
 //
 
-import SwiftTelegramSdk
+import SwiftTelegramBot
 import Hummingbird
 import Logging
 

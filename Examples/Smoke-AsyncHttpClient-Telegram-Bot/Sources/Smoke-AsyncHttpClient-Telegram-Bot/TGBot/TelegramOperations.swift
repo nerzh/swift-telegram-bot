@@ -7,7 +7,7 @@
 
 import SmokeOperationsHTTP1
 import SmokeOperations
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 enum TelegramOperations: String, Hashable, CustomStringConvertible, OperationIdentity {
     case telegramWebHook = "TelegramWebHook"

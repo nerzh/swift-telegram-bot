@@ -7,7 +7,7 @@
 
 import Logging
 import Hummingbird
-import SwiftTelegramSdk
+import SwiftTelegramBot
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
@@ -22,8 +22,8 @@ private struct TGEmptyParams: Encodable {}
 
 public final class URLSessionTGClient: TGClientPrtcl {
     
-    public typealias HTTPMediaType = SwiftTelegramSdk.HTTPMediaType
-    public var log: Logging.Logger = .init(label: "URLSessionTGClient")
+    public typealias HTTPMediaType = SwiftTelegramBot.HTTPMediaType
+    public let log: Logging.Logger = .init(label: "URLSessionTGClient")
     private let session: URLSession
     
     public init(session: URLSession = .shared) {

@@ -6,13 +6,13 @@
 //
 
 import Hummingbird
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 final class TelegramController {
     func addRoutes(to group: RouterGroup<some RequestContext>) {
         group.post("telegramWebHook") { req, context in
             let update: TGUpdate = try await req.decode(as: TGUpdate.self, context: context)
-            Task { await botActor.bot.dispatcher.process([update]) }
+            Task { await botActor.bot.processing(updates: [update]) }
             return Response(status: 200)
         }
     }

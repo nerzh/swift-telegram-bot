@@ -7,7 +7,7 @@
 
 import Foundation
 import FlyingFox
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 final class TelegramController {
     func addRoutes(to group: FlyingFox.HTTPRoute) async {
@@ -16,7 +16,7 @@ final class TelegramController {
                 let body = try await request.bodyData
                 let update = try JSONDecoder().decode(TGUpdate.self, from: body)
                 Task {
-                    await appContext.botActor.bot.dispatcher.process([update])
+                    await appContext.botActor.bot.processing(updates: [update])
                 }
             } catch {
                 return HTTPResponse(statusCode: .badRequest)

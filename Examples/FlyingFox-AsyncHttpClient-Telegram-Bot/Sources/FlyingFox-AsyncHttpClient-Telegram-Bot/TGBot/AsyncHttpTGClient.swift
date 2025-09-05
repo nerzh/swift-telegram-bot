@@ -8,7 +8,7 @@
 import Logging
 import Foundation
 import AsyncHTTPClient
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 public enum TGHTTPMediaType: String, Equatable {
     case formData
@@ -19,8 +19,8 @@ private struct TGEmptyParams: Encodable {}
 
 public final class AsyncHttpTGClient: TGClientPrtcl {
     
-    public typealias HTTPMediaType = SwiftTelegramSdk.HTTPMediaType
-    public var log: Logger = .init(label: "AsyncHttpTGClient")
+    public typealias HTTPMediaType = SwiftTelegramBot.HTTPMediaType
+    public let log: Logger = .init(label: "AsyncHttpTGClient")
     private let client: HTTPClient
     
     public init(client: HTTPClient = .shared) {
