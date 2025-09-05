@@ -1,4 +1,4 @@
-// swift-tools-version:6.1
+// swift-tools-version:6.0
 
 import PackageDescription
 
@@ -27,7 +27,11 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "\(name)Tests", dependencies: [.init(stringLiteral: name), "SwiftCustomLogger"]
+            name: "\(name)Tests",
+            dependencies: [
+                .init(stringLiteral: name),
+                .product(name: "SwiftCustomLogger", package: "swift-custom-logger"),
+            ]
         ),
     ]
 )

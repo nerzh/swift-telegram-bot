@@ -94,7 +94,7 @@ public actor TGBot {
         _dispatchGroups.removeAll(where: { $0 == dispatcher })
     }
     
-    public func processing(updates: [TGUpdate]) async throws {
+    public func processing(updates: [TGUpdate]) async {
         log.trace("processing: Get new updates: \(updates.count)")
         for dispatch in dispatchers {
             await dispatch.process(updates)
