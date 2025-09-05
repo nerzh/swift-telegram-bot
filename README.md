@@ -70,7 +70,7 @@ final class TelegramController: RouteCollection {
 
     func telegramWebHook(_ req: Request) async throws -> Bool {
         let update: TGUpdate = try req.content.decode(TGUpdate.self)
-        Task { try await bot.processing(updates: [updates]) }
+        Task { await bot.processing(updates: [update]) }
         return true
     }
 }
