@@ -81,12 +81,16 @@ public actor TGBot {
         "\(tgURI)/bot\(botId)/\(methodName)"
     }
     
-    public func add(dispatcher: TGDefaultDispatcher.Type...) throws {
+    public func add(dispatcher: TGDefaultDispatcher.Type) throws {
         if started {
             throw BotError("Bot already started. Please add dispatchers before start")
         }
-        for dispatcherType in dispatcher {
-            _dispatchGroups.append(dispatcherType.init(bot: self, logger: log))
+        _dispatchGroups.append(dispatcher.init(bot: self, logger: log))
+    }
+    
+    public func add(_ dispatchers: TGDefaultDispatcher.Type...) throws {
+        for dispatcherType in dispatchers {
+            try add(dispatcher: dispatcherType)
         }
     }
     
