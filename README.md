@@ -1,4 +1,4 @@
-# Swift Telegram Sdk for Telegram Bot Api (SDK for creating Telegram Bots in Swift)
+# Swift Telegram Bot for Telegram Bot Api (SDK for creating Telegram Bots in Swift)
 
 ### Please, support with ⭐️
 
