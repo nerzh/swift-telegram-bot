@@ -155,8 +155,8 @@ class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
 
 # Advanced Example Usage
 ## You should to implement TGClientPrtcl protocol
-To configure and run a bot with or without any framework, you need to implement a simple TGClient protocol to send requests to the network with Content-Type: multipart/form-data.
-You can see an example here: [VaporTGClient](https://github.com/nerzh/swift-telegram-sdk/blob/master/Examples/Vapor-Telegram-Bot/Sources/Vapor-Telegram-Bot/TGBot/VaporTGClient.swift)
+To configure and run a bot with or without any framework, you need to use TGClientDefault or implement a simple TGClient protocol to send requests to the network with Content-Type: multipart/form-data.
+You can see an example here: [TGClientDefault](https://github.com/nerzh/swift-telegram-bot/blob/master/Sources/SwiftTelegramBot/Bot/Helpers/TGClientDefault.swift)
 
 ```swift
 public protocol TGClientPrtcl {
