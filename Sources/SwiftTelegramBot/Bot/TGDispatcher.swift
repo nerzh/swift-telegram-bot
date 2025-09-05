@@ -32,7 +32,23 @@ open class TGDefaultDispatcher: Equatable, @unchecked Sendable {
         self.log = logger
     }
     
-    open func handle() async {}
+    open func handle() async {
+        fatalError("""
+        You must override the handle() method in your Dispatcher. All handlers must be added inside it.
+        
+        For example:
+        
+        override 
+        func handle() async {
+            await add(TGBaseHandler({ update in
+                guard let message = update.message else { return }
+                let params: TGSendMessageParams = .init(chatId: .chat(message.chat.id), text: "TGBaseHandler")
+                try await self.bot.sendMessage(params: params)
+            }))
+        }
+        
+        """)
+    }
 
     open func add(_ handler: TGHandlerPrtcl, priority: Int) async {
         /// add uniq index id
