@@ -26,11 +26,14 @@ public final class TGClientDefault: TGClientPrtcl {
     public let log: SendableValue<Logger> = .init(
         .init(label: "URLSessionTGClient")
     )
-    private let session: URLSession
-
-    public init(session: URLSession = .shared) {
-        self.session = session
-    }
+    private let session: URLSession = URLSession(configuration: {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        //        config.timeoutIntervalForRequest  = 1000
+        //        config.timeoutIntervalForResource = 0
+        return config
+    }())
 
     @discardableResult
     public func post<Params: Encodable, Response: Decodable>(
@@ -38,29 +41,9 @@ public final class TGClientDefault: TGClientPrtcl {
         params: Params? = nil,
         as mediaType: HTTPMediaType? = nil
     ) async throws -> Response {
-        let request = try await makeRequest(
-            url: url,
-            params: params,
-            as: mediaType
-        )
-
-        #if canImport(FoundationNetworking)
-            let (data, response): (Data, URLResponse) =
-                await withCheckedContinuation { continuation in
-                    URLSession.shared.dataTask(with: request) {
-                        data,
-                        response,
-                        _ in
-                        guard let data = data, let response = response else {
-                            fatalError()
-                        }
-                        continuation.resume(returning: (data, response))
-                    }.resume()
-                }
-        #else
-            let (data, response) = try await session.data(for: request)
-        #endif
-
+        let request = try await makeRequest(url: url, params: params, as: mediaType)
+        let (data, response) = try await session.data(for: request)
+        
         guard
             let httpResponse = response as? HTTPURLResponse,
             httpResponse.statusCode == 200
@@ -71,8 +54,7 @@ public final class TGClientDefault: TGClientPrtcl {
             )
         }
 
-        let telegramContainer: TGTelegramContainer<Response> = try JSONDecoder()
-            .decode(TGTelegramContainer<Response>.self, from: data)
+        let telegramContainer: TGTelegramContainer<Response> = try JSONDecoder().decode(TGTelegramContainer<Response>.self, from: data)
         return try await processContainer(telegramContainer)
     }
 
