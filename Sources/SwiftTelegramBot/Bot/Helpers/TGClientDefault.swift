@@ -34,6 +34,8 @@ public final class TGClientDefault: TGClientPrtcl {
         //        config.timeoutIntervalForResource = 0
         return config
     }())
+    
+    public init() {}
 
     @discardableResult
     public func post<Params: Encodable, Response: Decodable>(
