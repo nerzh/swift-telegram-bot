@@ -93,7 +93,7 @@ try await bot.start()
 
 ### TestDispatcher code example
 ```swift
-import SwiftTelegramSdk
+import SwiftTelegramBot
 
 class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
         
