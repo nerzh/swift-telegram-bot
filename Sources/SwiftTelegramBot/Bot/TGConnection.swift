@@ -50,9 +50,8 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
                 while !Task.isCancelled {
                     guard let self = self else { break }
                     do {
-                        log.trace("next try get updates \(UUID())")
                         let updates: [TGUpdate] = try await self.getUpdates(bot: bot)
-                        try await bot.processing(updates: updates)
+                        await bot.processing(updates: updates)
                     } catch {
                         self.log.error("\(BotError(error).localizedDescription)")
                     }

@@ -6,9 +6,9 @@
 
 import Foundation
 
-public class TGFilter {
+public class TGFilter: @unchecked Sendable {
 
-    public enum Operation {
+    public enum Operation: Sendable {
         case and
         case or
         case not
@@ -16,23 +16,25 @@ public class TGFilter {
 
     public typealias Compound = (lhs: TGFilter, rhs: TGFilter, op: Operation)
 
-    private var compoundFilter: Compound? = nil
+    private let compoundFilter: SendableValue<Compound?> = .init(nil)
 
     public init() {}
     
-    init(lhs: TGFilter, rhs: TGFilter, op: Operation) {
-        compoundFilter = (lhs: lhs, rhs: rhs, op: op)
+    init(lhs: TGFilter, rhs: TGFilter, op: Operation) async {
+        await compoundFilter.change { $0 = (lhs: lhs, rhs: rhs, op: op) }
     }
 
-    public func check(_ mess: TGMessage) -> Bool {
-        if let filter = compoundFilter {
+    public func check(_ mess: TGMessage) async -> Bool {
+        if let filter = await compoundFilter.value {
+            let lhs = await (filter.lhs).check(mess)
+            let rhs = await (filter.rhs).check(mess)
             switch filter.op {
             case .and:
-                return (filter.lhs).check(mess) && (filter.rhs).check(mess)
+                return  lhs && rhs
             case .or:
-                return (filter.lhs).check(mess) || (filter.rhs).check(mess)
+                return lhs || rhs
             case .not:
-                return !(filter.rhs).check(mess)
+                return rhs
             }
         } else {
             return self.filter(message: mess)
@@ -43,15 +45,15 @@ public class TGFilter {
         return false
     }
 
-    public static func &&(lhs: TGFilter, rhs: TGFilter) -> TGFilter {
-        return TGFilter(lhs: lhs, rhs: rhs, op: .and)
+    public static func &&(lhs: TGFilter, rhs: TGFilter) async -> TGFilter {
+        return await TGFilter(lhs: lhs, rhs: rhs, op: .and)
     }
 
-    public static func ||(lhs: TGFilter, rhs: TGFilter) -> TGFilter {
-        return TGFilter(lhs: lhs, rhs: rhs, op: .or)
+    public static func ||(lhs: TGFilter, rhs: TGFilter) async -> TGFilter {
+        return await TGFilter(lhs: lhs, rhs: rhs, op: .or)
     }
 
-    public static prefix func !(filter: TGFilter) -> TGFilter {
-        return TGFilter(lhs: filter, rhs: filter, op: .not)
+    public static prefix func !(filter: TGFilter) async -> TGFilter {
+        return await TGFilter(lhs: filter, rhs: filter, op: .not)
     }
 }

@@ -28,8 +28,8 @@ public actor TGBot {
     private let limiter: LimiterAsync?
     private let connection: TGConnectionPrtcl
     private var client: TGClientPrtcl
-    private var _dispatchGroups: [TGDefaultDispatcher] = []
-    public var dispatchers: [TGDefaultDispatcher] {
+    private var _dispatchGroups: [any TGDefaultDispatcherPrtcl] = []
+    public var dispatchers: [any TGDefaultDispatcherPrtcl] {
         get { _dispatchGroups }
     }
     private var started: Bool = false
@@ -81,29 +81,28 @@ public actor TGBot {
         "\(tgURI)/bot\(botId)/\(methodName)"
     }
     
-    public func add(dispatcher: TGDefaultDispatcher.Type) throws {
+    public func add(dispatcher: any TGDefaultDispatcherPrtcl) async throws {
         if started {
             throw BotError("Bot already started. Please add dispatchers before start")
         }
-        _dispatchGroups.append(dispatcher.init(bot: self, logger: log))
+        await dispatcher.handle()
+        _dispatchGroups.append(dispatcher)
     }
     
-    public func add(_ dispatchers: TGDefaultDispatcher.Type...) throws {
-        for dispatcherType in dispatchers {
-            try add(dispatcher: dispatcherType)
+    public func add(_ dispatchers: any TGDefaultDispatcherPrtcl...) async throws {
+        for dispatcher in dispatchers {
+            try await add(dispatcher: dispatcher)
         }
     }
     
-    public func remove<T: TGDefaultDispatcher>(dispatcher: T) {
-        _dispatchGroups.removeAll(where: { $0 == dispatcher })
+    public func remove<T: TGDefaultDispatcherPrtcl>(dispatcher: T) {
+        _dispatchGroups.removeAll(where: { $0 as! T == dispatcher })
     }
     
     public func processing(updates: [TGUpdate]) async {
-        log.trace("processing: Get new updates: \(updates.count)")
         for dispatch in dispatchers {
             await dispatch.process(updates)
         }
-        log.trace("processing: send all updates to dispatchers")
     }
     
     @discardableResult
@@ -112,9 +111,6 @@ public actor TGBot {
             throw BotError("Bot already started")
         }
         started = true
-        for dispatch in dispatchers {
-            await dispatch.handle()
-        }
         return try await connection.start(bot: self)
     }
     
