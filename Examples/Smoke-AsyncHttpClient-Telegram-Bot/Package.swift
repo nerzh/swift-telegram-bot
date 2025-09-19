@@ -5,7 +5,7 @@ import PackageDescription
 let packageDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/amzn/smoke-framework.git", from: "2.0.0"),
     .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.6.0"),
-    .package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.0.3"))
+    .package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.2.0"))
 ]
 
 let targetDependencies: [PackageDescription.Target.Dependency] = [

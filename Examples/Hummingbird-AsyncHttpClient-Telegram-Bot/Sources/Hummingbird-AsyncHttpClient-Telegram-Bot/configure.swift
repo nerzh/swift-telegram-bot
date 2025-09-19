@@ -14,7 +14,6 @@ public func configure(_ app: some ApplicationProtocol) async throws {
     
     /// SET WEBHOOK CONNECTION
     // let bot: TGBot = try await .init(connectionType: .webhook(webHookURL: URL(string: "https://your_domain/telegramWebHook")!),
-    //                                  dispatcher: nil,
     //                                  tgClient: URLSessionTGClient(),
     //                                  tgURI: TGBot.standardTGURL,
     //                                  botId: tgApi,
@@ -30,6 +29,6 @@ public func configure(_ app: some ApplicationProtocol) async throws {
     // set level of debug if you needed
     // bot.log.logLevel = .error
     await botActor.setBot(bot)
-    try await botActor.bot.add(dispatcher: DefaultBotHandlers.self)
+    try await botActor.bot.add(dispatcher: DefaultBotHandlers(bot: bot, logger: app.logger))
     try await botActor.bot.start()
 }
