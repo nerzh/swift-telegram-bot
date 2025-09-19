@@ -84,8 +84,8 @@ let bot: TGBot = try await .init(connectionType: connectionType,
                                  log: logger)
 
 /// add dispatcher with some bot logic
-try await bot.add(dispatcher: TestDispatcher.self)
-/// try await bot.add(dispatcher: SecondDispatcher.self)
+try await bot.add(dispatcher: TestDispatcher(bot: bot, logger: app.logger))
+/// try await bot.add(dispatcher: SecondDispatcher(bot: bot, logger: app.logger))
 /// etc
 
 try await bot.start()
@@ -181,7 +181,7 @@ var packageDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "4.57.0")),
 ]
 
-packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.0.0")))
+packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.2.0")))
 
 
 let package = Package(
