@@ -84,8 +84,8 @@ let bot: TGBot = try await .init(connectionType: connectionType,
                                  log: logger)
 
 /// add dispatcher with some bot logic
-try await bot.add(dispatcher: TestDispatcher(bot: bot, logger: app.logger))
-/// try await bot.add(dispatcher: SecondDispatcher(bot: bot, logger: app.logger))
+try await bot.add(dispatcher: TestDispatcher(bot: bot, logger: logger))
+/// try await bot.add(dispatcher: SecondDispatcher(bot: bot, logger: logger))
 /// etc
 
 try await bot.start()
