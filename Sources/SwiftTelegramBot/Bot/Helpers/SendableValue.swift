@@ -21,14 +21,6 @@ public actor SendableValue<Value: Sendable> {
     
     @discardableResult
     public func change(
-        _ block: @escaping @Sendable (inout Value) throws -> Void
-    ) async throws -> Value {
-        try block(&data)
-        return data
-    }
-    
-    @discardableResult
-    public func change(
         _ block: @escaping @Sendable (inout Value) -> Void
     ) async -> Value {
         block(&data)
@@ -37,17 +29,9 @@ public actor SendableValue<Value: Sendable> {
     
     @discardableResult
     public func change(
-        _ block: @escaping @Sendable (_ oldValue: Value) async throws -> Value
+        _ block: @escaping @Sendable (inout Value) throws -> Void
     ) async throws -> Value {
-        data = try await block(data)
-        return data
-    }
-    
-    @discardableResult
-    public func change(
-        _ block: @escaping @Sendable (_ oldValue: Value) async -> Value
-    ) async -> Value {
-        data = await block(data)
+        try block(&data)
         return data
     }
 }

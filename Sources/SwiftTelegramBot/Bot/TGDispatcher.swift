@@ -10,11 +10,47 @@ public protocol TGDefaultDispatcherPrtcl: Equatable, Sendable {
     var bot: TGBot { get }
     var log: Logger { get }
     var id: SendableValue<Int> { get }
-    var handlersGroup: SendableValue<[TGHandlerPrtcl]> { get }
+    var handlersGroup: HandlersGroupActor { get }
     func remove(_ handler: TGHandlerPrtcl) async
     func remove(handler id: Int) async
     func process(_ updates: [TGUpdate]) async
     func handle() async
+}
+
+public actor HandlersGroupActor {
+    private var _handlersGroup: [TGHandlerPrtcl] = []
+    public var value: [TGHandlerPrtcl] {
+        _handlersGroup
+    }
+    
+    func add(_ handler: TGHandlerPrtcl) async {
+        let handler: TGHandlerPrtcl = handler
+        let id: Int = if let id = await _handlersGroup.last?.id.value {
+            id + 1
+        } else {
+            0
+        }
+        await handler.id.change { $0 = id }
+        _handlersGroup.append(handler)
+    }
+    
+    func remove(_ handler: TGHandlerPrtcl) async {
+        for (index, groupHandler) in _handlersGroup.enumerated() {
+            if (await handler.id.value) == (await groupHandler.id.value) {
+                _handlersGroup.remove(at: index)
+                break
+            }
+        }
+    }
+    
+    func remove(handler id: Int) async {
+        for (index, groupHandler) in _handlersGroup.enumerated() {
+            if id == (await groupHandler.id.value) {
+                _handlersGroup.remove(at: index)
+                break
+            }
+        }
+    }
 }
 
 public extension TGDefaultDispatcherPrtcl {
@@ -25,46 +61,15 @@ public extension TGDefaultDispatcherPrtcl {
     }
     
     func add(_ handler: TGHandlerPrtcl) async {
-        let handler: TGHandlerPrtcl = handler
-        let index = await handlersGroup.value.count
-        await handler.id.change { $0 = index }
-        await self.handlersGroup.change { oldValue in
-            var newValue = oldValue
-            let id: Int = if let id = await oldValue.last?.id.value {
-                id + 1
-            } else {
-                0
-            }
-            await handler.id.change { $0 = id }
-            newValue.append(handler)
-            return newValue
-        }
+        await handlersGroup.add(handler)
     }
     
     func remove(_ handler: TGHandlerPrtcl) async {
-        await self.handlersGroup.change { oldValue in
-            for (index, groupHandler) in await self.handlersGroup.value.enumerated() {
-                if (await handler.id.value) == (await groupHandler.id.value) {
-                    var newValue = oldValue
-                    newValue.remove(at: index)
-                    return newValue
-                }
-            }
-            return oldValue
-        }
+        await handlersGroup.remove(handler)
     }
     
     func remove(handler id: Int) async {
-        await self.handlersGroup.change { oldValue in
-            for (index, groupHandler) in await self.handlersGroup.value.enumerated() {
-                if id == (await groupHandler.id.value) {
-                    var newValue = oldValue
-                    newValue.remove(at: index)
-                    return newValue
-                }
-            }
-            return oldValue
-        }
+        await handlersGroup.remove(handler: id)
     }
     
     func process(_ updates: [TGUpdate]) async {
@@ -89,7 +94,7 @@ open class TGDefaultDispatcher: TGDefaultDispatcherPrtcl, @unchecked Sendable {
     public unowned let bot: TGBot
     public let log: Logger
     public let id: SendableValue<Int> = .init(0)
-    public let handlersGroup: SendableValue<[TGHandlerPrtcl]> = .init([])
+    public let handlersGroup: HandlersGroupActor = .init()
     private let tasks: SendableValue<[UUID: Task<Void, Never>]> = .init([:])
 
     public init(bot: TGBot, logger: Logger) {
