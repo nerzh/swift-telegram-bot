@@ -14,10 +14,10 @@ final class swift_telegram_botTests: XCTestCase {
     
     class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
         
-        var someExtarArgument: String
+        var someExtraArgument: String
         
-        init(bot: TGBot, logger: Logger, someExtarArgument: String) {
-            self.someExtarArgument = someExtarArgument
+        init(bot: TGBot, logger: Logger, someExtraArgument: String) {
+            self.someExtraArgument = someExtraArgument
             super.init(bot: bot, logger: logger)
         }
         
@@ -88,7 +88,7 @@ final class swift_telegram_botTests: XCTestCase {
                                          tgURI: TGBot.standardTGURL,
                                          botId: botId,
                                          log: logger)
-        try await bot.add(dispatcher: TestDispatcher(bot: bot, logger: logger, someExtarArgument: "extra argument"))
+        try await bot.add(dispatcher: TestDispatcher(bot: bot, logger: logger, someExtraArgument: "extra argument"))
         print("Start")
         try await bot.start()
         while !Task.isCancelled {

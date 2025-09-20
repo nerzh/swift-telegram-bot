@@ -82,9 +82,6 @@ public actor TGBot {
     }
     
     public func add(dispatcher: any TGDefaultDispatcherPrtcl) async throws {
-        if started {
-            throw BotError("Bot already started. Please add dispatchers before start")
-        }
         await dispatcher.handle()
         _dispatchGroups.append(dispatcher)
     }
