@@ -23,8 +23,7 @@ public actor HandlersGroupActor {
         _handlersGroup
     }
     
-    func add(_ handler: TGHandlerPrtcl) async {
-        let handler: TGHandlerPrtcl = handler
+    public func add(_ handler: TGHandlerPrtcl) async {
         let id: Int = if let id = await _handlersGroup.last?.id.value {
             id + 1
         } else {
@@ -34,7 +33,7 @@ public actor HandlersGroupActor {
         _handlersGroup.append(handler)
     }
     
-    func remove(_ handler: TGHandlerPrtcl) async {
+    public func remove(_ handler: TGHandlerPrtcl) async {
         for (index, groupHandler) in _handlersGroup.enumerated() {
             if (await handler.id.value) == (await groupHandler.id.value) {
                 _handlersGroup.remove(at: index)
@@ -43,7 +42,7 @@ public actor HandlersGroupActor {
         }
     }
     
-    func remove(handler id: Int) async {
+    public func remove(handler id: Int) async {
         for (index, groupHandler) in _handlersGroup.enumerated() {
             if id == (await groupHandler.id.value) {
                 _handlersGroup.remove(at: index)
