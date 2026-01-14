@@ -8,7 +8,7 @@ Bundler.require(:default)
 require 'fileutils'
 
 HTML_FILE = 'tg-api.html'
-LIB_FOLDER_NAME = 'SwiftTelegramSdk'
+LIB_FOLDER_NAME = 'SwiftTelegramBot'
 API_DIR = "../Sources/#{LIB_FOLDER_NAME}/Bot/Telegram"
 LIB_DIR = "../Sources/#{LIB_FOLDER_NAME}"
 API_FILE = 'tg-api.txt'
