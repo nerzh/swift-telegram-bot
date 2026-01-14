@@ -12,7 +12,7 @@ public struct TGForwardMessageParams: Encodable, Sendable {
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     public let chatId: TGChatId
 
-    /// Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
     public let messageThreadId: Int?
 
     /// Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat
@@ -30,6 +30,9 @@ public struct TGForwardMessageParams: Encodable, Sendable {
     /// Protects the contents of the forwarded message from forwarding and saving
     public let protectContent: Bool?
 
+    /// Unique identifier of the message effect to be added to the message; only available when forwarding to private chats
+    public let messageEffectId: String?
+
     /// A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only
     public let suggestedPostParameters: TGSuggestedPostParameters?
 
@@ -45,11 +48,12 @@ public struct TGForwardMessageParams: Encodable, Sendable {
             case videoStartTimestamp = "video_start_timestamp"
             case disableNotification = "disable_notification"
             case protectContent = "protect_content"
+            case messageEffectId = "message_effect_id"
             case suggestedPostParameters = "suggested_post_parameters"
             case messageId = "message_id"
     }
 
-    public init(chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, fromChatId: TGChatId, videoStartTimestamp: Int? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, messageId: Int) {
+    public init(chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, fromChatId: TGChatId, videoStartTimestamp: Int? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, messageId: Int) {
             self.chatId = chatId
             self.messageThreadId = messageThreadId
             self.directMessagesTopicId = directMessagesTopicId
@@ -57,6 +61,7 @@ public struct TGForwardMessageParams: Encodable, Sendable {
             self.videoStartTimestamp = videoStartTimestamp
             self.disableNotification = disableNotification
             self.protectContent = protectContent
+            self.messageEffectId = messageEffectId
             self.suggestedPostParameters = suggestedPostParameters
             self.messageId = messageId
     }

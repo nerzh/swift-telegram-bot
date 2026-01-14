@@ -14,6 +14,7 @@ public final class TGAcceptedGiftTypes: Codable, Sendable {
         case limitedGifts = "limited_gifts"
         case uniqueGifts = "unique_gifts"
         case premiumSubscription = "premium_subscription"
+        case giftsFromChannels = "gifts_from_channels"
     }
 
     /// True, if unlimited regular gifts are accepted
@@ -28,10 +29,14 @@ public final class TGAcceptedGiftTypes: Codable, Sendable {
     /// True, if a Telegram Premium subscription is accepted
     public let premiumSubscription: Bool
 
-    public init (unlimitedGifts: Bool, limitedGifts: Bool, uniqueGifts: Bool, premiumSubscription: Bool) {
+    /// True, if transfers of unique gifts from channels are accepted
+    public let giftsFromChannels: Bool
+
+    public init (unlimitedGifts: Bool, limitedGifts: Bool, uniqueGifts: Bool, premiumSubscription: Bool, giftsFromChannels: Bool) {
         self.unlimitedGifts = unlimitedGifts
         self.limitedGifts = limitedGifts
         self.uniqueGifts = uniqueGifts
         self.premiumSubscription = premiumSubscription
+        self.giftsFromChannels = giftsFromChannels
     }
 }

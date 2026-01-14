@@ -23,6 +23,8 @@ public final class TGOwnedGiftRegular: Codable, Sendable {
         case wasRefunded = "was_refunded"
         case convertStarCount = "convert_star_count"
         case prepaidUpgradeStarCount = "prepaid_upgrade_star_count"
+        case isUpgradeSeparate = "is_upgrade_separate"
+        case uniqueGiftNumber = "unique_gift_number"
     }
 
     /// Type of the gift, always “regular”
@@ -58,13 +60,19 @@ public final class TGOwnedGiftRegular: Codable, Sendable {
     /// Optional. True, if the gift was refunded and isn't available anymore
     public let wasRefunded: Bool?
 
-    /// Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars
+    /// Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only
     public let convertStarCount: Int?
 
-    /// Optional. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift
+    /// Optional. Number of Telegram Stars that were paid for the ability to upgrade the gift
     public let prepaidUpgradeStarCount: Int?
 
-    public init (type: TGOwnedGiftRegularType, gift: TGGift, ownedGiftId: String? = nil, senderUser: TGUser? = nil, sendDate: Int, text: String? = nil, entities: [TGMessageEntity]? = nil, isPrivate: Bool? = nil, isSaved: Bool? = nil, canBeUpgraded: Bool? = nil, wasRefunded: Bool? = nil, convertStarCount: Int? = nil, prepaidUpgradeStarCount: Int? = nil) {
+    /// Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only
+    public let isUpgradeSeparate: Bool?
+
+    /// Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift
+    public let uniqueGiftNumber: Int?
+
+    public init (type: TGOwnedGiftRegularType, gift: TGGift, ownedGiftId: String? = nil, senderUser: TGUser? = nil, sendDate: Int, text: String? = nil, entities: [TGMessageEntity]? = nil, isPrivate: Bool? = nil, isSaved: Bool? = nil, canBeUpgraded: Bool? = nil, wasRefunded: Bool? = nil, convertStarCount: Int? = nil, prepaidUpgradeStarCount: Int? = nil, isUpgradeSeparate: Bool? = nil, uniqueGiftNumber: Int? = nil) {
         self.type = type
         self.gift = gift
         self.ownedGiftId = ownedGiftId
@@ -78,5 +86,7 @@ public final class TGOwnedGiftRegular: Codable, Sendable {
         self.wasRefunded = wasRefunded
         self.convertStarCount = convertStarCount
         self.prepaidUpgradeStarCount = prepaidUpgradeStarCount
+        self.isUpgradeSeparate = isUpgradeSeparate
+        self.uniqueGiftNumber = uniqueGiftNumber
     }
 }

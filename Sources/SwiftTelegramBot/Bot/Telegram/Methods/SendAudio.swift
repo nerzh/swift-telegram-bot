@@ -16,7 +16,7 @@ public struct TGSendAudioParams: Encodable, Sendable {
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     public let chatId: TGChatId
 
-    /// Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
     public let messageThreadId: Int?
 
     /// Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat

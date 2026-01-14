@@ -15,7 +15,7 @@ public struct TGSendGiftParams: Encodable, Sendable {
     /// Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
     public let chatId: TGChatId?
 
-    /// Identifier of the gift
+    /// Identifier of the gift; limited gifts can't be sent to channel chats
     public let giftId: String
 
     /// Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver

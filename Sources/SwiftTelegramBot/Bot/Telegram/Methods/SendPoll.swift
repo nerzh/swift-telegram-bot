@@ -15,7 +15,7 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername). Polls can't be sent to channel direct messages chats.
     public let chatId: TGChatId
 
-    /// Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
     public let messageThreadId: Int?
 
     /// Poll question, 1-300 characters

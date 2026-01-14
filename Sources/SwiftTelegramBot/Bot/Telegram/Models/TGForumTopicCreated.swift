@@ -13,6 +13,7 @@ public final class TGForumTopicCreated: Codable, Sendable {
         case name = "name"
         case iconColor = "icon_color"
         case iconCustomEmojiId = "icon_custom_emoji_id"
+        case isNameImplicit = "is_name_implicit"
     }
 
     /// Name of the topic
@@ -24,9 +25,13 @@ public final class TGForumTopicCreated: Codable, Sendable {
     /// Optional. Unique identifier of the custom emoji shown as the topic icon
     public let iconCustomEmojiId: String?
 
-    public init (name: String, iconColor: Int, iconCustomEmojiId: String? = nil) {
+    /// Optional. True, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot
+    public let isNameImplicit: Bool?
+
+    public init (name: String, iconColor: Int, iconCustomEmojiId: String? = nil, isNameImplicit: Bool? = nil) {
         self.name = name
         self.iconColor = iconColor
         self.iconCustomEmojiId = iconCustomEmojiId
+        self.isNameImplicit = isNameImplicit
     }
 }

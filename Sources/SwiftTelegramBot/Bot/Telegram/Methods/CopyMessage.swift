@@ -12,7 +12,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     public let chatId: TGChatId
 
-    /// Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
     public let messageThreadId: Int?
 
     /// Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
@@ -48,6 +48,9 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     public let allowPaidBroadcast: Bool?
 
+    /// Unique identifier of the message effect to be added to the message; only available when copying to private chats
+    public let messageEffectId: String?
+
     /// A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
     public let suggestedPostParameters: TGSuggestedPostParameters?
 
@@ -72,12 +75,13 @@ public struct TGCopyMessageParams: Encodable, Sendable {
             case disableNotification = "disable_notification"
             case protectContent = "protect_content"
             case allowPaidBroadcast = "allow_paid_broadcast"
+            case messageEffectId = "message_effect_id"
             case suggestedPostParameters = "suggested_post_parameters"
             case replyParameters = "reply_parameters"
             case replyMarkup = "reply_markup"
     }
 
-    public init(chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, fromChatId: TGChatId, messageId: Int, videoStartTimestamp: Int? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
+    public init(chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, fromChatId: TGChatId, messageId: Int, videoStartTimestamp: Int? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
             self.chatId = chatId
             self.messageThreadId = messageThreadId
             self.directMessagesTopicId = directMessagesTopicId
@@ -91,6 +95,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
             self.disableNotification = disableNotification
             self.protectContent = protectContent
             self.allowPaidBroadcast = allowPaidBroadcast
+            self.messageEffectId = messageEffectId
             self.suggestedPostParameters = suggestedPostParameters
             self.replyParameters = replyParameters
             self.replyMarkup = replyMarkup

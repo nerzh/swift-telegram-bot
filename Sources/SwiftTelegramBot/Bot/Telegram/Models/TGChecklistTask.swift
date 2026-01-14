@@ -14,6 +14,7 @@ public final class TGChecklistTask: Codable, Sendable {
         case text = "text"
         case textEntities = "text_entities"
         case completedByUser = "completed_by_user"
+        case completedByChat = "completed_by_chat"
         case completionDate = "completion_date"
     }
 
@@ -26,17 +27,21 @@ public final class TGChecklistTask: Codable, Sendable {
     /// Optional. Special entities that appear in the task text
     public let textEntities: [TGMessageEntity]?
 
-    /// Optional. User that completed the task; omitted if the task wasn't completed
+    /// Optional. User that completed the task; omitted if the task wasn't completed by a user
     public let completedByUser: TGUser?
+
+    /// Optional. Chat that completed the task; omitted if the task wasn't completed by a chat
+    public let completedByChat: TGChat?
 
     /// Optional. Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed
     public let completionDate: Int?
 
-    public init (id: Int, text: String, textEntities: [TGMessageEntity]? = nil, completedByUser: TGUser? = nil, completionDate: Int? = nil) {
+    public init (id: Int, text: String, textEntities: [TGMessageEntity]? = nil, completedByUser: TGUser? = nil, completedByChat: TGChat? = nil, completionDate: Int? = nil) {
         self.id = id
         self.text = text
         self.textEntities = textEntities
         self.completedByUser = completedByUser
+        self.completedByChat = completedByChat
         self.completionDate = completionDate
     }
 }
