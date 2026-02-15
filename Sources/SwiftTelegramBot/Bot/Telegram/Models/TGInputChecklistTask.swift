@@ -23,12 +23,12 @@ public final class TGInputChecklistTask: Codable, Sendable {
     public let text: String
 
     /// Optional. Mode for parsing entities in the text. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the text, which can be specified instead of parse_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are allowed.
     public let textEntities: [TGMessageEntity]?
 
-    public init (id: Int, text: String, parseMode: String? = nil, textEntities: [TGMessageEntity]? = nil) {
+    public init (id: Int, text: String, parseMode: TGParseMode? = nil, textEntities: [TGMessageEntity]? = nil) {
         self.id = id
         self.text = text
         self.parseMode = parseMode

@@ -51,7 +51,7 @@ public final class TGInlineQueryResultVideo: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -77,7 +77,7 @@ public final class TGInlineQueryResultVideo: Codable, Sendable {
     /// Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).
     public let inputMessageContent: TGInputMessageContent?
 
-    public init (type: TGInlineQueryResultVideoType, id: String, videoUrl: String, mimeType: String, thumbnailUrl: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, videoWidth: Int? = nil, videoHeight: Int? = nil, videoDuration: Int? = nil, description: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
+    public init (type: TGInlineQueryResultVideoType, id: String, videoUrl: String, mimeType: String, thumbnailUrl: String, title: String, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, videoWidth: Int? = nil, videoHeight: Int? = nil, videoDuration: Int? = nil, description: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type
         self.id = id
         self.videoUrl = videoUrl

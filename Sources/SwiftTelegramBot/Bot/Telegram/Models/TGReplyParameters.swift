@@ -33,7 +33,7 @@ public final class TGReplyParameters: Codable, Sendable {
     public let quote: String?
 
     /// Optional. Mode for parsing entities in the quote. See formatting options for more details.
-    public let quoteParseMode: String?
+    public let quoteParseMode: TGParseMode?
 
     /// Optional. A JSON-serialized list of special entities that appear in the quote. It can be specified instead of quote_parse_mode.
     public let quoteEntities: [TGMessageEntity]?
@@ -44,7 +44,7 @@ public final class TGReplyParameters: Codable, Sendable {
     /// Optional. Identifier of the specific checklist task to be replied to
     public let checklistTaskId: Int?
 
-    public init (messageId: Int, chatId: TGChatId? = nil, allowSendingWithoutReply: Bool? = nil, quote: String? = nil, quoteParseMode: String? = nil, quoteEntities: [TGMessageEntity]? = nil, quotePosition: Int? = nil, checklistTaskId: Int? = nil) {
+    public init (messageId: Int, chatId: TGChatId? = nil, allowSendingWithoutReply: Bool? = nil, quote: String? = nil, quoteParseMode: TGParseMode? = nil, quoteEntities: [TGMessageEntity]? = nil, quotePosition: Int? = nil, checklistTaskId: Int? = nil) {
         self.messageId = messageId
         self.chatId = chatId
         self.allowSendingWithoutReply = allowSendingWithoutReply

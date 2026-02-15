@@ -34,7 +34,7 @@ public final class TGInputMediaAudio: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -48,7 +48,7 @@ public final class TGInputMediaAudio: Codable, Sendable {
     /// Optional. Title of the audio
     public let title: String?
 
-    public init (type: TGInputMediaAudioType, media: String, thumbnail: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, duration: Int? = nil, performer: String? = nil, title: String? = nil) {
+    public init (type: TGInputMediaAudioType, media: String, thumbnail: String? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, duration: Int? = nil, performer: String? = nil, title: String? = nil) {
         self.type = type
         self.media = media
         self.thumbnail = thumbnail

@@ -13,6 +13,7 @@ public final class TGUniqueGiftModel: Codable, Sendable {
         case name = "name"
         case sticker = "sticker"
         case rarityPerMille = "rarity_per_mille"
+        case rarity = "rarity"
     }
 
     /// Name of the model
@@ -21,12 +22,16 @@ public final class TGUniqueGiftModel: Codable, Sendable {
     /// The sticker that represents the unique gift
     public let sticker: TGSticker
 
-    /// The number of unique gifts that receive this model for every 1000 gifts upgraded
+    /// The number of unique gifts that receive this model for every 1000 gift upgrades. Always 0 for crafted gifts.
     public let rarityPerMille: Int
 
-    public init (name: String, sticker: TGSticker, rarityPerMille: Int) {
+    /// Optional. Rarity of the model if it is a crafted model. Currently, can be “uncommon”, “rare”, “epic”, or “legendary”.
+    public let rarity: String?
+
+    public init (name: String, sticker: TGSticker, rarityPerMille: Int, rarity: String? = nil) {
         self.name = name
         self.sticker = sticker
         self.rarityPerMille = rarityPerMille
+        self.rarity = rarity
     }
 }

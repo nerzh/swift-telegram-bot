@@ -22,7 +22,7 @@ public final class TGInputChecklist: Codable, Sendable {
     public let title: String
 
     /// Optional. Mode for parsing entities in the title. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the title, which can be specified instead of parse_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are allowed.
     public let titleEntities: [TGMessageEntity]?
@@ -36,7 +36,7 @@ public final class TGInputChecklist: Codable, Sendable {
     /// Optional. Pass True if other users can mark tasks as done or not done in the checklist
     public let othersCanMarkTasksAsDone: Bool?
 
-    public init (title: String, parseMode: String? = nil, titleEntities: [TGMessageEntity]? = nil, tasks: [TGInputChecklistTask], othersCanAddTasks: Bool? = nil, othersCanMarkTasksAsDone: Bool? = nil) {
+    public init (title: String, parseMode: TGParseMode? = nil, titleEntities: [TGMessageEntity]? = nil, tasks: [TGInputChecklistTask], othersCanAddTasks: Bool? = nil, othersCanMarkTasksAsDone: Bool? = nil) {
         self.title = title
         self.parseMode = parseMode
         self.titleEntities = titleEntities

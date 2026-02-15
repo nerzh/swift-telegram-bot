@@ -24,6 +24,7 @@ public final class TGUser: Codable, Sendable {
         case canConnectToBusiness = "can_connect_to_business"
         case hasMainWebApp = "has_main_web_app"
         case hasTopicsEnabled = "has_topics_enabled"
+        case allowsUsersToCreateTopics = "allows_users_to_create_topics"
     }
 
     /// Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
@@ -68,7 +69,10 @@ public final class TGUser: Codable, Sendable {
     /// Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe.
     public let hasTopicsEnabled: Bool?
 
-    public init (id: Int64, isBot: Bool, firstName: String, lastName: String? = nil, username: String? = nil, languageCode: String? = nil, isPremium: Bool? = nil, addedToAttachmentMenu: Bool? = nil, canJoinGroups: Bool? = nil, canReadAllGroupMessages: Bool? = nil, supportsInlineQueries: Bool? = nil, canConnectToBusiness: Bool? = nil, hasMainWebApp: Bool? = nil, hasTopicsEnabled: Bool? = nil) {
+    /// Optional. True, if the bot allows users to create and delete topics in private chats. Returned only in getMe.
+    public let allowsUsersToCreateTopics: Bool?
+
+    public init (id: Int64, isBot: Bool, firstName: String, lastName: String? = nil, username: String? = nil, languageCode: String? = nil, isPremium: Bool? = nil, addedToAttachmentMenu: Bool? = nil, canJoinGroups: Bool? = nil, canReadAllGroupMessages: Bool? = nil, supportsInlineQueries: Bool? = nil, canConnectToBusiness: Bool? = nil, hasMainWebApp: Bool? = nil, hasTopicsEnabled: Bool? = nil, allowsUsersToCreateTopics: Bool? = nil) {
         self.id = id
         self.isBot = isBot
         self.firstName = firstName
@@ -83,5 +87,6 @@ public final class TGUser: Codable, Sendable {
         self.canConnectToBusiness = canConnectToBusiness
         self.hasMainWebApp = hasMainWebApp
         self.hasTopicsEnabled = hasTopicsEnabled
+        self.allowsUsersToCreateTopics = allowsUsersToCreateTopics
     }
 }

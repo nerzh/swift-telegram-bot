@@ -39,7 +39,7 @@ public final class TGInlineQueryResultAudio: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -56,7 +56,7 @@ public final class TGInlineQueryResultAudio: Codable, Sendable {
     /// Optional. Content of the message to be sent instead of the audio
     public let inputMessageContent: TGInputMessageContent?
 
-    public init (type: TGInlineQueryResultAudioType, id: String, audioUrl: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, performer: String? = nil, audioDuration: Int? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
+    public init (type: TGInlineQueryResultAudioType, id: String, audioUrl: String, title: String, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, performer: String? = nil, audioDuration: Int? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type
         self.id = id
         self.audioUrl = audioUrl

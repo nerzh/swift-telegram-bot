@@ -18,6 +18,7 @@ public final class TGUniqueGift: Codable, Sendable {
         case symbol = "symbol"
         case backdrop = "backdrop"
         case isPremium = "is_premium"
+        case isBurned = "is_burned"
         case isFromBlockchain = "is_from_blockchain"
         case colors = "colors"
         case publisherChat = "publisher_chat"
@@ -47,6 +48,9 @@ public final class TGUniqueGift: Codable, Sendable {
     /// Optional. True, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers
     public let isPremium: Bool?
 
+    /// Optional. True, if the gift was used to craft another gift and isn't available anymore
+    public let isBurned: Bool?
+
     /// Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
     public let isFromBlockchain: Bool?
 
@@ -56,7 +60,7 @@ public final class TGUniqueGift: Codable, Sendable {
     /// Optional. Information about the chat that published the gift
     public let publisherChat: TGChat?
 
-    public init (giftId: String, baseName: String, name: String, number: Int, model: TGUniqueGiftModel, symbol: TGUniqueGiftSymbol, backdrop: TGUniqueGiftBackdrop, isPremium: Bool? = nil, isFromBlockchain: Bool? = nil, colors: TGUniqueGiftColors? = nil, publisherChat: TGChat? = nil) {
+    public init (giftId: String, baseName: String, name: String, number: Int, model: TGUniqueGiftModel, symbol: TGUniqueGiftSymbol, backdrop: TGUniqueGiftBackdrop, isPremium: Bool? = nil, isBurned: Bool? = nil, isFromBlockchain: Bool? = nil, colors: TGUniqueGiftColors? = nil, publisherChat: TGChat? = nil) {
         self.giftId = giftId
         self.baseName = baseName
         self.name = name
@@ -65,6 +69,7 @@ public final class TGUniqueGift: Codable, Sendable {
         self.symbol = symbol
         self.backdrop = backdrop
         self.isPremium = isPremium
+        self.isBurned = isBurned
         self.isFromBlockchain = isFromBlockchain
         self.colors = colors
         self.publisherChat = publisherChat

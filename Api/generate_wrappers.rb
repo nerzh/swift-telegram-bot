@@ -625,8 +625,10 @@ class Api
       return "#{PREFIX_LIB}ChatId" if var_name.include?('chat_id')
       return 'String'
     when ['String', true]
+      return "#{PREFIX_LIB}ParseMode?" if var_name.include?('parse_mode')
       return "String?"
     when ['String', false]
+      return "#{PREFIX_LIB}ParseMode" if var_name.include?('parse_mode')
       return "String"
     when ['InputFile or String', true]
       return "#{PREFIX_LIB}FileInfo?"

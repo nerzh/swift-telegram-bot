@@ -18,6 +18,7 @@ public final class TGVideo: Codable, Sendable {
         case thumbnail = "thumbnail"
         case cover = "cover"
         case startTimestamp = "start_timestamp"
+        case qualities = "qualities"
         case fileName = "file_name"
         case mimeType = "mime_type"
         case fileSize = "file_size"
@@ -47,6 +48,9 @@ public final class TGVideo: Codable, Sendable {
     /// Optional. Timestamp in seconds from which the video will play in the message
     public let startTimestamp: Int?
 
+    /// Optional. List of available qualities of the video
+    public let qualities: [TGVideoQuality]?
+
     /// Optional. Original filename as defined by the sender
     public let fileName: String?
 
@@ -56,7 +60,7 @@ public final class TGVideo: Codable, Sendable {
     /// Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
     public let fileSize: Int?
 
-    public init (fileId: String, fileUniqueId: String, width: Int, height: Int, duration: Int, thumbnail: TGPhotoSize? = nil, cover: [TGPhotoSize]? = nil, startTimestamp: Int? = nil, fileName: String? = nil, mimeType: String? = nil, fileSize: Int? = nil) {
+    public init (fileId: String, fileUniqueId: String, width: Int, height: Int, duration: Int, thumbnail: TGPhotoSize? = nil, cover: [TGPhotoSize]? = nil, startTimestamp: Int? = nil, qualities: [TGVideoQuality]? = nil, fileName: String? = nil, mimeType: String? = nil, fileSize: Int? = nil) {
         self.fileId = fileId
         self.fileUniqueId = fileUniqueId
         self.width = width
@@ -65,6 +69,7 @@ public final class TGVideo: Codable, Sendable {
         self.thumbnail = thumbnail
         self.cover = cover
         self.startTimestamp = startTimestamp
+        self.qualities = qualities
         self.fileName = fileName
         self.mimeType = mimeType
         self.fileSize = fileSize

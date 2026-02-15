@@ -32,7 +32,7 @@ public final class TGInputMediaDocument: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the document caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -40,7 +40,7 @@ public final class TGInputMediaDocument: Codable, Sendable {
     /// Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album.
     public let disableContentTypeDetection: Bool?
 
-    public init (type: TGInputMediaDocumentType, media: String, thumbnail: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, disableContentTypeDetection: Bool? = nil) {
+    public init (type: TGInputMediaDocumentType, media: String, thumbnail: String? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, disableContentTypeDetection: Bool? = nil) {
         self.type = type
         self.media = media
         self.thumbnail = thumbnail

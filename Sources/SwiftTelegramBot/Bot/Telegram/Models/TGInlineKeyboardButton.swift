@@ -1,7 +1,7 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
+ This object represents one button of an inline keyboard. Exactly one of the fields other than text, icon_custom_emoji_id, and style must be used to specify the type of the button.
 
  SeeAlso Telegram Bot API Reference:
  [InlineKeyboardButton](https://core.telegram.org/bots/api#inlinekeyboardbutton)
@@ -11,6 +11,8 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
     /// Custom keys for coding/decoding `InlineKeyboardButton` struct
     public enum CodingKeys: String, CodingKey {
         case text = "text"
+        case iconCustomEmojiId = "icon_custom_emoji_id"
+        case style = "style"
         case url = "url"
         case callbackData = "callback_data"
         case webApp = "web_app"
@@ -25,6 +27,12 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
 
     /// Label text on the button
     public let text: String
+
+    /// Optional. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on Fragment or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
+    public let iconCustomEmojiId: String?
+
+    /// Optional. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
+    public let style: String?
 
     /// Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
     public let url: String?
@@ -62,8 +70,10 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
     /// NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.
     public let pay: Bool?
 
-    public init (text: String, url: String? = nil, callbackData: String? = nil, webApp: TGWebAppInfo? = nil, loginUrl: TGLoginUrl? = nil, switchInlineQuery: String? = nil, switchInlineQueryCurrentChat: String? = nil, switchInlineQueryChosenChat: TGSwitchInlineQueryChosenChat? = nil, copyText: TGCopyTextButton? = nil, callbackGame: TGCallbackGame? = nil, pay: Bool? = nil) {
+    public init (text: String, iconCustomEmojiId: String? = nil, style: String? = nil, url: String? = nil, callbackData: String? = nil, webApp: TGWebAppInfo? = nil, loginUrl: TGLoginUrl? = nil, switchInlineQuery: String? = nil, switchInlineQueryCurrentChat: String? = nil, switchInlineQueryChosenChat: TGSwitchInlineQueryChosenChat? = nil, copyText: TGCopyTextButton? = nil, callbackGame: TGCallbackGame? = nil, pay: Bool? = nil) {
         self.text = text
+        self.iconCustomEmojiId = iconCustomEmojiId
+        self.style = style
         self.url = url
         self.callbackData = callbackData
         self.webApp = webApp

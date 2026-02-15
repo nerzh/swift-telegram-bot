@@ -29,7 +29,7 @@ public final class TGInputMediaPhoto: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -40,7 +40,7 @@ public final class TGInputMediaPhoto: Codable, Sendable {
     /// Optional. Pass True if the photo needs to be covered with a spoiler animation
     public let hasSpoiler: Bool?
 
-    public init (type: TGInputMediaPhotoType, media: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasSpoiler: Bool? = nil) {
+    public init (type: TGInputMediaPhotoType, media: String, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasSpoiler: Bool? = nil) {
         self.type = type
         self.media = media
         self.caption = caption

@@ -58,7 +58,7 @@ public final class TGInlineQueryResultMpeg4Gif: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -72,7 +72,7 @@ public final class TGInlineQueryResultMpeg4Gif: Codable, Sendable {
     /// Optional. Content of the message to be sent instead of the video animation
     public let inputMessageContent: TGInputMessageContent?
 
-    public init (type: TGInlineQueryResultMpeg4GifType, id: String, mpeg4Url: String, mpeg4Width: Int? = nil, mpeg4Height: Int? = nil, mpeg4Duration: Int? = nil, thumbnailUrl: String, thumbnailMimeType: String? = nil, title: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
+    public init (type: TGInlineQueryResultMpeg4GifType, id: String, mpeg4Url: String, mpeg4Width: Int? = nil, mpeg4Height: Int? = nil, mpeg4Duration: Int? = nil, thumbnailUrl: String, thumbnailMimeType: String? = nil, title: String? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil) {
         self.type = type
         self.id = id
         self.mpeg4Url = mpeg4Url

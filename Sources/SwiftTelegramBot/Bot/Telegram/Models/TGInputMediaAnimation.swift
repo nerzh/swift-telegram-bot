@@ -36,7 +36,7 @@ public final class TGInputMediaAnimation: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the animation caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -56,7 +56,7 @@ public final class TGInputMediaAnimation: Codable, Sendable {
     /// Optional. Pass True if the animation needs to be covered with a spoiler animation
     public let hasSpoiler: Bool?
 
-    public init (type: TGInputMediaAnimationType, media: String, thumbnail: String? = nil, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, width: Int? = nil, height: Int? = nil, duration: Int? = nil, hasSpoiler: Bool? = nil) {
+    public init (type: TGInputMediaAnimationType, media: String, thumbnail: String? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, width: Int? = nil, height: Int? = nil, duration: Int? = nil, hasSpoiler: Bool? = nil) {
         self.type = type
         self.media = media
         self.thumbnail = thumbnail

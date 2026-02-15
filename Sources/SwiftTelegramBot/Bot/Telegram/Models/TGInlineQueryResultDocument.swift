@@ -39,7 +39,7 @@ public final class TGInlineQueryResultDocument: Codable, Sendable {
     public let caption: String?
 
     /// Optional. Mode for parsing entities in the document caption. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
@@ -68,7 +68,7 @@ public final class TGInlineQueryResultDocument: Codable, Sendable {
     /// Optional. Thumbnail height
     public let thumbnailHeight: Int?
 
-    public init (type: TGInlineQueryResultDocumentType, id: String, title: String, caption: String? = nil, parseMode: String? = nil, captionEntities: [TGMessageEntity]? = nil, documentUrl: String, mimeType: String, description: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
+    public init (type: TGInlineQueryResultDocumentType, id: String, title: String, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, documentUrl: String, mimeType: String, description: String? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil, inputMessageContent: TGInputMessageContent? = nil, thumbnailUrl: String? = nil, thumbnailWidth: Int? = nil, thumbnailHeight: Int? = nil) {
         self.type = type
         self.id = id
         self.title = title

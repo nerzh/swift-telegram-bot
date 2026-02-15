@@ -19,12 +19,12 @@ public final class TGInputPollOption: Codable, Sendable {
     public let text: String
 
     /// Optional. Mode for parsing entities in the text. See formatting options for more details. Currently, only custom emoji entities are allowed
-    public let textParseMode: String?
+    public let textParseMode: TGParseMode?
 
     /// Optional. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of text_parse_mode
     public let textEntities: [TGMessageEntity]?
 
-    public init (text: String, textParseMode: String? = nil, textEntities: [TGMessageEntity]? = nil) {
+    public init (text: String, textParseMode: TGParseMode? = nil, textEntities: [TGMessageEntity]? = nil) {
         self.text = text
         self.textParseMode = textParseMode
         self.textEntities = textEntities

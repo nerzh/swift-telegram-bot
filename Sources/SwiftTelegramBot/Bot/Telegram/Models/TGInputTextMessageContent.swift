@@ -20,7 +20,7 @@ public final class TGInputTextMessageContent: Codable, Sendable {
     public let messageText: String
 
     /// Optional. Mode for parsing entities in the message text. See formatting options for more details.
-    public let parseMode: String?
+    public let parseMode: TGParseMode?
 
     /// Optional. List of special entities that appear in message text, which can be specified instead of parse_mode
     public let entities: [TGMessageEntity]?
@@ -28,7 +28,7 @@ public final class TGInputTextMessageContent: Codable, Sendable {
     /// Optional. Link preview generation options for the message
     public let linkPreviewOptions: TGLinkPreviewOptions?
 
-    public init (messageText: String, parseMode: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil) {
+    public init (messageText: String, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil) {
         self.messageText = messageText
         self.parseMode = parseMode
         self.entities = entities
