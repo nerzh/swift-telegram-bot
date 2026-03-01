@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+/// Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
 
 
 /// Parameters container struct for `sendMessageDraft` method
@@ -51,7 +51,7 @@ public struct TGSendMessageDraftParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
 
  SeeAlso Telegram Bot API Reference:
  [SendMessageDraftParams](https://core.telegram.org/bots/api#sendmessagedraft)

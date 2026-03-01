@@ -27,6 +27,7 @@ public enum TGMessageEntityType: String, Codable, Sendable {
     case textLink = "text_link"
     case textMention = "text_mention"
     case customEmoji = "custom_emoji"
+    case dateTime = "date_time"
     case undefined
 
     public init(from decoder: Decoder) throws {

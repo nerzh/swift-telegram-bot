@@ -63,6 +63,9 @@ public struct TGPromoteChatMemberParams: Encodable, Sendable {
     /// Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only
     public let canManageDirectMessages: Bool?
 
+    /// Pass True if the administrator can edit the tags of regular members; for groups and supergroups only
+    public let canManageTags: Bool?
+
     /// Custom keys for coding/decoding `PromoteChatMemberParams` struct
     public enum CodingKeys: String, CodingKey {
             case chatId = "chat_id"
@@ -83,9 +86,10 @@ public struct TGPromoteChatMemberParams: Encodable, Sendable {
             case canPinMessages = "can_pin_messages"
             case canManageTopics = "can_manage_topics"
             case canManageDirectMessages = "can_manage_direct_messages"
+            case canManageTags = "can_manage_tags"
     }
 
-    public init(chatId: TGChatId, userId: Int64, isAnonymous: Bool? = nil, canManageChat: Bool? = nil, canDeleteMessages: Bool? = nil, canManageVideoChats: Bool? = nil, canRestrictMembers: Bool? = nil, canPromoteMembers: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPostStories: Bool? = nil, canEditStories: Bool? = nil, canDeleteStories: Bool? = nil, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil) {
+    public init(chatId: TGChatId, userId: Int64, isAnonymous: Bool? = nil, canManageChat: Bool? = nil, canDeleteMessages: Bool? = nil, canManageVideoChats: Bool? = nil, canRestrictMembers: Bool? = nil, canPromoteMembers: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPostStories: Bool? = nil, canEditStories: Bool? = nil, canDeleteStories: Bool? = nil, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil, canManageTags: Bool? = nil) {
             self.chatId = chatId
             self.userId = userId
             self.isAnonymous = isAnonymous
@@ -104,6 +108,7 @@ public struct TGPromoteChatMemberParams: Encodable, Sendable {
             self.canPinMessages = canPinMessages
             self.canManageTopics = canManageTopics
             self.canManageDirectMessages = canManageDirectMessages
+            self.canManageTags = canManageTags
     }
 }
 

@@ -11,6 +11,7 @@ public final class TGChatMemberRestricted: Codable, Sendable {
     /// Custom keys for coding/decoding `ChatMemberRestricted` struct
     public enum CodingKeys: String, CodingKey {
         case status = "status"
+        case tag = "tag"
         case user = "user"
         case isMember = "is_member"
         case canSendMessages = "can_send_messages"
@@ -23,6 +24,7 @@ public final class TGChatMemberRestricted: Codable, Sendable {
         case canSendPolls = "can_send_polls"
         case canSendOtherMessages = "can_send_other_messages"
         case canAddWebPagePreviews = "can_add_web_page_previews"
+        case canEditTag = "can_edit_tag"
         case canChangeInfo = "can_change_info"
         case canInviteUsers = "can_invite_users"
         case canPinMessages = "can_pin_messages"
@@ -32,6 +34,9 @@ public final class TGChatMemberRestricted: Codable, Sendable {
 
     /// The member's status in the chat, always “restricted”
     public let status: String
+
+    /// Optional. Tag of the member
+    public let tag: String?
 
     /// Information about the user
     public let user: TGUser
@@ -69,6 +74,9 @@ public final class TGChatMemberRestricted: Codable, Sendable {
     /// True, if the user is allowed to add web page previews to their messages
     public let canAddWebPagePreviews: Bool
 
+    /// True, if the user is allowed to edit their own tag
+    public let canEditTag: Bool
+
     /// True, if the user is allowed to change the chat title, photo and other settings
     public let canChangeInfo: Bool
 
@@ -84,8 +92,9 @@ public final class TGChatMemberRestricted: Codable, Sendable {
     /// Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever
     public let untilDate: Int
 
-    public init (status: String, user: TGUser, isMember: Bool, canSendMessages: Bool, canSendAudios: Bool, canSendDocuments: Bool, canSendPhotos: Bool, canSendVideos: Bool, canSendVideoNotes: Bool, canSendVoiceNotes: Bool, canSendPolls: Bool, canSendOtherMessages: Bool, canAddWebPagePreviews: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPinMessages: Bool, canManageTopics: Bool, untilDate: Int) {
+    public init (status: String, tag: String? = nil, user: TGUser, isMember: Bool, canSendMessages: Bool, canSendAudios: Bool, canSendDocuments: Bool, canSendPhotos: Bool, canSendVideos: Bool, canSendVideoNotes: Bool, canSendVoiceNotes: Bool, canSendPolls: Bool, canSendOtherMessages: Bool, canAddWebPagePreviews: Bool, canEditTag: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPinMessages: Bool, canManageTopics: Bool, untilDate: Int) {
         self.status = status
+        self.tag = tag
         self.user = user
         self.isMember = isMember
         self.canSendMessages = canSendMessages
@@ -98,6 +107,7 @@ public final class TGChatMemberRestricted: Codable, Sendable {
         self.canSendPolls = canSendPolls
         self.canSendOtherMessages = canSendOtherMessages
         self.canAddWebPagePreviews = canAddWebPagePreviews
+        self.canEditTag = canEditTag
         self.canChangeInfo = canChangeInfo
         self.canInviteUsers = canInviteUsers
         self.canPinMessages = canPinMessages
