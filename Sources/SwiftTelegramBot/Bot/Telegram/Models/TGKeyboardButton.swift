@@ -15,6 +15,7 @@ public final class TGKeyboardButton: Codable, Sendable {
         case style = "style"
         case requestUsers = "request_users"
         case requestChat = "request_chat"
+        case requestManagedBot = "request_managed_bot"
         case requestContact = "request_contact"
         case requestLocation = "request_location"
         case requestPoll = "request_poll"
@@ -36,6 +37,9 @@ public final class TGKeyboardButton: Codable, Sendable {
     /// Optional. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat_shared” service message. Available in private chats only.
     public let requestChat: TGKeyboardButtonRequestChat?
 
+    /// Optional. If specified, pressing the button will ask the user to create and share a bot that will be managed by the current bot. Available for bots that enabled management of other bots in the @BotFather Mini App. Available in private chats only.
+    public let requestManagedBot: TGKeyboardButtonRequestManagedBot?
+
     /// Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only.
     public let requestContact: Bool?
 
@@ -48,12 +52,13 @@ public final class TGKeyboardButton: Codable, Sendable {
     /// Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a “web_app_data” service message. Available in private chats only.
     public let webApp: TGWebAppInfo?
 
-    public init (text: String, iconCustomEmojiId: String? = nil, style: String? = nil, requestUsers: TGKeyboardButtonRequestUsers? = nil, requestChat: TGKeyboardButtonRequestChat? = nil, requestContact: Bool? = nil, requestLocation: Bool? = nil, requestPoll: TGKeyboardButtonPollType? = nil, webApp: TGWebAppInfo? = nil) {
+    public init (text: String, iconCustomEmojiId: String? = nil, style: String? = nil, requestUsers: TGKeyboardButtonRequestUsers? = nil, requestChat: TGKeyboardButtonRequestChat? = nil, requestManagedBot: TGKeyboardButtonRequestManagedBot? = nil, requestContact: Bool? = nil, requestLocation: Bool? = nil, requestPoll: TGKeyboardButtonPollType? = nil, webApp: TGWebAppInfo? = nil) {
         self.text = text
         self.iconCustomEmojiId = iconCustomEmojiId
         self.style = style
         self.requestUsers = requestUsers
         self.requestChat = requestChat
+        self.requestManagedBot = requestManagedBot
         self.requestContact = requestContact
         self.requestLocation = requestLocation
         self.requestPoll = requestPoll

@@ -36,11 +36,23 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Poll type, “quiz” or “regular”, defaults to “regular”
     public let type: String?
 
-    /// True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False
+    /// Pass True, if the poll allows multiple answers, defaults to False
     public let allowsMultipleAnswers: Bool?
 
-    /// 0-based identifier of the correct answer option, required for polls in quiz mode
-    public let correctOptionId: Int?
+    /// Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls
+    public let allowsRevoting: Bool?
+
+    /// Pass True, if the poll options must be shown in random order
+    public let shuffleOptions: Bool?
+
+    /// Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes
+    public let allowAddingOptions: Bool?
+
+    /// Pass True, if poll results must be shown only after the poll closes
+    public let hideResultsUntilCloses: Bool?
+
+    /// A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode
+    public let correctOptionIds: [Int]?
 
     /// Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing
     public let explanation: String?
@@ -51,14 +63,23 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation_parse_mode
     public let explanationEntities: [TGMessageEntity]?
 
-    /// Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close_date.
+    /// Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with close_date.
     public let openPeriod: Int?
 
-    /// Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open_period.
+    /// Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 2628000 seconds in the future. Can't be used together with open_period.
     public let closeDate: Int?
 
     /// Pass True if the poll needs to be immediately closed. This can be useful for poll preview.
     public let isClosed: Bool?
+
+    /// Description of the poll to be sent, 0-1024 characters after entities parsing
+    public let description: String?
+
+    /// Mode for parsing entities in the poll description. See formatting options for more details.
+    public let descriptionParseMode: TGParseMode?
+
+    /// A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of description_parse_mode
+    public let descriptionEntities: [TGMessageEntity]?
 
     /// Sends the message silently. Users will receive a notification with no sound.
     public let disableNotification: Bool?
@@ -90,13 +111,20 @@ public struct TGSendPollParams: Encodable, Sendable {
             case isAnonymous = "is_anonymous"
             case type = "type"
             case allowsMultipleAnswers = "allows_multiple_answers"
-            case correctOptionId = "correct_option_id"
+            case allowsRevoting = "allows_revoting"
+            case shuffleOptions = "shuffle_options"
+            case allowAddingOptions = "allow_adding_options"
+            case hideResultsUntilCloses = "hide_results_until_closes"
+            case correctOptionIds = "correct_option_ids"
             case explanation = "explanation"
             case explanationParseMode = "explanation_parse_mode"
             case explanationEntities = "explanation_entities"
             case openPeriod = "open_period"
             case closeDate = "close_date"
             case isClosed = "is_closed"
+            case description = "description"
+            case descriptionParseMode = "description_parse_mode"
+            case descriptionEntities = "description_entities"
             case disableNotification = "disable_notification"
             case protectContent = "protect_content"
             case allowPaidBroadcast = "allow_paid_broadcast"
@@ -105,7 +133,7 @@ public struct TGSendPollParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, question: String, questionParseMode: TGParseMode? = nil, questionEntities: [TGMessageEntity]? = nil, options: [TGInputPollOption], isAnonymous: Bool? = nil, type: String? = nil, allowsMultipleAnswers: Bool? = nil, correctOptionId: Int? = nil, explanation: String? = nil, explanationParseMode: TGParseMode? = nil, explanationEntities: [TGMessageEntity]? = nil, openPeriod: Int? = nil, closeDate: Int? = nil, isClosed: Bool? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, question: String, questionParseMode: TGParseMode? = nil, questionEntities: [TGMessageEntity]? = nil, options: [TGInputPollOption], isAnonymous: Bool? = nil, type: String? = nil, allowsMultipleAnswers: Bool? = nil, allowsRevoting: Bool? = nil, shuffleOptions: Bool? = nil, allowAddingOptions: Bool? = nil, hideResultsUntilCloses: Bool? = nil, correctOptionIds: [Int]? = nil, explanation: String? = nil, explanationParseMode: TGParseMode? = nil, explanationEntities: [TGMessageEntity]? = nil, openPeriod: Int? = nil, closeDate: Int? = nil, isClosed: Bool? = nil, description: String? = nil, descriptionParseMode: TGParseMode? = nil, descriptionEntities: [TGMessageEntity]? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId
@@ -116,13 +144,20 @@ public struct TGSendPollParams: Encodable, Sendable {
             self.isAnonymous = isAnonymous
             self.type = type
             self.allowsMultipleAnswers = allowsMultipleAnswers
-            self.correctOptionId = correctOptionId
+            self.allowsRevoting = allowsRevoting
+            self.shuffleOptions = shuffleOptions
+            self.allowAddingOptions = allowAddingOptions
+            self.hideResultsUntilCloses = hideResultsUntilCloses
+            self.correctOptionIds = correctOptionIds
             self.explanation = explanation
             self.explanationParseMode = explanationParseMode
             self.explanationEntities = explanationEntities
             self.openPeriod = openPeriod
             self.closeDate = closeDate
             self.isClosed = isClosed
+            self.description = description
+            self.descriptionParseMode = descriptionParseMode
+            self.descriptionEntities = descriptionEntities
             self.disableNotification = disableNotification
             self.protectContent = protectContent
             self.allowPaidBroadcast = allowPaidBroadcast

@@ -18,6 +18,7 @@ public final class TGReplyParameters: Codable, Sendable {
         case quoteEntities = "quote_entities"
         case quotePosition = "quote_position"
         case checklistTaskId = "checklist_task_id"
+        case pollOptionId = "poll_option_id"
     }
 
     /// Identifier of the message that will be replied to in the current chat, or in the chat chat_id if it is specified
@@ -29,7 +30,7 @@ public final class TGReplyParameters: Codable, Sendable {
     /// Optional. Pass True if the message should be sent even if the specified message to be replied to is not found. Always False for replies in another chat or forum topic. Always True for messages sent on behalf of a business account.
     public let allowSendingWithoutReply: Bool?
 
-    /// Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, and custom_emoji entities. The message will fail to send if the quote isn't found in the original message.
+    /// Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities. The message will fail to send if the quote isn't found in the original message.
     public let quote: String?
 
     /// Optional. Mode for parsing entities in the quote. See formatting options for more details.
@@ -44,7 +45,10 @@ public final class TGReplyParameters: Codable, Sendable {
     /// Optional. Identifier of the specific checklist task to be replied to
     public let checklistTaskId: Int?
 
-    public init (messageId: Int, chatId: TGChatId? = nil, allowSendingWithoutReply: Bool? = nil, quote: String? = nil, quoteParseMode: TGParseMode? = nil, quoteEntities: [TGMessageEntity]? = nil, quotePosition: Int? = nil, checklistTaskId: Int? = nil) {
+    /// Optional. Persistent identifier of the specific poll option to be replied to
+    public let pollOptionId: String?
+
+    public init (messageId: Int, chatId: TGChatId? = nil, allowSendingWithoutReply: Bool? = nil, quote: String? = nil, quoteParseMode: TGParseMode? = nil, quoteEntities: [TGMessageEntity]? = nil, quotePosition: Int? = nil, checklistTaskId: Int? = nil, pollOptionId: String? = nil) {
         self.messageId = messageId
         self.chatId = chatId
         self.allowSendingWithoutReply = allowSendingWithoutReply
@@ -53,5 +57,6 @@ public final class TGReplyParameters: Codable, Sendable {
         self.quoteEntities = quoteEntities
         self.quotePosition = quotePosition
         self.checklistTaskId = checklistTaskId
+        self.pollOptionId = pollOptionId
     }
 }

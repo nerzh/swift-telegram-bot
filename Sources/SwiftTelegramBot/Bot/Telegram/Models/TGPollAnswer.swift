@@ -14,6 +14,7 @@ public final class TGPollAnswer: Codable, Sendable {
         case voterChat = "voter_chat"
         case user = "user"
         case optionIds = "option_ids"
+        case optionPersistentIds = "option_persistent_ids"
     }
 
     /// Unique poll identifier
@@ -28,10 +29,14 @@ public final class TGPollAnswer: Codable, Sendable {
     /// 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
     public let optionIds: [Int]
 
-    public init (pollId: String, voterChat: TGChat? = nil, user: TGUser? = nil, optionIds: [Int]) {
+    /// Persistent identifiers of the chosen answer options. May be empty if the vote was retracted.
+    public let optionPersistentIds: [String]
+
+    public init (pollId: String, voterChat: TGChat? = nil, user: TGUser? = nil, optionIds: [Int], optionPersistentIds: [String]) {
         self.pollId = pollId
         self.voterChat = voterChat
         self.user = user
         self.optionIds = optionIds
+        self.optionPersistentIds = optionPersistentIds
     }
 }

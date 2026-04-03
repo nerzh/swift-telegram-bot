@@ -24,7 +24,7 @@ public final class TGInputChecklist: Codable, Sendable {
     /// Optional. Mode for parsing entities in the title. See formatting options for more details.
     public let parseMode: TGParseMode?
 
-    /// Optional. List of special entities that appear in the title, which can be specified instead of parse_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are allowed.
+    /// Optional. List of special entities that appear in the title, which can be specified instead of parse_mode. Currently, only bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities are allowed.
     public let titleEntities: [TGMessageEntity]?
 
     /// List of 1-30 tasks in the checklist

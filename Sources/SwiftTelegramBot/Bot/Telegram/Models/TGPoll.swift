@@ -19,11 +19,14 @@ public final class TGPoll: Codable, Sendable {
         case isAnonymous = "is_anonymous"
         case type = "type"
         case allowsMultipleAnswers = "allows_multiple_answers"
-        case correctOptionId = "correct_option_id"
+        case allowsRevoting = "allows_revoting"
+        case correctOptionIds = "correct_option_ids"
         case explanation = "explanation"
         case explanationEntities = "explanation_entities"
         case openPeriod = "open_period"
         case closeDate = "close_date"
+        case description = "description"
+        case descriptionEntities = "description_entities"
     }
 
     /// Unique poll identifier
@@ -53,8 +56,11 @@ public final class TGPoll: Codable, Sendable {
     /// True, if the poll allows multiple answers
     public let allowsMultipleAnswers: Bool
 
-    /// Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
-    public let correctOptionId: Int?
+    /// True, if the poll allows to change the chosen answer options
+    public let allowsRevoting: Bool
+
+    /// Optional. Array of 0-based identifiers of the correct answer options. Available only for polls in quiz mode which are closed or were sent (not forwarded) by the bot or to the private chat with the bot.
+    public let correctOptionIds: [Int]?
 
     /// Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
     public let explanation: String?
@@ -68,7 +74,13 @@ public final class TGPoll: Codable, Sendable {
     /// Optional. Point in time (Unix timestamp) when the poll will be automatically closed
     public let closeDate: Int?
 
-    public init (id: String, question: String, questionEntities: [TGMessageEntity]? = nil, options: [TGPollOption], totalVoterCount: Int, isClosed: Bool, isAnonymous: Bool, type: TGPollType, allowsMultipleAnswers: Bool, correctOptionId: Int? = nil, explanation: String? = nil, explanationEntities: [TGMessageEntity]? = nil, openPeriod: Int? = nil, closeDate: Int? = nil) {
+    /// Optional. Description of the poll; for polls inside the Message object only
+    public let description: String?
+
+    /// Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the description
+    public let descriptionEntities: [TGMessageEntity]?
+
+    public init (id: String, question: String, questionEntities: [TGMessageEntity]? = nil, options: [TGPollOption], totalVoterCount: Int, isClosed: Bool, isAnonymous: Bool, type: TGPollType, allowsMultipleAnswers: Bool, allowsRevoting: Bool, correctOptionIds: [Int]? = nil, explanation: String? = nil, explanationEntities: [TGMessageEntity]? = nil, openPeriod: Int? = nil, closeDate: Int? = nil, description: String? = nil, descriptionEntities: [TGMessageEntity]? = nil) {
         self.id = id
         self.question = question
         self.questionEntities = questionEntities
@@ -78,10 +90,13 @@ public final class TGPoll: Codable, Sendable {
         self.isAnonymous = isAnonymous
         self.type = type
         self.allowsMultipleAnswers = allowsMultipleAnswers
-        self.correctOptionId = correctOptionId
+        self.allowsRevoting = allowsRevoting
+        self.correctOptionIds = correctOptionIds
         self.explanation = explanation
         self.explanationEntities = explanationEntities
         self.openPeriod = openPeriod
         self.closeDate = closeDate
+        self.description = description
+        self.descriptionEntities = descriptionEntities
     }
 }

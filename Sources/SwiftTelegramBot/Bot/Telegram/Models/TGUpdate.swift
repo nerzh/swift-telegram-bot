@@ -35,6 +35,7 @@ public final class TGUpdate: Codable, Sendable {
         case chatJoinRequest = "chat_join_request"
         case chatBoost = "chat_boost"
         case removedChatBoost = "removed_chat_boost"
+        case managedBot = "managed_bot"
     }
 
     /// The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
@@ -109,7 +110,10 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates.
     public let removedChatBoost: TGChatBoostRemoved?
 
-    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil) {
+    /// Optional. A new bot was created to be managed by the bot or token of a bot was changed
+    public let managedBot: TGManagedBotUpdated?
+
+    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil) {
         self.updateId = updateId
         self.message = message
         self.editedMessage = editedMessage
@@ -134,5 +138,6 @@ public final class TGUpdate: Codable, Sendable {
         self.chatJoinRequest = chatJoinRequest
         self.chatBoost = chatBoost
         self.removedChatBoost = removedChatBoost
+        self.managedBot = managedBot
     }
 }
