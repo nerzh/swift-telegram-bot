@@ -48,7 +48,7 @@ public final class TGInlineQueryResultMpeg4Gif: Codable, Sendable {
     /// URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     public let thumbnailUrl: String
 
-    /// Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
+    /// Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”.
     public let thumbnailMimeType: String?
 
     /// Optional. Title for the result

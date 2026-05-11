@@ -19,7 +19,7 @@ public final class TGKeyboardButtonRequestUsers: Codable, Sendable {
         case requestPhoto = "request_photo"
     }
 
-    /// Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message
+    /// Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message.
     public let requestId: Int
 
     /// Optional. Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied.

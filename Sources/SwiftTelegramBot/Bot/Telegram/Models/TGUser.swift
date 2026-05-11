@@ -20,6 +20,7 @@ public final class TGUser: Codable, Sendable {
         case addedToAttachmentMenu = "added_to_attachment_menu"
         case canJoinGroups = "can_join_groups"
         case canReadAllGroupMessages = "can_read_all_group_messages"
+        case supportsGuestQueries = "supports_guest_queries"
         case supportsInlineQueries = "supports_inline_queries"
         case canConnectToBusiness = "can_connect_to_business"
         case hasMainWebApp = "has_main_web_app"
@@ -58,10 +59,13 @@ public final class TGUser: Codable, Sendable {
     /// Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
     public let canReadAllGroupMessages: Bool?
 
+    /// Optional. True, if the bot supports guest queries from chats it is not a member of. Returned only in getMe.
+    public let supportsGuestQueries: Bool?
+
     /// Optional. True, if the bot supports inline queries. Returned only in getMe.
     public let supportsInlineQueries: Bool?
 
-    /// Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
+    /// Optional. True, if the bot can be connected to a user account to manage it. Returned only in getMe.
     public let canConnectToBusiness: Bool?
 
     /// Optional. True, if the bot has a main Web App. Returned only in getMe.
@@ -76,7 +80,7 @@ public final class TGUser: Codable, Sendable {
     /// Optional. True, if other bots can be created to be controlled by the bot. Returned only in getMe.
     public let canManageBots: Bool?
 
-    public init (id: Int64, isBot: Bool, firstName: String, lastName: String? = nil, username: String? = nil, languageCode: String? = nil, isPremium: Bool? = nil, addedToAttachmentMenu: Bool? = nil, canJoinGroups: Bool? = nil, canReadAllGroupMessages: Bool? = nil, supportsInlineQueries: Bool? = nil, canConnectToBusiness: Bool? = nil, hasMainWebApp: Bool? = nil, hasTopicsEnabled: Bool? = nil, allowsUsersToCreateTopics: Bool? = nil, canManageBots: Bool? = nil) {
+    public init (id: Int64, isBot: Bool, firstName: String, lastName: String? = nil, username: String? = nil, languageCode: String? = nil, isPremium: Bool? = nil, addedToAttachmentMenu: Bool? = nil, canJoinGroups: Bool? = nil, canReadAllGroupMessages: Bool? = nil, supportsGuestQueries: Bool? = nil, supportsInlineQueries: Bool? = nil, canConnectToBusiness: Bool? = nil, hasMainWebApp: Bool? = nil, hasTopicsEnabled: Bool? = nil, allowsUsersToCreateTopics: Bool? = nil, canManageBots: Bool? = nil) {
         self.id = id
         self.isBot = isBot
         self.firstName = firstName
@@ -87,6 +91,7 @@ public final class TGUser: Codable, Sendable {
         self.addedToAttachmentMenu = addedToAttachmentMenu
         self.canJoinGroups = canJoinGroups
         self.canReadAllGroupMessages = canReadAllGroupMessages
+        self.supportsGuestQueries = supportsGuestQueries
         self.supportsInlineQueries = supportsInlineQueries
         self.canConnectToBusiness = canConnectToBusiness
         self.hasMainWebApp = hasMainWebApp

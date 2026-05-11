@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `setChatAdministratorCustomTitle` method
 public struct TGSetChatAdministratorCustomTitleParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    /// Unique identifier for the target chat or username of the target supergroup in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier of the target user

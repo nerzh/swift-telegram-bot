@@ -12,7 +12,7 @@ public struct TGUnpinChatMessageParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be unpinned
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.

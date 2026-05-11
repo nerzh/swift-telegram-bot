@@ -17,7 +17,7 @@ public final class TGBotCommand: Codable, Sendable {
     /// Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
     public let command: String
 
-    /// Description of the command; 1-256 characters.
+    /// Description of the command; 1-256 characters
     public let description: String
 
     public init (command: String, description: String) {

@@ -12,13 +12,13 @@ public struct TGEditMessageLiveLocationParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
     public let businessConnectionId: String?
 
-    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username.
     public let chatId: TGChatId?
 
-    /// Required if inline_message_id is not specified. Identifier of the message to edit
+    /// Required if inline_message_id is not specified. Identifier of the message to edit.
     public let messageId: Int?
 
-    /// Required if chat_id and message_id are not specified. Identifier of the inline message
+    /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
     /// Latitude of new location
@@ -27,7 +27,7 @@ public struct TGEditMessageLiveLocationParams: Encodable, Sendable {
     /// Longitude of new location
     public let longitude: Float
 
-    /// New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live_period remains unchanged
+    /// New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live_period remains unchanged.
     public let livePeriod: Int?
 
     /// The radius of uncertainty for the location, measured in meters; 0-1500
@@ -39,7 +39,7 @@ public struct TGEditMessageLiveLocationParams: Encodable, Sendable {
     /// The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
     public let proximityAlertRadius: Int?
 
-    /// A JSON-serialized object for a new inline keyboard.
+    /// A JSON-serialized object for a new inline keyboard
     public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageLiveLocationParams` struct

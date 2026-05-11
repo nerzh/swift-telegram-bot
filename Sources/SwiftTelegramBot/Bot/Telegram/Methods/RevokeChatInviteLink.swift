@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `revokeChatInviteLink` method
 public struct TGRevokeChatInviteLinkParams: Encodable, Sendable {
 
-    /// Unique identifier of the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier of the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// The invite link to revoke

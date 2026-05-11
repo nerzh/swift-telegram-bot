@@ -9,10 +9,10 @@ import Foundation
 /// Parameters container struct for `deleteMessages` method
 public struct TGDeleteMessagesParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
     public let chatId: TGChatId
 
-    /// A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted
+    /// A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted.
     public let messageIds: [Int]
 
     /// Custom keys for coding/decoding `DeleteMessagesParams` struct

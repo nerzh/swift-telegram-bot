@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `getChatMemberCount` method
 public struct TGGetChatMemberCountParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `GetChatMemberCountParams` struct

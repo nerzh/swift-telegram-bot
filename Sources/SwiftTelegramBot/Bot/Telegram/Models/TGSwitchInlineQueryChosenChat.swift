@@ -17,7 +17,7 @@ public final class TGSwitchInlineQueryChosenChat: Codable, Sendable {
         case allowChannelChats = "allow_channel_chats"
     }
 
-    /// Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
+    /// Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted.
     public let query: String?
 
     /// Optional. True, if private chats with users can be chosen

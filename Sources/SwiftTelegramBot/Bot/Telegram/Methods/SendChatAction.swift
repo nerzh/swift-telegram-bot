@@ -14,7 +14,7 @@ public struct TGSendChatActionParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the action will be sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel chats and channel direct messages chats aren't supported.
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Channel chats and channel direct messages chats aren't supported.
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only

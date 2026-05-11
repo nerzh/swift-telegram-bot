@@ -15,19 +15,19 @@ public struct TGSetGameScoreParams: Encodable, Sendable {
     /// New score, must be non-negative
     public let score: Int
 
-    /// Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+    /// Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters.
     public let force: Bool?
 
     /// Pass True if the game message should not be automatically edited to include the current scoreboard
     public let disableEditMessage: Bool?
 
-    /// Required if inline_message_id is not specified. Unique identifier for the target chat
+    /// Required if inline_message_id is not specified. Unique identifier for the target chat.
     public let chatId: Int64?
 
-    /// Required if inline_message_id is not specified. Identifier of the sent message
+    /// Required if inline_message_id is not specified. Identifier of the sent message.
     public let messageId: Int?
 
-    /// Required if chat_id and message_id are not specified. Identifier of the inline message
+    /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
     /// Custom keys for coding/decoding `SetGameScoreParams` struct

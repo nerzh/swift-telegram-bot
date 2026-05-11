@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `removeChatVerification` method
 public struct TGRemoveChatVerificationParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot or channel in the format @username
     public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `RemoveChatVerificationParams` struct

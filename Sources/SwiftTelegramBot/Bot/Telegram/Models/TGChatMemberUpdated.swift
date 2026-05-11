@@ -35,7 +35,7 @@ public final class TGChatMemberUpdated: Codable, Sendable {
     /// New information about the chat member
     public let newChatMember: TGChatMember
 
-    /// Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
+    /// Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only
     public let inviteLink: TGChatInviteLink?
 
     /// Optional. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator

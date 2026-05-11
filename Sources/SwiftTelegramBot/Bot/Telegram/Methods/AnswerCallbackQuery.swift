@@ -13,7 +13,7 @@ public struct TGAnswerCallbackQueryParams: Encodable, Sendable {
     /// Unique identifier for the query to be answered
     public let callbackQueryId: String
 
-    /// Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
+    /// Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
     public let text: String?
 
     /// If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.

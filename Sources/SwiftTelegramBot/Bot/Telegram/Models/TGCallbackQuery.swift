@@ -28,7 +28,7 @@ public final class TGCallbackQuery: Codable, Sendable {
     /// Optional. Message sent by the bot with the callback button that originated the query
     public let message: TGMaybeInaccessibleMessage?
 
-    /// Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
+    /// Optional. Identifier of the message sent via the bot in inline mode, that originated the query
     public let inlineMessageId: String?
 
     /// Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.

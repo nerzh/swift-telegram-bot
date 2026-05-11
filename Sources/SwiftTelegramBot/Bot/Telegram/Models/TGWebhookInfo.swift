@@ -45,7 +45,7 @@ public final class TGWebhookInfo: Codable, Sendable {
     /// Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
     public let maxConnections: Int?
 
-    /// Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member
+    /// Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member.
     public let allowedUpdates: [String]?
 
     public init (url: String, hasCustomCertificate: Bool, pendingUpdateCount: Int, ipAddress: String? = nil, lastErrorDate: Int? = nil, lastErrorMessage: String? = nil, lastSynchronizationErrorDate: Int? = nil, maxConnections: Int? = nil, allowedUpdates: [String]? = nil) {

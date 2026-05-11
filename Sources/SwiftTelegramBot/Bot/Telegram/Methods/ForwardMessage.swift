@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `forwardMessage` method
 public struct TGForwardMessageParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
@@ -18,7 +18,7 @@ public struct TGForwardMessageParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat
     public let directMessagesTopicId: Int?
 
-    /// Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+    /// Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup or channel in the format @username)
     public let fromChatId: TGChatId
 
     /// New start timestamp for the forwarded video in the message

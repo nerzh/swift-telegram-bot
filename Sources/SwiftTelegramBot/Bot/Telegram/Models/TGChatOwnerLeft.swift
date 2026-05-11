@@ -13,7 +13,7 @@ public final class TGChatOwnerLeft: Codable, Sendable {
         case newOwner = "new_owner"
     }
 
-    /// Optional. The user which will be the new owner of the chat if the previous owner does not return to the chat
+    /// Optional. The user who will become the new owner of the chat if the previous owner does not return to the chat
     public let newOwner: TGUser?
 
     public init (newOwner: TGUser? = nil) {

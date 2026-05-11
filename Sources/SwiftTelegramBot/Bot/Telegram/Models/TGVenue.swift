@@ -19,7 +19,7 @@ public final class TGVenue: Codable, Sendable {
         case googlePlaceType = "google_place_type"
     }
 
-    /// Venue location. Can't be a live location
+    /// Venue location. Can't be a live location.
     public let location: TGLocation
 
     /// Name of the venue

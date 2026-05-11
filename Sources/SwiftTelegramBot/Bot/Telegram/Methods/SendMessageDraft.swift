@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+/// Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user's chat. Returns True on success.
 
 
 /// Parameters container struct for `sendMessageDraft` method
@@ -15,11 +15,11 @@ public struct TGSendMessageDraftParams: Encodable, Sendable {
     /// Unique identifier for the target message thread
     public let messageThreadId: Int?
 
-    /// Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated
+    /// Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated.
     public let draftId: Int
 
-    /// Text of the message to be sent, 1-4096 characters after entities parsing
-    public let text: String
+    /// Text of the message to be sent, 0-4096 characters after entities parsing. Pass an empty text to show a “Thinking…” placeholder.
+    public let text: String?
 
     /// Mode for parsing entities in the message text. See formatting options for more details.
     public let parseMode: TGParseMode?
@@ -37,7 +37,7 @@ public struct TGSendMessageDraftParams: Encodable, Sendable {
             case entities = "entities"
     }
 
-    public init(chatId: Int64, messageThreadId: Int? = nil, draftId: Int, text: String, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil) {
+    public init(chatId: Int64, messageThreadId: Int? = nil, draftId: Int, text: String? = nil, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil) {
             self.chatId = chatId
             self.messageThreadId = messageThreadId
             self.draftId = draftId
@@ -51,7 +51,7 @@ public struct TGSendMessageDraftParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+ Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user's chat. Returns True on success.
 
  SeeAlso Telegram Bot API Reference:
  [SendMessageDraftParams](https://core.telegram.org/bots/api#sendmessagedraft)

@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `setChatPhoto` method
 public struct TGSetChatPhotoParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// New chat photo, uploaded using multipart/form-data

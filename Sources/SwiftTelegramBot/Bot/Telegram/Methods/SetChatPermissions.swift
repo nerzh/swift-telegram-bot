@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `setChatPermissions` method
 public struct TGSetChatPermissionsParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    /// Unique identifier for the target chat or username of the target supergroup in the format @username
     public let chatId: TGChatId
 
     /// A JSON-serialized object for new default chat permissions

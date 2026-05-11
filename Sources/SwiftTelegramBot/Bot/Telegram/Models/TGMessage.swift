@@ -19,6 +19,7 @@ public final class TGMessage: Codable, Sendable {
         case senderBusinessBot = "sender_business_bot"
         case senderTag = "sender_tag"
         case date = "date"
+        case guestQueryId = "guest_query_id"
         case businessConnectionId = "business_connection_id"
         case chat = "chat"
         case forwardOrigin = "forward_origin"
@@ -31,6 +32,8 @@ public final class TGMessage: Codable, Sendable {
         case replyToChecklistTaskId = "reply_to_checklist_task_id"
         case replyToPollOptionId = "reply_to_poll_option_id"
         case viaBot = "via_bot"
+        case guestBotCallerUser = "guest_bot_caller_user"
+        case guestBotCallerChat = "guest_bot_caller_chat"
         case editDate = "edit_date"
         case hasProtectedContent = "has_protected_content"
         case isFromOffline = "is_from_offline"
@@ -46,6 +49,7 @@ public final class TGMessage: Codable, Sendable {
         case animation = "animation"
         case audio = "audio"
         case document = "document"
+        case livePhoto = "live_photo"
         case paidMedia = "paid_media"
         case photo = "photo"
         case sticker = "sticker"
@@ -122,7 +126,7 @@ public final class TGMessage: Codable, Sendable {
         case replyMarkup = "reply_markup"
     }
 
-    /// Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
+    /// Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
     public let messageId: Int
 
     /// Optional. Unique identifier of a message thread or forum topic to which the message belongs; for supergroups and private chats only
@@ -131,7 +135,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Information about the direct messages chat topic that contains the message
     public let directMessagesTopic: TGDirectMessagesTopic?
 
-    /// Optional. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats
+    /// Optional. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats.
     public let from: TGUser?
 
     /// Optional. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field from contains a fake sender user in non-channel chats.
@@ -148,6 +152,9 @@ public final class TGMessage: Codable, Sendable {
 
     /// Date the message was sent in Unix time. It is always a positive number, representing a valid date.
     public let date: Int
+
+    /// Optional. The unique identifier for the guest query. Use this identifier with the method answerGuestQuery to send a response message. If non-empty, the message belongs to the chat where the guest bot was summoned, which may not coincide with other existing bot chats sharing the same identifier.
+    public let guestQueryId: String?
 
     /// Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
     public let businessConnectionId: String?
@@ -185,6 +192,12 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Bot through which the message was sent
     public let viaBot: TGUser?
 
+    /// Optional. For a message sent by a guest bot, this is the user whose original message triggered the bot's response
+    public let guestBotCallerUser: TGUser?
+
+    /// Optional. For a message sent by a guest bot, this is the chat whose original message triggered the bot's response
+    public let guestBotCallerChat: TGChat?
+
     /// Optional. Date the message was last edited in Unix time
     public let editDate: Int?
 
@@ -221,7 +234,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Unique identifier of the message effect added to the message
     public let effectId: String?
 
-    /// Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set
+    /// Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set.
     public let animation: TGAnimation?
 
     /// Optional. Message is an audio file, information about the file
@@ -229,6 +242,9 @@ public final class TGMessage: Codable, Sendable {
 
     /// Optional. Message is a general file, information about the file
     public let document: TGDocument?
+
+    /// Optional. Message is a live photo, information about the live photo. For backward compatibility, when this field is set, the photo field will also be set.
+    public let livePhoto: TGLivePhoto?
 
     /// Optional. Message contains paid media; information about the paid media
     public let paidMedia: TGPaidMediaInfo?
@@ -278,7 +294,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Message is a native poll, information about the poll
     public let poll: TGPoll?
 
-    /// Optional. Message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set
+    /// Optional. Message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set.
     public let venue: TGVenue?
 
     /// Optional. Message is a shared location, information about the location
@@ -452,7 +468,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
     public let replyMarkup: TGInlineKeyboardMarkup?
 
-    public init (messageId: Int, messageThreadId: Int? = nil, directMessagesTopic: TGDirectMessagesTopic? = nil, from: TGUser? = nil, senderChat: TGChat? = nil, senderBoostCount: Int? = nil, senderBusinessBot: TGUser? = nil, senderTag: String? = nil, date: Int, businessConnectionId: String? = nil, chat: TGChat, forwardOrigin: TGMessageOrigin? = nil, isTopicMessage: Bool? = nil, isAutomaticForward: Bool? = nil, replyToMessage: TGMessage? = nil, externalReply: TGExternalReplyInfo? = nil, quote: TGTextQuote? = nil, replyToStory: TGStory? = nil, replyToChecklistTaskId: Int? = nil, replyToPollOptionId: String? = nil, viaBot: TGUser? = nil, editDate: Int? = nil, hasProtectedContent: Bool? = nil, isFromOffline: Bool? = nil, isPaidPost: Bool? = nil, mediaGroupId: String? = nil, authorSignature: String? = nil, paidStarCount: Int? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, suggestedPostInfo: TGSuggestedPostInfo? = nil, effectId: String? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, caption: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil, location: TGLocation? = nil, newChatMembers: [TGUser]? = nil, leftChatMember: TGUser? = nil, chatOwnerLeft: TGChatOwnerLeft? = nil, chatOwnerChanged: TGChatOwnerChanged? = nil, newChatTitle: String? = nil, newChatPhoto: [TGPhotoSize]? = nil, deleteChatPhoto: Bool? = nil, groupChatCreated: Bool? = nil, supergroupChatCreated: Bool? = nil, channelChatCreated: Bool? = nil, messageAutoDeleteTimerChanged: TGMessageAutoDeleteTimerChanged? = nil, migrateToChatId: Int64? = nil, migrateFromChatId: Int64? = nil, pinnedMessage: TGMaybeInaccessibleMessage? = nil, invoice: TGInvoice? = nil, successfulPayment: TGSuccessfulPayment? = nil, refundedPayment: TGRefundedPayment? = nil, usersShared: TGUsersShared? = nil, chatShared: TGChatShared? = nil, gift: TGGiftInfo? = nil, uniqueGift: TGUniqueGiftInfo? = nil, giftUpgradeSent: TGGiftInfo? = nil, connectedWebsite: String? = nil, writeAccessAllowed: TGWriteAccessAllowed? = nil, passportData: TGPassportData? = nil, proximityAlertTriggered: TGProximityAlertTriggered? = nil, boostAdded: TGChatBoostAdded? = nil, chatBackgroundSet: TGChatBackground? = nil, checklistTasksDone: TGChecklistTasksDone? = nil, checklistTasksAdded: TGChecklistTasksAdded? = nil, directMessagePriceChanged: TGDirectMessagePriceChanged? = nil, forumTopicCreated: TGForumTopicCreated? = nil, forumTopicEdited: TGForumTopicEdited? = nil, forumTopicClosed: TGForumTopicClosed? = nil, forumTopicReopened: TGForumTopicReopened? = nil, generalForumTopicHidden: TGGeneralForumTopicHidden? = nil, generalForumTopicUnhidden: TGGeneralForumTopicUnhidden? = nil, giveawayCreated: TGGiveawayCreated? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, giveawayCompleted: TGGiveawayCompleted? = nil, managedBotCreated: TGManagedBotCreated? = nil, paidMessagePriceChanged: TGPaidMessagePriceChanged? = nil, pollOptionAdded: TGPollOptionAdded? = nil, pollOptionDeleted: TGPollOptionDeleted? = nil, suggestedPostApproved: TGSuggestedPostApproved? = nil, suggestedPostApprovalFailed: TGSuggestedPostApprovalFailed? = nil, suggestedPostDeclined: TGSuggestedPostDeclined? = nil, suggestedPostPaid: TGSuggestedPostPaid? = nil, suggestedPostRefunded: TGSuggestedPostRefunded? = nil, videoChatScheduled: TGVideoChatScheduled? = nil, videoChatStarted: TGVideoChatStarted? = nil, videoChatEnded: TGVideoChatEnded? = nil, videoChatParticipantsInvited: TGVideoChatParticipantsInvited? = nil, webAppData: TGWebAppData? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init (messageId: Int, messageThreadId: Int? = nil, directMessagesTopic: TGDirectMessagesTopic? = nil, from: TGUser? = nil, senderChat: TGChat? = nil, senderBoostCount: Int? = nil, senderBusinessBot: TGUser? = nil, senderTag: String? = nil, date: Int, guestQueryId: String? = nil, businessConnectionId: String? = nil, chat: TGChat, forwardOrigin: TGMessageOrigin? = nil, isTopicMessage: Bool? = nil, isAutomaticForward: Bool? = nil, replyToMessage: TGMessage? = nil, externalReply: TGExternalReplyInfo? = nil, quote: TGTextQuote? = nil, replyToStory: TGStory? = nil, replyToChecklistTaskId: Int? = nil, replyToPollOptionId: String? = nil, viaBot: TGUser? = nil, guestBotCallerUser: TGUser? = nil, guestBotCallerChat: TGChat? = nil, editDate: Int? = nil, hasProtectedContent: Bool? = nil, isFromOffline: Bool? = nil, isPaidPost: Bool? = nil, mediaGroupId: String? = nil, authorSignature: String? = nil, paidStarCount: Int? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, suggestedPostInfo: TGSuggestedPostInfo? = nil, effectId: String? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, caption: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil, location: TGLocation? = nil, newChatMembers: [TGUser]? = nil, leftChatMember: TGUser? = nil, chatOwnerLeft: TGChatOwnerLeft? = nil, chatOwnerChanged: TGChatOwnerChanged? = nil, newChatTitle: String? = nil, newChatPhoto: [TGPhotoSize]? = nil, deleteChatPhoto: Bool? = nil, groupChatCreated: Bool? = nil, supergroupChatCreated: Bool? = nil, channelChatCreated: Bool? = nil, messageAutoDeleteTimerChanged: TGMessageAutoDeleteTimerChanged? = nil, migrateToChatId: Int64? = nil, migrateFromChatId: Int64? = nil, pinnedMessage: TGMaybeInaccessibleMessage? = nil, invoice: TGInvoice? = nil, successfulPayment: TGSuccessfulPayment? = nil, refundedPayment: TGRefundedPayment? = nil, usersShared: TGUsersShared? = nil, chatShared: TGChatShared? = nil, gift: TGGiftInfo? = nil, uniqueGift: TGUniqueGiftInfo? = nil, giftUpgradeSent: TGGiftInfo? = nil, connectedWebsite: String? = nil, writeAccessAllowed: TGWriteAccessAllowed? = nil, passportData: TGPassportData? = nil, proximityAlertTriggered: TGProximityAlertTriggered? = nil, boostAdded: TGChatBoostAdded? = nil, chatBackgroundSet: TGChatBackground? = nil, checklistTasksDone: TGChecklistTasksDone? = nil, checklistTasksAdded: TGChecklistTasksAdded? = nil, directMessagePriceChanged: TGDirectMessagePriceChanged? = nil, forumTopicCreated: TGForumTopicCreated? = nil, forumTopicEdited: TGForumTopicEdited? = nil, forumTopicClosed: TGForumTopicClosed? = nil, forumTopicReopened: TGForumTopicReopened? = nil, generalForumTopicHidden: TGGeneralForumTopicHidden? = nil, generalForumTopicUnhidden: TGGeneralForumTopicUnhidden? = nil, giveawayCreated: TGGiveawayCreated? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, giveawayCompleted: TGGiveawayCompleted? = nil, managedBotCreated: TGManagedBotCreated? = nil, paidMessagePriceChanged: TGPaidMessagePriceChanged? = nil, pollOptionAdded: TGPollOptionAdded? = nil, pollOptionDeleted: TGPollOptionDeleted? = nil, suggestedPostApproved: TGSuggestedPostApproved? = nil, suggestedPostApprovalFailed: TGSuggestedPostApprovalFailed? = nil, suggestedPostDeclined: TGSuggestedPostDeclined? = nil, suggestedPostPaid: TGSuggestedPostPaid? = nil, suggestedPostRefunded: TGSuggestedPostRefunded? = nil, videoChatScheduled: TGVideoChatScheduled? = nil, videoChatStarted: TGVideoChatStarted? = nil, videoChatEnded: TGVideoChatEnded? = nil, videoChatParticipantsInvited: TGVideoChatParticipantsInvited? = nil, webAppData: TGWebAppData? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
         self.messageId = messageId
         self.messageThreadId = messageThreadId
         self.directMessagesTopic = directMessagesTopic
@@ -462,6 +478,7 @@ public final class TGMessage: Codable, Sendable {
         self.senderBusinessBot = senderBusinessBot
         self.senderTag = senderTag
         self.date = date
+        self.guestQueryId = guestQueryId
         self.businessConnectionId = businessConnectionId
         self.chat = chat
         self.forwardOrigin = forwardOrigin
@@ -474,6 +491,8 @@ public final class TGMessage: Codable, Sendable {
         self.replyToChecklistTaskId = replyToChecklistTaskId
         self.replyToPollOptionId = replyToPollOptionId
         self.viaBot = viaBot
+        self.guestBotCallerUser = guestBotCallerUser
+        self.guestBotCallerChat = guestBotCallerChat
         self.editDate = editDate
         self.hasProtectedContent = hasProtectedContent
         self.isFromOffline = isFromOffline
@@ -489,6 +508,7 @@ public final class TGMessage: Codable, Sendable {
         self.animation = animation
         self.audio = audio
         self.document = document
+        self.livePhoto = livePhoto
         self.paidMedia = paidMedia
         self.photo = photo
         self.sticker = sticker

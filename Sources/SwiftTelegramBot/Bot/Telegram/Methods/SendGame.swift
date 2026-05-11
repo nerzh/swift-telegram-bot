@@ -12,8 +12,8 @@ public struct TGSendGameParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.
-    public let chatId: Int64
+    /// Unique identifier for the target chat or username of the target bot in the format @username. Games can't be sent to channel direct messages chats and channel chats.
+    public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
     public let messageThreadId: Int?
@@ -27,7 +27,7 @@ public struct TGSendGameParams: Encodable, Sendable {
     /// Protects the contents of the sent message from forwarding and saving
     public let protectContent: Bool?
 
-    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
     public let allowPaidBroadcast: Bool?
 
     /// Unique identifier of the message effect to be added to the message; for private chats only
@@ -53,7 +53,7 @@ public struct TGSendGameParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: Int64, messageThreadId: Int? = nil, gameShortName: String, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, gameShortName: String, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId

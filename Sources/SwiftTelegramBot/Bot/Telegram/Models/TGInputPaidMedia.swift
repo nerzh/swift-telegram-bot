@@ -2,6 +2,7 @@
 
 /**
  This object describes the paid media to be sent. Currently, it can be one of
+ InputPaidMediaLivePhoto
  InputPaidMediaPhoto
  InputPaidMediaVideo
 
@@ -9,12 +10,15 @@
  [InputPaidMedia](https://core.telegram.org/bots/api#inputpaidmedia)
  **/
 public enum TGInputPaidMedia: Codable, Sendable {
+    case inputPaidMediaLivePhoto(TGInputPaidMediaLivePhoto)
     case inputPaidMediaPhoto(TGInputPaidMediaPhoto)
     case inputPaidMediaVideo(TGInputPaidMediaVideo)
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(TGInputPaidMediaPhoto.self) {
+        if let value = try? container.decode(TGInputPaidMediaLivePhoto.self) {
+            self = .inputPaidMediaLivePhoto(value)
+        } else if let value = try? container.decode(TGInputPaidMediaPhoto.self) {
             self = .inputPaidMediaPhoto(value)
         } else if let value = try? container.decode(TGInputPaidMediaVideo.self) {
             self = .inputPaidMediaVideo(value)
@@ -26,6 +30,8 @@ public enum TGInputPaidMedia: Codable, Sendable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
+        case let .inputPaidMediaLivePhoto(value):
+            try container.encode(value)
         case let .inputPaidMediaPhoto(value):
             try container.encode(value)
         case let .inputPaidMediaVideo(value):

@@ -2,24 +2,28 @@
 
 /**
  This object describes paid media. Currently, it can be one of
- PaidMediaPreview
+ PaidMediaLivePhoto
  PaidMediaPhoto
+ PaidMediaPreview
  PaidMediaVideo
 
  SeeAlso Telegram Bot API Reference:
  [PaidMedia](https://core.telegram.org/bots/api#paidmedia)
  **/
 public enum TGPaidMedia: Codable, Sendable {
-    case paidMediaPreview(TGPaidMediaPreview)
+    case paidMediaLivePhoto(TGPaidMediaLivePhoto)
     case paidMediaPhoto(TGPaidMediaPhoto)
+    case paidMediaPreview(TGPaidMediaPreview)
     case paidMediaVideo(TGPaidMediaVideo)
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(TGPaidMediaPreview.self) {
-            self = .paidMediaPreview(value)
+        if let value = try? container.decode(TGPaidMediaLivePhoto.self) {
+            self = .paidMediaLivePhoto(value)
         } else if let value = try? container.decode(TGPaidMediaPhoto.self) {
             self = .paidMediaPhoto(value)
+        } else if let value = try? container.decode(TGPaidMediaPreview.self) {
+            self = .paidMediaPreview(value)
         } else if let value = try? container.decode(TGPaidMediaVideo.self) {
             self = .paidMediaVideo(value)
         } else {
@@ -30,9 +34,11 @@ public enum TGPaidMedia: Codable, Sendable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .paidMediaPreview(value):
+        case let .paidMediaLivePhoto(value):
             try container.encode(value)
         case let .paidMediaPhoto(value):
+            try container.encode(value)
+        case let .paidMediaPreview(value):
             try container.encode(value)
         case let .paidMediaVideo(value):
             try container.encode(value)

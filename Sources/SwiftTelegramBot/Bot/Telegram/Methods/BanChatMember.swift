@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `banChatMember` method
 public struct TGBanChatMemberParams: Encodable, Sendable {
 
-    /// Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+    /// Unique identifier for the target group or username of the target supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier of the target user

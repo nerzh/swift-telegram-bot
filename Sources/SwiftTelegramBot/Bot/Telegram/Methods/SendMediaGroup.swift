@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+/// Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
 
 
 /// Parameters container struct for `sendMediaGroup` method
@@ -12,7 +12,7 @@ public struct TGSendMediaGroupParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
@@ -30,7 +30,7 @@ public struct TGSendMediaGroupParams: Encodable, Sendable {
     /// Protects the contents of the sent messages from forwarding and saving
     public let protectContent: Bool?
 
-    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
     public let allowPaidBroadcast: Bool?
 
     /// Unique identifier of the message effect to be added to the message; for private chats only
@@ -71,7 +71,7 @@ public struct TGSendMediaGroupParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
 
  SeeAlso Telegram Bot API Reference:
  [SendMediaGroupParams](https://core.telegram.org/bots/api#sendmediagroup)

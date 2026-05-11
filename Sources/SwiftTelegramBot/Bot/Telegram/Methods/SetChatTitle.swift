@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `setChatTitle` method
 public struct TGSetChatTitleParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// New chat title, 1-128 characters

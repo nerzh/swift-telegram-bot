@@ -24,7 +24,7 @@ public final class TGGame: Codable, Sendable {
     /// Description of the game
     public let description: String
 
-    /// Photo that will be displayed in the game message in chats.
+    /// Photo that will be displayed in the game message in chats
     public let photo: [TGPhotoSize]
 
     /// Optional. Brief description of the game or high scores included in the game message. Can be automatically edited to include current high scores for the game when the bot calls setGameScore, or manually edited using editMessageText. 0-4096 characters.
@@ -33,7 +33,7 @@ public final class TGGame: Codable, Sendable {
     /// Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc.
     public let textEntities: [TGMessageEntity]?
 
-    /// Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
+    /// Optional. Animation that will be displayed in the game message in chats. Upload via BotFather.
     public let animation: TGAnimation?
 
     public init (title: String, description: String, photo: [TGPhotoSize], text: String? = nil, textEntities: [TGMessageEntity]? = nil, animation: TGAnimation? = nil) {

@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `promoteChatMember` method
 public struct TGPromoteChatMemberParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier of the target user
@@ -27,7 +27,7 @@ public struct TGPromoteChatMemberParams: Encodable, Sendable {
     /// Pass True if the administrator can manage video chats
     public let canManageVideoChats: Bool?
 
-    /// Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators
+    /// Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators.
     public let canRestrictMembers: Bool?
 
     /// Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by him)

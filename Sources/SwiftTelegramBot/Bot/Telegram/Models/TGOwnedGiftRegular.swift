@@ -69,7 +69,7 @@ public final class TGOwnedGiftRegular: Codable, Sendable {
     /// Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only
     public let isUpgradeSeparate: Bool?
 
-    /// Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift
+    /// Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift.
     public let uniqueGiftNumber: Int?
 
     public init (type: TGOwnedGiftRegularType, gift: TGGift, ownedGiftId: String? = nil, senderUser: TGUser? = nil, sendDate: Int, text: String? = nil, entities: [TGMessageEntity]? = nil, isPrivate: Bool? = nil, isSaved: Bool? = nil, canBeUpgraded: Bool? = nil, wasRefunded: Bool? = nil, convertStarCount: Int? = nil, prepaidUpgradeStarCount: Int? = nil, isUpgradeSeparate: Bool? = nil, uniqueGiftNumber: Int? = nil) {

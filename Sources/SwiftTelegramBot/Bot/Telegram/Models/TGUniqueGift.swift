@@ -30,7 +30,7 @@ public final class TGUniqueGift: Codable, Sendable {
     /// Human-readable name of the regular gift from which this unique gift was upgraded
     public let baseName: String
 
-    /// Unique name of the gift. This name can be used in https://t.me/nft/... links and story areas
+    /// Unique name of the gift. This name can be used in https://t.me/nft/... links and story areas.
     public let name: String
 
     /// Unique number of the upgraded gift among gifts upgraded from the same regular gift

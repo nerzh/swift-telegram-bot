@@ -15,7 +15,7 @@ public struct TGApproveSuggestedPostParams: Encodable, Sendable {
     /// Identifier of a suggested post message to approve
     public let messageId: Int
 
-    /// Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future
+    /// Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future.
     public let sendDate: Int?
 
     /// Custom keys for coding/decoding `ApproveSuggestedPostParams` struct

@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `getChat` method
 public struct TGGetChatParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Custom keys for coding/decoding `GetChatParams` struct

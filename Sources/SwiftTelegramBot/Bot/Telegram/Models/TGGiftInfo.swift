@@ -49,7 +49,7 @@ public final class TGGiftInfo: Codable, Sendable {
     /// Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
     public let isPrivate: Bool?
 
-    /// Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift
+    /// Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift.
     public let uniqueGiftNumber: Int?
 
     public init (gift: TGGift, ownedGiftId: String? = nil, convertStarCount: Int? = nil, prepaidUpgradeStarCount: Int? = nil, isUpgradeSeparate: Bool? = nil, canBeUpgraded: Bool? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, isPrivate: Bool? = nil, uniqueGiftNumber: Int? = nil) {

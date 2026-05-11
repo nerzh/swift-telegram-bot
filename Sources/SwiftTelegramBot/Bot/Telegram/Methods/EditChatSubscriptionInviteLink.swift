@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `editChatSubscriptionInviteLink` method
 public struct TGEditChatSubscriptionInviteLinkParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// The invite link to edit

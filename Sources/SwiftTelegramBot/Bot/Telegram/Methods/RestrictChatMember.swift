@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `restrictChatMember` method
 public struct TGRestrictChatMemberParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    /// Unique identifier for the target chat or username of the target supergroup in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier of the target user
@@ -21,7 +21,7 @@ public struct TGRestrictChatMemberParams: Encodable, Sendable {
     /// Pass True if chat permissions are set independently. Otherwise, the can_send_other_messages and can_add_web_page_previews permissions will imply the can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes permissions; the can_send_polls permission will imply the can_send_messages permission.
     public let useIndependentChatPermissions: Bool?
 
-    /// Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever
+    /// Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever.
     public let untilDate: Int?
 
     /// Custom keys for coding/decoding `RestrictChatMemberParams` struct

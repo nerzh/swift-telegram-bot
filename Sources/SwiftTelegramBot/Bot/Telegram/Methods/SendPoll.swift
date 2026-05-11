@@ -12,7 +12,7 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername). Polls can't be sent to channel direct messages chats.
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Polls can't be sent to channel direct messages chats.
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
@@ -21,13 +21,13 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Poll question, 1-300 characters
     public let question: String
 
-    /// Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed
+    /// Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed.
     public let questionParseMode: TGParseMode?
 
-    /// A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question_parse_mode
+    /// A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question_parse_mode.
     public let questionEntities: [TGMessageEntity]?
 
-    /// A JSON-serialized list of 2-12 answer options
+    /// A JSON-serialized list of 1-12 answer options
     public let options: [TGInputPollOption]
 
     /// True, if the poll needs to be anonymous, defaults to True
@@ -51,6 +51,12 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Pass True, if poll results must be shown only after the poll closes
     public let hideResultsUntilCloses: Bool?
 
+    /// Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only
+    public let membersOnly: Bool?
+
+    /// A JSON-serialized list of 0-12 two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll.
+    public let countryCodes: [String]?
+
     /// A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode
     public let correctOptionIds: [Int]?
 
@@ -60,8 +66,11 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Mode for parsing entities in the explanation. See formatting options for more details.
     public let explanationParseMode: TGParseMode?
 
-    /// A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation_parse_mode
+    /// A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation_parse_mode.
     public let explanationEntities: [TGMessageEntity]?
+
+    /// Media added to the quiz explanation
+    public let explanationMedia: TGInputPollMedia?
 
     /// Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with close_date.
     public let openPeriod: Int?
@@ -81,13 +90,16 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of description_parse_mode
     public let descriptionEntities: [TGMessageEntity]?
 
+    /// Media added to the poll description
+    public let media: TGInputPollMedia?
+
     /// Sends the message silently. Users will receive a notification with no sound.
     public let disableNotification: Bool?
 
     /// Protects the contents of the sent message from forwarding and saving
     public let protectContent: Bool?
 
-    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
     public let allowPaidBroadcast: Bool?
 
     /// Unique identifier of the message effect to be added to the message; for private chats only
@@ -96,7 +108,7 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Description of the message to reply to
     public let replyParameters: TGReplyParameters?
 
-    /// Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    /// Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user.
     public let replyMarkup: TGReplyMarkup?
 
     /// Custom keys for coding/decoding `SendPollParams` struct
@@ -115,16 +127,20 @@ public struct TGSendPollParams: Encodable, Sendable {
             case shuffleOptions = "shuffle_options"
             case allowAddingOptions = "allow_adding_options"
             case hideResultsUntilCloses = "hide_results_until_closes"
+            case membersOnly = "members_only"
+            case countryCodes = "country_codes"
             case correctOptionIds = "correct_option_ids"
             case explanation = "explanation"
             case explanationParseMode = "explanation_parse_mode"
             case explanationEntities = "explanation_entities"
+            case explanationMedia = "explanation_media"
             case openPeriod = "open_period"
             case closeDate = "close_date"
             case isClosed = "is_closed"
             case description = "description"
             case descriptionParseMode = "description_parse_mode"
             case descriptionEntities = "description_entities"
+            case media = "media"
             case disableNotification = "disable_notification"
             case protectContent = "protect_content"
             case allowPaidBroadcast = "allow_paid_broadcast"
@@ -133,7 +149,7 @@ public struct TGSendPollParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, question: String, questionParseMode: TGParseMode? = nil, questionEntities: [TGMessageEntity]? = nil, options: [TGInputPollOption], isAnonymous: Bool? = nil, type: String? = nil, allowsMultipleAnswers: Bool? = nil, allowsRevoting: Bool? = nil, shuffleOptions: Bool? = nil, allowAddingOptions: Bool? = nil, hideResultsUntilCloses: Bool? = nil, correctOptionIds: [Int]? = nil, explanation: String? = nil, explanationParseMode: TGParseMode? = nil, explanationEntities: [TGMessageEntity]? = nil, openPeriod: Int? = nil, closeDate: Int? = nil, isClosed: Bool? = nil, description: String? = nil, descriptionParseMode: TGParseMode? = nil, descriptionEntities: [TGMessageEntity]? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, question: String, questionParseMode: TGParseMode? = nil, questionEntities: [TGMessageEntity]? = nil, options: [TGInputPollOption], isAnonymous: Bool? = nil, type: String? = nil, allowsMultipleAnswers: Bool? = nil, allowsRevoting: Bool? = nil, shuffleOptions: Bool? = nil, allowAddingOptions: Bool? = nil, hideResultsUntilCloses: Bool? = nil, membersOnly: Bool? = nil, countryCodes: [String]? = nil, correctOptionIds: [Int]? = nil, explanation: String? = nil, explanationParseMode: TGParseMode? = nil, explanationEntities: [TGMessageEntity]? = nil, explanationMedia: TGInputPollMedia? = nil, openPeriod: Int? = nil, closeDate: Int? = nil, isClosed: Bool? = nil, description: String? = nil, descriptionParseMode: TGParseMode? = nil, descriptionEntities: [TGMessageEntity]? = nil, media: TGInputPollMedia? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId
@@ -148,16 +164,20 @@ public struct TGSendPollParams: Encodable, Sendable {
             self.shuffleOptions = shuffleOptions
             self.allowAddingOptions = allowAddingOptions
             self.hideResultsUntilCloses = hideResultsUntilCloses
+            self.membersOnly = membersOnly
+            self.countryCodes = countryCodes
             self.correctOptionIds = correctOptionIds
             self.explanation = explanation
             self.explanationParseMode = explanationParseMode
             self.explanationEntities = explanationEntities
+            self.explanationMedia = explanationMedia
             self.openPeriod = openPeriod
             self.closeDate = closeDate
             self.isClosed = isClosed
             self.description = description
             self.descriptionParseMode = descriptionParseMode
             self.descriptionEntities = descriptionEntities
+            self.media = media
             self.disableNotification = disableNotification
             self.protectContent = protectContent
             self.allowPaidBroadcast = allowPaidBroadcast

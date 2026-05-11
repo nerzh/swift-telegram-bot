@@ -2,7 +2,7 @@
 
 /**
  This object represents an incoming update.
- At most one of the optional parameters can be present in any given update.
+ At most one of the optional fields can be present in any given update.
 
  SeeAlso Telegram Bot API Reference:
  [Update](https://core.telegram.org/bots/api#update)
@@ -20,6 +20,7 @@ public final class TGUpdate: Codable, Sendable {
         case businessMessage = "business_message"
         case editedBusinessMessage = "edited_business_message"
         case deletedBusinessMessages = "deleted_business_messages"
+        case guestMessage = "guest_message"
         case messageReaction = "message_reaction"
         case messageReactionCount = "message_reaction_count"
         case inlineQuery = "inline_query"
@@ -65,6 +66,9 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. Messages were deleted from a connected business account
     public let deletedBusinessMessages: TGBusinessMessagesDeleted?
 
+    /// Optional. New guest message. The bot can use the field Message.guest_query_id and the method answerGuestQuery to send a message in response.
+    public let guestMessage: TGMessage?
+
     /// Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify "message_reaction" in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots.
     public let messageReaction: TGMessageReactionUpdated?
 
@@ -80,16 +84,16 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. New incoming callback query
     public let callbackQuery: TGCallbackQuery?
 
-    /// Optional. New incoming shipping query. Only for invoices with flexible price
+    /// Optional. New incoming shipping query. Only for invoices with flexible price.
     public let shippingQuery: TGShippingQuery?
 
-    /// Optional. New incoming pre-checkout query. Contains full information about checkout
+    /// Optional. New incoming pre-checkout query. Contains full information about checkout.
     public let preCheckoutQuery: TGPreCheckoutQuery?
 
     /// Optional. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat
     public let purchasedPaidMedia: TGPaidMediaPurchased?
 
-    /// Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
+    /// Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot.
     public let poll: TGPoll?
 
     /// Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
@@ -110,10 +114,10 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates.
     public let removedChatBoost: TGChatBoostRemoved?
 
-    /// Optional. A new bot was created to be managed by the bot or token of a bot was changed
+    /// Optional. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed
     public let managedBot: TGManagedBotUpdated?
 
-    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil) {
+    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, guestMessage: TGMessage? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil) {
         self.updateId = updateId
         self.message = message
         self.editedMessage = editedMessage
@@ -123,6 +127,7 @@ public final class TGUpdate: Codable, Sendable {
         self.businessMessage = businessMessage
         self.editedBusinessMessage = editedBusinessMessage
         self.deletedBusinessMessages = deletedBusinessMessages
+        self.guestMessage = guestMessage
         self.messageReaction = messageReaction
         self.messageReactionCount = messageReactionCount
         self.inlineQuery = inlineQuery

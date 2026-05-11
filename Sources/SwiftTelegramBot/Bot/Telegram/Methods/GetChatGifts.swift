@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `getChatGifts` method
 public struct TGGetChatGiftsParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// Pass True to exclude gifts that aren't saved to the chat's profile page. Always True, unless the bot has the can_post_messages administrator right in the channel.
@@ -39,7 +39,7 @@ public struct TGGetChatGiftsParams: Encodable, Sendable {
     /// Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results
     public let offset: String?
 
-    /// The maximum number of gifts to be returned; 1-100. Defaults to 100
+    /// The maximum number of gifts to be returned; 1-100. Defaults to 100.
     public let limit: Int?
 
     /// Custom keys for coding/decoding `GetChatGiftsParams` struct

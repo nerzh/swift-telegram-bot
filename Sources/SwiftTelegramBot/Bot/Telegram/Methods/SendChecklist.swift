@@ -12,8 +12,8 @@ public struct TGSendChecklistParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String
 
-    /// Unique identifier for the target chat
-    public let chatId: Int64
+    /// Unique identifier for the target chat or username of the target bot in the format @username
+    public let chatId: TGChatId
 
     /// A JSON-serialized object for the checklist to send
     public let checklist: TGInputChecklist
@@ -45,7 +45,7 @@ public struct TGSendChecklistParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String, chatId: Int64, checklist: TGInputChecklist, disableNotification: Bool? = nil, protectContent: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init(businessConnectionId: String, chatId: TGChatId, checklist: TGInputChecklist, disableNotification: Bool? = nil, protectContent: Bool? = nil, messageEffectId: String? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.checklist = checklist

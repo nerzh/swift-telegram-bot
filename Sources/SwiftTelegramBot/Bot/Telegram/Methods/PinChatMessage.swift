@@ -12,7 +12,7 @@ public struct TGPinChatMessageParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be pinned
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// Identifier of a message to pin

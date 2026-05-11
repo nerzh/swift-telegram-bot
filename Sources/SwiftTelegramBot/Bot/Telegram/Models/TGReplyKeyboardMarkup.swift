@@ -1,7 +1,7 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- This object represents a custom keyboard with reply options (see Introduction to bots for details and examples). Not supported in channels and for messages sent on behalf of a Telegram Business account.
+ This object represents a custom keyboard with reply options (see Introduction to bots for details and examples). Not supported in channels and for messages sent on behalf of a business account.
 
  SeeAlso Telegram Bot API Reference:
  [ReplyKeyboardMarkup](https://core.telegram.org/bots/api#replykeyboardmarkup)

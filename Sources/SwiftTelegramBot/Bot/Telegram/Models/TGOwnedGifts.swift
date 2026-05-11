@@ -21,7 +21,7 @@ public final class TGOwnedGifts: Codable, Sendable {
     /// The list of gifts
     public let gifts: [TGOwnedGift]
 
-    /// Optional. Offset for the next request. If empty, then there are no more results
+    /// Optional. Offset for the next request. If empty, then there are no more results.
     public let nextOffset: String?
 
     public init (totalCount: Int, gifts: [TGOwnedGift], nextOffset: String? = nil) {

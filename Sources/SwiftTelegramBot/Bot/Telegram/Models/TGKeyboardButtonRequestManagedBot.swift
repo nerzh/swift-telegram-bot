@@ -15,7 +15,7 @@ public final class TGKeyboardButtonRequestManagedBot: Codable, Sendable {
         case suggestedUsername = "suggested_username"
     }
 
-    /// Signed 32-bit identifier of the request. Must be unique within the message
+    /// Signed 32-bit identifier of the request. Must be unique within the message.
     public let requestId: Int
 
     /// Optional. Suggested name for the bot

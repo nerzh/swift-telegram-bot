@@ -17,7 +17,7 @@ public final class TGUsersShared: Codable, Sendable {
     /// Identifier of the request
     public let requestId: Int
 
-    /// Information about users shared with the bot.
+    /// Information about users shared with the bot
     public let users: [TGSharedUser]
 
     public init (requestId: Int, users: [TGSharedUser]) {

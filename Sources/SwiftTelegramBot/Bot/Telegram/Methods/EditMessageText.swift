@@ -12,13 +12,13 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
     public let businessConnectionId: String?
 
-    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username.
     public let chatId: TGChatId?
 
-    /// Required if inline_message_id is not specified. Identifier of the message to edit
+    /// Required if inline_message_id is not specified. Identifier of the message to edit.
     public let messageId: Int?
 
-    /// Required if chat_id and message_id are not specified. Identifier of the inline message
+    /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
     /// New text of the message, 1-4096 characters after entities parsing
@@ -33,7 +33,7 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
     /// Link preview generation options for the message
     public let linkPreviewOptions: TGLinkPreviewOptions?
 
-    /// A JSON-serialized object for an inline keyboard.
+    /// A JSON-serialized object for an inline keyboard
     public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `EditMessageTextParams` struct

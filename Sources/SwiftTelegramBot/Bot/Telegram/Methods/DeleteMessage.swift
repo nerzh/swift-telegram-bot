@@ -19,7 +19,7 @@ import Foundation
 /// Parameters container struct for `deleteMessage` method
 public struct TGDeleteMessageParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Identifier of the message to delete

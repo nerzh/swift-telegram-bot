@@ -12,7 +12,7 @@ public struct TGSendGiftParams: Encodable, Sendable {
     /// Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.
     public let userId: Int64?
 
-    /// Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
+    /// Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift.
     public let chatId: TGChatId?
 
     /// Identifier of the gift; limited gifts can't be sent to channel chats

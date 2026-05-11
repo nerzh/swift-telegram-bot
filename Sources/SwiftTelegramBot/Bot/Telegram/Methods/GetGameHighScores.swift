@@ -13,13 +13,13 @@ public struct TGGetGameHighScoresParams: Encodable, Sendable {
     /// Target user id
     public let userId: Int64
 
-    /// Required if inline_message_id is not specified. Unique identifier for the target chat
+    /// Required if inline_message_id is not specified. Unique identifier for the target chat.
     public let chatId: Int64?
 
-    /// Required if inline_message_id is not specified. Identifier of the sent message
+    /// Required if inline_message_id is not specified. Identifier of the sent message.
     public let messageId: Int?
 
-    /// Required if chat_id and message_id are not specified. Identifier of the inline message
+    /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
     /// Custom keys for coding/decoding `GetGameHighScoresParams` struct

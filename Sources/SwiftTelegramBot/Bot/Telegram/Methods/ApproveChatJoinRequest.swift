@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `approveChatJoinRequest` method
 public struct TGApproveChatJoinRequestParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier of the target user

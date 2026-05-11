@@ -30,10 +30,10 @@ public final class TGStarTransaction: Codable, Sendable {
     /// Date the transaction was created in Unix time
     public let date: Int
 
-    /// Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
+    /// Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions.
     public let source: TGTransactionPartner?
 
-    /// Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
+    /// Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions.
     public let receiver: TGTransactionPartner?
 
     public init (id: String, amount: Int, nanostarAmount: Int? = nil, date: Int, source: TGTransactionPartner? = nil, receiver: TGTransactionPartner? = nil) {

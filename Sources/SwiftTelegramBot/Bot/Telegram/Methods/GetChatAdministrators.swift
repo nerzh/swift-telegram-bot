@@ -3,22 +3,27 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.
+/// Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
 
 
 /// Parameters container struct for `getChatAdministrators` method
 public struct TGGetChatAdministratorsParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target supergroup or channel in the format @username
     public let chatId: TGChatId
+
+    /// Pass True to additionally receive all bots that are administrators of the chat. By default, bots other than the current bot are omitted.
+    public let returnBots: Bool?
 
     /// Custom keys for coding/decoding `GetChatAdministratorsParams` struct
     public enum CodingKeys: String, CodingKey {
             case chatId = "chat_id"
+            case returnBots = "return_bots"
     }
 
-    public init(chatId: TGChatId) {
+    public init(chatId: TGChatId, returnBots: Bool? = nil) {
             self.chatId = chatId
+            self.returnBots = returnBots
     }
 }
 
@@ -26,7 +31,7 @@ public struct TGGetChatAdministratorsParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.
+ Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
 
  SeeAlso Telegram Bot API Reference:
  [GetChatAdministratorsParams](https://core.telegram.org/bots/api#getchatadministrators)

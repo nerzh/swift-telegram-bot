@@ -24,13 +24,13 @@ public final class TGLoginUrl: Codable, Sendable {
     /// NOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization.
     public let url: String
 
-    /// Optional. New text of the button in forwarded messages.
+    /// Optional. New text of the button in forwarded messages
     public let forwardText: String?
 
     /// Optional. Username of a bot, which will be used for user authorization. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
     public let botUsername: String?
 
-    /// Optional. Pass True to request the permission for your bot to send messages to the user.
+    /// Optional. Pass True to request the permission for your bot to send messages to the user
     public let requestWriteAccess: Bool?
 
     public init (url: String, forwardText: String? = nil, botUsername: String? = nil, requestWriteAccess: Bool? = nil) {

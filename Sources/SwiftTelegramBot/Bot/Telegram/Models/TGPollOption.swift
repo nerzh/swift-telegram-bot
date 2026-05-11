@@ -13,6 +13,7 @@ public final class TGPollOption: Codable, Sendable {
         case persistentId = "persistent_id"
         case text = "text"
         case textEntities = "text_entities"
+        case media = "media"
         case voterCount = "voter_count"
         case addedByUser = "added_by_user"
         case addedByChat = "added_by_chat"
@@ -28,6 +29,9 @@ public final class TGPollOption: Codable, Sendable {
     /// Optional. Special entities that appear in the option text. Currently, only custom emoji entities are allowed in poll option texts
     public let textEntities: [TGMessageEntity]?
 
+    /// Optional. Media added to the poll option
+    public let media: TGPollMedia?
+
     /// Number of users who voted for this option; may be 0 if unknown
     public let voterCount: Int
 
@@ -40,10 +44,11 @@ public final class TGPollOption: Codable, Sendable {
     /// Optional. Point in time (Unix timestamp) when the option was added; omitted if the option existed in the original poll
     public let additionDate: Int?
 
-    public init (persistentId: String, text: String, textEntities: [TGMessageEntity]? = nil, voterCount: Int, addedByUser: TGUser? = nil, addedByChat: TGChat? = nil, additionDate: Int? = nil) {
+    public init (persistentId: String, text: String, textEntities: [TGMessageEntity]? = nil, media: TGPollMedia? = nil, voterCount: Int, addedByUser: TGUser? = nil, addedByChat: TGChat? = nil, additionDate: Int? = nil) {
         self.persistentId = persistentId
         self.text = text
         self.textEntities = textEntities
+        self.media = media
         self.voterCount = voterCount
         self.addedByUser = addedByUser
         self.addedByChat = addedByChat

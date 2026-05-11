@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `editGeneralForumTopic` method
 public struct TGEditGeneralForumTopicParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    /// Unique identifier for the target chat or username of the target supergroup in the format @username
     public let chatId: TGChatId
 
     /// New topic name, 1-128 characters

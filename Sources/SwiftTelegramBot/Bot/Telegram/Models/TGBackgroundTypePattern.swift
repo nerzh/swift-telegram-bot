@@ -30,7 +30,7 @@ public final class TGBackgroundTypePattern: Codable, Sendable {
     /// Intensity of the pattern when it is shown above the filled background; 0-100
     public let intensity: Int
 
-    /// Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only
+    /// Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only.
     public let isInverted: Bool?
 
     /// Optional. True, if the background moves slightly when the device is tilted

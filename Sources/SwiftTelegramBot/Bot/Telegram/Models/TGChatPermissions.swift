@@ -20,6 +20,7 @@ public final class TGChatPermissions: Codable, Sendable {
         case canSendPolls = "can_send_polls"
         case canSendOtherMessages = "can_send_other_messages"
         case canAddWebPagePreviews = "can_add_web_page_previews"
+        case canReactToMessages = "can_react_to_messages"
         case canEditTag = "can_edit_tag"
         case canChangeInfo = "can_change_info"
         case canInviteUsers = "can_invite_users"
@@ -57,22 +58,25 @@ public final class TGChatPermissions: Codable, Sendable {
     /// Optional. True, if the user is allowed to add web page previews to their messages
     public let canAddWebPagePreviews: Bool?
 
-    /// Optional. True, if the user is allowed to edit their own tag
+    /// Optional. True, if the user is allowed to react to messages. If omitted, defaults to the value of can_send_messages.
+    public let canReactToMessages: Bool?
+
+    /// Optional. True, if the user is allowed to edit their own tag. If omitted, defaults to the value of can_pin_messages.
     public let canEditTag: Bool?
 
-    /// Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+    /// Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups.
     public let canChangeInfo: Bool?
 
     /// Optional. True, if the user is allowed to invite new users to the chat
     public let canInviteUsers: Bool?
 
-    /// Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
+    /// Optional. True, if the user is allowed to pin messages. Ignored in public supergroups.
     public let canPinMessages: Bool?
 
-    /// Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
+    /// Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages.
     public let canManageTopics: Bool?
 
-    public init (canSendMessages: Bool? = nil, canSendAudios: Bool? = nil, canSendDocuments: Bool? = nil, canSendPhotos: Bool? = nil, canSendVideos: Bool? = nil, canSendVideoNotes: Bool? = nil, canSendVoiceNotes: Bool? = nil, canSendPolls: Bool? = nil, canSendOtherMessages: Bool? = nil, canAddWebPagePreviews: Bool? = nil, canEditTag: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil) {
+    public init (canSendMessages: Bool? = nil, canSendAudios: Bool? = nil, canSendDocuments: Bool? = nil, canSendPhotos: Bool? = nil, canSendVideos: Bool? = nil, canSendVideoNotes: Bool? = nil, canSendVoiceNotes: Bool? = nil, canSendPolls: Bool? = nil, canSendOtherMessages: Bool? = nil, canAddWebPagePreviews: Bool? = nil, canReactToMessages: Bool? = nil, canEditTag: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil) {
         self.canSendMessages = canSendMessages
         self.canSendAudios = canSendAudios
         self.canSendDocuments = canSendDocuments
@@ -83,6 +87,7 @@ public final class TGChatPermissions: Codable, Sendable {
         self.canSendPolls = canSendPolls
         self.canSendOtherMessages = canSendOtherMessages
         self.canAddWebPagePreviews = canAddWebPagePreviews
+        self.canReactToMessages = canReactToMessages
         self.canEditTag = canEditTag
         self.canChangeInfo = canChangeInfo
         self.canInviteUsers = canInviteUsers

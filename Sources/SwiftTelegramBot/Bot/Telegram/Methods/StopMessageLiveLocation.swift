@@ -12,16 +12,16 @@ public struct TGStopMessageLiveLocationParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
     public let businessConnectionId: String?
 
-    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username.
     public let chatId: TGChatId?
 
-    /// Required if inline_message_id is not specified. Identifier of the message with live location to stop
+    /// Required if inline_message_id is not specified. Identifier of the message with live location to stop.
     public let messageId: Int?
 
-    /// Required if chat_id and message_id are not specified. Identifier of the inline message
+    /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
-    /// A JSON-serialized object for a new inline keyboard.
+    /// A JSON-serialized object for a new inline keyboard
     public let replyMarkup: TGInlineKeyboardMarkup?
 
     /// Custom keys for coding/decoding `StopMessageLiveLocationParams` struct

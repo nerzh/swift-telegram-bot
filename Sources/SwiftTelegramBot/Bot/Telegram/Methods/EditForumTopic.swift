@@ -9,16 +9,16 @@ import Foundation
 /// Parameters container struct for `editForumTopic` method
 public struct TGEditForumTopicParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    /// Unique identifier for the target chat or username of the target supergroup in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread of the forum topic
     public let messageThreadId: Int
 
-    /// New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
+    /// New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept.
     public let name: String?
 
-    /// New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+    /// New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
     public let iconCustomEmojiId: String?
 
     /// Custom keys for coding/decoding `EditForumTopicParams` struct

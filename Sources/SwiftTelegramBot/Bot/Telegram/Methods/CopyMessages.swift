@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `copyMessages` method
 public struct TGCopyMessagesParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
@@ -18,7 +18,7 @@ public struct TGCopyMessagesParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
     public let directMessagesTopicId: Int?
 
-    /// Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
+    /// Unique identifier for the chat where the original messages were sent (or username of the target bot, supergroup or channel in the format @username)
     public let fromChatId: TGChatId
 
     /// A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.

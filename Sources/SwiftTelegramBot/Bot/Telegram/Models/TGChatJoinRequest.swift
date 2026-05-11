@@ -30,7 +30,7 @@ public final class TGChatJoinRequest: Codable, Sendable {
     /// Date the request was sent in Unix time
     public let date: Int
 
-    /// Optional. Bio of the user.
+    /// Optional. Bio of the user
     public let bio: String?
 
     /// Optional. Chat invite link that was used by the user to send the join request

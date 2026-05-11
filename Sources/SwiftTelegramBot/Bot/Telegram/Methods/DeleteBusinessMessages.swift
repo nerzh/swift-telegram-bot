@@ -12,7 +12,7 @@ public struct TGDeleteBusinessMessagesParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which to delete the messages
     public let businessConnectionId: String
 
-    /// A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted
+    /// A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted.
     public let messageIds: [Int]
 
     /// Custom keys for coding/decoding `DeleteBusinessMessagesParams` struct

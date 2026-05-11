@@ -12,7 +12,7 @@ public struct TGSetCustomEmojiStickerSetThumbnailParams: Encodable, Sendable {
     /// Sticker set name
     public let name: String
 
-    /// Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail.
+    /// Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail
     public let customEmojiId: String?
 
     /// Custom keys for coding/decoding `SetCustomEmojiStickerSetThumbnailParams` struct

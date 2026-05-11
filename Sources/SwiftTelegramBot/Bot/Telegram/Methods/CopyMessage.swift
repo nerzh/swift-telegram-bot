@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `copyMessage` method
 public struct TGCopyMessageParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
@@ -18,7 +18,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
     public let directMessagesTopicId: Int?
 
-    /// Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+    /// Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup or channel in the format @username)
     public let fromChatId: TGChatId
 
     /// Message identifier in the chat specified in from_chat_id
@@ -27,7 +27,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// New start timestamp for the copied video in the message
     public let videoStartTimestamp: Int?
 
-    /// New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
+    /// New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept.
     public let caption: String?
 
     /// Mode for parsing entities in the new caption. See formatting options for more details.
@@ -45,7 +45,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// Protects the contents of the sent message from forwarding and saving
     public let protectContent: Bool?
 
-    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+    /// Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
     public let allowPaidBroadcast: Bool?
 
     /// Unique identifier of the message effect to be added to the message; only available when copying to private chats
@@ -57,7 +57,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// Description of the message to reply to
     public let replyParameters: TGReplyParameters?
 
-    /// Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    /// Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user.
     public let replyMarkup: TGReplyMarkup?
 
     /// Custom keys for coding/decoding `CopyMessageParams` struct

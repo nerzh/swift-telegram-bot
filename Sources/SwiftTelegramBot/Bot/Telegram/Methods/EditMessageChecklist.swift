@@ -12,8 +12,8 @@ public struct TGEditMessageChecklistParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String
 
-    /// Unique identifier for the target chat
-    public let chatId: Int64
+    /// Unique identifier for the target chat or username of the target bot in the format @username
+    public let chatId: TGChatId
 
     /// Unique identifier for the target message
     public let messageId: Int
@@ -33,7 +33,7 @@ public struct TGEditMessageChecklistParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String, chatId: Int64, messageId: Int, checklist: TGInputChecklist, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init(businessConnectionId: String, chatId: TGChatId, messageId: Int, checklist: TGInputChecklist, replyMarkup: TGInlineKeyboardMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageId = messageId

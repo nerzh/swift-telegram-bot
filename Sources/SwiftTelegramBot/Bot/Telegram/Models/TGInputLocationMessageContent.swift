@@ -27,7 +27,7 @@ public final class TGInputLocationMessageContent: Codable, Sendable {
     /// Optional. The radius of uncertainty for the location, measured in meters; 0-1500
     public let horizontalAccuracy: Float?
 
-    /// Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+    /// Optional. Period in seconds during which the location can be updated, must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
     public let livePeriod: Int?
 
     /// Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
