@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'byebug'
 require 'bundler/setup'
 Bundler.require(:default)
-
+require 'rubygems'
+require 'byebug'
 require 'fileutils'
 
 HTML_FILE = 'tg-api.html'
