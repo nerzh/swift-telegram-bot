@@ -8,4 +8,5 @@ DerivedData/
 Package.resolved
 Api/Gemfile.lock
 Api/tg*
+Api/gems
 .byebug*
