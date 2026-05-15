@@ -4,7 +4,10 @@
 
 import Foundation
 import Logging
+
+#if canImport(ServiceLifecycle)
 import ServiceLifecycle
+#endif
 
 public protocol TGConnectionPrtcl: Sendable {
     @discardableResult
@@ -74,7 +77,11 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
     }
 
     private var shouldContinuePolling: Bool {
+#if canImport(ServiceLifecycle)
         !Task.isCancelled && !Task.isShuttingDownGracefully
+#else
+        !Task.isCancelled
+#endif
     }
 
     private func runPolling(bot: TGBot) async {
