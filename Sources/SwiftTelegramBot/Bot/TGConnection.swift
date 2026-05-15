@@ -5,6 +5,10 @@
 import Foundation
 import Logging
 
+#if canImport(ServiceLifecycle)
+import ServiceLifecycle
+#endif
+
 public protocol TGConnectionPrtcl: Sendable {
     @discardableResult
     func start(bot: TGBot) async throws -> Bool
@@ -27,7 +31,7 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
     
     private let offsetUpdates: SendableValue<Int> = .init(0)
     private let log: Logger
-    private let task: SendableValue<Task<Void, Never>> = .init(.init {})
+    private let task: SendableValue<Task<Void, Never>?> = .init(nil)
     
     public init(limit: Int? = nil,
                 timeout: Int? = 10,
@@ -45,18 +49,15 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
         /// delete webhook because: You will not be able to receive updates using getUpdates for as long as an outgoing webhook is set up.
         let deleteWebHookParams: TGDeleteWebhookParams = .init(dropPendingUpdates: false)
         try await bot.deleteWebhook(params: deleteWebHookParams)
-        await task.change { 
-            $0 = Task.detached { [weak self] in
-                while !Task.isCancelled {
-                    guard let self = self else { break }
-                    do {
-                        let updates: [TGUpdate] = try await self.getUpdates(bot: bot)
-                        await bot.processing(updates: updates)
-                    } catch {
-                        self.log.error("\(BotError(error).localizedDescription)")
-                    }
-                }
-            }
+
+        let previousTask = await task.value
+        await task.change {
+            $0 = Task { [weak self] in await self?.runPolling(bot: bot) }
+        }
+
+        previousTask?.cancel()
+        if let previousTask {
+            await previousTask.value
         }
         
         return true
@@ -64,8 +65,47 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
     
     @discardableResult
     public func stop(bot: TGBot) async throws -> Bool {
-        await task.value.cancel()
+        let currentTask = await task.value
+        await task.change {
+            $0 = nil
+        }
+        currentTask?.cancel()
+        if let currentTask {
+            await currentTask.value
+        }
         return true
+    }
+
+    private var shouldContinuePolling: Bool {
+#if canImport(ServiceLifecycle)
+        !Task.isCancelled && !Task.isShuttingDownGracefully
+#else
+        !Task.isCancelled
+#endif
+    }
+
+    private func runPolling(bot: TGBot) async {
+        while shouldContinuePolling {
+            do {
+                let updates: [TGUpdate] = try await getUpdates(bot: bot)
+                guard shouldContinuePolling else { return }
+                await bot.processing(updates: updates)
+            } catch is CancellationError {
+                return
+            } catch {
+                log.error("\(BotError(error).localizedDescription)")
+                guard await waitBeforeRetry() else { return }
+            }
+        }
+    }
+    
+    private func waitBeforeRetry() async -> Bool {
+        do {
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+            return shouldContinuePolling
+        } catch {
+            return false
+        }
     }
     
     private func getUpdates(bot: TGBot) async throws -> [TGUpdate] {
