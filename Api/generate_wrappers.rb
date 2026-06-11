@@ -554,6 +554,8 @@ class Api
         case_name = "#{case_name.camel_case_lower}"
         if reserved_names.include?(case_name)
           case_name = "`#{case_name.camel_case_lower}`"
+        elsif case_name.match?(/\A\d+\z/)
+          case_name = "number#{case_name.camel_case_lower}"
         end
         out.write "#{ONE}case #{case_name} = \"#{case_value}\"\n"
       end
@@ -593,7 +595,7 @@ class Api
     var_desc = var_description.clone
     result_types = []
     # p var_desc
-    if var_desc[/must be\s+(.+)/]
+    if var_desc[/must be\s+([\S]+)\s*$/]
       case_name = $1
       result_types << case_name
       return result_types
