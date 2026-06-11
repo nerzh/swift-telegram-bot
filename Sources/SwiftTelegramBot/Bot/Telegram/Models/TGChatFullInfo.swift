@@ -61,6 +61,7 @@ public final class TGChatFullInfo: Codable, Sendable {
         case firstProfileAudio = "first_profile_audio"
         case uniqueGiftColors = "unique_gift_colors"
         case paidMessageStarCount = "paid_message_star_count"
+        case guardBot = "guard_bot"
     }
 
     /// Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
@@ -213,10 +214,13 @@ public final class TGChatFullInfo: Codable, Sendable {
     /// Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews
     public let uniqueGiftColors: TGUniqueGiftColors?
 
-    /// Optional. The number of Telegram Stars a general user have to pay to send a message to the chat
+    /// Optional. The number of Telegram Stars a general user has to pay to send a message to the chat
     public let paidMessageStarCount: Int?
 
-    public init (id: Int, type: TGChatFullInfoType, title: String? = nil, username: String? = nil, firstName: String? = nil, lastName: String? = nil, isForum: Bool? = nil, isDirectMessages: Bool? = nil, accentColorId: Int, maxReactionCount: Int, photo: TGChatPhoto? = nil, activeUsernames: [String]? = nil, birthdate: TGBirthdate? = nil, businessIntro: TGBusinessIntro? = nil, businessLocation: TGBusinessLocation? = nil, businessOpeningHours: TGBusinessOpeningHours? = nil, personalChat: TGChat? = nil, parentChat: TGChat? = nil, availableReactions: [TGReactionType]? = nil, backgroundCustomEmojiId: String? = nil, profileAccentColorId: Int? = nil, profileBackgroundCustomEmojiId: String? = nil, emojiStatusCustomEmojiId: String? = nil, emojiStatusExpirationDate: Int? = nil, bio: String? = nil, hasPrivateForwards: Bool? = nil, hasRestrictedVoiceAndVideoMessages: Bool? = nil, joinToSendMessages: Bool? = nil, joinByRequest: Bool? = nil, description: String? = nil, inviteLink: String? = nil, pinnedMessage: TGMessage? = nil, permissions: TGChatPermissions? = nil, acceptedGiftTypes: TGAcceptedGiftTypes, canSendPaidMedia: Bool? = nil, slowModeDelay: Int? = nil, unrestrictBoostCount: Int? = nil, messageAutoDeleteTime: Int? = nil, hasAggressiveAntiSpamEnabled: Bool? = nil, hasHiddenMembers: Bool? = nil, hasProtectedContent: Bool? = nil, hasVisibleHistory: Bool? = nil, stickerSetName: String? = nil, canSetStickerSet: Bool? = nil, customEmojiStickerSetName: String? = nil, linkedChatId: Int64? = nil, location: TGChatLocation? = nil, rating: TGUserRating? = nil, firstProfileAudio: TGAudio? = nil, uniqueGiftColors: TGUniqueGiftColors? = nil, paidMessageStarCount: Int? = nil) {
+    /// Optional. The bot that processes join request queries in the chat. The field is only available to chat administrators.
+    public let guardBot: TGUser?
+
+    public init (id: Int, type: TGChatFullInfoType, title: String? = nil, username: String? = nil, firstName: String? = nil, lastName: String? = nil, isForum: Bool? = nil, isDirectMessages: Bool? = nil, accentColorId: Int, maxReactionCount: Int, photo: TGChatPhoto? = nil, activeUsernames: [String]? = nil, birthdate: TGBirthdate? = nil, businessIntro: TGBusinessIntro? = nil, businessLocation: TGBusinessLocation? = nil, businessOpeningHours: TGBusinessOpeningHours? = nil, personalChat: TGChat? = nil, parentChat: TGChat? = nil, availableReactions: [TGReactionType]? = nil, backgroundCustomEmojiId: String? = nil, profileAccentColorId: Int? = nil, profileBackgroundCustomEmojiId: String? = nil, emojiStatusCustomEmojiId: String? = nil, emojiStatusExpirationDate: Int? = nil, bio: String? = nil, hasPrivateForwards: Bool? = nil, hasRestrictedVoiceAndVideoMessages: Bool? = nil, joinToSendMessages: Bool? = nil, joinByRequest: Bool? = nil, description: String? = nil, inviteLink: String? = nil, pinnedMessage: TGMessage? = nil, permissions: TGChatPermissions? = nil, acceptedGiftTypes: TGAcceptedGiftTypes, canSendPaidMedia: Bool? = nil, slowModeDelay: Int? = nil, unrestrictBoostCount: Int? = nil, messageAutoDeleteTime: Int? = nil, hasAggressiveAntiSpamEnabled: Bool? = nil, hasHiddenMembers: Bool? = nil, hasProtectedContent: Bool? = nil, hasVisibleHistory: Bool? = nil, stickerSetName: String? = nil, canSetStickerSet: Bool? = nil, customEmojiStickerSetName: String? = nil, linkedChatId: Int64? = nil, location: TGChatLocation? = nil, rating: TGUserRating? = nil, firstProfileAudio: TGAudio? = nil, uniqueGiftColors: TGUniqueGiftColors? = nil, paidMessageStarCount: Int? = nil, guardBot: TGUser? = nil) {
         self.id = id
         self.type = type
         self.title = title
@@ -268,5 +272,6 @@ public final class TGChatFullInfo: Codable, Sendable {
         self.firstProfileAudio = firstProfileAudio
         self.uniqueGiftColors = uniqueGiftColors
         self.paidMessageStarCount = paidMessageStarCount
+        self.guardBot = guardBot
     }
 }

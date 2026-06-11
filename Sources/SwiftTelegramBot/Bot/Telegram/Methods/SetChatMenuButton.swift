@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `setChatMenuButton` method
 public struct TGSetChatMenuButtonParams: Encodable, Sendable {
 
-    /// Unique identifier for the target private chat. If not specified, default bot's menu button will be changed.
+    /// Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed.
     public let chatId: Int64?
 
     /// A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault.

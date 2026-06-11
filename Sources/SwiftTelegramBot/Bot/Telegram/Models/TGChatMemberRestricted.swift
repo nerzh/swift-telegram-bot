@@ -45,7 +45,7 @@ public final class TGChatMemberRestricted: Codable, Sendable {
     /// True, if the user is a member of the chat at the moment of the request
     public let isMember: Bool
 
-    /// True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+    /// True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues
     public let canSendMessages: Bool
 
     /// True, if the user is allowed to send audios

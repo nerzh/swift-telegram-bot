@@ -16,6 +16,7 @@ public final class TGChatJoinRequest: Codable, Sendable {
         case date = "date"
         case bio = "bio"
         case inviteLink = "invite_link"
+        case queryId = "query_id"
     }
 
     /// Chat to which the request was sent
@@ -36,12 +37,16 @@ public final class TGChatJoinRequest: Codable, Sendable {
     /// Optional. Chat invite link that was used by the user to send the join request
     public let inviteLink: TGChatInviteLink?
 
-    public init (chat: TGChat, from: TGUser, userChatId: Int64, date: Int, bio: String? = nil, inviteLink: TGChatInviteLink? = nil) {
+    /// Optional. Identifier of the join request query. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.
+    public let queryId: String?
+
+    public init (chat: TGChat, from: TGUser, userChatId: Int64, date: Int, bio: String? = nil, inviteLink: TGChatInviteLink? = nil, queryId: String? = nil) {
         self.chat = chat
         self.from = from
         self.userChatId = userChatId
         self.date = date
         self.bio = bio
         self.inviteLink = inviteLink
+        self.queryId = queryId
     }
 }

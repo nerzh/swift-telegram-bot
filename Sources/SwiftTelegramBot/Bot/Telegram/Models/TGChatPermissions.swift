@@ -28,7 +28,7 @@ public final class TGChatPermissions: Codable, Sendable {
         case canManageTopics = "can_manage_topics"
     }
 
-    /// Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+    /// Optional. True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues
     public let canSendMessages: Bool?
 
     /// Optional. True, if the user is allowed to send audios

@@ -13,6 +13,7 @@ public final class TGPollMedia: Codable, Sendable {
         case animation = "animation"
         case audio = "audio"
         case document = "document"
+        case link = "link"
         case livePhoto = "live_photo"
         case location = "location"
         case photo = "photo"
@@ -29,6 +30,9 @@ public final class TGPollMedia: Codable, Sendable {
 
     /// Optional. Media is a general file, information about the file; currently, can't be received in a poll option
     public let document: TGDocument?
+
+    /// Optional. The HTTP link attached to the poll option
+    public let link: TGLink?
 
     /// Optional. Media is a live photo, information about the live photo
     public let livePhoto: TGLivePhoto?
@@ -48,10 +52,11 @@ public final class TGPollMedia: Codable, Sendable {
     /// Optional. Media is a video, information about the video
     public let video: TGVideo?
 
-    public init (animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, location: TGLocation? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, venue: TGVenue? = nil, video: TGVideo? = nil) {
+    public init (animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, link: TGLink? = nil, livePhoto: TGLivePhoto? = nil, location: TGLocation? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, venue: TGVenue? = nil, video: TGVideo? = nil) {
         self.animation = animation
         self.audio = audio
         self.document = document
+        self.link = link
         self.livePhoto = livePhoto
         self.location = location
         self.photo = photo

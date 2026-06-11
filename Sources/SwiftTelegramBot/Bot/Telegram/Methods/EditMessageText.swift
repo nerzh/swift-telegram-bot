@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+/// Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 
 /// Parameters container struct for `editMessageText` method
@@ -21,8 +21,8 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
     /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
-    /// New text of the message, 1-4096 characters after entities parsing
-    public let text: String
+    /// New text of the message, 1-4096 characters after entity parsing; required if rich_message isn't specified
+    public let text: String?
 
     /// Mode for parsing entities in the message text. See formatting options for more details.
     public let parseMode: TGParseMode?
@@ -32,6 +32,9 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
 
     /// Link preview generation options for the message
     public let linkPreviewOptions: TGLinkPreviewOptions?
+
+    /// New rich content of the message; required if text isn't specified
+    public let richMessage: TGInputRichMessage?
 
     /// A JSON-serialized object for an inline keyboard
     public let replyMarkup: TGInlineKeyboardMarkup?
@@ -46,10 +49,11 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
             case parseMode = "parse_mode"
             case entities = "entities"
             case linkPreviewOptions = "link_preview_options"
+            case richMessage = "rich_message"
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId? = nil, messageId: Int? = nil, inlineMessageId: String? = nil, text: String, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId? = nil, messageId: Int? = nil, inlineMessageId: String? = nil, text: String? = nil, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, richMessage: TGInputRichMessage? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageId = messageId
@@ -58,6 +62,7 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
             self.parseMode = parseMode
             self.entities = entities
             self.linkPreviewOptions = linkPreviewOptions
+            self.richMessage = richMessage
             self.replyMarkup = replyMarkup
     }
 }
@@ -66,7 +71,7 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
  SeeAlso Telegram Bot API Reference:
  [EditMessageTextParams](https://core.telegram.org/bots/api#editmessagetext)
@@ -78,7 +83,7 @@ public extension TGBot {
  */
 
     @discardableResult
-    func editMessageText(params: TGEditMessageTextParams) async throws -> TGMessageOrBool {
+    func editMessageText(params: TGEditMessageTextParams? = nil) async throws -> TGMessageOrBool {
         guard let methodURL: URL = .init(string: getMethodURL("editMessageText")) else {
             throw BotError("Bad URL: \(getMethodURL("editMessageText"))")
         }

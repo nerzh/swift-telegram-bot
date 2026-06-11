@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `deleteAllMessageReactions` method
 public struct TGDeleteAllMessageReactionsParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target supergroup (in the format @username)
+    /// Unique identifier for the target chat or username of the target supergroup in the format @username
     public let chatId: TGChatId
 
     /// Identifier of the user whose reactions will be removed, if the reactions were added by a user

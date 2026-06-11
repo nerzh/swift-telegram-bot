@@ -3,6 +3,7 @@
 /**
  This object represents the content of a poll option to be sent. It should be one of
  InputMediaAnimation
+ InputMediaLink
  InputMediaLivePhoto
  InputMediaLocation
  InputMediaPhoto
@@ -15,6 +16,7 @@
  **/
 public enum TGInputPollOptionMedia: Codable, Sendable {
     case inputMediaAnimation(TGInputMediaAnimation)
+    case inputMediaLink(TGInputMediaLink)
     case inputMediaLivePhoto(TGInputMediaLivePhoto)
     case inputMediaLocation(TGInputMediaLocation)
     case inputMediaPhoto(TGInputMediaPhoto)
@@ -26,6 +28,8 @@ public enum TGInputPollOptionMedia: Codable, Sendable {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(TGInputMediaAnimation.self) {
             self = .inputMediaAnimation(value)
+        } else if let value = try? container.decode(TGInputMediaLink.self) {
+            self = .inputMediaLink(value)
         } else if let value = try? container.decode(TGInputMediaLivePhoto.self) {
             self = .inputMediaLivePhoto(value)
         } else if let value = try? container.decode(TGInputMediaLocation.self) {
@@ -47,6 +51,8 @@ public enum TGInputPollOptionMedia: Codable, Sendable {
         var container = encoder.singleValueContainer()
         switch self {
         case let .inputMediaAnimation(value):
+            try container.encode(value)
+        case let .inputMediaLink(value):
             try container.encode(value)
         case let .inputMediaLivePhoto(value):
             try container.encode(value)
