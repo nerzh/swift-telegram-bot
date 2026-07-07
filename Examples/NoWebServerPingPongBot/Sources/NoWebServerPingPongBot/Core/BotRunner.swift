@@ -24,16 +24,31 @@ public struct BotRunner {
         try await appContext.botActor.bot.add(dispatcher: dispatcher)
     }
     
-    public func startAndWait4Finish() async throws {
+    public func startAndWait4Finish(singleAction: () async throws -> () = { },
+                                    periodicAction: () async throws -> () = { }
+    ) async throws {
+        await makeSureOnlyOneProcessRunned()
+        
         try await appContext.botActor.bot.start()
         
         print("Started")
         
-        while !Task.isCancelled {
-            try await Task.sleep(nanoseconds: 1_000_000_000)
-        }
+        try await singleAction()
         
-        print("Finish")
+        while true {
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+            try await periodicAction()
+        }
+    }
+    
+    private func makeSureOnlyOneProcessRunned() async {
+        await MainActor.run {
+            guard SingleInstance.acquireLock(appName: ProcessInfo.processInfo.processName)
+            else {
+                print("Another instance is already running.")
+                exit(EXIT_FAILURE)
+            }
+        }
     }
 }
 

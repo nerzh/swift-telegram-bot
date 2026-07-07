@@ -12,15 +12,9 @@ If you need to handle updates via **Webhooks**, refer to the corresponding Webho
 > - It has significant performance and scalability limitations.
 > - Bot responses may be noticeably slower than with Webhooks.
 > - For production deployments, Webhooks are the recommended solution.
-
-> [!WARNING]
-> This example uses Long Polling via `getUpdates`.
 >
 > Long Polling is suitable for development, testing, and SMALL deployments.
 > For scalable production deployments, Webhooks are generally the recommended approach.
-
-> [!WARNING]
-> This example uses Long Polling via `getUpdates`.
 >
 > If you have troubles with answer speed from your bot - you need to switch to Webhooks
 
