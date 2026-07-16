@@ -734,7 +734,7 @@ class Api
     type_name = description[/On success, an (\w+)s that were sent is returned/, 1]
     return type_name unless type_name.nil?
 
-    type_name = description[/On success, an (array of\s+\w+?)\s.+/, 1]
+    type_name = description[/On success, an (array of\s+\w+?)\s.+/i, 1]
     (return type_name) unless type_name.nil?
 
   	type_name = description[/invite link as (\w+) on success/, 1]
