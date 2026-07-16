@@ -18,6 +18,8 @@ public final class TGMessage: Codable, Sendable {
         case senderBoostCount = "sender_boost_count"
         case senderBusinessBot = "sender_business_bot"
         case senderTag = "sender_tag"
+        case receiverUser = "receiver_user"
+        case ephemeralMessageId = "ephemeral_message_id"
         case date = "date"
         case guestQueryId = "guest_query_id"
         case businessConnectionId = "business_connection_id"
@@ -99,6 +101,8 @@ public final class TGMessage: Codable, Sendable {
         case chatBackgroundSet = "chat_background_set"
         case checklistTasksDone = "checklist_tasks_done"
         case checklistTasksAdded = "checklist_tasks_added"
+        case communityChatAdded = "community_chat_added"
+        case communityChatRemoved = "community_chat_removed"
         case directMessagePriceChanged = "direct_message_price_changed"
         case forumTopicCreated = "forum_topic_created"
         case forumTopicEdited = "forum_topic_edited"
@@ -127,7 +131,7 @@ public final class TGMessage: Codable, Sendable {
         case replyMarkup = "reply_markup"
     }
 
-    /// Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
+    /// Unique message identifier inside this chat; 0 for ephemeral messages. In specific instances (e.g., a message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
     public let messageId: Int
 
     /// Optional. Unique identifier of a message thread or forum topic to which the message belongs; for supergroups and private chats only
@@ -151,6 +155,12 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Tag or custom title of the sender of the message; for supergroups only
     public let senderTag: String?
 
+    /// Optional. For ephemeral messages, the user who received the message
+    public let receiverUser: TGUser?
+
+    /// Optional. For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires.
+    public let ephemeralMessageId: Int?
+
     /// Date the message was sent in Unix time. It is always a positive number, representing a valid date.
     public let date: Int
 
@@ -172,7 +182,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group
     public let isAutomaticForward: Bool?
 
-    /// Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+    /// Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply. If the message is a reply to an ephemeral message, then this field may be omitted.
     public let replyToMessage: TGMessage?
 
     /// Optional. Information about the message that is being replied to, which may come from another chat or forum topic
@@ -379,7 +389,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Telegram Passport data
     public let passportData: TGPassportData?
 
-    /// Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
+    /// Optional. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location
     public let proximityAlertTriggered: TGProximityAlertTriggered?
 
     /// Optional. Service message: user boosted the chat
@@ -393,6 +403,12 @@ public final class TGMessage: Codable, Sendable {
 
     /// Optional. Service message: tasks were added to a checklist
     public let checklistTasksAdded: TGChecklistTasksAdded?
+
+    /// Optional. Service message: chat added to a Community
+    public let communityChatAdded: TGCommunityChatAdded?
+
+    /// Optional. Service message: chat removed from a Community
+    public let communityChatRemoved: TGCommunityChatRemoved?
 
     /// Optional. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed
     public let directMessagePriceChanged: TGDirectMessagePriceChanged?
@@ -472,7 +488,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
     public let replyMarkup: TGInlineKeyboardMarkup?
 
-    public init (messageId: Int, messageThreadId: Int? = nil, directMessagesTopic: TGDirectMessagesTopic? = nil, from: TGUser? = nil, senderChat: TGChat? = nil, senderBoostCount: Int? = nil, senderBusinessBot: TGUser? = nil, senderTag: String? = nil, date: Int, guestQueryId: String? = nil, businessConnectionId: String? = nil, chat: TGChat, forwardOrigin: TGMessageOrigin? = nil, isTopicMessage: Bool? = nil, isAutomaticForward: Bool? = nil, replyToMessage: TGMessage? = nil, externalReply: TGExternalReplyInfo? = nil, quote: TGTextQuote? = nil, replyToStory: TGStory? = nil, replyToChecklistTaskId: Int? = nil, replyToPollOptionId: String? = nil, viaBot: TGUser? = nil, guestBotCallerUser: TGUser? = nil, guestBotCallerChat: TGChat? = nil, editDate: Int? = nil, hasProtectedContent: Bool? = nil, isFromOffline: Bool? = nil, isPaidPost: Bool? = nil, mediaGroupId: String? = nil, authorSignature: String? = nil, paidStarCount: Int? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, suggestedPostInfo: TGSuggestedPostInfo? = nil, effectId: String? = nil, richMessage: TGRichMessage? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, caption: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil, location: TGLocation? = nil, newChatMembers: [TGUser]? = nil, leftChatMember: TGUser? = nil, chatOwnerLeft: TGChatOwnerLeft? = nil, chatOwnerChanged: TGChatOwnerChanged? = nil, newChatTitle: String? = nil, newChatPhoto: [TGPhotoSize]? = nil, deleteChatPhoto: Bool? = nil, groupChatCreated: Bool? = nil, supergroupChatCreated: Bool? = nil, channelChatCreated: Bool? = nil, messageAutoDeleteTimerChanged: TGMessageAutoDeleteTimerChanged? = nil, migrateToChatId: Int64? = nil, migrateFromChatId: Int64? = nil, pinnedMessage: TGMaybeInaccessibleMessage? = nil, invoice: TGInvoice? = nil, successfulPayment: TGSuccessfulPayment? = nil, refundedPayment: TGRefundedPayment? = nil, usersShared: TGUsersShared? = nil, chatShared: TGChatShared? = nil, gift: TGGiftInfo? = nil, uniqueGift: TGUniqueGiftInfo? = nil, giftUpgradeSent: TGGiftInfo? = nil, connectedWebsite: String? = nil, writeAccessAllowed: TGWriteAccessAllowed? = nil, passportData: TGPassportData? = nil, proximityAlertTriggered: TGProximityAlertTriggered? = nil, boostAdded: TGChatBoostAdded? = nil, chatBackgroundSet: TGChatBackground? = nil, checklistTasksDone: TGChecklistTasksDone? = nil, checklistTasksAdded: TGChecklistTasksAdded? = nil, directMessagePriceChanged: TGDirectMessagePriceChanged? = nil, forumTopicCreated: TGForumTopicCreated? = nil, forumTopicEdited: TGForumTopicEdited? = nil, forumTopicClosed: TGForumTopicClosed? = nil, forumTopicReopened: TGForumTopicReopened? = nil, generalForumTopicHidden: TGGeneralForumTopicHidden? = nil, generalForumTopicUnhidden: TGGeneralForumTopicUnhidden? = nil, giveawayCreated: TGGiveawayCreated? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, giveawayCompleted: TGGiveawayCompleted? = nil, managedBotCreated: TGManagedBotCreated? = nil, paidMessagePriceChanged: TGPaidMessagePriceChanged? = nil, pollOptionAdded: TGPollOptionAdded? = nil, pollOptionDeleted: TGPollOptionDeleted? = nil, suggestedPostApproved: TGSuggestedPostApproved? = nil, suggestedPostApprovalFailed: TGSuggestedPostApprovalFailed? = nil, suggestedPostDeclined: TGSuggestedPostDeclined? = nil, suggestedPostPaid: TGSuggestedPostPaid? = nil, suggestedPostRefunded: TGSuggestedPostRefunded? = nil, videoChatScheduled: TGVideoChatScheduled? = nil, videoChatStarted: TGVideoChatStarted? = nil, videoChatEnded: TGVideoChatEnded? = nil, videoChatParticipantsInvited: TGVideoChatParticipantsInvited? = nil, webAppData: TGWebAppData? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init (messageId: Int, messageThreadId: Int? = nil, directMessagesTopic: TGDirectMessagesTopic? = nil, from: TGUser? = nil, senderChat: TGChat? = nil, senderBoostCount: Int? = nil, senderBusinessBot: TGUser? = nil, senderTag: String? = nil, receiverUser: TGUser? = nil, ephemeralMessageId: Int? = nil, date: Int, guestQueryId: String? = nil, businessConnectionId: String? = nil, chat: TGChat, forwardOrigin: TGMessageOrigin? = nil, isTopicMessage: Bool? = nil, isAutomaticForward: Bool? = nil, replyToMessage: TGMessage? = nil, externalReply: TGExternalReplyInfo? = nil, quote: TGTextQuote? = nil, replyToStory: TGStory? = nil, replyToChecklistTaskId: Int? = nil, replyToPollOptionId: String? = nil, viaBot: TGUser? = nil, guestBotCallerUser: TGUser? = nil, guestBotCallerChat: TGChat? = nil, editDate: Int? = nil, hasProtectedContent: Bool? = nil, isFromOffline: Bool? = nil, isPaidPost: Bool? = nil, mediaGroupId: String? = nil, authorSignature: String? = nil, paidStarCount: Int? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, suggestedPostInfo: TGSuggestedPostInfo? = nil, effectId: String? = nil, richMessage: TGRichMessage? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, caption: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil, location: TGLocation? = nil, newChatMembers: [TGUser]? = nil, leftChatMember: TGUser? = nil, chatOwnerLeft: TGChatOwnerLeft? = nil, chatOwnerChanged: TGChatOwnerChanged? = nil, newChatTitle: String? = nil, newChatPhoto: [TGPhotoSize]? = nil, deleteChatPhoto: Bool? = nil, groupChatCreated: Bool? = nil, supergroupChatCreated: Bool? = nil, channelChatCreated: Bool? = nil, messageAutoDeleteTimerChanged: TGMessageAutoDeleteTimerChanged? = nil, migrateToChatId: Int64? = nil, migrateFromChatId: Int64? = nil, pinnedMessage: TGMaybeInaccessibleMessage? = nil, invoice: TGInvoice? = nil, successfulPayment: TGSuccessfulPayment? = nil, refundedPayment: TGRefundedPayment? = nil, usersShared: TGUsersShared? = nil, chatShared: TGChatShared? = nil, gift: TGGiftInfo? = nil, uniqueGift: TGUniqueGiftInfo? = nil, giftUpgradeSent: TGGiftInfo? = nil, connectedWebsite: String? = nil, writeAccessAllowed: TGWriteAccessAllowed? = nil, passportData: TGPassportData? = nil, proximityAlertTriggered: TGProximityAlertTriggered? = nil, boostAdded: TGChatBoostAdded? = nil, chatBackgroundSet: TGChatBackground? = nil, checklistTasksDone: TGChecklistTasksDone? = nil, checklistTasksAdded: TGChecklistTasksAdded? = nil, communityChatAdded: TGCommunityChatAdded? = nil, communityChatRemoved: TGCommunityChatRemoved? = nil, directMessagePriceChanged: TGDirectMessagePriceChanged? = nil, forumTopicCreated: TGForumTopicCreated? = nil, forumTopicEdited: TGForumTopicEdited? = nil, forumTopicClosed: TGForumTopicClosed? = nil, forumTopicReopened: TGForumTopicReopened? = nil, generalForumTopicHidden: TGGeneralForumTopicHidden? = nil, generalForumTopicUnhidden: TGGeneralForumTopicUnhidden? = nil, giveawayCreated: TGGiveawayCreated? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, giveawayCompleted: TGGiveawayCompleted? = nil, managedBotCreated: TGManagedBotCreated? = nil, paidMessagePriceChanged: TGPaidMessagePriceChanged? = nil, pollOptionAdded: TGPollOptionAdded? = nil, pollOptionDeleted: TGPollOptionDeleted? = nil, suggestedPostApproved: TGSuggestedPostApproved? = nil, suggestedPostApprovalFailed: TGSuggestedPostApprovalFailed? = nil, suggestedPostDeclined: TGSuggestedPostDeclined? = nil, suggestedPostPaid: TGSuggestedPostPaid? = nil, suggestedPostRefunded: TGSuggestedPostRefunded? = nil, videoChatScheduled: TGVideoChatScheduled? = nil, videoChatStarted: TGVideoChatStarted? = nil, videoChatEnded: TGVideoChatEnded? = nil, videoChatParticipantsInvited: TGVideoChatParticipantsInvited? = nil, webAppData: TGWebAppData? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
         self.messageId = messageId
         self.messageThreadId = messageThreadId
         self.directMessagesTopic = directMessagesTopic
@@ -481,6 +497,8 @@ public final class TGMessage: Codable, Sendable {
         self.senderBoostCount = senderBoostCount
         self.senderBusinessBot = senderBusinessBot
         self.senderTag = senderTag
+        self.receiverUser = receiverUser
+        self.ephemeralMessageId = ephemeralMessageId
         self.date = date
         self.guestQueryId = guestQueryId
         self.businessConnectionId = businessConnectionId
@@ -562,6 +580,8 @@ public final class TGMessage: Codable, Sendable {
         self.chatBackgroundSet = chatBackgroundSet
         self.checklistTasksDone = checklistTasksDone
         self.checklistTasksAdded = checklistTasksAdded
+        self.communityChatAdded = communityChatAdded
+        self.communityChatRemoved = communityChatRemoved
         self.directMessagePriceChanged = directMessagePriceChanged
         self.forumTopicCreated = forumTopicCreated
         self.forumTopicEdited = forumTopicEdited

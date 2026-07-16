@@ -21,6 +21,12 @@ public struct TGSendMessageParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
     public let directMessagesTopicId: Int?
 
+    /// For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
+    public let receiverUserId: Int64?
+
+    /// For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
+    public let callbackQueryId: String?
+
     /// Text of the message to be sent, 1-4096 characters after entities parsing
     public let text: String
 
@@ -60,6 +66,8 @@ public struct TGSendMessageParams: Encodable, Sendable {
             case chatId = "chat_id"
             case messageThreadId = "message_thread_id"
             case directMessagesTopicId = "direct_messages_topic_id"
+            case receiverUserId = "receiver_user_id"
+            case callbackQueryId = "callback_query_id"
             case text = "text"
             case parseMode = "parse_mode"
             case entities = "entities"
@@ -73,11 +81,13 @@ public struct TGSendMessageParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, text: String, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, receiverUserId: Int64? = nil, callbackQueryId: String? = nil, text: String, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId
             self.directMessagesTopicId = directMessagesTopicId
+            self.receiverUserId = receiverUserId
+            self.callbackQueryId = callbackQueryId
             self.text = text
             self.parseMode = parseMode
             self.entities = entities

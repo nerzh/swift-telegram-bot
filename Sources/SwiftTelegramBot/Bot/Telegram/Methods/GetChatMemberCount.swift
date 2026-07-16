@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to get the number of members in a chat. Returns Int on success.
+/// Use this method to get the number of members in a chat. Returns Integer on success.
 
 
 /// Parameters container struct for `getChatMemberCount` method
@@ -26,7 +26,7 @@ public struct TGGetChatMemberCountParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to get the number of members in a chat. Returns Int on success.
+ Use this method to get the number of members in a chat. Returns Integer on success.
 
  SeeAlso Telegram Bot API Reference:
  [GetChatMemberCountParams](https://core.telegram.org/bots/api#getchatmembercount)

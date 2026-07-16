@@ -19,10 +19,10 @@ public final class TGSuggestedPostPaid: Codable, Sendable {
     /// Optional. Message containing the suggested post. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.
     public let suggestedPostMessage: TGMessage?
 
-    /// Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
+    /// Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.
     public let currency: String
 
-    /// Optional. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only
+    /// Optional. The amount of the currency that was received by the channel in nanograms; for payments in TON grams only
     public let amount: Int?
 
     /// Optional. The amount of Telegram Stars that was received by the channel; for payments in Telegram Stars only

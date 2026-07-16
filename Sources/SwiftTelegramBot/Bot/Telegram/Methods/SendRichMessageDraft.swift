@@ -18,7 +18,7 @@ public struct TGSendRichMessageDraftParams: Encodable, Sendable {
     /// Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
     public let draftId: Int
 
-    /// The partial message to be streamed
+    /// The partial message to be streamed. Direct upload of new files isn't supported.
     public let richMessage: TGInputRichMessage
 
     /// Custom keys for coding/decoding `SendRichMessageDraftParams` struct

@@ -21,6 +21,12 @@ public struct TGSendLocationParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
     public let directMessagesTopicId: Int?
 
+    /// For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
+    public let receiverUserId: Int64?
+
+    /// For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
+    public let callbackQueryId: String?
+
     /// Latitude of the location
     public let latitude: Float
 
@@ -30,7 +36,7 @@ public struct TGSendLocationParams: Encodable, Sendable {
     /// The radius of uncertainty for the location, measured in meters; 0-1500
     public let horizontalAccuracy: Float?
 
-    /// Period in seconds during which the location will be updated (see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
+    /// Period in seconds during which the location will be updated (see Live Locations), must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. Must be 0 for ephemeral messages.
     public let livePeriod: Int?
 
     /// For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
@@ -66,6 +72,8 @@ public struct TGSendLocationParams: Encodable, Sendable {
             case chatId = "chat_id"
             case messageThreadId = "message_thread_id"
             case directMessagesTopicId = "direct_messages_topic_id"
+            case receiverUserId = "receiver_user_id"
+            case callbackQueryId = "callback_query_id"
             case latitude = "latitude"
             case longitude = "longitude"
             case horizontalAccuracy = "horizontal_accuracy"
@@ -81,11 +89,13 @@ public struct TGSendLocationParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, latitude: Float, longitude: Float, horizontalAccuracy: Float? = nil, livePeriod: Int? = nil, heading: Int? = nil, proximityAlertRadius: Int? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, receiverUserId: Int64? = nil, callbackQueryId: String? = nil, latitude: Float, longitude: Float, horizontalAccuracy: Float? = nil, livePeriod: Int? = nil, heading: Int? = nil, proximityAlertRadius: Int? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId
             self.directMessagesTopicId = directMessagesTopicId
+            self.receiverUserId = receiverUserId
+            self.callbackQueryId = callbackQueryId
             self.latitude = latitude
             self.longitude = longitude
             self.horizontalAccuracy = horizontalAccuracy

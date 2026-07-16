@@ -12,10 +12,10 @@ public struct TGSetManagedBotAccessSettingsParams: Encodable, Sendable {
     /// User identifier of the managed bot whose access settings will be changed
     public let userId: Int64
 
-    /// Pass True, if only selected users can access the bot. The bot's owner can always access it.
+    /// Pass True if only selected users can access the bot. The bot's owner can always access it.
     public let isAccessRestricted: Bool
 
-    /// A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is_access_restricted is false.
+    /// A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is_access_restricted is False.
     public let addedUserIds: [Int64]?
 
     /// Custom keys for coding/decoding `SetManagedBotAccessSettingsParams` struct

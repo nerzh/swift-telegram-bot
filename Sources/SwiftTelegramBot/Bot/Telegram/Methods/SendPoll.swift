@@ -36,22 +36,22 @@ public struct TGSendPollParams: Encodable, Sendable {
     /// Poll type, “quiz” or “regular”, defaults to “regular”
     public let type: String?
 
-    /// Pass True, if the poll allows multiple answers, defaults to False
+    /// Pass True if the poll allows multiple answers, defaults to False
     public let allowsMultipleAnswers: Bool?
 
-    /// Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls
+    /// Pass True if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls
     public let allowsRevoting: Bool?
 
-    /// Pass True, if the poll options must be shown in random order
+    /// Pass True if the poll options must be shown in random order
     public let shuffleOptions: Bool?
 
-    /// Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes
+    /// Pass True if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes
     public let allowAddingOptions: Bool?
 
-    /// Pass True, if poll results must be shown only after the poll closes
+    /// Pass True if poll results must be shown only after the poll closes
     public let hideResultsUntilCloses: Bool?
 
-    /// Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only
+    /// Pass True if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only
     public let membersOnly: Bool?
 
     /// A JSON-serialized list of 0-12 two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll.

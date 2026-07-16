@@ -515,6 +515,35 @@ class Api
 
   private
 
+  def generate_union_type(type_name, var_name, var_type)
+    case_type_names = var_type.split(/\s+or\s+/).map(&:strip)
+    unless case_type_names.count > 1 && case_type_names.all? { |name| fucking_telegram_any_type_name(name) == name }
+      raise "Unsupported union type #{var_type.inspect} for #{type_name}.#{var_name}"
+    end
+
+    field_type_name = var_name.camel_case
+    union_type_name = if type_name.downcase.end_with?(field_type_name.downcase)
+                        "#{type_name}Value"
+                      else
+                        "#{type_name}#{field_type_name}"
+                      end
+    swift_type_name = "#{PREFIX_LIB}#{union_type_name}"
+    description = "Value can be one of\n#{case_type_names.join("\n")}\n"
+
+    FileUtils.mkpath "#{API_DIR}/#{MODELS_DIR_NAME}"
+    File.open("#{API_DIR}/#{MODELS_DIR_NAME}/#{swift_type_name}.swift", "wb") do |out|
+      out.write TYPE_HEADER
+      out.write "/**\n"
+      out.write " Represents a possible value of `#{type_name}.#{var_name.camel_case_lower}`.\n\n"
+      out.write " SeeAlso Telegram Bot API Reference:\n"
+      out.write " [#{type_name}](https://core.telegram.org/bots/api\##{type_name.downcase})\n"
+      out.write " **/\n"
+      out.write generate_fucking_telegram_any_type(union_type_name, "Codable, Sendable", description)
+    end
+
+    swift_type_name
+  end
+
   def generate_custom_model_if_needed(type_name, var_name, var_type, custom_type_description, type_description)
     if var_name == 'type'
       if var_type.upcase == 'String'.upcase
@@ -665,6 +694,11 @@ class Api
         return "Bool"
       end
     else
+      if var_type.include?(' or ')
+        union_type = generate_union_type(type_name, var_name, var_type)
+        return "#{union_type}#{var_optional ? '?' : ''}"
+      end
+
       two_d_array_prefix = 'Array of Array of '
       array_prefix = 'Array of '
       if var_type.start_with?(two_d_array_prefix)

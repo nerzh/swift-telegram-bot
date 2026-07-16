@@ -21,7 +21,7 @@ public final class TGInputMediaAudio: Codable, Sendable {
         case title = "title"
     }
 
-    /// Type of the result, must be audio
+    /// Type of the media, must be audio
     public let type: TGInputMediaAudioType
 
     /// File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »

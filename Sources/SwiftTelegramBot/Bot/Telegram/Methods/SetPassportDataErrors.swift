@@ -13,7 +13,7 @@ public struct TGSetPassportDataErrorsParams: Encodable, Sendable {
     /// User identifier
     public let userId: Int64
 
-    /// A JSON-serialized array describing the errors
+    /// A JSON-serialized Array describing the errors
     public let errors: [TGPassportElementError]
 
     /// Custom keys for coding/decoding `SetPassportDataErrorsParams` struct

@@ -33,7 +33,7 @@ public struct TGEditMessageTextParams: Encodable, Sendable {
     /// Link preview generation options for the message
     public let linkPreviewOptions: TGLinkPreviewOptions?
 
-    /// New rich content of the message; required if text isn't specified
+    /// New rich content of the message; required if text isn't specified. Direct upload of new files isn't supported when an inline message is edited.
     public let richMessage: TGInputRichMessage?
 
     /// A JSON-serialized object for an inline keyboard

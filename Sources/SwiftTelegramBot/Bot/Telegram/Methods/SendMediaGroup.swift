@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+/// Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
 
 
 /// Parameters container struct for `sendMediaGroup` method
@@ -21,7 +21,7 @@ public struct TGSendMediaGroupParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
     public let directMessagesTopicId: Int?
 
-    /// A JSON-serialized array describing messages to be sent, must include 2-10 items
+    /// A JSON-serialized Array describing messages to be sent, must include 2-10 items
     public let media: [TGInputMedia]
 
     /// Sends messages silently. Users will receive a notification with no sound.
@@ -71,7 +71,7 @@ public struct TGSendMediaGroupParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
 
  SeeAlso Telegram Bot API Reference:
  [SendMediaGroupParams](https://core.telegram.org/bots/api#sendmediagroup)

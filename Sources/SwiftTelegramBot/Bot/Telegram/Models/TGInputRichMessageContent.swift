@@ -13,7 +13,7 @@ public final class TGInputRichMessageContent: Codable, Sendable {
         case richMessage = "rich_message"
     }
 
-    /// Yes
+    /// The message to be sent
     public let richMessage: TGInputRichMessage
 
     public init (richMessage: TGInputRichMessage) {

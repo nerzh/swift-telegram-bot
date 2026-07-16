@@ -13,7 +13,7 @@ public struct TGAnswerInlineQueryParams: Encodable, Sendable {
     /// Unique identifier for the answered query
     public let inlineQueryId: String
 
-    /// A JSON-serialized array of results for the inline query
+    /// A JSON-serialized Array of results for the inline query
     public let results: [TGInlineQueryResult]
 
     /// The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to 300.

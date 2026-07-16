@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an array of Message objects is returned.
+/// Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of Message objects is returned.
 
 
 /// Parameters container struct for `getUserPersonalChatMessages` method
@@ -31,7 +31,7 @@ public struct TGGetUserPersonalChatMessagesParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an array of Message objects is returned.
+ Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of Message objects is returned.
 
  SeeAlso Telegram Bot API Reference:
  [GetUserPersonalChatMessagesParams](https://core.telegram.org/bots/api#getuserpersonalchatmessages)

@@ -24,7 +24,7 @@ public struct TGSendPaidMediaParams: Encodable, Sendable {
     /// The number of Telegram Stars that must be paid to buy access to the media; 1-25000
     public let starCount: Int
 
-    /// A JSON-serialized array describing the media to be sent; up to 10 items
+    /// A JSON-serialized Array describing the media to be sent; up to 10 items
     public let media: [TGInputPaidMedia]
 
     /// Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.
@@ -39,7 +39,7 @@ public struct TGSendPaidMediaParams: Encodable, Sendable {
     /// A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
 
-    /// Pass True, if the caption must be shown above the message media
+    /// Pass True if the caption must be shown above the message media
     public let showCaptionAboveMedia: Bool?
 
     /// Sends the message silently. Users will receive a notification with no sound.

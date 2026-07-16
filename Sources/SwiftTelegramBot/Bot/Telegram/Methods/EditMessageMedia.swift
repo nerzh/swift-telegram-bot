@@ -21,7 +21,7 @@ public struct TGEditMessageMediaParams: Encodable, Sendable {
     /// Required if chat_id and message_id are not specified. Identifier of the inline message.
     public let inlineMessageId: String?
 
-    /// A JSON-serialized object for a new media content of the message
+    /// A JSON-serialized object for the new media content of the message
     public let media: TGInputMedia
 
     /// A JSON-serialized object for a new inline keyboard

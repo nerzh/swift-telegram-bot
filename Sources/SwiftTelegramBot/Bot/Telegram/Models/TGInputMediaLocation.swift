@@ -16,7 +16,7 @@ public final class TGInputMediaLocation: Codable, Sendable {
         case horizontalAccuracy = "horizontal_accuracy"
     }
 
-    /// Type of the result, must be location
+    /// Type of the media, must be location
     public let type: TGInputMediaLocationType
 
     /// Latitude of the location

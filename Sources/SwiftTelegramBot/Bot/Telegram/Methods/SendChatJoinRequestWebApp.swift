@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+/// Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
 
 
 /// Parameters container struct for `sendChatJoinRequestWebApp` method
@@ -12,7 +12,7 @@ public struct TGSendChatJoinRequestWebAppParams: Encodable, Sendable {
     /// Unique identifier of the join request query
     public let chatJoinRequestQueryId: String
 
-    /// The URL of the Mini App to be opened
+    /// An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps
     public let webAppUrl: String
 
     /// Custom keys for coding/decoding `SendChatJoinRequestWebAppParams` struct
@@ -31,7 +31,7 @@ public struct TGSendChatJoinRequestWebAppParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+ Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
 
  SeeAlso Telegram Bot API Reference:
  [SendChatJoinRequestWebAppParams](https://core.telegram.org/bots/api#sendchatjoinrequestwebapp)

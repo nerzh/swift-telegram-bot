@@ -14,7 +14,7 @@ public final class TGInputMediaLink: Codable, Sendable {
         case url = "url"
     }
 
-    /// Type of the result, must be link
+    /// Type of the media, must be link
     public let type: TGInputMediaLinkType
 
     /// HTTP URL of the link

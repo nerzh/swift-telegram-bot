@@ -16,7 +16,7 @@ public struct TGAnswerCallbackQueryParams: Encodable, Sendable {
     /// Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
     public let text: String?
 
-    /// If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
+    /// If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to False.
     public let showAlert: Bool?
 
     /// URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @BotFather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button.

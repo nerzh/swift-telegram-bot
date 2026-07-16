@@ -56,7 +56,7 @@ public final class TGInlineQueryResultVideo: Codable, Sendable {
     /// Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
 
-    /// Optional. Pass True, if the caption must be shown above the message media
+    /// Optional. Pass True if the caption must be shown above the message media
     public let showCaptionAboveMedia: Bool?
 
     /// Optional. Video width

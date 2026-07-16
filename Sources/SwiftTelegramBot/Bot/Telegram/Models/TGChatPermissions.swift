@@ -73,7 +73,7 @@ public final class TGChatPermissions: Codable, Sendable {
     /// Optional. True, if the user is allowed to pin messages. Ignored in public supergroups.
     public let canPinMessages: Bool?
 
-    /// Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages.
+    /// Optional. True, if the user is allowed to create forum topics. If omitted, defaults to the value of can_pin_messages.
     public let canManageTopics: Bool?
 
     public init (canSendMessages: Bool? = nil, canSendAudios: Bool? = nil, canSendDocuments: Bool? = nil, canSendPhotos: Bool? = nil, canSendVideos: Bool? = nil, canSendVideoNotes: Bool? = nil, canSendVoiceNotes: Bool? = nil, canSendPolls: Bool? = nil, canSendOtherMessages: Bool? = nil, canAddWebPagePreviews: Bool? = nil, canReactToMessages: Bool? = nil, canEditTag: Bool? = nil, canChangeInfo: Bool? = nil, canInviteUsers: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil) {

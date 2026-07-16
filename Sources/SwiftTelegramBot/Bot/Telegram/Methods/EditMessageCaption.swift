@@ -30,7 +30,7 @@ public struct TGEditMessageCaptionParams: Encodable, Sendable {
     /// A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
     public let captionEntities: [TGMessageEntity]?
 
-    /// Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+    /// Pass True if the caption must be shown above the message media. Supported only for animation, photo and video messages.
     public let showCaptionAboveMedia: Bool?
 
     /// A JSON-serialized object for an inline keyboard

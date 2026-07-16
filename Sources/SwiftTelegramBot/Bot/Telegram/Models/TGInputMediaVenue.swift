@@ -21,7 +21,7 @@ public final class TGInputMediaVenue: Codable, Sendable {
         case googlePlaceType = "google_place_type"
     }
 
-    /// Type of the result, must be venue
+    /// Type of the media, must be venue
     public let type: TGInputMediaVenueType
 
     /// Latitude of the location

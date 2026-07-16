@@ -12,7 +12,7 @@ public struct TGSetBusinessAccountGiftSettingsParams: Encodable, Sendable {
     /// Unique identifier of the business connection
     public let businessConnectionId: String
 
-    /// Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+    /// Pass True if a button for sending a gift to the user or by the business account must always be shown in the input field
     public let showGiftButton: Bool
 
     /// Types of gifts accepted by the business account

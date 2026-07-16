@@ -90,7 +90,7 @@ public final class TGChatMemberAdministrator: Codable, Sendable {
     /// Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
     public let canManageDirectMessages: Bool?
 
-    /// Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can_pin_messages.
+    /// Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can_pin_messages.
     public let canManageTags: Bool?
 
     /// Optional. Custom title for this user
