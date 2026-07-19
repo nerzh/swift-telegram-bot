@@ -133,7 +133,7 @@ class Api
     description[/\s+may\s+be\s+one\s+of/] || 
     description[/\s+should\s+be\s+one\s+of/] ||
     description[/scopes\s+are\s+supported:/] ||
-    description[/\d+\s+types:\n/] ||
+    description[/\s+following\s+(?:\d+\s+)?types:\n/] ||
     description[/supported:\n/] ||
     description[/\s+any\s+of\s+the\s+following\s+types:\n/]
   end
