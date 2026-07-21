@@ -30,9 +30,9 @@ public final class TGInputRichBlockListItem: Codable, Sendable {
     public let value: Int?
 
     /// Optional. For ordered lists, the type of the item label; must be one of “a” for lowercase letters, “A” for uppercase letters, “i” for lowercase Roman numerals, “I” for uppercase Roman numerals, or “1” for decimal numbers
-    public let type: TGInputRichBlockListItemType
+    public let type: TGInputRichBlockListItemType?
 
-    public init (blocks: [TGInputRichBlock], hasCheckbox: Bool? = nil, isChecked: Bool? = nil, value: Int? = nil, type: TGInputRichBlockListItemType) {
+    public init (blocks: [TGInputRichBlock], hasCheckbox: Bool? = nil, isChecked: Bool? = nil, value: Int? = nil, type: TGInputRichBlockListItemType? = nil) {
         self.blocks = blocks
         self.hasCheckbox = hasCheckbox
         self.isChecked = isChecked

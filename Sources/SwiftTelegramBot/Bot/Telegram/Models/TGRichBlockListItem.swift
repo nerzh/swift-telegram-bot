@@ -34,9 +34,9 @@ public final class TGRichBlockListItem: Codable, Sendable {
     public let value: Int?
 
     /// Optional. For ordered lists, the type of the item label; must be one of “a” for lowercase letters, “A” for uppercase letters, “i” for lowercase Roman numerals, “I” for uppercase Roman numerals, or “1” for decimal numbers
-    public let type: TGRichBlockListItemType
+    public let type: TGRichBlockListItemType?
 
-    public init (label: String, blocks: [TGRichBlock], hasCheckbox: Bool? = nil, isChecked: Bool? = nil, value: Int? = nil, type: TGRichBlockListItemType) {
+    public init (label: String, blocks: [TGRichBlock], hasCheckbox: Bool? = nil, isChecked: Bool? = nil, value: Int? = nil, type: TGRichBlockListItemType? = nil) {
         self.label = label
         self.blocks = blocks
         self.hasCheckbox = hasCheckbox

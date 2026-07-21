@@ -622,7 +622,7 @@ class Api
     if var_name == 'type'
       if var_type.upcase == 'String'.upcase
         if !search_cases_for_enum_type_of_variable_with_type_name(var_desc).empty?
-          return "#{PREFIX_LIB}#{type_name}Type"
+          return "#{PREFIX_LIB}#{type_name}Type#{var_optional ? '?' : ''}"
         end
       end
     end
