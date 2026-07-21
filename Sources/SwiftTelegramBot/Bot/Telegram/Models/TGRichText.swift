@@ -32,6 +32,8 @@
  [RichText](https://core.telegram.org/bots/api#richtext)
  **/
 public enum TGRichText: Codable, Sendable {
+    case stringRichText(String)
+    case arrayRichText([TGRichText])
     case richTextBold(TGRichTextBold)
     case richTextItalic(TGRichTextItalic)
     case richTextUnderline(TGRichTextUnderline)
@@ -60,7 +62,11 @@ public enum TGRichText: Codable, Sendable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(TGRichTextBold.self) {
+        if let value = try? container.decode(String.self) {
+            self = .stringRichText(value)
+        } else if let value = try? container.decode([TGRichText].self) {
+            self = .arrayRichText(value)
+        } else if let value = try? container.decode(TGRichTextBold.self) {
             self = .richTextBold(value)
         } else if let value = try? container.decode(TGRichTextItalic.self) {
             self = .richTextItalic(value)
@@ -118,6 +124,10 @@ public enum TGRichText: Codable, Sendable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
+        case let .stringRichText(value):
+            try container.encode(value)
+        case let .arrayRichText(value):
+            try container.encode(value)
         case let .richTextBold(value):
             try container.encode(value)
         case let .richTextItalic(value):

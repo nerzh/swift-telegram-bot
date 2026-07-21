@@ -142,51 +142,55 @@ class Api
     line[/^\w+$/]
   end
 
-  def generate_fucking_telegram_any_type(type_name, var_protocol, description)
-    out = ''
-    out << "public enum #{PREFIX_LIB}#{type_name}: #{var_protocol} {\n"
+  def fucking_telegram_any_type_cases(type_name, description)
+    cases = []
+    inline_types_description = description[/\bcan be either\s+(.+?),\s+or any of the following types:/, 1]
+    unless inline_types_description.nil?
+      inline_types_description.scan(/\b(?:a|an)\s+((?:Array of\s+)?\w+)/).flatten.each do |telegram_type|
+        if telegram_type[/\AArray of\s+(\w+)\z/]
+          case_name = "array#{$1}"
+        else
+          case_name = "#{telegram_type}#{type_name}"
+        end
+        case_name[0] = case_name[0].downcase
+        cases << [case_name, make_swift_type_name('', telegram_type.dup)]
+      end
+    end
+
     start_trigger = false
     description.each_line do |line|
       if fucking_telegram_any_type?(line)
         start_trigger = true
         next
       end
-      if start_trigger
-        case_type_name = fucking_telegram_any_type_name(line.strip)
-        unless case_type_name
-          start_trigger = false
-          next
-        end
-        case_name = case_type_name.clone
-        case_name[0] = case_name[0].downcase
-        out << "#{ONE}case #{case_name}(#{PREFIX_LIB}#{case_type_name})\n"
-      end
+      next unless start_trigger
+
+      case_type_name = fucking_telegram_any_type_name(line.strip)
+      break unless case_type_name
+
+      case_name = case_type_name.clone
+      case_name[0] = case_name[0].downcase
+      cases << [case_name, "#{PREFIX_LIB}#{case_type_name}"]
+    end
+
+    cases
+  end
+
+  def generate_fucking_telegram_any_type(type_name, var_protocol, description)
+    cases = fucking_telegram_any_type_cases(type_name, description)
+    out = ''
+    out << "public enum #{PREFIX_LIB}#{type_name}: #{var_protocol} {\n"
+    cases.each do |case_name, swift_type_name|
+      out << "#{ONE}case #{case_name}(#{swift_type_name})\n"
     end
     out << "\n"
     out << "#{ONE}public init(from decoder: Decoder) throws {\n"
     out << "#{TWO}let container = try decoder.singleValueContainer()\n#{TWO}"
-    start_trigger = false
-    else_trigger = false
-    description.each_line do |line|
-      if fucking_telegram_any_type?(line)
-        start_trigger = true
-        next
-      end
-      if start_trigger
-        case_type_name = fucking_telegram_any_type_name(line.strip)
-        unless case_type_name
-          start_trigger = false
-          next
-        end
-        case_name = case_type_name.clone
-        case_name[0] = case_name[0].downcase
-        # out << "#{ONE}case #{case_name}(#{PREFIX_LIB}#{case_type_name})\n"
-        e_l_s_e = else_trigger ? " else " : ""
-        else_trigger = true
-        out << "#{e_l_s_e}if let value = try? container.decode(#{PREFIX_LIB}#{case_type_name}.self) {\n"
-        out << "#{THREE}self = .#{case_name}(value)\n"
-        out << "#{TWO}}"
-      end
+    cases.each_with_index do |(case_name, swift_type_name), index|
+      e_l_s_e = index.zero? ? "" : " else "
+      out << "#{e_l_s_e}if let value = try? container.decode(#{swift_type_name}.self) {\n"
+      out << "#{THREE}self = .#{case_name}(value)\n"
+      out << "#{TWO}}"
     end
     out << " else {\n"
     out << "#{THREE}throw BotError(\"Failed! Can't decode ANY_TYPE #{type_name}.\")\n"
@@ -196,23 +200,9 @@ class Api
     out << "#{ONE}public func encode(to encoder: Encoder) throws {\n"
     out << "#{TWO}var container = encoder.singleValueContainer()\n"
     out << "#{TWO}switch self {\n"
-    start_trigger = false
-    description.each_line do |line|
-      if fucking_telegram_any_type?(line)
-        start_trigger = true
-        next
-      end
-      if start_trigger
-        case_type_name = fucking_telegram_any_type_name(line.strip)
-        unless case_type_name
-          start_trigger = false
-          next
-        end
-        case_name = case_type_name.clone
-        case_name[0] = case_name[0].downcase
-        out << "#{TWO}case let .#{case_name}(value):\n"
-        out << "#{THREE}try container.encode(value)\n"
-      end
+    cases.each do |case_name, _swift_type_name|
+      out << "#{TWO}case let .#{case_name}(value):\n"
+      out << "#{THREE}try container.encode(value)\n"
     end
     out << "#{TWO}}\n"
     out << "#{ONE}}\n"
