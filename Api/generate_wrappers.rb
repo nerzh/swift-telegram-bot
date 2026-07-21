@@ -579,17 +579,6 @@ class Api
         end
         out.write "#{ONE}case #{case_name} = \"#{case_value}\"\n"
       end
-
-      out.write "#{ONE}case undefined\n"
-      out.write "\n"
-      out.write "#{ONE}public init(from decoder: Decoder) throws {\n"
-      out.write "#{TWO}let value = try decoder.singleValueContainer().decode(String.self)\n"
-      out.write "#{TWO}guard let type = #{custom_type_name}(rawValue: value) else {\n"
-      out.write "#{THREE}self = .undefined\n"
-      out.write "#{THREE}return\n"
-      out.write "#{TWO}}\n"
-      out.write "#{TWO}self = type\n"
-      out.write "#{ONE}}\n"
       out.write "}"
     end
   end

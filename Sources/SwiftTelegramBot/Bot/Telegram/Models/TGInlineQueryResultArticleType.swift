@@ -9,14 +9,4 @@
 
 public enum TGInlineQueryResultArticleType: String, Codable, Sendable {
     case article = "article"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGInlineQueryResultArticleType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

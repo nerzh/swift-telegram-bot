@@ -9,14 +9,4 @@
 
 public enum TGTransactionPartnerChatType: String, Codable, Sendable {
     case chat = "chat"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGTransactionPartnerChatType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

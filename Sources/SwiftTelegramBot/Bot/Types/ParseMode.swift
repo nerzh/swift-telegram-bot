@@ -17,14 +17,4 @@ public enum TGParseMode: String, Codable, Sendable {
     @available(*, deprecated, message: "This is a legacy mode, retained for backward compatibility.", renamed: "markdownV2")
     case markdown  = "Markdown"
     case html      = "HTML"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGParseMode(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

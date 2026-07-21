@@ -9,14 +9,4 @@
 
 public enum TGInputMediaAnimationType: String, Codable, Sendable {
     case animation = "animation"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGInputMediaAnimationType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

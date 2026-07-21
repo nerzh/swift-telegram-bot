@@ -9,14 +9,4 @@
 
 public enum TGMenuButtonDefaultType: String, Codable, Sendable {
     case `default` = "default"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGMenuButtonDefaultType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

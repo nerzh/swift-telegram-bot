@@ -9,14 +9,4 @@
 
 public enum TGBackgroundFillFreeformGradientType: String, Codable, Sendable {
     case freeformGradient = "freeform_gradient"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGBackgroundFillFreeformGradientType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

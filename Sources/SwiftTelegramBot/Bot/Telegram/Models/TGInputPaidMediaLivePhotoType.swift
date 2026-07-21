@@ -9,14 +9,4 @@
 
 public enum TGInputPaidMediaLivePhotoType: String, Codable, Sendable {
     case livePhoto = "live_photo"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGInputPaidMediaLivePhotoType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

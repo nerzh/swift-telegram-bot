@@ -9,14 +9,4 @@
 
 public enum TGBackgroundTypeChatThemeType: String, Codable, Sendable {
     case chatTheme = "chat_theme"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGBackgroundTypeChatThemeType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

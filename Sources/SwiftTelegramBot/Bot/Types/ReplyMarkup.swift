@@ -17,7 +17,6 @@ public enum TGReplyMarkup: Codable, Sendable {
     case replyKeyboardMarkup(TGReplyKeyboardMarkup)
     case replyKeyboardRemove(TGReplyKeyboardRemove)
     case forceReply(TGForceReply)
-    case undefined
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
@@ -30,28 +29,33 @@ public enum TGReplyMarkup: Codable, Sendable {
             try container.encode(value)
         case .forceReply(let value):
             try container.encode(value)
-        case .undefined:
-            try container.encodeNil()
         }
     }
 
     public init(from decoder: Decoder) throws {
-        if let value = try? decoder.singleValueContainer().decode(TGInlineKeyboardMarkup.self) {
+        let container = try decoder.singleValueContainer()
+        if let value = try? container.decode(TGInlineKeyboardMarkup.self) {
             self = .inlineKeyboardMarkup(value)
             return
         }
-        if let value = try? decoder.singleValueContainer().decode(TGReplyKeyboardMarkup.self) {
+        if let value = try? container.decode(TGReplyKeyboardMarkup.self) {
             self = .replyKeyboardMarkup(value)
             return
         }
-        if let value = try? decoder.singleValueContainer().decode(TGReplyKeyboardRemove.self) {
+        if let value = try? container.decode(TGReplyKeyboardRemove.self) {
             self = .replyKeyboardRemove(value)
             return
         }
-        if let value = try? decoder.singleValueContainer().decode(TGForceReply.self) {
+        if let value = try? container.decode(TGForceReply.self) {
             self = .forceReply(value)
             return
         }
-        self = .undefined
+        throw DecodingError.typeMismatch(
+            TGReplyMarkup.self,
+            DecodingError.Context(
+                codingPath: decoder.codingPath,
+                debugDescription: "Expected a supported reply markup object."
+            )
+        )
     }
 }

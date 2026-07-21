@@ -9,14 +9,4 @@
 
 public enum TGRichBlockThinkingType: String, Codable, Sendable {
     case thinking = "thinking"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGRichBlockThinkingType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

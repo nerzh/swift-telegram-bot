@@ -9,14 +9,4 @@
 
 public enum TGMenuButtonWebAppType: String, Codable, Sendable {
     case webApp = "web_app"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGMenuButtonWebAppType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

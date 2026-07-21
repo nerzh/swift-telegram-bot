@@ -9,14 +9,4 @@
 
 public enum TGRichBlockSectionHeadingType: String, Codable, Sendable {
     case heading = "heading"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGRichBlockSectionHeadingType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

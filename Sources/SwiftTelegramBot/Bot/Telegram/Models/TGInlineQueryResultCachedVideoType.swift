@@ -9,14 +9,4 @@
 
 public enum TGInlineQueryResultCachedVideoType: String, Codable, Sendable {
     case video = "video"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGInlineQueryResultCachedVideoType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

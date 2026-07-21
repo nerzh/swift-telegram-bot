@@ -13,14 +13,4 @@ public enum TGPassportElementErrorFileType: String, Codable, Sendable {
     case rentalAgreement = "rental_agreement"
     case passportRegistration = "passport_registration"
     case temporaryRegistration = "temporary_registration"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGPassportElementErrorFileType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

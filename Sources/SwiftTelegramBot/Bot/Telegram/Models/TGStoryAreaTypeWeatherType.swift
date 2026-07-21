@@ -9,14 +9,4 @@
 
 public enum TGStoryAreaTypeWeatherType: String, Codable, Sendable {
     case weather = "weather"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGStoryAreaTypeWeatherType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

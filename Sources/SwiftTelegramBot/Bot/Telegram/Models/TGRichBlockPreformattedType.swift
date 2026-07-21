@@ -9,14 +9,4 @@
 
 public enum TGRichBlockPreformattedType: String, Codable, Sendable {
     case pre = "pre"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGRichBlockPreformattedType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

@@ -9,14 +9,4 @@
 
 public enum TGBotCommandScopeAllGroupChatsType: String, Codable, Sendable {
     case allGroupChats = "all_group_chats"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGBotCommandScopeAllGroupChatsType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

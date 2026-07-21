@@ -9,14 +9,4 @@
 
 public enum TGInputRichBlockAudioType: String, Codable, Sendable {
     case audio = "audio"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGInputRichBlockAudioType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

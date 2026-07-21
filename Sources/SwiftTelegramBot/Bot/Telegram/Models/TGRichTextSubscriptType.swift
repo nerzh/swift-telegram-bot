@@ -9,14 +9,4 @@
 
 public enum TGRichTextSubscriptType: String, Codable, Sendable {
     case `subscript` = "subscript"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGRichTextSubscriptType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

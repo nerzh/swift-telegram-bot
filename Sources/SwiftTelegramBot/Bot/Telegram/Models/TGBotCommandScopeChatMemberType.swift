@@ -9,14 +9,4 @@
 
 public enum TGBotCommandScopeChatMemberType: String, Codable, Sendable {
     case chatMember = "chat_member"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGBotCommandScopeChatMemberType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

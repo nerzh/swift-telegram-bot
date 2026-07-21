@@ -10,14 +10,4 @@
 public enum TGPassportElementErrorReverseSideType: String, Codable, Sendable {
     case driverLicense = "driver_license"
     case identityCard = "identity_card"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGPassportElementErrorReverseSideType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

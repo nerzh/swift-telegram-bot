@@ -14,14 +14,4 @@ public enum TGPassportElementErrorDataFieldType: String, Codable, Sendable {
     case identityCard = "identity_card"
     case internalPassport = "internal_passport"
     case address = "address"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGPassportElementErrorDataFieldType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

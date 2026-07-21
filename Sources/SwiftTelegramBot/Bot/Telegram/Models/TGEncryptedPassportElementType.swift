@@ -21,14 +21,4 @@ public enum TGEncryptedPassportElementType: String, Codable, Sendable {
     case temporaryRegistration = "temporary_registration"
     case phoneNumber = "phone_number"
     case email = "email"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGEncryptedPassportElementType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

@@ -9,14 +9,4 @@
 
 public enum TGInlineQueryResultCachedMpeg4GifType: String, Codable, Sendable {
     case mpeg4Gif = "mpeg4_gif"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGInlineQueryResultCachedMpeg4GifType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

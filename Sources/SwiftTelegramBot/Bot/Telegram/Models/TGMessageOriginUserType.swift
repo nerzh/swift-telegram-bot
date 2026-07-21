@@ -9,14 +9,4 @@
 
 public enum TGMessageOriginUserType: String, Codable, Sendable {
     case user = "user"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGMessageOriginUserType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

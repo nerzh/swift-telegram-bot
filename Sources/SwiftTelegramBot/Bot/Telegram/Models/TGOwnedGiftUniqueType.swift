@@ -9,14 +9,4 @@
 
 public enum TGOwnedGiftUniqueType: String, Codable, Sendable {
     case unique = "unique"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGOwnedGiftUniqueType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

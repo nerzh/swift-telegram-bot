@@ -12,7 +12,6 @@ public enum TGChatId: Codable, Sendable {
 
     case chat(Int64)
     case username(String)
-    case undefined
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
@@ -21,20 +20,25 @@ public enum TGChatId: Codable, Sendable {
             try container.encode(string)
         case .chat(let integer):
             try container.encode(integer)
-        default:
-            try container.encodeNil()
         }
     }
 
     public init(from decoder: Decoder) throws {
-        if let value = try? decoder.singleValueContainer().decode(Int64.self) {
+        let container = try decoder.singleValueContainer()
+        if let value = try? container.decode(Int64.self) {
             self = .chat(value)
             return
         }
-        if let value = try? decoder.singleValueContainer().decode(String.self) {
+        if let value = try? container.decode(String.self) {
             self = .username(value)
             return
         }
-        self = .undefined
+        throw DecodingError.typeMismatch(
+            TGChatId.self,
+            DecodingError.Context(
+                codingPath: decoder.codingPath,
+                debugDescription: "Expected an integer chat ID or a string username."
+            )
+        )
     }
 }

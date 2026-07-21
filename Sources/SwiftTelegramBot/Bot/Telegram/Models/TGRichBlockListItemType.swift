@@ -13,14 +13,4 @@ public enum TGRichBlockListItemType: String, Codable, Sendable {
     case i = "i"
     case I = "I"
     case number1 = "1"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGRichBlockListItemType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }

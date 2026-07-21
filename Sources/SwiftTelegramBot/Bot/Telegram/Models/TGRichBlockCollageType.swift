@@ -9,14 +9,4 @@
 
 public enum TGRichBlockCollageType: String, Codable, Sendable {
     case collage = "collage"
-    case undefined
-
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.singleValueContainer().decode(String.self)
-        guard let type = TGRichBlockCollageType(rawValue: value) else {
-            self = .undefined
-            return
-        }
-        self = type
-    }
 }
