@@ -11,9 +11,9 @@ public actor TGBot {
         string: "https://api.telegram.org"
     )!
 
-    public let connectionType: TGConnectionType
-    public let botId: String
-    public let tgURI: URL
+    nonisolated public let connectionType: TGConnectionType
+    nonisolated public let botId: String
+    nonisolated public let tgURI: URL
     public var tgClient: TGClientPrtcl {
         get async {
             if let limiter {
@@ -24,7 +24,7 @@ public actor TGBot {
             return client
         }
     }
-    public let log: Logger
+    nonisolated public let log: Logger
     private let limiter: LimiterAsync?
     private let connection: TGConnectionPrtcl
     private var client: TGClientPrtcl
@@ -108,13 +108,26 @@ public actor TGBot {
             throw BotError("Bot already started")
         }
         started = true
-        return try await connection.start(bot: self)
+        do {
+            return try await connection.start(bot: self)
+        } catch {
+            started = false
+            throw error
+        }
     }
     
     @discardableResult
     public func stop() async throws -> Bool {
-        try await connection.stop(bot: self)
+        if !started {
+            return true
+        }
+        do {
+            let stopped = try await connection.stop(bot: self)
+            started = false
+            return stopped
+        } catch {
+            started = false
+            throw error
+        }
     }
 }
-
-
