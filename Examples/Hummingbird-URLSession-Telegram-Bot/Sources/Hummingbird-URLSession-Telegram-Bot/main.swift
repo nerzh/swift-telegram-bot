@@ -8,16 +8,33 @@
 import SwiftTelegramBot
 import Hummingbird
 import Logging
+import ServiceLifecycle
+
+let connectionType: TGConnectionType = .longpolling()
+//let connectionType: TGConnectionType = .webhook(webHookURL: URL(string: "https://your_domain/telegramWebHook")!)
 
 var logger = Logger(label: "SwiftTelegramBot")
 logger.logLevel = .debug
 
 let router = Router()
 router.middlewares.add(LogRequestsMiddleware(.info))
-TelegramController().addRoutes(to: router.group("tgbot"))
 
-let app = Application(router: router)
-let botActor: TGBotActor = .init()
+let telegramUpdates = TelegramUpdateQueue()
+TelegramController(updates: telegramUpdates).addRoutes(to: router.group("tgbot"))
 
-try await configure(app)
+var app = Application(router: router, logger: logger)
+let bot = try await configure(app, connectionType: connectionType)
+
+switch connectionType {
+case .longpolling:
+    app.addServices(bot)
+case .webhook:
+    app.addServices(
+        TelegramWebhookBotService(
+            bot: bot,
+            updates: telegramUpdates
+        )
+    )
+}
+
 try await app.runService()
