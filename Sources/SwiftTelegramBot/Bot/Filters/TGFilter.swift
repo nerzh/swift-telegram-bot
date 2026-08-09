@@ -19,7 +19,7 @@ public class TGFilter: @unchecked Sendable {
     private let compoundFilter: SendableValue<Compound?> = .init(nil)
 
     public init() {}
-    
+
     init(lhs: TGFilter, rhs: TGFilter, op: Operation) async {
         await compoundFilter.change { $0 = (lhs: lhs, rhs: rhs, op: op) }
     }
@@ -34,7 +34,7 @@ public class TGFilter: @unchecked Sendable {
             case .or:
                 return lhs || rhs
             case .not:
-                return rhs
+                return !rhs
             }
         } else {
             return self.filter(message: mess)
