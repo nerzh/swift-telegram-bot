@@ -12,6 +12,9 @@ public final class TGUniqueGiftInfo: Codable, Sendable {
     public enum CodingKeys: String, CodingKey {
         case gift = "gift"
         case origin = "origin"
+        case text = "text"
+        case entities = "entities"
+        case isPrivate = "is_private"
         case lastResaleCurrency = "last_resale_currency"
         case lastResaleAmount = "last_resale_amount"
         case ownedGiftId = "owned_gift_id"
@@ -24,6 +27,15 @@ public final class TGUniqueGiftInfo: Codable, Sendable {
 
     /// Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers.
     public let origin: String
+
+    /// Optional. Text of the message that was added to the gift
+    public let text: String?
+
+    /// Optional. Special entities that appear in the text
+    public let entities: [TGMessageEntity]?
+
+    /// Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
+    public let isPrivate: Bool?
 
     /// Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.
     public let lastResaleCurrency: String?
@@ -40,9 +52,12 @@ public final class TGUniqueGiftInfo: Codable, Sendable {
     /// Optional. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now.
     public let nextTransferDate: Int?
 
-    public init (gift: TGUniqueGift, origin: String, lastResaleCurrency: String? = nil, lastResaleAmount: Int? = nil, ownedGiftId: String? = nil, transferStarCount: Int? = nil, nextTransferDate: Int? = nil) {
+    public init (gift: TGUniqueGift, origin: String, text: String? = nil, entities: [TGMessageEntity]? = nil, isPrivate: Bool? = nil, lastResaleCurrency: String? = nil, lastResaleAmount: Int? = nil, ownedGiftId: String? = nil, transferStarCount: Int? = nil, nextTransferDate: Int? = nil) {
         self.gift = gift
         self.origin = origin
+        self.text = text
+        self.entities = entities
+        self.isPrivate = isPrivate
         self.lastResaleCurrency = lastResaleCurrency
         self.lastResaleAmount = lastResaleAmount
         self.ownedGiftId = ownedGiftId

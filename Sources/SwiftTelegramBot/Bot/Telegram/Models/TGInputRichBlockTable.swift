@@ -14,6 +14,7 @@ public final class TGInputRichBlockTable: Codable, Sendable {
         case cells = "cells"
         case isBordered = "is_bordered"
         case isStriped = "is_striped"
+        case isCompact = "is_compact"
         case caption = "caption"
     }
 
@@ -29,14 +30,18 @@ public final class TGInputRichBlockTable: Codable, Sendable {
     /// Optional. Pass True if the table is striped
     public let isStriped: Bool?
 
+    /// Optional. Pass True if table cells must have smaller indents
+    public let isCompact: Bool?
+
     /// Optional. Caption of the table
     public let caption: TGRichText?
 
-    public init (type: TGInputRichBlockTableType, cells: [[TGRichBlockTableCell]], isBordered: Bool? = nil, isStriped: Bool? = nil, caption: TGRichText? = nil) {
+    public init (type: TGInputRichBlockTableType, cells: [[TGRichBlockTableCell]], isBordered: Bool? = nil, isStriped: Bool? = nil, isCompact: Bool? = nil, caption: TGRichText? = nil) {
         self.type = type
         self.cells = cells
         self.isBordered = isBordered
         self.isStriped = isStriped
+        self.isCompact = isCompact
         self.caption = caption
     }
 }

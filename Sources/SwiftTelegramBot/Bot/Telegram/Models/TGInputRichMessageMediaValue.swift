@@ -9,6 +9,7 @@
 public enum TGInputRichMessageMediaValue: Codable, Sendable {
     case inputMediaAnimation(TGInputMediaAnimation)
     case inputMediaAudio(TGInputMediaAudio)
+    case inputMediaDocument(TGInputMediaDocument)
     case inputMediaPhoto(TGInputMediaPhoto)
     case inputMediaVideo(TGInputMediaVideo)
     case inputMediaVoiceNote(TGInputMediaVoiceNote)
@@ -19,6 +20,8 @@ public enum TGInputRichMessageMediaValue: Codable, Sendable {
             self = .inputMediaAnimation(value)
         } else if let value = try? container.decode(TGInputMediaAudio.self) {
             self = .inputMediaAudio(value)
+        } else if let value = try? container.decode(TGInputMediaDocument.self) {
+            self = .inputMediaDocument(value)
         } else if let value = try? container.decode(TGInputMediaPhoto.self) {
             self = .inputMediaPhoto(value)
         } else if let value = try? container.decode(TGInputMediaVideo.self) {
@@ -36,6 +39,8 @@ public enum TGInputRichMessageMediaValue: Codable, Sendable {
         case let .inputMediaAnimation(value):
             try container.encode(value)
         case let .inputMediaAudio(value):
+            try container.encode(value)
+        case let .inputMediaDocument(value):
             try container.encode(value)
         case let .inputMediaPhoto(value):
             try container.encode(value)

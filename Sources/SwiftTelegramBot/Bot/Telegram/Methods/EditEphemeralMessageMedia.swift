@@ -18,7 +18,7 @@ public struct TGEditEphemeralMessageMediaParams: Encodable, Sendable {
     /// Identifier of the ephemeral message to edit
     public let ephemeralMessageId: Int
 
-    /// A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL.
+    /// A JSON-serialized object for the new media content of the message
     public let media: TGInputMedia
 
     /// A JSON-serialized object for an inline keyboard

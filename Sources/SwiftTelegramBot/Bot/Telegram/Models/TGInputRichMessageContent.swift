@@ -13,7 +13,7 @@ public final class TGInputRichMessageContent: Codable, Sendable {
         case richMessage = "rich_message"
     }
 
-    /// The message to be sent
+    /// The message to be sent. Only previously uploaded files may be used in the message.
     public let richMessage: TGInputRichMessage
 
     public init (richMessage: TGInputRichMessage) {

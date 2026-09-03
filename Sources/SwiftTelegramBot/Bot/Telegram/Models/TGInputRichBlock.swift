@@ -11,14 +11,17 @@
  InputRichBlockAnchor
  InputRichBlockList
  InputRichBlockBlockQuotation
+ InputRichBlockExpandableBlockQuotation
  InputRichBlockPullQuotation
  InputRichBlockCollage
  InputRichBlockSlideshow
  InputRichBlockTable
  InputRichBlockDetails
  InputRichBlockMap
+ InputRichBlockButtons
  InputRichBlockAnimation
  InputRichBlockAudio
+ InputRichBlockDocument
  InputRichBlockPhoto
  InputRichBlockVideo
  InputRichBlockVoiceNote
@@ -37,14 +40,17 @@ public enum TGInputRichBlock: Codable, Sendable {
     case inputRichBlockAnchor(TGInputRichBlockAnchor)
     case inputRichBlockList(TGInputRichBlockList)
     case inputRichBlockBlockQuotation(TGInputRichBlockBlockQuotation)
+    case inputRichBlockExpandableBlockQuotation(TGInputRichBlockExpandableBlockQuotation)
     case inputRichBlockPullQuotation(TGInputRichBlockPullQuotation)
     case inputRichBlockCollage(TGInputRichBlockCollage)
     case inputRichBlockSlideshow(TGInputRichBlockSlideshow)
     case inputRichBlockTable(TGInputRichBlockTable)
     case inputRichBlockDetails(TGInputRichBlockDetails)
     case inputRichBlockMap(TGInputRichBlockMap)
+    case inputRichBlockButtons(TGInputRichBlockButtons)
     case inputRichBlockAnimation(TGInputRichBlockAnimation)
     case inputRichBlockAudio(TGInputRichBlockAudio)
+    case inputRichBlockDocument(TGInputRichBlockDocument)
     case inputRichBlockPhoto(TGInputRichBlockPhoto)
     case inputRichBlockVideo(TGInputRichBlockVideo)
     case inputRichBlockVoiceNote(TGInputRichBlockVoiceNote)
@@ -70,6 +76,8 @@ public enum TGInputRichBlock: Codable, Sendable {
             self = .inputRichBlockList(value)
         } else if let value = try? container.decode(TGInputRichBlockBlockQuotation.self) {
             self = .inputRichBlockBlockQuotation(value)
+        } else if let value = try? container.decode(TGInputRichBlockExpandableBlockQuotation.self) {
+            self = .inputRichBlockExpandableBlockQuotation(value)
         } else if let value = try? container.decode(TGInputRichBlockPullQuotation.self) {
             self = .inputRichBlockPullQuotation(value)
         } else if let value = try? container.decode(TGInputRichBlockCollage.self) {
@@ -82,10 +90,14 @@ public enum TGInputRichBlock: Codable, Sendable {
             self = .inputRichBlockDetails(value)
         } else if let value = try? container.decode(TGInputRichBlockMap.self) {
             self = .inputRichBlockMap(value)
+        } else if let value = try? container.decode(TGInputRichBlockButtons.self) {
+            self = .inputRichBlockButtons(value)
         } else if let value = try? container.decode(TGInputRichBlockAnimation.self) {
             self = .inputRichBlockAnimation(value)
         } else if let value = try? container.decode(TGInputRichBlockAudio.self) {
             self = .inputRichBlockAudio(value)
+        } else if let value = try? container.decode(TGInputRichBlockDocument.self) {
+            self = .inputRichBlockDocument(value)
         } else if let value = try? container.decode(TGInputRichBlockPhoto.self) {
             self = .inputRichBlockPhoto(value)
         } else if let value = try? container.decode(TGInputRichBlockVideo.self) {
@@ -120,6 +132,8 @@ public enum TGInputRichBlock: Codable, Sendable {
             try container.encode(value)
         case let .inputRichBlockBlockQuotation(value):
             try container.encode(value)
+        case let .inputRichBlockExpandableBlockQuotation(value):
+            try container.encode(value)
         case let .inputRichBlockPullQuotation(value):
             try container.encode(value)
         case let .inputRichBlockCollage(value):
@@ -132,9 +146,13 @@ public enum TGInputRichBlock: Codable, Sendable {
             try container.encode(value)
         case let .inputRichBlockMap(value):
             try container.encode(value)
+        case let .inputRichBlockButtons(value):
+            try container.encode(value)
         case let .inputRichBlockAnimation(value):
             try container.encode(value)
         case let .inputRichBlockAudio(value):
+            try container.encode(value)
+        case let .inputRichBlockDocument(value):
             try container.encode(value)
         case let .inputRichBlockPhoto(value):
             try container.encode(value)

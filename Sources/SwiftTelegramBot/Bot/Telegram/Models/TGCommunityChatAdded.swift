@@ -1,7 +1,7 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- Describes a service message about a chat being added to a community.
+ Describes a service message about a chat or a bot being added to a community.
 
  SeeAlso Telegram Bot API Reference:
  [CommunityChatAdded](https://core.telegram.org/bots/api#communitychatadded)
@@ -13,7 +13,7 @@ public final class TGCommunityChatAdded: Codable, Sendable {
         case community = "community"
     }
 
-    /// The new community to which the chat belongs
+    /// The new community to which the chat or the bot belongs
     public let community: TGCommunity
 
     public init (community: TGCommunity) {

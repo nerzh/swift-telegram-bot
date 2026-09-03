@@ -27,6 +27,7 @@ public final class TGChatAdministratorRights: Codable, Sendable {
         case canManageTopics = "can_manage_topics"
         case canManageDirectMessages = "can_manage_direct_messages"
         case canManageTags = "can_manage_tags"
+        case canSendWelcomeMessages = "can_send_welcome_messages"
     }
 
     /// True, if the user's presence in the chat is hidden
@@ -77,10 +78,13 @@ public final class TGChatAdministratorRights: Codable, Sendable {
     /// Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
     public let canManageDirectMessages: Bool?
 
-    /// Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can_pin_messages.
+    /// Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only
     public let canManageTags: Bool?
 
-    public init (isAnonymous: Bool, canManageChat: Bool, canDeleteMessages: Bool, canManageVideoChats: Bool, canRestrictMembers: Bool, canPromoteMembers: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPostStories: Bool, canEditStories: Bool, canDeleteStories: Bool, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil, canManageTags: Bool? = nil) {
+    /// True, if the administrator can manage chat welcome messages or directly send them in the case of bots
+    public let canSendWelcomeMessages: Bool
+
+    public init (isAnonymous: Bool, canManageChat: Bool, canDeleteMessages: Bool, canManageVideoChats: Bool, canRestrictMembers: Bool, canPromoteMembers: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPostStories: Bool, canEditStories: Bool, canDeleteStories: Bool, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil, canManageTags: Bool? = nil, canSendWelcomeMessages: Bool) {
         self.isAnonymous = isAnonymous
         self.canManageChat = canManageChat
         self.canDeleteMessages = canDeleteMessages
@@ -98,5 +102,6 @@ public final class TGChatAdministratorRights: Codable, Sendable {
         self.canManageTopics = canManageTopics
         self.canManageDirectMessages = canManageDirectMessages
         self.canManageTags = canManageTags
+        self.canSendWelcomeMessages = canSendWelcomeMessages
     }
 }

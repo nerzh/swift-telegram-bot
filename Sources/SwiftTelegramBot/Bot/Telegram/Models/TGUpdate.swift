@@ -38,6 +38,7 @@ public final class TGUpdate: Codable, Sendable {
         case removedChatBoost = "removed_chat_boost"
         case managedBot = "managed_bot"
         case subscription = "subscription"
+        case stoppedMessageGeneration = "stopped_message_generation"
     }
 
     /// The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
@@ -121,7 +122,10 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. User payment subscription has changed
     public let subscription: TGBotSubscriptionUpdated?
 
-    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, guestMessage: TGMessage? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil, subscription: TGBotSubscriptionUpdated? = nil) {
+    /// Optional. A user asked the bot to stop the generation of a message
+    public let stoppedMessageGeneration: TGMessageGenerationStopped?
+
+    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, guestMessage: TGMessage? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil, subscription: TGBotSubscriptionUpdated? = nil, stoppedMessageGeneration: TGMessageGenerationStopped? = nil) {
         self.updateId = updateId
         self.message = message
         self.editedMessage = editedMessage
@@ -149,5 +153,6 @@ public final class TGUpdate: Codable, Sendable {
         self.removedChatBoost = removedChatBoost
         self.managedBot = managedBot
         self.subscription = subscription
+        self.stoppedMessageGeneration = stoppedMessageGeneration
     }
 }

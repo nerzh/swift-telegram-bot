@@ -3,7 +3,7 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+/// Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
 
 
 /// Parameters container struct for `editEphemeralMessageText` method
@@ -18,14 +18,17 @@ public struct TGEditEphemeralMessageTextParams: Encodable, Sendable {
     /// Identifier of the ephemeral message to edit
     public let ephemeralMessageId: Int
 
-    /// New text of the message, 1-4096 characters after entity parsing
-    public let text: String
+    /// New text of the message, 1-4096 characters after entity parsing; required if rich_message isn't specified
+    public let text: String?
 
     /// Mode for parsing entities in the message text. See formatting options for more details.
     public let parseMode: TGParseMode?
 
     /// A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
     public let entities: [TGMessageEntity]?
+
+    /// New rich content of the message; required if text isn't specified
+    public let richMessage: TGInputRichMessage?
 
     /// Link preview generation options for the message
     public let linkPreviewOptions: TGLinkPreviewOptions?
@@ -41,17 +44,19 @@ public struct TGEditEphemeralMessageTextParams: Encodable, Sendable {
             case text = "text"
             case parseMode = "parse_mode"
             case entities = "entities"
+            case richMessage = "rich_message"
             case linkPreviewOptions = "link_preview_options"
             case replyMarkup = "reply_markup"
     }
 
-    public init(chatId: TGChatId, receiverUserId: Int64, ephemeralMessageId: Int, text: String, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init(chatId: TGChatId, receiverUserId: Int64, ephemeralMessageId: Int, text: String? = nil, parseMode: TGParseMode? = nil, entities: [TGMessageEntity]? = nil, richMessage: TGInputRichMessage? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
             self.chatId = chatId
             self.receiverUserId = receiverUserId
             self.ephemeralMessageId = ephemeralMessageId
             self.text = text
             self.parseMode = parseMode
             self.entities = entities
+            self.richMessage = richMessage
             self.linkPreviewOptions = linkPreviewOptions
             self.replyMarkup = replyMarkup
     }
@@ -61,7 +66,7 @@ public struct TGEditEphemeralMessageTextParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
 
  SeeAlso Telegram Bot API Reference:
  [EditEphemeralMessageTextParams](https://core.telegram.org/bots/api#editephemeralmessagetext)

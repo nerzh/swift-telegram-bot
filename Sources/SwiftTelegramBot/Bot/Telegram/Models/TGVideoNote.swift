@@ -1,7 +1,7 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- This object represents a video message (available in Telegram apps as of v.4.0).
+ This object represents a video message.
 
  SeeAlso Telegram Bot API Reference:
  [VideoNote](https://core.telegram.org/bots/api#videonote)

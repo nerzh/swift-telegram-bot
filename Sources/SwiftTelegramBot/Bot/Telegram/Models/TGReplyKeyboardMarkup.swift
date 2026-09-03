@@ -16,6 +16,7 @@ public final class TGReplyKeyboardMarkup: Codable, Sendable {
         case oneTimeKeyboard = "one_time_keyboard"
         case inputFieldPlaceholder = "input_field_placeholder"
         case selective = "selective"
+        case forceReply = "force_reply"
     }
 
     /// Array of button rows, each represented by an Array of KeyboardButton objects
@@ -38,12 +39,16 @@ public final class TGReplyKeyboardMarkup: Codable, Sendable {
     /// Example: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.
     public let selective: Bool?
 
-    public init (keyboard: [[TGKeyboardButton]], isPersistent: Bool? = nil, resizeKeyboard: Bool? = nil, oneTimeKeyboard: Bool? = nil, inputFieldPlaceholder: String? = nil, selective: Bool? = nil) {
+    /// Optional. Pass True if the reply interface must be shown to the user, as if they had manually selected the bot's message and tapped 'Reply'
+    public let forceReply: Bool?
+
+    public init (keyboard: [[TGKeyboardButton]], isPersistent: Bool? = nil, resizeKeyboard: Bool? = nil, oneTimeKeyboard: Bool? = nil, inputFieldPlaceholder: String? = nil, selective: Bool? = nil, forceReply: Bool? = nil) {
         self.keyboard = keyboard
         self.isPersistent = isPersistent
         self.resizeKeyboard = resizeKeyboard
         self.oneTimeKeyboard = oneTimeKeyboard
         self.inputFieldPlaceholder = inputFieldPlaceholder
         self.selective = selective
+        self.forceReply = forceReply
     }
 }

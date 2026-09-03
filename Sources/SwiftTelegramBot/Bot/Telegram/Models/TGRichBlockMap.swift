@@ -24,7 +24,7 @@ public final class TGRichBlockMap: Codable, Sendable {
     /// Location of the center of the map
     public let location: TGLocation
 
-    /// Map zoom level; 13-20
+    /// Map zoom level
     public let zoom: Int
 
     /// Expected width of the map

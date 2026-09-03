@@ -23,6 +23,7 @@
  RichTextHashtag
  RichTextCashtag
  RichTextBotCommand
+ RichTextButton
  RichTextAnchor
  RichTextAnchorLink
  RichTextReference
@@ -55,6 +56,7 @@ public enum TGRichText: Codable, Sendable {
     case richTextHashtag(TGRichTextHashtag)
     case richTextCashtag(TGRichTextCashtag)
     case richTextBotCommand(TGRichTextBotCommand)
+    case richTextButton(TGRichTextButton)
     case richTextAnchor(TGRichTextAnchor)
     case richTextAnchorLink(TGRichTextAnchorLink)
     case richTextReference(TGRichTextReference)
@@ -108,6 +110,8 @@ public enum TGRichText: Codable, Sendable {
             self = .richTextCashtag(value)
         } else if let value = try? container.decode(TGRichTextBotCommand.self) {
             self = .richTextBotCommand(value)
+        } else if let value = try? container.decode(TGRichTextButton.self) {
+            self = .richTextButton(value)
         } else if let value = try? container.decode(TGRichTextAnchor.self) {
             self = .richTextAnchor(value)
         } else if let value = try? container.decode(TGRichTextAnchorLink.self) {
@@ -169,6 +173,8 @@ public enum TGRichText: Codable, Sendable {
         case let .richTextCashtag(value):
             try container.encode(value)
         case let .richTextBotCommand(value):
+            try container.encode(value)
+        case let .richTextButton(value):
             try container.encode(value)
         case let .richTextAnchor(value):
             try container.encode(value)

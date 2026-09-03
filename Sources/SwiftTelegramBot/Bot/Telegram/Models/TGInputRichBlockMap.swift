@@ -24,19 +24,19 @@ public final class TGInputRichBlockMap: Codable, Sendable {
     /// Location of the center of the map
     public let location: TGLocation
 
-    /// Map zoom level; 0-24
-    public let zoom: Int
+    /// Optional. Map zoom level; 0-24
+    public let zoom: Int?
 
-    /// Map width; 0-10000
-    public let width: Int
+    /// Optional. Map width; 0-10000
+    public let width: Int?
 
-    /// Map height; 0-10000
-    public let height: Int
+    /// Optional. Map height; 0-10000
+    public let height: Int?
 
     /// Optional. Caption of the block
     public let caption: TGRichBlockCaption?
 
-    public init (type: TGInputRichBlockMapType, location: TGLocation, zoom: Int, width: Int, height: Int, caption: TGRichBlockCaption? = nil) {
+    public init (type: TGInputRichBlockMapType, location: TGLocation, zoom: Int? = nil, width: Int? = nil, height: Int? = nil, caption: TGRichBlockCaption? = nil) {
         self.type = type
         self.location = location
         self.zoom = zoom

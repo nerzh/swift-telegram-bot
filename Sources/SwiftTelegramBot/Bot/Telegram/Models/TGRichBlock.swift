@@ -11,14 +11,17 @@
  RichBlockAnchor
  RichBlockList
  RichBlockBlockQuotation
+ RichBlockExpandableBlockQuotation
  RichBlockPullQuotation
  RichBlockCollage
  RichBlockSlideshow
  RichBlockTable
  RichBlockDetails
  RichBlockMap
+ RichBlockButtons
  RichBlockAnimation
  RichBlockAudio
+ RichBlockDocument
  RichBlockPhoto
  RichBlockVideo
  RichBlockVoiceNote
@@ -37,14 +40,17 @@ public enum TGRichBlock: Codable, Sendable {
     case richBlockAnchor(TGRichBlockAnchor)
     case richBlockList(TGRichBlockList)
     case richBlockBlockQuotation(TGRichBlockBlockQuotation)
+    case richBlockExpandableBlockQuotation(TGRichBlockExpandableBlockQuotation)
     case richBlockPullQuotation(TGRichBlockPullQuotation)
     case richBlockCollage(TGRichBlockCollage)
     case richBlockSlideshow(TGRichBlockSlideshow)
     case richBlockTable(TGRichBlockTable)
     case richBlockDetails(TGRichBlockDetails)
     case richBlockMap(TGRichBlockMap)
+    case richBlockButtons(TGRichBlockButtons)
     case richBlockAnimation(TGRichBlockAnimation)
     case richBlockAudio(TGRichBlockAudio)
+    case richBlockDocument(TGRichBlockDocument)
     case richBlockPhoto(TGRichBlockPhoto)
     case richBlockVideo(TGRichBlockVideo)
     case richBlockVoiceNote(TGRichBlockVoiceNote)
@@ -70,6 +76,8 @@ public enum TGRichBlock: Codable, Sendable {
             self = .richBlockList(value)
         } else if let value = try? container.decode(TGRichBlockBlockQuotation.self) {
             self = .richBlockBlockQuotation(value)
+        } else if let value = try? container.decode(TGRichBlockExpandableBlockQuotation.self) {
+            self = .richBlockExpandableBlockQuotation(value)
         } else if let value = try? container.decode(TGRichBlockPullQuotation.self) {
             self = .richBlockPullQuotation(value)
         } else if let value = try? container.decode(TGRichBlockCollage.self) {
@@ -82,10 +90,14 @@ public enum TGRichBlock: Codable, Sendable {
             self = .richBlockDetails(value)
         } else if let value = try? container.decode(TGRichBlockMap.self) {
             self = .richBlockMap(value)
+        } else if let value = try? container.decode(TGRichBlockButtons.self) {
+            self = .richBlockButtons(value)
         } else if let value = try? container.decode(TGRichBlockAnimation.self) {
             self = .richBlockAnimation(value)
         } else if let value = try? container.decode(TGRichBlockAudio.self) {
             self = .richBlockAudio(value)
+        } else if let value = try? container.decode(TGRichBlockDocument.self) {
+            self = .richBlockDocument(value)
         } else if let value = try? container.decode(TGRichBlockPhoto.self) {
             self = .richBlockPhoto(value)
         } else if let value = try? container.decode(TGRichBlockVideo.self) {
@@ -120,6 +132,8 @@ public enum TGRichBlock: Codable, Sendable {
             try container.encode(value)
         case let .richBlockBlockQuotation(value):
             try container.encode(value)
+        case let .richBlockExpandableBlockQuotation(value):
+            try container.encode(value)
         case let .richBlockPullQuotation(value):
             try container.encode(value)
         case let .richBlockCollage(value):
@@ -132,9 +146,13 @@ public enum TGRichBlock: Codable, Sendable {
             try container.encode(value)
         case let .richBlockMap(value):
             try container.encode(value)
+        case let .richBlockButtons(value):
+            try container.encode(value)
         case let .richBlockAnimation(value):
             try container.encode(value)
         case let .richBlockAudio(value):
+            try container.encode(value)
+        case let .richBlockDocument(value):
             try container.encode(value)
         case let .richBlockPhoto(value):
             try container.encode(value)

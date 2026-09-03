@@ -1,17 +1,16 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- This object represents one button of an inline keyboard. Exactly one of the fields other than text, icon_custom_emoji_id, and style must be used to specify the type of the button.
+ This object represents a button in a RichMessage. Exactly one of the fields other than text and style must be used to specify the type of the button.
 
  SeeAlso Telegram Bot API Reference:
- [InlineKeyboardButton](https://core.telegram.org/bots/api#inlinekeyboardbutton)
+ [RichMessageButton](https://core.telegram.org/bots/api#richmessagebutton)
  **/
-public final class TGInlineKeyboardButton: Codable, Sendable {
+public final class TGRichMessageButton: Codable, Sendable {
 
-    /// Custom keys for coding/decoding `InlineKeyboardButton` struct
+    /// Custom keys for coding/decoding `RichMessageButton` struct
     public enum CodingKeys: String, CodingKey {
         case text = "text"
-        case iconCustomEmojiId = "icon_custom_emoji_id"
         case style = "style"
         case url = "url"
         case callbackData = "callback_data"
@@ -21,18 +20,13 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
         case switchInlineQueryCurrentChat = "switch_inline_query_current_chat"
         case switchInlineQueryChosenChat = "switch_inline_query_chosen_chat"
         case copyText = "copy_text"
-        case callbackGame = "callback_game"
-        case pay = "pay"
         case disabled = "disabled"
     }
 
-    /// Label text on the button
-    public let text: String
+    /// Text of the button. May contain only plain text, RichTextCustomEmoji and RichTextDateTime entities.
+    public let text: TGRichText
 
-    /// Optional. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on Fragment or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
-    public let iconCustomEmojiId: String?
-
-    /// Optional. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
+    /// Optional. Style of the button. Must be one of “danger”, “success”, “primary”, or “link” (the button is shown as a regular link without borders). Apps may use theme-specific colors for the button background and text based on the style. The style “link” is allowed only for callback buttons.
     public let style: String?
 
     /// Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
@@ -50,33 +44,20 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
     /// Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent in channel direct messages chats and on behalf of a business account.
     public let switchInlineQuery: String?
 
-    /// Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
-    /// 
-    /// This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a business account.
+    /// Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a business account.
     public let switchInlineQueryCurrentChat: String?
 
     /// Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent in channel direct messages chats and on behalf of a business account.
     public let switchInlineQueryChosenChat: TGSwitchInlineQueryChosenChat?
 
-    /// Optional. Description of the button that copies the specified text to the clipboard
+    /// Optional. A button that copies the specified text to the clipboard
     public let copyText: TGCopyTextButton?
-
-    /// Optional. Description of the game that will be launched when the user presses the button.
-    /// 
-    /// NOTE: This type of button must always be the first button in the first row.
-    public let callbackGame: TGCallbackGame?
-
-    /// Optional. Specify True, to send a Pay button. Substrings “” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.
-    /// 
-    /// NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.
-    public let pay: Bool?
 
     /// Optional. If set, then the button is disabled and does nothing
     public let disabled: TGDisabledButton?
 
-    public init (text: String, iconCustomEmojiId: String? = nil, style: String? = nil, url: String? = nil, callbackData: String? = nil, webApp: TGWebAppInfo? = nil, loginUrl: TGLoginUrl? = nil, switchInlineQuery: String? = nil, switchInlineQueryCurrentChat: String? = nil, switchInlineQueryChosenChat: TGSwitchInlineQueryChosenChat? = nil, copyText: TGCopyTextButton? = nil, callbackGame: TGCallbackGame? = nil, pay: Bool? = nil, disabled: TGDisabledButton? = nil) {
+    public init (text: TGRichText, style: String? = nil, url: String? = nil, callbackData: String? = nil, webApp: TGWebAppInfo? = nil, loginUrl: TGLoginUrl? = nil, switchInlineQuery: String? = nil, switchInlineQueryCurrentChat: String? = nil, switchInlineQueryChosenChat: TGSwitchInlineQueryChosenChat? = nil, copyText: TGCopyTextButton? = nil, disabled: TGDisabledButton? = nil) {
         self.text = text
-        self.iconCustomEmojiId = iconCustomEmojiId
         self.style = style
         self.url = url
         self.callbackData = callbackData
@@ -86,8 +67,6 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
         self.switchInlineQueryCurrentChat = switchInlineQueryCurrentChat
         self.switchInlineQueryChosenChat = switchInlineQueryChosenChat
         self.copyText = copyText
-        self.callbackGame = callbackGame
-        self.pay = pay
         self.disabled = disabled
     }
 }

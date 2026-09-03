@@ -15,7 +15,7 @@ public final class TGForceReply: Codable, Sendable {
         case selective = "selective"
     }
 
-    /// Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'
+    /// Shows reply interface to the user, as if they had manually selected the bot's message and tapped 'Reply'
     public let forceReply: Bool
 
     /// Optional. The placeholder to be shown in the input field when the reply is active; 1-64 characters

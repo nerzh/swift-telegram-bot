@@ -30,6 +30,7 @@ public final class TGChatMemberAdministrator: Codable, Sendable {
         case canManageTopics = "can_manage_topics"
         case canManageDirectMessages = "can_manage_direct_messages"
         case canManageTags = "can_manage_tags"
+        case canSendWelcomeMessages = "can_send_welcome_messages"
         case customTitle = "custom_title"
     }
 
@@ -90,13 +91,16 @@ public final class TGChatMemberAdministrator: Codable, Sendable {
     /// Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
     public let canManageDirectMessages: Bool?
 
-    /// Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can_pin_messages.
+    /// Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only
     public let canManageTags: Bool?
+
+    /// True, if the administrator can manage chat welcome messages or directly send them in the case of bots
+    public let canSendWelcomeMessages: Bool
 
     /// Optional. Custom title for this user
     public let customTitle: String?
 
-    public init (status: String, user: TGUser, canBeEdited: Bool, isAnonymous: Bool, canManageChat: Bool, canDeleteMessages: Bool, canManageVideoChats: Bool, canRestrictMembers: Bool, canPromoteMembers: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPostStories: Bool, canEditStories: Bool, canDeleteStories: Bool, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil, canManageTags: Bool? = nil, customTitle: String? = nil) {
+    public init (status: String, user: TGUser, canBeEdited: Bool, isAnonymous: Bool, canManageChat: Bool, canDeleteMessages: Bool, canManageVideoChats: Bool, canRestrictMembers: Bool, canPromoteMembers: Bool, canChangeInfo: Bool, canInviteUsers: Bool, canPostStories: Bool, canEditStories: Bool, canDeleteStories: Bool, canPostMessages: Bool? = nil, canEditMessages: Bool? = nil, canPinMessages: Bool? = nil, canManageTopics: Bool? = nil, canManageDirectMessages: Bool? = nil, canManageTags: Bool? = nil, canSendWelcomeMessages: Bool, customTitle: String? = nil) {
         self.status = status
         self.user = user
         self.canBeEdited = canBeEdited
@@ -117,6 +121,7 @@ public final class TGChatMemberAdministrator: Codable, Sendable {
         self.canManageTopics = canManageTopics
         self.canManageDirectMessages = canManageDirectMessages
         self.canManageTags = canManageTags
+        self.canSendWelcomeMessages = canSendWelcomeMessages
         self.customTitle = customTitle
     }
 }

@@ -1,10 +1,9 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- This object represents a parameter of the inline keyboard button used to automatically authorize a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:
+ This object represents a parameter of the inline keyboard button used to automatically authorize a user. It serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:
  
- Telegram apps support these buttons as of version 5.7.
- Sample bot: @discussbot
+ Sample bot: @DiscussBot
 
  SeeAlso Telegram Bot API Reference:
  [LoginUrl](https://core.telegram.org/bots/api#loginurl)
@@ -27,7 +26,7 @@ public final class TGLoginUrl: Codable, Sendable {
     /// Optional. New text of the button in forwarded messages
     public let forwardText: String?
 
-    /// Optional. Username of a bot, which will be used for user authorization. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
+    /// Optional. Username of a bot, which will be used for user authorization; not supported in RichMessageButton. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
     public let botUsername: String?
 
     /// Optional. Pass True to request the permission for your bot to send messages to the user
