@@ -15,6 +15,8 @@ public enum TGMessageEntityType: String, Codable, Sendable {
     case url = "url"
     case email = "email"
     case phoneNumber = "phone_number"
+    case bankCardNumber = "bank_card_number"
+    case tonAddress = "ton_address"
     case bold = "bold"
     case italic = "italic"
     case underline = "underline"

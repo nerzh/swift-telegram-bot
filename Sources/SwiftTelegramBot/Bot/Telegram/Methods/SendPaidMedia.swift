@@ -12,7 +12,7 @@ public struct TGSendPaidMediaParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
+    /// Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format @username. If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only

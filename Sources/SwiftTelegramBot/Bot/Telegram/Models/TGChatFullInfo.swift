@@ -63,6 +63,8 @@ public final class TGChatFullInfo: Codable, Sendable {
         case paidMessageStarCount = "paid_message_star_count"
         case guardBot = "guard_bot"
         case community = "community"
+        case tonWalletCard = "ton_wallet_card"
+        case shareTheme = "share_theme"
     }
 
     /// Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
@@ -224,7 +226,13 @@ public final class TGChatFullInfo: Codable, Sendable {
     /// Optional. The Community to which the chat belongs
     public let community: TGCommunity?
 
-    public init (id: Int, type: TGChatFullInfoType, title: String? = nil, username: String? = nil, firstName: String? = nil, lastName: String? = nil, isForum: Bool? = nil, isDirectMessages: Bool? = nil, accentColorId: Int, maxReactionCount: Int, photo: TGChatPhoto? = nil, activeUsernames: [String]? = nil, birthdate: TGBirthdate? = nil, businessIntro: TGBusinessIntro? = nil, businessLocation: TGBusinessLocation? = nil, businessOpeningHours: TGBusinessOpeningHours? = nil, personalChat: TGChat? = nil, parentChat: TGChat? = nil, availableReactions: [TGReactionType]? = nil, backgroundCustomEmojiId: String? = nil, profileAccentColorId: Int? = nil, profileBackgroundCustomEmojiId: String? = nil, emojiStatusCustomEmojiId: String? = nil, emojiStatusExpirationDate: Int? = nil, bio: String? = nil, hasPrivateForwards: Bool? = nil, hasRestrictedVoiceAndVideoMessages: Bool? = nil, joinToSendMessages: Bool? = nil, joinByRequest: Bool? = nil, description: String? = nil, inviteLink: String? = nil, pinnedMessage: TGMessage? = nil, permissions: TGChatPermissions? = nil, acceptedGiftTypes: TGAcceptedGiftTypes, canSendPaidMedia: Bool? = nil, slowModeDelay: Int? = nil, unrestrictBoostCount: Int? = nil, messageAutoDeleteTime: Int? = nil, hasAggressiveAntiSpamEnabled: Bool? = nil, hasHiddenMembers: Bool? = nil, hasProtectedContent: Bool? = nil, hasVisibleHistory: Bool? = nil, stickerSetName: String? = nil, canSetStickerSet: Bool? = nil, customEmojiStickerSetName: String? = nil, linkedChatId: Int64? = nil, location: TGChatLocation? = nil, rating: TGUserRating? = nil, firstProfileAudio: TGAudio? = nil, uniqueGiftColors: TGUniqueGiftColors? = nil, paidMessageStarCount: Int? = nil, guardBot: TGUser? = nil, community: TGCommunity? = nil) {
+    /// Optional. For private chats, the TON wallet card of the user, which is shown on their profile page
+    public let tonWalletCard: TGTonWalletCard?
+
+    /// Optional. For private chats, supergroups and channels, the theme of the screen for sharing a link to the user or the chat; omitted if the default theme is used
+    public let shareTheme: TGChatShareTheme?
+
+    public init (id: Int, type: TGChatFullInfoType, title: String? = nil, username: String? = nil, firstName: String? = nil, lastName: String? = nil, isForum: Bool? = nil, isDirectMessages: Bool? = nil, accentColorId: Int, maxReactionCount: Int, photo: TGChatPhoto? = nil, activeUsernames: [String]? = nil, birthdate: TGBirthdate? = nil, businessIntro: TGBusinessIntro? = nil, businessLocation: TGBusinessLocation? = nil, businessOpeningHours: TGBusinessOpeningHours? = nil, personalChat: TGChat? = nil, parentChat: TGChat? = nil, availableReactions: [TGReactionType]? = nil, backgroundCustomEmojiId: String? = nil, profileAccentColorId: Int? = nil, profileBackgroundCustomEmojiId: String? = nil, emojiStatusCustomEmojiId: String? = nil, emojiStatusExpirationDate: Int? = nil, bio: String? = nil, hasPrivateForwards: Bool? = nil, hasRestrictedVoiceAndVideoMessages: Bool? = nil, joinToSendMessages: Bool? = nil, joinByRequest: Bool? = nil, description: String? = nil, inviteLink: String? = nil, pinnedMessage: TGMessage? = nil, permissions: TGChatPermissions? = nil, acceptedGiftTypes: TGAcceptedGiftTypes, canSendPaidMedia: Bool? = nil, slowModeDelay: Int? = nil, unrestrictBoostCount: Int? = nil, messageAutoDeleteTime: Int? = nil, hasAggressiveAntiSpamEnabled: Bool? = nil, hasHiddenMembers: Bool? = nil, hasProtectedContent: Bool? = nil, hasVisibleHistory: Bool? = nil, stickerSetName: String? = nil, canSetStickerSet: Bool? = nil, customEmojiStickerSetName: String? = nil, linkedChatId: Int64? = nil, location: TGChatLocation? = nil, rating: TGUserRating? = nil, firstProfileAudio: TGAudio? = nil, uniqueGiftColors: TGUniqueGiftColors? = nil, paidMessageStarCount: Int? = nil, guardBot: TGUser? = nil, community: TGCommunity? = nil, tonWalletCard: TGTonWalletCard? = nil, shareTheme: TGChatShareTheme? = nil) {
         self.id = id
         self.type = type
         self.title = title
@@ -278,5 +286,7 @@ public final class TGChatFullInfo: Codable, Sendable {
         self.paidMessageStarCount = paidMessageStarCount
         self.guardBot = guardBot
         self.community = community
+        self.tonWalletCard = tonWalletCard
+        self.shareTheme = shareTheme
     }
 }

@@ -26,6 +26,8 @@ public final class TGUpdate: Codable, Sendable {
         case inlineQuery = "inline_query"
         case chosenInlineResult = "chosen_inline_result"
         case callbackQuery = "callback_query"
+        case widgetQuery = "widget_query"
+        case sharedWidgetQuery = "shared_widget_query"
         case shippingQuery = "shipping_query"
         case preCheckoutQuery = "pre_checkout_query"
         case purchasedPaidMedia = "purchased_paid_media"
@@ -86,6 +88,12 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. New incoming callback query
     public let callbackQuery: TGCallbackQuery?
 
+    /// Optional. New incoming query from a widget in a message sent by the bot or via the bot
+    public let widgetQuery: TGWidgetQuery?
+
+    /// Optional. New incoming query from a forwarded message with a shared widget
+    public let sharedWidgetQuery: TGSharedWidgetQuery?
+
     /// Optional. New incoming shipping query. Only for invoices with flexible price.
     public let shippingQuery: TGShippingQuery?
 
@@ -125,7 +133,7 @@ public final class TGUpdate: Codable, Sendable {
     /// Optional. A user asked the bot to stop the generation of a message
     public let stoppedMessageGeneration: TGMessageGenerationStopped?
 
-    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, guestMessage: TGMessage? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil, subscription: TGBotSubscriptionUpdated? = nil, stoppedMessageGeneration: TGMessageGenerationStopped? = nil) {
+    public init (updateId: Int, message: TGMessage? = nil, editedMessage: TGMessage? = nil, channelPost: TGMessage? = nil, editedChannelPost: TGMessage? = nil, businessConnection: TGBusinessConnection? = nil, businessMessage: TGMessage? = nil, editedBusinessMessage: TGMessage? = nil, deletedBusinessMessages: TGBusinessMessagesDeleted? = nil, guestMessage: TGMessage? = nil, messageReaction: TGMessageReactionUpdated? = nil, messageReactionCount: TGMessageReactionCountUpdated? = nil, inlineQuery: TGInlineQuery? = nil, chosenInlineResult: TGChosenInlineResult? = nil, callbackQuery: TGCallbackQuery? = nil, widgetQuery: TGWidgetQuery? = nil, sharedWidgetQuery: TGSharedWidgetQuery? = nil, shippingQuery: TGShippingQuery? = nil, preCheckoutQuery: TGPreCheckoutQuery? = nil, purchasedPaidMedia: TGPaidMediaPurchased? = nil, poll: TGPoll? = nil, pollAnswer: TGPollAnswer? = nil, myChatMember: TGChatMemberUpdated? = nil, chatMember: TGChatMemberUpdated? = nil, chatJoinRequest: TGChatJoinRequest? = nil, chatBoost: TGChatBoostUpdated? = nil, removedChatBoost: TGChatBoostRemoved? = nil, managedBot: TGManagedBotUpdated? = nil, subscription: TGBotSubscriptionUpdated? = nil, stoppedMessageGeneration: TGMessageGenerationStopped? = nil) {
         self.updateId = updateId
         self.message = message
         self.editedMessage = editedMessage
@@ -141,6 +149,8 @@ public final class TGUpdate: Codable, Sendable {
         self.inlineQuery = inlineQuery
         self.chosenInlineResult = chosenInlineResult
         self.callbackQuery = callbackQuery
+        self.widgetQuery = widgetQuery
+        self.sharedWidgetQuery = sharedWidgetQuery
         self.shippingQuery = shippingQuery
         self.preCheckoutQuery = preCheckoutQuery
         self.purchasedPaidMedia = purchasedPaidMedia

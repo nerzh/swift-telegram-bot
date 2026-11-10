@@ -41,7 +41,7 @@ public final class TGInlineKeyboardButton: Codable, Sendable {
     /// Optional. Data to be sent in a callback query to the bot when the button is pressed, 1-64 bytes
     public let callbackData: String?
 
-    /// Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a business account.
+    /// Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a business account and ephemeral messages.
     public let webApp: TGWebAppInfo?
 
     /// Optional. An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget. Not supported for ephemeral messages.

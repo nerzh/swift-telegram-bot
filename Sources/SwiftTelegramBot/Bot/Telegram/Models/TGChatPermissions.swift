@@ -52,7 +52,7 @@ public final class TGChatPermissions: Codable, Sendable {
     /// Optional. True, if the user is allowed to send polls and checklists
     public let canSendPolls: Bool?
 
-    /// Optional. True, if the user is allowed to send animations, games, stickers and use inline bots
+    /// Optional. True, if the user is allowed to send animations, games, stickers, widgets and use inline bots
     public let canSendOtherMessages: Bool?
 
     /// Optional. True, if the user is allowed to add web page previews to their messages

@@ -3,13 +3,13 @@
 import Foundation
 
 /// DESCRIPTION:
-/// Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+/// Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, invoice messages, and widget messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
 
 
 /// Parameters container struct for `copyMessage` method
 public struct TGCopyMessageParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
+    /// Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
@@ -18,7 +18,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
     /// Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
     public let directMessagesTopicId: Int?
 
-    /// Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup or channel in the format @username)
+    /// Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup, or channel in the format @username)
     public let fromChatId: TGChatId
 
     /// Message identifier in the chat specified in from_chat_id
@@ -106,7 +106,7 @@ public struct TGCopyMessageParams: Encodable, Sendable {
 public extension TGBot {
 
 /**
- Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+ Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, invoice messages, and widget messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
 
  SeeAlso Telegram Bot API Reference:
  [CopyMessageParams](https://core.telegram.org/bots/api#copymessage)

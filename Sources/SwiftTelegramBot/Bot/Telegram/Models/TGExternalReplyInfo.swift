@@ -25,6 +25,7 @@ public final class TGExternalReplyInfo: Codable, Sendable {
         case video = "video"
         case videoNote = "video_note"
         case voice = "voice"
+        case widget = "widget"
         case hasMediaSpoiler = "has_media_spoiler"
         case checklist = "checklist"
         case contact = "contact"
@@ -83,6 +84,9 @@ public final class TGExternalReplyInfo: Codable, Sendable {
     /// Optional. Message is a voice message, information about the file
     public let voice: TGVoice?
 
+    /// Optional. Message is an HTML widget, information about the widget
+    public let widget: TGWidget?
+
     /// Optional. True, if the message media is covered by a spoiler animation
     public let hasMediaSpoiler: Bool?
 
@@ -116,7 +120,7 @@ public final class TGExternalReplyInfo: Codable, Sendable {
     /// Optional. Message is a venue, information about the venue
     public let venue: TGVenue?
 
-    public init (origin: TGMessageOrigin, chat: TGChat? = nil, messageId: Int? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, invoice: TGInvoice? = nil, location: TGLocation? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil) {
+    public init (origin: TGMessageOrigin, chat: TGChat? = nil, messageId: Int? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, widget: TGWidget? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, invoice: TGInvoice? = nil, location: TGLocation? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil) {
         self.origin = origin
         self.chat = chat
         self.messageId = messageId
@@ -132,6 +136,7 @@ public final class TGExternalReplyInfo: Codable, Sendable {
         self.video = video
         self.videoNote = videoNote
         self.voice = voice
+        self.widget = widget
         self.hasMediaSpoiler = hasMediaSpoiler
         self.checklist = checklist
         self.contact = contact

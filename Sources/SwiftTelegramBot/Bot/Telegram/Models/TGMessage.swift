@@ -60,6 +60,7 @@ public final class TGMessage: Codable, Sendable {
         case video = "video"
         case videoNote = "video_note"
         case voice = "voice"
+        case widget = "widget"
         case caption = "caption"
         case captionEntities = "caption_entities"
         case showCaptionAboveMedia = "show_caption_above_media"
@@ -117,6 +118,7 @@ public final class TGMessage: Codable, Sendable {
         case giveawayCompleted = "giveaway_completed"
         case managedBotCreated = "managed_bot_created"
         case paidMessagePriceChanged = "paid_message_price_changed"
+        case paidMessagesWaived = "paid_messages_waived"
         case pollOptionAdded = "poll_option_added"
         case pollOptionDeleted = "poll_option_deleted"
         case suggestedPostApproved = "suggested_post_approved"
@@ -124,6 +126,7 @@ public final class TGMessage: Codable, Sendable {
         case suggestedPostDeclined = "suggested_post_declined"
         case suggestedPostPaid = "suggested_post_paid"
         case suggestedPostRefunded = "suggested_post_refunded"
+        case tonWalletTransfer = "ton_wallet_transfer"
         case videoChatScheduled = "video_chat_scheduled"
         case videoChatStarted = "video_chat_started"
         case videoChatEnded = "video_chat_ended"
@@ -282,13 +285,16 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Message is a voice message, information about the file
     public let voice: TGVoice?
 
-    /// Optional. Caption for the animation, audio, document, paid media, photo, video or voice
+    /// Optional. Message is an HTML widget, information about the widget
+    public let widget: TGWidget?
+
+    /// Optional. Caption for the animation, audio, document, live photo, paid media, photo, video, voice, or widget
     public let caption: String?
 
     /// Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
     public let captionEntities: [TGMessageEntity]?
 
-    /// Optional. True, if the caption must be shown above the message media
+    /// Optional. True, if the caption must be shown above the message media or the widget
     public let showCaptionAboveMedia: Bool?
 
     /// Optional. True, if the message media is covered by a spoiler animation
@@ -453,6 +459,9 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Service message: the price for paid messages has changed in the chat
     public let paidMessagePriceChanged: TGPaidMessagePriceChanged?
 
+    /// Optional. Service message: the sender of the message used a link of the other user, which allows sending messages to the user without paying Telegram Stars
+    public let paidMessagesWaived: TGPaidMessagesWaived?
+
     /// Optional. Service message: answer option was added to a poll
     public let pollOptionAdded: TGPollOptionAdded?
 
@@ -474,6 +483,9 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Service message: payment for a suggested post was refunded
     public let suggestedPostRefunded: TGSuggestedPostRefunded?
 
+    /// Optional. Service message: a transfer with a TON wallet
+    public let tonWalletTransfer: TGTonWalletTransfer?
+
     /// Optional. Service message: video chat scheduled
     public let videoChatScheduled: TGVideoChatScheduled?
 
@@ -492,7 +504,7 @@ public final class TGMessage: Codable, Sendable {
     /// Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
     public let replyMarkup: TGInlineKeyboardMarkup?
 
-    public init (messageId: Int, messageThreadId: Int? = nil, directMessagesTopic: TGDirectMessagesTopic? = nil, from: TGUser? = nil, senderChat: TGChat? = nil, senderBoostCount: Int? = nil, senderBusinessBot: TGUser? = nil, senderTag: String? = nil, receiverUser: TGUser? = nil, ephemeralMessageId: Int? = nil, date: Int, guestQueryId: String? = nil, businessConnectionId: String? = nil, chat: TGChat, forwardOrigin: TGMessageOrigin? = nil, isTopicMessage: Bool? = nil, isAutomaticForward: Bool? = nil, replyToMessage: TGMessage? = nil, externalReply: TGExternalReplyInfo? = nil, quote: TGTextQuote? = nil, replyToStory: TGStory? = nil, replyToChecklistTaskId: Int? = nil, replyToPollOptionId: String? = nil, viaBot: TGUser? = nil, guestBotCallerUser: TGUser? = nil, guestBotCallerChat: TGChat? = nil, editDate: Int? = nil, hasProtectedContent: Bool? = nil, isFromOffline: Bool? = nil, isPaidPost: Bool? = nil, mediaGroupId: String? = nil, authorSignature: String? = nil, paidStarCount: Int? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, suggestedPostInfo: TGSuggestedPostInfo? = nil, effectId: String? = nil, richMessage: TGRichMessage? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, caption: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil, location: TGLocation? = nil, newChatMembers: [TGUser]? = nil, leftChatMember: TGUser? = nil, chatOwnerLeft: TGChatOwnerLeft? = nil, chatOwnerChanged: TGChatOwnerChanged? = nil, newChatTitle: String? = nil, newChatPhoto: [TGPhotoSize]? = nil, deleteChatPhoto: Bool? = nil, groupChatCreated: Bool? = nil, supergroupChatCreated: Bool? = nil, channelChatCreated: Bool? = nil, messageAutoDeleteTimerChanged: TGMessageAutoDeleteTimerChanged? = nil, migrateToChatId: Int64? = nil, migrateFromChatId: Int64? = nil, pinnedMessage: TGMaybeInaccessibleMessage? = nil, invoice: TGInvoice? = nil, successfulPayment: TGSuccessfulPayment? = nil, refundedPayment: TGRefundedPayment? = nil, usersShared: TGUsersShared? = nil, chatShared: TGChatShared? = nil, gift: TGGiftInfo? = nil, uniqueGift: TGUniqueGiftInfo? = nil, giftUpgradeSent: TGGiftInfo? = nil, connectedWebsite: String? = nil, writeAccessAllowed: TGWriteAccessAllowed? = nil, passportData: TGPassportData? = nil, proximityAlertTriggered: TGProximityAlertTriggered? = nil, boostAdded: TGChatBoostAdded? = nil, chatBackgroundSet: TGChatBackground? = nil, checklistTasksDone: TGChecklistTasksDone? = nil, checklistTasksAdded: TGChecklistTasksAdded? = nil, communityChatAdded: TGCommunityChatAdded? = nil, communityChatJoined: TGCommunityChatJoined? = nil, communityChatRemoved: TGCommunityChatRemoved? = nil, directMessagePriceChanged: TGDirectMessagePriceChanged? = nil, forumTopicCreated: TGForumTopicCreated? = nil, forumTopicEdited: TGForumTopicEdited? = nil, forumTopicClosed: TGForumTopicClosed? = nil, forumTopicReopened: TGForumTopicReopened? = nil, generalForumTopicHidden: TGGeneralForumTopicHidden? = nil, generalForumTopicUnhidden: TGGeneralForumTopicUnhidden? = nil, giveawayCreated: TGGiveawayCreated? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, giveawayCompleted: TGGiveawayCompleted? = nil, managedBotCreated: TGManagedBotCreated? = nil, paidMessagePriceChanged: TGPaidMessagePriceChanged? = nil, pollOptionAdded: TGPollOptionAdded? = nil, pollOptionDeleted: TGPollOptionDeleted? = nil, suggestedPostApproved: TGSuggestedPostApproved? = nil, suggestedPostApprovalFailed: TGSuggestedPostApprovalFailed? = nil, suggestedPostDeclined: TGSuggestedPostDeclined? = nil, suggestedPostPaid: TGSuggestedPostPaid? = nil, suggestedPostRefunded: TGSuggestedPostRefunded? = nil, videoChatScheduled: TGVideoChatScheduled? = nil, videoChatStarted: TGVideoChatStarted? = nil, videoChatEnded: TGVideoChatEnded? = nil, videoChatParticipantsInvited: TGVideoChatParticipantsInvited? = nil, webAppData: TGWebAppData? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
+    public init (messageId: Int, messageThreadId: Int? = nil, directMessagesTopic: TGDirectMessagesTopic? = nil, from: TGUser? = nil, senderChat: TGChat? = nil, senderBoostCount: Int? = nil, senderBusinessBot: TGUser? = nil, senderTag: String? = nil, receiverUser: TGUser? = nil, ephemeralMessageId: Int? = nil, date: Int, guestQueryId: String? = nil, businessConnectionId: String? = nil, chat: TGChat, forwardOrigin: TGMessageOrigin? = nil, isTopicMessage: Bool? = nil, isAutomaticForward: Bool? = nil, replyToMessage: TGMessage? = nil, externalReply: TGExternalReplyInfo? = nil, quote: TGTextQuote? = nil, replyToStory: TGStory? = nil, replyToChecklistTaskId: Int? = nil, replyToPollOptionId: String? = nil, viaBot: TGUser? = nil, guestBotCallerUser: TGUser? = nil, guestBotCallerChat: TGChat? = nil, editDate: Int? = nil, hasProtectedContent: Bool? = nil, isFromOffline: Bool? = nil, isPaidPost: Bool? = nil, mediaGroupId: String? = nil, authorSignature: String? = nil, paidStarCount: Int? = nil, text: String? = nil, entities: [TGMessageEntity]? = nil, linkPreviewOptions: TGLinkPreviewOptions? = nil, suggestedPostInfo: TGSuggestedPostInfo? = nil, effectId: String? = nil, richMessage: TGRichMessage? = nil, animation: TGAnimation? = nil, audio: TGAudio? = nil, document: TGDocument? = nil, livePhoto: TGLivePhoto? = nil, paidMedia: TGPaidMediaInfo? = nil, photo: [TGPhotoSize]? = nil, sticker: TGSticker? = nil, story: TGStory? = nil, video: TGVideo? = nil, videoNote: TGVideoNote? = nil, voice: TGVoice? = nil, widget: TGWidget? = nil, caption: String? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasMediaSpoiler: Bool? = nil, checklist: TGChecklist? = nil, contact: TGContact? = nil, dice: TGDice? = nil, game: TGGame? = nil, poll: TGPoll? = nil, venue: TGVenue? = nil, location: TGLocation? = nil, newChatMembers: [TGUser]? = nil, leftChatMember: TGUser? = nil, chatOwnerLeft: TGChatOwnerLeft? = nil, chatOwnerChanged: TGChatOwnerChanged? = nil, newChatTitle: String? = nil, newChatPhoto: [TGPhotoSize]? = nil, deleteChatPhoto: Bool? = nil, groupChatCreated: Bool? = nil, supergroupChatCreated: Bool? = nil, channelChatCreated: Bool? = nil, messageAutoDeleteTimerChanged: TGMessageAutoDeleteTimerChanged? = nil, migrateToChatId: Int64? = nil, migrateFromChatId: Int64? = nil, pinnedMessage: TGMaybeInaccessibleMessage? = nil, invoice: TGInvoice? = nil, successfulPayment: TGSuccessfulPayment? = nil, refundedPayment: TGRefundedPayment? = nil, usersShared: TGUsersShared? = nil, chatShared: TGChatShared? = nil, gift: TGGiftInfo? = nil, uniqueGift: TGUniqueGiftInfo? = nil, giftUpgradeSent: TGGiftInfo? = nil, connectedWebsite: String? = nil, writeAccessAllowed: TGWriteAccessAllowed? = nil, passportData: TGPassportData? = nil, proximityAlertTriggered: TGProximityAlertTriggered? = nil, boostAdded: TGChatBoostAdded? = nil, chatBackgroundSet: TGChatBackground? = nil, checklistTasksDone: TGChecklistTasksDone? = nil, checklistTasksAdded: TGChecklistTasksAdded? = nil, communityChatAdded: TGCommunityChatAdded? = nil, communityChatJoined: TGCommunityChatJoined? = nil, communityChatRemoved: TGCommunityChatRemoved? = nil, directMessagePriceChanged: TGDirectMessagePriceChanged? = nil, forumTopicCreated: TGForumTopicCreated? = nil, forumTopicEdited: TGForumTopicEdited? = nil, forumTopicClosed: TGForumTopicClosed? = nil, forumTopicReopened: TGForumTopicReopened? = nil, generalForumTopicHidden: TGGeneralForumTopicHidden? = nil, generalForumTopicUnhidden: TGGeneralForumTopicUnhidden? = nil, giveawayCreated: TGGiveawayCreated? = nil, giveaway: TGGiveaway? = nil, giveawayWinners: TGGiveawayWinners? = nil, giveawayCompleted: TGGiveawayCompleted? = nil, managedBotCreated: TGManagedBotCreated? = nil, paidMessagePriceChanged: TGPaidMessagePriceChanged? = nil, paidMessagesWaived: TGPaidMessagesWaived? = nil, pollOptionAdded: TGPollOptionAdded? = nil, pollOptionDeleted: TGPollOptionDeleted? = nil, suggestedPostApproved: TGSuggestedPostApproved? = nil, suggestedPostApprovalFailed: TGSuggestedPostApprovalFailed? = nil, suggestedPostDeclined: TGSuggestedPostDeclined? = nil, suggestedPostPaid: TGSuggestedPostPaid? = nil, suggestedPostRefunded: TGSuggestedPostRefunded? = nil, tonWalletTransfer: TGTonWalletTransfer? = nil, videoChatScheduled: TGVideoChatScheduled? = nil, videoChatStarted: TGVideoChatStarted? = nil, videoChatEnded: TGVideoChatEnded? = nil, videoChatParticipantsInvited: TGVideoChatParticipantsInvited? = nil, webAppData: TGWebAppData? = nil, replyMarkup: TGInlineKeyboardMarkup? = nil) {
         self.messageId = messageId
         self.messageThreadId = messageThreadId
         self.directMessagesTopic = directMessagesTopic
@@ -543,6 +555,7 @@ public final class TGMessage: Codable, Sendable {
         self.video = video
         self.videoNote = videoNote
         self.voice = voice
+        self.widget = widget
         self.caption = caption
         self.captionEntities = captionEntities
         self.showCaptionAboveMedia = showCaptionAboveMedia
@@ -600,6 +613,7 @@ public final class TGMessage: Codable, Sendable {
         self.giveawayCompleted = giveawayCompleted
         self.managedBotCreated = managedBotCreated
         self.paidMessagePriceChanged = paidMessagePriceChanged
+        self.paidMessagesWaived = paidMessagesWaived
         self.pollOptionAdded = pollOptionAdded
         self.pollOptionDeleted = pollOptionDeleted
         self.suggestedPostApproved = suggestedPostApproved
@@ -607,6 +621,7 @@ public final class TGMessage: Codable, Sendable {
         self.suggestedPostDeclined = suggestedPostDeclined
         self.suggestedPostPaid = suggestedPostPaid
         self.suggestedPostRefunded = suggestedPostRefunded
+        self.tonWalletTransfer = tonWalletTransfer
         self.videoChatScheduled = videoChatScheduled
         self.videoChatStarted = videoChatStarted
         self.videoChatEnded = videoChatEnded

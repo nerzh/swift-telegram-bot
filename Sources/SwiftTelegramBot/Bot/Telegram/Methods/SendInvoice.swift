@@ -9,7 +9,7 @@ import Foundation
 /// Parameters container struct for `sendInvoice` method
 public struct TGSendInvoiceParams: Encodable, Sendable {
 
-    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
+    /// Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format @username
     public let chatId: TGChatId
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only

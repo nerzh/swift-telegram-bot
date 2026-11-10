@@ -12,7 +12,7 @@ public struct TGEditMessageMediaParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
     public let businessConnectionId: String?
 
-    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username.
+    /// Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format @username.
     public let chatId: TGChatId?
 
     /// Required if inline_message_id is not specified. Identifier of the message to edit.

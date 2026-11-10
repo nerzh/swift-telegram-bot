@@ -1,14 +1,14 @@
 // Swift Telegram SDK - Telegram Bot Swift SDK.
 
 /**
- Describes the position of a clickable area within a story.
+ Describes the position of a rectangle area on a story media or a TON wallet card.
 
  SeeAlso Telegram Bot API Reference:
- [StoryAreaPosition](https://core.telegram.org/bots/api#storyareaposition)
+ [AreaPosition](https://core.telegram.org/bots/api#areaposition)
  **/
-public final class TGStoryAreaPosition: Codable, Sendable {
+public final class TGAreaPosition: Codable, Sendable {
 
-    /// Custom keys for coding/decoding `StoryAreaPosition` struct
+    /// Custom keys for coding/decoding `AreaPosition` struct
     public enum CodingKeys: String, CodingKey {
         case xPercentage = "x_percentage"
         case yPercentage = "y_percentage"
@@ -18,22 +18,22 @@ public final class TGStoryAreaPosition: Codable, Sendable {
         case cornerRadiusPercentage = "corner_radius_percentage"
     }
 
-    /// The abscissa of the area's center, as a percentage of the media width
+    /// The abscissa of the area's center, as a percentage of the media or the card width
     public let xPercentage: Float
 
-    /// The ordinate of the area's center, as a percentage of the media height
+    /// The ordinate of the area's center, as a percentage of the media or the card height
     public let yPercentage: Float
 
-    /// The width of the area's rectangle, as a percentage of the media width
+    /// The width of the area's rectangle, as a percentage of the media or the card width
     public let widthPercentage: Float
 
-    /// The height of the area's rectangle, as a percentage of the media height
+    /// The height of the area's rectangle, as a percentage of the media or the card height
     public let heightPercentage: Float
 
     /// The clockwise rotation angle of the rectangle, in degrees; 0-360
     public let rotationAngle: Float
 
-    /// The radius of the rectangle corner rounding, as a percentage of the media width
+    /// The radius of the rectangle corner rounding, as a percentage of the media or the card width
     public let cornerRadiusPercentage: Float
 
     public init (xPercentage: Float, yPercentage: Float, widthPercentage: Float, heightPercentage: Float, rotationAngle: Float, cornerRadiusPercentage: Float) {

@@ -12,8 +12,8 @@ public struct TGSendVideoParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message will be sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
-    public let chatId: TGChatId
+    /// Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format @username; required unless the message is sent as an ephemeral reply to a callback query
+    public let chatId: TGChatId?
 
     /// Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
     public let messageThreadId: Int?
@@ -113,7 +113,7 @@ public struct TGSendVideoParams: Encodable, Sendable {
             case replyMarkup = "reply_markup"
     }
 
-    public init(businessConnectionId: String? = nil, chatId: TGChatId, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, ephemeralMessageParameters: TGEphemeralMessageParameters? = nil, video: TGFileInfo, duration: Int? = nil, width: Int? = nil, height: Int? = nil, thumbnail: TGFileInfo? = nil, cover: TGFileInfo? = nil, startTimestamp: Int? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasSpoiler: Bool? = nil, supportsStreaming: Bool? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
+    public init(businessConnectionId: String? = nil, chatId: TGChatId? = nil, messageThreadId: Int? = nil, directMessagesTopicId: Int? = nil, ephemeralMessageParameters: TGEphemeralMessageParameters? = nil, video: TGFileInfo, duration: Int? = nil, width: Int? = nil, height: Int? = nil, thumbnail: TGFileInfo? = nil, cover: TGFileInfo? = nil, startTimestamp: Int? = nil, caption: String? = nil, parseMode: TGParseMode? = nil, captionEntities: [TGMessageEntity]? = nil, showCaptionAboveMedia: Bool? = nil, hasSpoiler: Bool? = nil, supportsStreaming: Bool? = nil, disableNotification: Bool? = nil, protectContent: Bool? = nil, allowPaidBroadcast: Bool? = nil, messageEffectId: String? = nil, suggestedPostParameters: TGSuggestedPostParameters? = nil, replyParameters: TGReplyParameters? = nil, replyMarkup: TGReplyMarkup? = nil) {
             self.businessConnectionId = businessConnectionId
             self.chatId = chatId
             self.messageThreadId = messageThreadId

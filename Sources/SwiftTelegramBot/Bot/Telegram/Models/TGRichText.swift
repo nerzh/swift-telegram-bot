@@ -19,6 +19,7 @@
  RichTextEmailAddress
  RichTextPhoneNumber
  RichTextBankCardNumber
+ RichTextTonAddress
  RichTextMention
  RichTextHashtag
  RichTextCashtag
@@ -52,6 +53,7 @@ public enum TGRichText: Codable, Sendable {
     case richTextEmailAddress(TGRichTextEmailAddress)
     case richTextPhoneNumber(TGRichTextPhoneNumber)
     case richTextBankCardNumber(TGRichTextBankCardNumber)
+    case richTextTonAddress(TGRichTextTonAddress)
     case richTextMention(TGRichTextMention)
     case richTextHashtag(TGRichTextHashtag)
     case richTextCashtag(TGRichTextCashtag)
@@ -102,6 +104,8 @@ public enum TGRichText: Codable, Sendable {
             self = .richTextPhoneNumber(value)
         } else if let value = try? container.decode(TGRichTextBankCardNumber.self) {
             self = .richTextBankCardNumber(value)
+        } else if let value = try? container.decode(TGRichTextTonAddress.self) {
+            self = .richTextTonAddress(value)
         } else if let value = try? container.decode(TGRichTextMention.self) {
             self = .richTextMention(value)
         } else if let value = try? container.decode(TGRichTextHashtag.self) {
@@ -165,6 +169,8 @@ public enum TGRichText: Codable, Sendable {
         case let .richTextPhoneNumber(value):
             try container.encode(value)
         case let .richTextBankCardNumber(value):
+            try container.encode(value)
+        case let .richTextTonAddress(value):
             try container.encode(value)
         case let .richTextMention(value):
             try container.encode(value)

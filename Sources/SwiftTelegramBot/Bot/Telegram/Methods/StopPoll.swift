@@ -12,7 +12,7 @@ public struct TGStopPollParams: Encodable, Sendable {
     /// Unique identifier of the business connection on behalf of which the message to be edited was sent
     public let businessConnectionId: String?
 
-    /// Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
+    /// Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format @username
     public let chatId: TGChatId
 
     /// Identifier of the original message with the poll

@@ -15,12 +15,12 @@ public final class TGStoryArea: Codable, Sendable {
     }
 
     /// Position of the area
-    public let position: TGStoryAreaPosition
+    public let position: TGAreaPosition
 
     /// Type of the area
     public let type: TGStoryAreaType
 
-    public init (position: TGStoryAreaPosition, type: TGStoryAreaType) {
+    public init (position: TGAreaPosition, type: TGStoryAreaType) {
         self.position = position
         self.type = type
     }

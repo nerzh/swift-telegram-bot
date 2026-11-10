@@ -8,6 +8,8 @@
  InputVenueMessageContent
  InputContactMessageContent
  InputInvoiceMessageContent
+ InputWidgetMessageContent
+ InputSharedWidgetMessageContent
 
  SeeAlso Telegram Bot API Reference:
  [InputMessageContent](https://core.telegram.org/bots/api#inputmessagecontent)
@@ -19,6 +21,8 @@ public enum TGInputMessageContent: Codable, Sendable {
     case inputVenueMessageContent(TGInputVenueMessageContent)
     case inputContactMessageContent(TGInputContactMessageContent)
     case inputInvoiceMessageContent(TGInputInvoiceMessageContent)
+    case inputWidgetMessageContent(TGInputWidgetMessageContent)
+    case inputSharedWidgetMessageContent(TGInputSharedWidgetMessageContent)
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -34,6 +38,10 @@ public enum TGInputMessageContent: Codable, Sendable {
             self = .inputContactMessageContent(value)
         } else if let value = try? container.decode(TGInputInvoiceMessageContent.self) {
             self = .inputInvoiceMessageContent(value)
+        } else if let value = try? container.decode(TGInputWidgetMessageContent.self) {
+            self = .inputWidgetMessageContent(value)
+        } else if let value = try? container.decode(TGInputSharedWidgetMessageContent.self) {
+            self = .inputSharedWidgetMessageContent(value)
         } else {
             throw BotError("Failed! Can't decode ANY_TYPE InputMessageContent.")
         }
@@ -53,6 +61,10 @@ public enum TGInputMessageContent: Codable, Sendable {
         case let .inputContactMessageContent(value):
             try container.encode(value)
         case let .inputInvoiceMessageContent(value):
+            try container.encode(value)
+        case let .inputWidgetMessageContent(value):
+            try container.encode(value)
+        case let .inputSharedWidgetMessageContent(value):
             try container.encode(value)
         }
     }
