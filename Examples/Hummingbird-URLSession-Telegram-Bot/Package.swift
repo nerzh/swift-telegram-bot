@@ -1,15 +1,17 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.1
 
 import PackageDescription
 
 let packageDependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/hummingbird-project/hummingbird.git", from: "2.0.0-alpha.1"),
-    .package(url: "https://github.com/nerzh/swift-telegram-bot.git", .upToNextMajor(from: "4.2.0"))
+    .package(url: "https://github.com/hummingbird-project/hummingbird.git", from: "2.23.0"),
+    .package(url: "https://github.com/swift-server/swift-service-lifecycle.git", .upToNextMajor(from: "2.0.0")),
+    .package(path: "../../", traits: [.defaults, "ServiceLifecycle"]),
 ]
 
 let targetDependencies: [PackageDescription.Target.Dependency] = [
     .product(name: "Hummingbird", package: "hummingbird"),
-    .product(name: "SwiftTelegramBot", package: "swift-telegram-bot")
+    .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
+    .product(name: "SwiftTelegramBot", package: "swift-telegram-sdk")
 ]
 
 let package = Package(
