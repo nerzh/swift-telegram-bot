@@ -15,7 +15,7 @@ let package = Package(
             targets: [name]),
     ],
     dependencies: [
-        .package(url: "https://github.com/nerzh/swift-extensions-pack.git", .upToNextMajor(from: "2.14.1")),
+        .package(url: "https://github.com/nerzh/swift-extensions-pack.git", .upToNextMajor(from: "2.15.0")),
         .package(url: "https://github.com/nerzh/swift-regular-expression", .upToNextMajor(from: "0.2.4")),
         .package(url: "https://github.com/nerzh/swift-custom-logger", .upToNextMajor(from: "1.1.0")),
     ],

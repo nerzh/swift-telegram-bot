@@ -52,18 +52,26 @@ public final class TGClientDefault: TGClientPrtcl {
             url: url.absoluteString, method: "POST", body: body, session: session
         )
         
-        guard
-            let httpResponse = response as? HTTPURLResponse,
-            httpResponse.statusCode == 200
-        else {
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw BotError(
                 type: .network,
                 reason: "Invalid response from server"
             )
         }
 
-        let telegramContainer: TGTelegramContainer<Response> = try JSONDecoder().decode(TGTelegramContainer<Response>.self, from: data)
-        return try await processContainer(telegramContainer)
+        let decoder = JSONDecoder()
+        guard httpResponse.statusCode == 200 else {
+            if let container = try? decoder.decode(TGTelegramContainer<Response>.self, from: data) {
+                throw BotError(httpStatusCode: httpResponse.statusCode, container: container)
+            }
+            let excerpt = String(decoding: data.prefix(1024), as: UTF8.self)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let reason = excerpt.isEmpty ? HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode) : excerpt
+            throw BotError(httpStatusCode: httpResponse.statusCode, reason: reason)
+        }
+
+        let container = try decoder.decode(TGTelegramContainer<Response>.self, from: data)
+        return try await processContainer(container)
     }
 
     @discardableResult
@@ -86,26 +94,16 @@ public final class TGClientDefault: TGClientPrtcl {
         }
     }
 
-    private func processContainer<T: Decodable>(
-        _ container: TGTelegramContainer<T>
-    ) async throws -> T {
+    private func processContainer<T: Decodable>(_ container: TGTelegramContainer<T>) async throws -> T {
         guard container.ok else {
-            let desc = """
-                Response marked as `not Ok`, it seems something wrong with request
-                Code: \(container.errorCode ?? -1)
-                \(container.description ?? "Empty")
-                """
-            let error = BotError(
-                type: .server,
-                description: desc
-            )
+            let error = BotError(httpStatusCode: 200, container: container)
             await log.value.error(error.logMessage)
             throw error
         }
 
         guard let result = container.result else {
             let error = BotError(
-                type: .server,
+                httpStatusCode: 200,
                 reason:
                     "Response marked as `Ok`, but doesn't contain `result` field."
             )
