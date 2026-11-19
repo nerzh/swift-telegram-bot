@@ -96,6 +96,10 @@ public actor TGBot {
             throw BotError("Bot already started")
         }
         started = true
+        if let polling = connection as? TGLongPollingConnection {
+            // Register startup on this actor before stop() can interleave.
+            return try await polling.startPolling(bot: self)
+        }
         return try await connection.start(bot: self)
     }
     

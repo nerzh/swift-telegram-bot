@@ -7,65 +7,57 @@ final class LongPollingRetryTests: XCTestCase, @unchecked Sendable {
         let offline = URLError(.notConnectedToInternet)
         let serverError = BotError(httpStatusCode: 503, reason: "Service unavailable")
         let missingDelay = BotError(httpStatusCode: 429, reason: "Too many requests")
-        let floodControl = BotError(httpStatusCode: 429, parameters: .init(retryAfter: 17), reason: "Too many requests")
-        let client = PollingClient(responses: [serverError, serverError, offline, nil, missingDelay, floodControl])
+        let rateLimited = expectation(description: "Telegram returned retry_after")
+        let retried = expectation(description: "Polling resumed after retry_after")
+        let client = PollingClient(beforeRateLimit: [serverError, serverError, offline, nil, missingDelay],
+                                   rateLimited: rateLimited, retried: retried)
         let bot = try await TGBot(connectionType: .longpolling(), tgClient: client, botId: "test", apiRequestLimitLongPolling: nil)
-        let connection = TGLongPollingConnection(log: await bot.log)
-        let finished = expectation(description: "Polling reached the explicit retry delay")
-
-        await connection.startPolling(bot: bot) { nanoseconds in
-            XCTAssertEqual(nanoseconds, 17_000_000_000)
-            finished.fulfill()
-            throw CancellationError()
-        }
-        await fulfillment(of: [finished], timeout: 3)
-        try await connection.stop(bot: bot)
-        let polls = await client.count.value
-        XCTAssertEqual(polls, client.responses.count)
+        try await bot.start()
+        await fulfillment(of: [rateLimited], timeout: 3)
+        await fulfillment(of: [retried], timeout: 3)
+        try await bot.stop()
+        let times = await client.pollTimes.value
+        let index = client.beforeRateLimit.count
+        guard times.indices.contains(index + 1) else { return XCTFail("Missing retry") }
+        XCTAssertGreaterThanOrEqual(times[index + 1], times[index] + .seconds(1))
     }
 
-    func testStopInterruptsTelegramRetryAfter() async throws {
-        let floodControl = BotError(httpStatusCode: 429, parameters: .init(retryAfter: 17), reason: "Too many requests")
-        let client = PollingClient(responses: [floodControl])
+    func testStopPreventsRetryAfterFloodControlResponse() async throws {
+        let rateLimited = expectation(description: "Telegram returned retry_after")
+        let retried = expectation(description: "Polling retried after stop")
+        retried.isInverted = true
+        let client = PollingClient(beforeRateLimit: [], rateLimited: rateLimited, retried: retried)
         let bot = try await TGBot(connectionType: .longpolling(), tgClient: client, botId: "test", apiRequestLimitLongPolling: nil)
-        let connection = TGLongPollingConnection(log: await bot.log)
-        let sleeping = expectation(description: "Polling is waiting to retry")
-        let cancelled = expectation(description: "Stop cancelled the wait")
-
-        await connection.startPolling(bot: bot) { _ in
-            sleeping.fulfill()
-            do {
-                try await Task.sleep(nanoseconds: 60_000_000_000)
-            } catch is CancellationError {
-                cancelled.fulfill()
-                throw CancellationError()
-            }
-        }
-        await fulfillment(of: [sleeping], timeout: 3)
-        try await connection.stop(bot: bot)
-        await fulfillment(of: [cancelled], timeout: 3)
-        let polls = await client.count.value
-        XCTAssertEqual(polls, 1)
+        try await bot.start()
+        await fulfillment(of: [rateLimited], timeout: 3)
+        try await bot.stop()
+        await fulfillment(of: [retried], timeout: 1.5)
     }
 }
 
 private struct PollingClient: TGClientPrtcl {
-    let responses: [(any Error)?]
-    let count = SendableValue(0)
+    let beforeRateLimit: [(any Error)?]
+    let rateLimited: XCTestExpectation
+    let retried: XCTestExpectation
+    let pollTimes = SendableValue<[DispatchTime]>([])
 
     func post<Params: Encodable, Response: Decodable>(_ url: URL, params: Params?, as mediaType: HTTPMediaType?) async throws -> Response {
         try await post(url)
     }
 
     func post<Response: Decodable>(_ url: URL) async throws -> Response {
-        XCTAssertEqual(url.lastPathComponent, "getUpdates")
-        let attempt = await count.change { $0 += 1 }
-        guard attempt <= responses.count else {
-            XCTFail("Unexpected getUpdates call")
-            try await Task.sleep(nanoseconds: 60_000_000_000)
-            throw CancellationError()
+        if url.lastPathComponent == "deleteWebhook" {
+            return try JSONDecoder().decode(Response.self, from: Data("true".utf8))
         }
-        if let error = responses[attempt - 1] { throw error }
-        return try JSONDecoder().decode(Response.self, from: Data("[]".utf8))
+        XCTAssertEqual(url.lastPathComponent, "getUpdates")
+        let times = await pollTimes.change { $0.append(.now()) }
+        let index = times.count - 1
+        if index < beforeRateLimit.count {
+            if let error = beforeRateLimit[index] { throw error }
+            return try JSONDecoder().decode(Response.self, from: Data("[]".utf8))
+        }
+        if index == beforeRateLimit.count { rateLimited.fulfill() }
+        if index == beforeRateLimit.count + 1 { retried.fulfill() }
+        throw BotError(httpStatusCode: 429, parameters: .init(retryAfter: 1), reason: "Too many requests")
     }
 }

@@ -4,6 +4,7 @@
 
 import Foundation
 import Logging
+import class SwiftExtensionsPack.SafeValue
 
 public protocol TGConnectionPrtcl: Sendable {
     @discardableResult
@@ -29,7 +30,8 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
 
     private let offsetUpdates: SendableValue<Int> = .init(0)
     private let log: Logger
-    private let task: SendableValue<Task<Void, Never>> = .init(.init {})
+    // Holds deleteWebhook during startup, then the polling loop.
+    private let activeTask = SafeValue<Task<Void, Error>?>(nil)
 
     public init(
         limit: Int? = nil,
@@ -45,43 +47,76 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
 
     @discardableResult
     public func start(bot: TGBot) async throws -> Bool {
-        /// delete webhook because: You will not be able to receive updates using getUpdates for as long as an outgoing webhook is set up.
-        let deleteWebHookParams: TGDeleteWebhookParams = .init(dropPendingUpdates: false)
-        try await bot.deleteWebhook(params: deleteWebHookParams)
-        await startPolling(bot: bot)
-        return true
+        try await startPolling(bot: bot)
     }
 
-    func startPolling(
-        bot: TGBot,
-        sleep: @escaping @Sendable (UInt64) async throws -> Void = Task.sleep(
-            nanoseconds:
+    @discardableResult
+    func startPolling(bot: isolated TGBot) async throws -> Bool {
+        try Task.checkCancellation()
+        // Register the request before the first await so stop() can cancel it.
+        let deleteWebhookTask = activeTask.change { currentTask -> Task<Void, Error>? in
+            guard currentTask == nil else { return nil }
+            let request = Task<Void, Error> {
+                try Task.checkCancellation()
+                // Telegram requires the webhook to be removed before getUpdates.
+                try await bot.deleteWebhook(params: .init(dropPendingUpdates: false))
+            }
+            currentTask = request
+            return request
+        }
+        guard let deleteWebhookTask else { throw BotError("Long polling already started") }
+
+        // Wait for Telegram's reply. Cancelling start() also cancels its HTTP request.
+        let webhookResult = await withTaskCancellationHandler(
+            operation: { await deleteWebhookTask.result },
+            onCancel: { deleteWebhookTask.cancel() }
         )
-    ) async {
-        await task.change { [weak self] in
-            $0 = Task.detached { [weak self] in
-                while !Task.isCancelled {
-                    guard let self = self else { break }
-                    do {
-                        let updates: [TGUpdate] = try await self.getUpdates(bot: bot)
-                        await bot.processing(updates: updates)
-                    } catch {
-                        guard !Task.isCancelled else { return }
-                        let botError = BotError(error)
-                        self.log.error("\(botError.localizedDescription)")
-                        guard
-                            let seconds = botError.floodControlRetryAfter,
-                            !(await bot.tgClient is TGRateLimitedClient)
-                        else {
-                            continue
-                        }
-                        let nanoseconds = min(UInt64(seconds), UInt64.max / 1_000_000_000) * 1_000_000_000
-                        do {
-                            try await sleep(nanoseconds)
-                        } catch {
-                            return
-                        }
+
+        let startResult: Result<Bool, Error> = activeTask.change { currentTask in
+            // Check and replace under the same lock: stop() may have removed this
+            // request while we awaited Telegram. A later start may already own the slot.
+            guard currentTask == deleteWebhookTask else {
+                return .failure(CancellationError())
+            }
+            // The caller can cancel start() even if the transport returns success.
+            if Task.isCancelled {
+                currentTask = nil
+                return .failure(CancellationError())
+            }
+
+            switch webhookResult {
+            case .failure(let error):
+                currentTask = nil
+                return .failure(error)
+            case .success:
+                // From here on, stop() cancels getUpdates and its polling loop.
+                currentTask = pollingTask(bot: bot)
+                return .success(true)
+            }
+        }
+        return try startResult.get()
+    }
+
+    private func pollingTask(bot: TGBot) -> Task<Void, Error> {
+        Task.detached { [weak self] in
+            while !Task.isCancelled {
+                guard let self else { return }
+                do {
+                    let updates = try await self.getUpdates(bot: bot)
+                    try Task.checkCancellation()
+                    await bot.processing(updates: updates)
+                } catch {
+                    guard !Task.isCancelled else { return }
+                    let botError = BotError(error)
+                    self.log.error("\(botError.localizedDescription)")
+                    guard
+                        let seconds = botError.floodControlRetryAfter,
+                        !(await bot.tgClient is TGRateLimitedClient)
+                    else {
+                        continue
                     }
+                    let nanoseconds = min(UInt64(seconds), UInt64.max / 1_000_000_000) * 1_000_000_000
+                    try await Task.sleep(nanoseconds: nanoseconds)
                 }
             }
         }
@@ -89,7 +124,13 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
 
     @discardableResult
     public func stop(bot: TGBot) async throws -> Bool {
-        await task.value.cancel()
+        // Remove the task before cancelling it so a late reply cannot start polling.
+        let task = activeTask.change { currentTask in
+            let taskToCancel = currentTask
+            currentTask = nil
+            return taskToCancel
+        }
+        task?.cancel()
         return true
     }
 
@@ -104,6 +145,7 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
             allowedUpdates: allowedUpdates
         )
         let response = try await bot.getUpdates(params: params)
+        try Task.checkCancellation()
         if let lastUpdate: TGUpdate = response.last {
             await offsetUpdates.change { $0 = lastUpdate.updateId + 1 }
         }
