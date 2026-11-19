@@ -1,11 +1,11 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.2
 
 import PackageDescription
 
 let packageDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/hummingbird-project/hummingbird.git", from: "2.0.0-alpha.1"),
     .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.6.0"),
-    .package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.2.0"))
+    .package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "10.4.0"))
 ]
 
 let targetDependencies: [PackageDescription.Target.Dependency] = [

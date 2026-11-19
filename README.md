@@ -7,9 +7,9 @@
 #### Swift Server Side Community
 [Swift Server Side Community - Ukraine / Russian / CIS Telegram Chat](https://t.me/server_side_swift)
 
-# ⚠️ SWIFT 6
+# Swift version
 
-For now with swift 6 please use 4.0.0 and above
+The current source requires Swift 6.2 or later.
 
 # Usage
 - Clone one of [examples](https://github.com/nerzh/swift-telegram-sdk/tree/master/Examples)
@@ -154,12 +154,12 @@ class TestDispatcher: TGDefaultDispatcher, @unchecked Sendable {
 ```
 
 # Advanced Example Usage
-## You should to implement TGClientPrtcl protocol
-To configure and run a bot with or without any framework, you need to use TGClientDefault or implement a simple TGClient protocol to send requests to the network with Content-Type: multipart/form-data.
+## HTTP clients
+Use `TGClientDefault()` with or without a web framework, or implement `TGClientPrtcl` to use your own HTTP transport with support for `multipart/form-data`.
 You can see an example here: [TGClientDefault](https://github.com/nerzh/swift-telegram-bot/blob/master/Sources/SwiftTelegramBot/Bot/Helpers/TGClientDefault.swift)
 
 ```swift
-public protocol TGClientPrtcl {
+public protocol TGClientPrtcl: Sendable {
     
     @discardableResult
     func post<Params: Encodable, Response: Decodable>(_ url: URL, params: Params?, as mediaType: HTTPMediaType?) async throws -> Response
@@ -169,11 +169,25 @@ public protocol TGClientPrtcl {
 }
 ```
 
+### Rate limiting
+
+`TGBot` limits outgoing requests through both the default and custom clients. Configure `apiRequestLimitLongPolling` (default: 5 requests per second) or `apiRequestLimitWebHook` (default: 30 requests per second) in the bot initializer. Pass `nil` to disable the limiter for that connection type.
+
+With rate limiting enabled, `await bot.tgClient` returns a client wrapper that waits for a slot before each `post` call. Keep a reference to the client passed to `TGBot` if you need its concrete type or configuration. Requests sent directly through that original client bypass the bot's limiter.
+
+The standalone `LimiterAsync` type is provided by the `SwiftExtensionsPack` module. Using the bot's built-in rate limiting does not require creating or importing a limiter yourself.
+
+### Errors and retry delays
+
+`TGClientDefault` exposes HTTP and Telegram error details through `BotError.httpStatusCode`, `BotError.errorCode`, and `BotError.parameters`. These optional properties let you inspect values such as `error.parameters?.retryAfter` without parsing the error description. Non-200 HTTP responses are reported as server errors.
+
+With rate limiting enabled, a Telegram 429 error containing a positive `retry_after` blocks new requests through that bot's client for at least that duration. The failed call still throws; it is not automatically sent again. Long polling continues requesting updates after the wait. Custom HTTP clients are responsible for their own response decoding; errors without these details cannot trigger this pause.
+
 ### Add to your Vapor project with Swift Package Manager
-add to yor Package.json
+Configure your `Package.swift`:
 
 ```swift
-// swift-tools-version:6.0
+// swift-tools-version:6.2
 
 import PackageDescription
 
@@ -181,7 +195,7 @@ var packageDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "4.57.0")),
 ]
 
-packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "4.2.0")))
+packageDependencies.append(.package(url: "https://github.com/nerzh/swift-telegram-bot", .upToNextMajor(from: "10.4.0")))
 
 
 let package = Package(
