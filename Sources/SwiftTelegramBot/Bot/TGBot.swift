@@ -80,7 +80,10 @@ public actor TGBot {
     }
     
     public func remove<T: TGDefaultDispatcherPrtcl>(dispatcher: T) {
-        _dispatchGroups.removeAll(where: { $0 as! T == dispatcher })
+        _dispatchGroups.removeAll { existing in
+            guard let candidate = existing as? T else { return false }
+            return candidate == dispatcher
+        }
     }
     
     public func processing(updates: [TGUpdate]) async {
