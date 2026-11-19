@@ -1,27 +1,10 @@
 //
-//  Created by Oleh Hudeichuk on 29.05.2021.
+//  Created by Oleh Hudeichuk on 19.11.2026.
 //
 
 import Foundation
 import Logging
 import class SwiftExtensionsPack.SafeValue
-
-public protocol TGConnectionPrtcl: Sendable {
-    @discardableResult
-    func start(bot: TGBot) async throws -> Bool
-
-    @discardableResult
-    func stop(bot: TGBot) async throws -> Bool
-}
-
-public enum TGConnectionType: Sendable {
-    case longpolling(
-        limit: Int? = nil,
-        timeout: Int? = nil,
-        allowedUpdates: [TGUpdate.CodingKeys]? = nil
-    )
-    case webhook(webHookURL: URL)
-}
 
 public final class TGLongPollingConnection: TGConnectionPrtcl {
     private let limit: Int?
@@ -46,12 +29,8 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
     }
 
     @discardableResult
+    nonisolated(nonsending)
     public func start(bot: TGBot) async throws -> Bool {
-        try await startPolling(bot: bot)
-    }
-
-    @discardableResult
-    func startPolling(bot: isolated TGBot) async throws -> Bool {
         try Task.checkCancellation()
         // Register the request before the first await so stop() can cancel it.
         let deleteWebhookTask = activeTask.change { currentTask -> Task<Void, Error>? in
@@ -59,12 +38,15 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
             let request = Task<Void, Error> {
                 try Task.checkCancellation()
                 // Telegram requires the webhook to be removed before getUpdates.
-                try await bot.deleteWebhook(params: .init(dropPendingUpdates: false))
+                let removed = try await bot.deleteWebhook(params: .init(dropPendingUpdates: false))
+                guard removed else {
+                    throw BotError(type: .server, reason: "Telegram did not confirm webhook removal")
+                }
             }
             currentTask = request
             return request
         }
-        guard let deleteWebhookTask else { throw BotError("Long polling already started") }
+        guard let deleteWebhookTask else { throw BotError("Bot already started") }
 
         // Wait for Telegram's reply. Cancelling start() also cancels its HTTP request.
         let webhookResult = await withTaskCancellationHandler(
@@ -123,6 +105,7 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
     }
 
     @discardableResult
+    nonisolated(nonsending)
     public func stop(bot: TGBot) async throws -> Bool {
         // Remove the task before cancelling it so a late reply cannot start polling.
         let task = activeTask.change { currentTask in
@@ -147,29 +130,10 @@ public final class TGLongPollingConnection: TGConnectionPrtcl {
         let response = try await bot.getUpdates(params: params)
         try Task.checkCancellation()
         if let lastUpdate: TGUpdate = response.last {
-            await offsetUpdates.change { $0 = lastUpdate.updateId + 1 }
+            await offsetUpdates.change { offset in
+                if !Task.isCancelled { offset = lastUpdate.updateId + 1 }
+            }
         }
         return response
-    }
-}
-
-public final class TGWebHookConnection: TGConnectionPrtcl {
-
-    public let webHookURL: URL
-
-    public init(webHookURL: URL) {
-        self.webHookURL = webHookURL
-    }
-
-    @discardableResult
-    public func start(bot: TGBot) async throws -> Bool {
-        let webHookParams: TGSetWebhookParams = .init(url: webHookURL.description)
-        return try await bot.setWebhook(params: webHookParams)
-    }
-
-    @discardableResult
-    public func stop(bot: TGBot) async throws -> Bool {
-        let deleteWebHookParams: TGDeleteWebhookParams = .init(dropPendingUpdates: false)
-        return try await bot.deleteWebhook(params: deleteWebHookParams)
     }
 }

@@ -25,7 +25,6 @@ public actor TGBot {
     public var dispatchers: [any TGDefaultDispatcherPrtcl] {
         get { _dispatchGroups }
     }
-    private var started: Bool = false
     
     public init(
         connectionType: TGConnectionType,
@@ -92,15 +91,7 @@ public actor TGBot {
     
     @discardableResult
     public func start() async throws -> Bool {
-        if started {
-            throw BotError("Bot already started")
-        }
-        started = true
-        if let polling = connection as? TGLongPollingConnection {
-            // Register startup on this actor before stop() can interleave.
-            return try await polling.startPolling(bot: self)
-        }
-        return try await connection.start(bot: self)
+        try await connection.start(bot: self)
     }
     
     @discardableResult
