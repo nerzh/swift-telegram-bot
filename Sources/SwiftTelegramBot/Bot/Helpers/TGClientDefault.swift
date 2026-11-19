@@ -10,6 +10,8 @@
 
 import Foundation
 import Logging
+import class SwiftExtensionsPack.Net
+import enum SwiftExtensionsPack.NetBody
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
@@ -26,16 +28,18 @@ public final class TGClientDefault: TGClientPrtcl {
     public let log: SendableValue<Logger> = .init(
         .init(label: "URLSessionTGClient")
     )
-    private let session: URLSession = URLSession(configuration: {
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        config.urlCache = nil
-        //        config.timeoutIntervalForRequest  = 1000
-        //        config.timeoutIntervalForResource = 0
-        return config
-    }())
-    
-    public init() {}
+    private let session: URLSession
+
+    public convenience init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        configuration.urlCache = nil
+        self.init(session: URLSession(configuration: configuration))
+    }
+
+    init(session: URLSession) {
+        self.session = session
+    }
 
     @discardableResult
     public func post<Params: Encodable, Response: Decodable>(
@@ -43,8 +47,10 @@ public final class TGClientDefault: TGClientPrtcl {
         params: Params? = nil,
         as mediaType: HTTPMediaType? = nil
     ) async throws -> Response {
-        let request = try await makeRequest(url: url, params: params, as: mediaType)
-        let (data, response) = try await session.data(for: request)
+        let body = try await makeBody(params ?? TGEmptyParams(), as: mediaType)
+        let (data, response) = try await Net.sendRequest(
+            url: url.absoluteString, method: "POST", body: body, session: session
+        )
         
         guard
             let httpResponse = response as? HTTPURLResponse,
@@ -65,48 +71,19 @@ public final class TGClientDefault: TGClientPrtcl {
         try await post(url, params: TGEmptyParams(), as: nil)
     }
 
-    private func makeRequest<Params: Encodable>(
-        url: URL,
-        params: Params?,
-        as mediaType: HTTPMediaType?
-    ) async throws -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-
-        if mediaType == .formData || mediaType == nil {
-            var rawMultipart: (body: NSMutableData, boundary: String)!
-            do {
-                if let currentParams = params {
-                    rawMultipart = try currentParams.toMultiPartFormData(
-                        log: await log.value
-                    )
-                } else {
-                    rawMultipart = try TGEmptyParams().toMultiPartFormData(
-                        log: await log.value
-                    )
-                }
-            } catch {
-                await log.value.critical(
-                    "Post request error: \(error.localizedDescription)"
-                )
-                throw error
-            }
-            request.setValue(
-                "multipart/form-data; boundary=\(rawMultipart.boundary)",
-                forHTTPHeaderField: "Content-Type"
-            )
-            request.httpBody = rawMultipart.body as Data
-        } else {
-            request.setValue(
-                "application/json",
-                forHTTPHeaderField: "Content-Type"
-            )
-            let encodable: Encodable = params ?? TGEmptyParams()
-            let data = try JSONEncoder().encode(encodable)
-            request.httpBody = data
+    private func makeBody(_ params: any Encodable, as mediaType: HTTPMediaType?) async throws -> NetBody {
+        if let mediaType, mediaType != .formData {
+            return .json(params)
         }
 
-        return request
+        let logger = await log.value
+        do {
+            let multipart = try params.toMultiPartFormData(log: logger)
+            return .raw(data: multipart.body as Data, contentType: .custom("multipart/form-data; boundary=\(multipart.boundary)"))
+        } catch {
+            logger.critical("Post request error: \(error.localizedDescription)")
+            throw error
+        }
     }
 
     private func processContainer<T: Decodable>(

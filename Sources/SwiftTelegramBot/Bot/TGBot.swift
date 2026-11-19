@@ -4,6 +4,7 @@
 
 import Foundation
 import Logging
+import SwiftExtensionsPack
 
 public actor TGBot {
 
@@ -15,19 +16,11 @@ public actor TGBot {
     public let botId: String
     public let tgURI: URL
     public var tgClient: TGClientPrtcl {
-        get async {
-            if let limiter {
-                await limiter.run {
-                    return await client
-                }
-            }
-            return client
-        }
+        get async { client }
     }
     public let log: Logger
-    private let limiter: LimiterAsync?
     private let connection: TGConnectionPrtcl
-    private var client: TGClientPrtcl
+    private let client: TGClientPrtcl
     private var _dispatchGroups: [any TGDefaultDispatcherPrtcl] = []
     public var dispatchers: [any TGDefaultDispatcherPrtcl] {
         get { _dispatchGroups }
@@ -44,16 +37,11 @@ public actor TGBot {
         log: Logger = .init(label: "com.tgbot")
     ) async throws {
         self.connectionType = connectionType
+        let requestLimit: UInt?
+
         switch connectionType {
         case let .longpolling(limit, timeout, allowedUpdates):
-            if let apiRequestLimitLongPolling {
-                limiter = LimiterAsync(
-                    maxRequests: Int(apiRequestLimitLongPolling),
-                    per: 1
-                )
-            } else {
-                limiter = nil
-            }
+            requestLimit = apiRequestLimitLongPolling
             self.connection = TGLongPollingConnection(
                 limit: limit,
                 timeout: timeout,
@@ -61,17 +49,17 @@ public actor TGBot {
                 log: log
             )
         case let .webhook(webHookURL):
-            if let apiRequestLimitWebHook {
-                limiter = LimiterAsync(
-                    maxRequests: Int(apiRequestLimitWebHook),
-                    per: 1
-                )
-            } else {
-                limiter = nil
-            }
+            requestLimit = apiRequestLimitWebHook
             self.connection = TGWebHookConnection(webHookURL: webHookURL)
         }
-        client = tgClient
+
+        if let requestLimit {
+            let limiter = LimiterAsync(maxRequests: Int(clamping: requestLimit), per: 1)
+            client = TGRateLimitedClient(client: tgClient, limiter: limiter)
+        } else {
+            client = tgClient
+        }
+
         self.botId = botId
         self.tgURI = tgURI
         self.log = log
