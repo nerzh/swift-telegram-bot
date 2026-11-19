@@ -3,6 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import XCTest
+import class SwiftExtensionsPack.Net
 @testable import SwiftTelegramBot
 
 final class ClientRequestTests: XCTestCase, @unchecked Sendable {
@@ -77,7 +78,54 @@ final class ClientRequestTests: XCTestCase, @unchecked Sendable {
         XCTAssertTrue(body.hasPrefix("--\(boundary)\r\n"))
         XCTAssertTrue(body.hasSuffix("--\(boundary)--"))
         XCTAssertTrue(body.contains("name=\"document\"; filename=\"a.txt\""))
+        XCTAssertTrue(body.contains("Content-Type: application/octet-stream\r\n"))
         XCTAssertTrue(body.contains("\r\n\r\nhello\r\n"))
+    }
+
+    func testUploadedFilePreservesMIMETypeAndBinaryData() async throws {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [EchoRequestProtocol.self]
+        let session = URLSession(configuration: configuration)
+        defer { session.invalidateAndCancel() }
+        let client = TGClientDefault(session: session)
+        let url = URL(string: "https://example.invalid/test")!
+        let data = Data([0, 0xFF, 0x80, 13, 10, 42])
+        let cases: [(mime: String?, expected: String)] = [
+            (nil, "application/octet-stream"),
+            ("", "application/octet-stream"),
+            (" \t ", "application/octet-stream"),
+            ("image/png", "image/png"),
+            ("text/plain; charset=UTF-8", "text/plain; charset=UTF-8"),
+            ("application/vnd.example+json; profile=\"CaseSensitive\"", "application/vnd.example+json; profile=\"CaseSensitive\"")
+        ]
+        for (mime, expected) in cases {
+            let upload = TGSendDocumentParams(
+                chatId: .chat(123),
+                document: .file(.init(filename: "upload.bin", data: data, mimeType: mime))
+            )
+            let request: EchoedRequest = try await client.post(url, params: upload, as: nil)
+            let filePart = Data(("filename=\"upload.bin\"\r\nContent-Type: " + expected + "\r\n\r\n").utf8)
+                + data + Data("\r\n".utf8)
+            XCTAssertNotNil(request.body.range(of: filePart), expected)
+            XCTAssertTrue(request.contentType.hasPrefix("multipart/form-data; boundary="))
+        }
+    }
+
+    func testInvalidMIMETypeDoesNotModifyMultipartBody() throws {
+        let multipart = NetMultipartData(boundary: "test-boundary", log: .init(label: "multipart-tests"))
+        try multipart.append("chat_id", "123")
+        let original = multipart.body as Data
+        for mime in ["not-a-media-type", "text/plain\r\nX-Injected: yes"] {
+            XCTAssertThrowsError(try multipart.appendFile("document", Data([42]), "a.bin", mimeType: mime)) { error in
+                guard case Net.NetErrors.InvalidContentType = error else {
+                    return XCTFail("Unexpected error: \(error)")
+                }
+            }
+            XCTAssertEqual(multipart.body as Data, original)
+        }
+        try multipart.appendFile("document", Data([42]), "a.bin", mimeType: "image/png")
+        let body = String(decoding: try multipart.finalizeBodyAndGetData() as Data, as: UTF8.self)
+        XCTAssertTrue(body.contains("Content-Type: image/png\r\n\r\n*\r\n--test-boundary--"))
     }
 }
 

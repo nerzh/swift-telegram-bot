@@ -7,6 +7,7 @@
 
 import Foundation
 import Logging
+import SwiftExtensionsPack
 
 // MARK: Extension NSMutableData
 extension NSMutableData {
@@ -55,7 +56,7 @@ private struct FileContainer {
             return nil
         }
 
-        let mimeType = dictionary["dictionary"] as? String
+        let mimeType = dictionary["mimeType"] as? String
 
         self.fileName = fileName
         self.data = rawData
@@ -104,13 +105,13 @@ public class NetMultipartData {
         _ fileName: String,
         mimeType: String
     ) throws {
-        try body.appendString(boundaryPrefix)
-        try body.appendString(
-            "Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n"
+        let contentType = mimeType.trimmingCharacters(in: .whitespaces)
+        let part = SwiftExtensionsPack.NetMultipartData(boundary: boundary)
+        try part.appendFile(
+            name, data, fileName,
+            mimeType: contentType.isEmpty ? .octetStream : .custom(contentType)
         )
-        try body.appendString("Content-Type: \(mimeType)\r\n\r\n")
-        body.append(data)
-        try body.appendString("\r\n")
+        body.append(part.body as Data)
     }
 
     public func finalizeBodyAndGetData() throws -> NSMutableData {
