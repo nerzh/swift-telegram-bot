@@ -18,8 +18,7 @@ struct TGRateLimitedClient: TGClientPrtcl {
         do {
             return try await send()
         } catch let error as BotError {
-            if error.httpStatusCode == 429 || error.errorCode == 429,
-               let seconds = error.parameters?.retryAfter, seconds > 0 {
+            if let seconds = error.floodControlRetryAfter {
                 await limiter.blockAllSlots(until: .now() + .seconds(seconds))
             }
             throw error

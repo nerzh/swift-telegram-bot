@@ -23,6 +23,12 @@ public struct BotError: ErrorCommon {
     public private(set) var httpStatusCode: Int?
     public private(set) var errorCode: Int?
     public private(set) var parameters: TGResponseParameters?
+
+    var floodControlRetryAfter: Int? {
+        guard httpStatusCode == 429 || errorCode == 429,
+              let seconds = parameters?.retryAfter, seconds > 0 else { return nil }
+        return seconds
+    }
     
     public init() {
         self.type = .internal
